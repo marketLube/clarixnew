@@ -1,0 +1,33 @@
+import React from "react";
+
+export interface SuitCaseIconProps extends React.SVGProps<SVGSVGElement> {
+  width?: number | string;
+  height?: number | string;
+  fill?: string;
+  className?: string;
+}
+
+const SuitCaseIcon = React.memo<SuitCaseIconProps>(
+  ({ width = 18, height = 18, fill = "#767E92", className, ...props }) => {
+    return (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={width}
+        height={height}
+        viewBox="0 0 18 18"
+        fill="none"
+        className={className}
+        {...props}
+      >
+        <path
+          d="M5.25 3.75V1.5C5.25 1.08579 5.58579 0.75 6 0.75H12C12.4142 0.75 12.75 1.08579 12.75 1.5V3.75H15.75C16.1642 3.75 16.5 4.08579 16.5 4.5V15C16.5 15.4142 16.1642 15.75 15.75 15.75H2.25C1.83579 15.75 1.5 15.4142 1.5 15V4.5C1.5 4.08579 1.83579 3.75 2.25 3.75H5.25ZM11.25 5.25H6.75V14.25H11.25V5.25ZM5.25 5.25H3V14.25H5.25V5.25ZM12.75 5.25V14.25H15V5.25H12.75ZM6.75 2.25V3.75H11.25V2.25H6.75Z"
+          fill={fill}
+        />
+      </svg>
+    );
+  }
+);
+
+SuitCaseIcon.displayName = "SuitCaseIcon";
+
+export default SuitCaseIcon;

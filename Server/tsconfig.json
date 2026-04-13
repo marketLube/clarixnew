@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    /* Output folders */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Node + ES Modules */
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es2020",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+
+    /* Type System */
+    "strict": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+
+    /* Useful for backend dev */
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Source & declaration maps (good for prod builds & debugging) */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Disable JSX — this is a backend project */
+    "jsx": "preserve",
+
+    /* Preserve import specifiers exactly (needed for ESM on Vercel) */
+    "verbatimModuleSyntax": true
+  },
+
+  /* Include only backend source files */
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}
