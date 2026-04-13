@@ -34,6 +34,11 @@ import { SEO_BLOGS } from "./data/seo-blogs.js";
 import { SEO_BLOGS_BATCH2 } from "./data/seo-blogs-batch2.js";
 import { KERALA_COLLEGES } from "./data/kerala-colleges.js";
 import { KERALA_BLOGS } from "./data/kerala-blogs.js";
+import { MEGA_BLOGS_BATCH1 } from "./data/mega-blogs-batch1.js";
+import { MEGA_BLOGS_BATCH2 } from "./data/mega-blogs-batch2.js";
+import { MEGA_BLOGS_BATCH3 } from "./data/mega-blogs-batch3.js";
+import { MEGA_BLOGS_BATCH4 } from "./data/mega-blogs-batch4.js";
+import { MEGA_BLOGS_BATCH5 } from "./data/mega-blogs-batch5.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
@@ -3746,8 +3751,40 @@ async function seed() {
       category: b.category,
     })),
   );
-  const totalBlogs = 8 + ADDITIONAL_BLOGS.length + SEO_BLOGS.length + SEO_BLOGS_BATCH2.length + KERALA_BLOGS.length;
-  console.log(`Seeded ${KERALA_BLOGS.length} Kerala blogs. Grand total: ${totalBlogs} blog posts.`);
+  const baseBlogCount = 8 + ADDITIONAL_BLOGS.length + SEO_BLOGS.length + SEO_BLOGS_BATCH2.length + KERALA_BLOGS.length;
+  console.log(`Seeded ${KERALA_BLOGS.length} Kerala blogs. Base total: ${baseBlogCount} blog posts.`);
+
+  /* ─── MEGA BLOG BATCHES (1000+ SEO articles) ─── */
+  const megaBatches = [
+    { name: "Mega Batch 1 (Best Colleges by city/course)", data: MEGA_BLOGS_BATCH1, thumb: i("campus1", 800) },
+    { name: "Mega Batch 2 (Exam prep, career, comparisons)", data: MEGA_BLOGS_BATCH2, thumb: i("campus2", 800) },
+    { name: "Mega Batch 3 (State guides, salary, trending)", data: MEGA_BLOGS_BATCH3, thumb: i("campus3", 800) },
+    { name: "Mega Batch 4 (Scholarships, fees, how-to)", data: MEGA_BLOGS_BATCH4, thumb: i("campus4", 800) },
+    { name: "Mega Batch 5 (Course guides, after 12th, long-tail)", data: MEGA_BLOGS_BATCH5, thumb: i("campus5", 800) },
+  ];
+  let megaBlogTotal = 0;
+  for (const batch of megaBatches) {
+    console.log(`Seeding ${batch.name}…`);
+    await BlogModel.insertMany(
+      batch.data.map((b: any) => ({
+        title: b.title,
+        slug: b.slug,
+        excerpt: b.excerpt,
+        content: b.content,
+        thumbnail: batch.thumb,
+        status: "Published" as const,
+        tags: b.tags,
+        views: b.views,
+        date: new Date(),
+        readTime: b.readTime,
+        category: b.category,
+      })),
+    );
+    megaBlogTotal += batch.data.length;
+    console.log(`Seeded ${batch.data.length} posts from ${batch.name}.`);
+  }
+  const grandTotal = baseBlogCount + megaBlogTotal;
+  console.log(`✅ Grand total: ${grandTotal} blog posts (${baseBlogCount} base + ${megaBlogTotal} mega batches).`);
 
   /* ─── FOOTER CMS ─── */
   console.log("Seeding footer CMS…");
