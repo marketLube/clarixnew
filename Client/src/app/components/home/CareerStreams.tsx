@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import { Button } from "@/components/common/Button";
 import StreamCard from "@/components/common/Cards/streamCard";
 import SectionHeading from "@/components/common/Section/SectionHeading";
@@ -42,6 +42,28 @@ export default function CareerStreams() {
       current.scrollBy({ left: amount, behavior: "smooth" });
     }
   };
+
+  // Translate vertical wheel events to horizontal scroll for trackpad support
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    // If the user is scrolling horizontally (trackpad horizontal swipe), let it happen natively
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+    // Only intercept vertical scroll if there is room to scroll horizontally
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const atStart = el.scrollLeft <= 0;
+    const atEnd = el.scrollLeft >= maxScroll - 1;
+
+    // If scrolling down and at the end, or scrolling up and at the start, let page scroll normally
+    if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) return;
+
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, []);
 
   return (
     <section className="w-full bg-[#F6F7FF] py-4 sm:py-16 px-4 sm:px-0">
@@ -117,7 +139,9 @@ export default function CareerStreams() {
 
               <div
                 ref={scrollRef}
+                onWheel={handleWheel}
                 className="grid grid-rows-2 grid-flow-col auto-cols-[35%] overflow-x-auto gap-3 sm:gap-5 pb-4 snap-x snap-mandatory scrollbar-hide lg:auto-cols-[calc(25%-16px)]"
+                style={{ WebkitOverflowScrolling: "touch" }}
               >
                 {apiStreams.map((stream) => (
                   <StreamCard
@@ -126,6 +150,7 @@ export default function CareerStreams() {
                     description={`${stream.examsCount || 0} Exams`}
                     image={stream.image}
                     className="w-full flex-shrink-0 snap-start"
+                    onClick={() => router.push(`/exams?stream=${stream._id}`)}
                   />
                 ))}
               </div>

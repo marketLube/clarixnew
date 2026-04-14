@@ -6,14 +6,16 @@ export interface StreamCardProps {
   description: string;
   image: string;
   className?: string;
+  onClick?: () => void;
 }
 
 const StreamCard = forwardRef<HTMLDivElement, StreamCardProps>(
-  ({ title, description, image, className = "" }, ref) => {
+  ({ title, description, image, className = "", onClick }, ref) => {
     return (
       <div
         ref={ref}
-        className={`shrink-0 bg-white rounded-[12px] sm:rounded-[26px] p-2 sm:p-6 shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] hover:shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.08)] transition-shadow flex flex-col gap-1.5 sm:gap-6 ${className}`}
+        onClick={onClick}
+        className={`shrink-0 bg-white rounded-[12px] sm:rounded-[26px] p-2 sm:p-6 shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] hover:shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.08)] transition-shadow flex flex-col gap-1.5 sm:gap-6 ${onClick ? "cursor-pointer" : ""} ${className}`}
       >
         {/* Image */}
         <div className="border-[#f2f2f2] border-[0.5px] border-solid flex items-center p-[5px] rounded-[10px] w-fit">
