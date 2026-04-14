@@ -53,7 +53,7 @@ export async function generateMetadata({
       ? `${title} - ${descriptionParts.join(". ")}. Find courses, fees, placements, and more on Clarix Education.`
       : `${title} - Find courses, fees, placements, admissions, and more on Clarix Education.`;
 
-  const image = college.bannerImage || college.logo || college.image;
+  const image = college.campusImages?.[0] || college.logo || college.image;
 
   return {
     title,
@@ -89,7 +89,7 @@ export default async function CollegeLayout({ params, children }: Props) {
         url: `${SITE_URL}/colleges/${id}`,
         ...(college.description ? { description: stripMarkdown(college.description) } : {}),
         ...(college.logo ? { logo: college.logo } : {}),
-        ...(college.bannerImage ? { image: college.bannerImage } : {}),
+        ...(college.campusImages?.[0] ? { image: college.campusImages[0] } : college.logo ? { image: college.logo } : {}),
         ...(college.location || college.city
           ? {
               address: {
