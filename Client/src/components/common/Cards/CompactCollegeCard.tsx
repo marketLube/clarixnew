@@ -54,25 +54,25 @@ export default function CompactCollegeCard({ college }: { college: any }) {
             </div>
 
             {/* Bottom: Content Area */}
-            <div className="p-2.5 flex flex-col gap-1.5 flex-1 justify-between">
+            <div className="p-2.5 flex flex-col gap-1 flex-1 justify-between">
                 <div>
-                    <h3 className="font-semibold text-[11px] text-[#162447] line-clamp-2 leading-[1.3] mb-0.5">
+                    <h3 className="font-semibold text-[12px] text-[#162447] line-clamp-2 leading-[1.3] mb-0.5">
                         {college?.name}
                     </h3>
-                    <p className="flex items-center gap-0.5 text-[9px] text-[#767E92]">
-                        <LocationIcon width={8} height={8} />
+                    <p className="flex items-center gap-0.5 text-[10px] text-[#767E92]">
+                        <LocationIcon width={9} height={9} />
                         <span className="truncate">{college?.city}</span>
                     </p>
                 </div>
 
-                <div className="flex flex-col gap-1 border-t border-gray-50 pt-1.5">
+                <div className="flex flex-col gap-0.5 border-t border-gray-100 pt-1.5">
                     <div className="flex justify-between items-center">
-                        <span className="text-[8px] text-[#767E92] font-medium uppercase">Fees</span>
-                        <span className="text-[10px] font-bold text-[#513392]">{formatFeeRange(college?.annualFeesRange)}</span>
+                        <span className="text-[9px] text-[#767E92] font-medium uppercase">Fees</span>
+                        <span className="text-[11px] font-bold text-[#513392]">{formatFeeRange(college?.annualFeesRange)}</span>
                     </div>
                     <div className="flex justify-between items-center">
-                        <span className="text-[8px] text-[#767E92] font-medium uppercase">Avg Pack</span>
-                        <span className="text-[10px] font-bold text-[#162447]">{formatSalaryLPA(college?.averageSalary)}</span>
+                        <span className="text-[9px] text-[#767E92] font-medium uppercase">Avg Pack</span>
+                        <span className="text-[11px] font-bold text-[#162447]">{formatSalaryLPA(college?.averageSalary)}</span>
                     </div>
                 </div>
             </div>

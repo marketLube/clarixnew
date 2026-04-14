@@ -29,37 +29,38 @@ export default function BlogCard({
   return (
     <Link href={`/blog/${slug}`} className={`block w-full md:max-w-[320px] ${className}`}>
     <article
-      className="bg-white group flex flex-col items-stretch pb-[34px] pt-[16px] px-[16px] rounded-[20px] shadow-[1px_6px_41px_rgba(0,0,0,0.04)] font-poppins w-full"
+      className="bg-white group flex flex-col items-stretch pb-3 md:pb-[34px] pt-2 md:pt-[16px] px-2 md:px-[16px] rounded-[12px] md:rounded-[20px] shadow-[1px_6px_41px_rgba(0,0,0,0.04)] font-poppins w-full"
     >
       {/* Thumbnail */}
-      <div className="relative h-[258px] w-full rounded-[10px] overflow-hidden mb-4">
+      <div className="relative h-[120px] md:h-[258px] w-full rounded-[8px] md:rounded-[10px] overflow-hidden mb-2 md:mb-4">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imageUrl}
           alt={title}
-          className="absolute inset-0 w-full h-full object-cover rounded-[10px]"
+          className="absolute inset-0 w-full h-full object-cover"
           loading="lazy"
         />
       </div>
 
       {/* Meta + CTA */}
-      <div className="flex items-center justify-between mb-[18px]">
-        <p className="text-[16px] leading-[20px] text-[rgba(19,8,37,0.6)]">
+      <div className="flex items-center justify-between mb-1.5 md:mb-[18px]">
+        <p className="text-[10px] md:text-[16px] leading-[14px] md:leading-[20px] text-[rgba(19,8,37,0.6)]">
           {date}
         </p>
         <span
           aria-label={`Read more: ${title}`}
-          className="flex items-center justify-center rounded-full border border-[#dac9ff] p-1 size-[32px] cursor-pointer transition-colors group-hover:bg-[#513392]"
+          className="flex items-center justify-center rounded-full border border-[#dac9ff] p-0.5 md:p-1 size-[22px] md:size-[32px] cursor-pointer transition-colors group-hover:bg-[#513392]"
         >
           <ChevronRight
             strokeWidth={2}
-            className="text-current group-hover:text-white"
+            size={14}
+            className="text-current group-hover:text-white md:!w-[18px] md:!h-[18px]"
           />
         </span>
       </div>
 
       {/* Title */}
-      <h3 className="font-poppins text-[18px] md:text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
+      <h3 className="font-poppins text-[13px] md:text-[20px] leading-[18px] md:leading-[28px] tracking-[-0.3px] text-[#162447] line-clamp-2">
         {title}
       </h3>
     </article>

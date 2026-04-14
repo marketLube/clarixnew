@@ -25,19 +25,19 @@ export default function Blog() {
   const blogs = data?.blogs || [];
 
   return (
-    <section className="w-full bg-white py-10 md:py-20 lg:py-24">
+    <section className="w-full bg-white py-6 md:py-16 lg:py-20">
       <ContentWrapper className="flex flex-col items-center px-4 md:px-10">
         {/* Heading block */}
-        <header className="flex max-w-[567px] flex-col items-center gap-3 text-center">
-          <div className="inline-flex items-center justify-center rounded-full bg-(--color-background) px-5 py-2">
-            <p className="font-poppins text-base leading-5 text-primary">
+        <header className="flex max-w-[567px] flex-col items-center gap-2 md:gap-3 text-center">
+          <div className="inline-flex items-center justify-center rounded-full bg-(--color-background) px-4 py-1.5 md:px-5 md:py-2">
+            <p className="font-poppins text-[13px] md:text-base leading-5 text-primary">
               Blogs
             </p>
           </div>
-          <h2 className="font-poppins text-[22px] leading-[28px] tracking-[-0.02em] text-(--text-headline) md:text-[40px] md:leading-[46px] lg:text-[48px] lg:leading-[48px]">
+          <h2 className="font-poppins text-[20px] leading-[26px] tracking-[-0.02em] text-(--text-headline) md:text-[36px] md:leading-[42px] lg:text-[48px] lg:leading-[48px]">
             {title}
           </h2>
-          <p className="font-poppins text-base leading-5 text-text-sub md:max-w-[472px]">
+          <p className="font-poppins text-[12px] md:text-base leading-[18px] md:leading-5 text-text-sub md:max-w-[472px]">
             {description}
           </p>
         </header>
@@ -46,7 +46,7 @@ export default function Blog() {
         {isLoading ? (
           <Loader containerClassName="h-[300px]" label="Loading blogs..." />
         ) : (
-          <div className="mt-10 grid w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-6 md:mt-10 grid w-full grid-cols-2 gap-3 md:gap-6 xl:grid-cols-4">
             {blogs.slice(0, 4).map((blog) => (
               <div key={blog._id} className="flex justify-center">
                 <BlogCard

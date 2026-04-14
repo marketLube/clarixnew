@@ -80,10 +80,10 @@ export default function FAQ({
 
   // Default variant - two column layout
   return (
-    <section className="w-full py-2 md:py-12 px-[16px] md:px-0">
-      <ContentWrapper className="grid grid-cols-1 gap-6 md:gap-10 md:grid-cols-[minmax(0,420px)_minmax(0,1fr)] items-start !px-0">
+    <section className="w-full py-4 md:py-12 px-4 md:px-0">
+      <ContentWrapper className="grid grid-cols-1 gap-4 md:gap-10 md:grid-cols-[minmax(0,420px)_minmax(0,1fr)] items-start !px-0">
         {/* Left column – heading & description */}
-        <div className="space-y-4">
+        <div className="space-y-2 md:space-y-4">
           <SectionHeading title={title} />
           <SectionDescription className="max-w-[426px]">
             {description}
@@ -91,7 +91,7 @@ export default function FAQ({
         </div>
 
         {/* Right column – FAQ list */}
-        <div className="space-y-3 ">
+        <div className="space-y-2 md:space-y-3">
           {isLoading ? (
             <Loader containerClassName="py-10" />
           ) : (

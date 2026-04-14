@@ -19,10 +19,10 @@ export default function FAQCard({
   
   return (
     <div
-      className={`bg-[var(--white-color)] rounded-[10px]  md:px-6 px-1  ${!isSectioned
+      className={`bg-[var(--white-color)] rounded-[10px] px-3 md:px-6 ${!isSectioned
           ? "shadow-[0px_0px_30px_rgba(0,0,0,0.03)]"
           : "border-b border-gray-200"
-        } ${isOpen ? "py-[26px]" : "h-[72px] flex items-center"}`}
+        } ${isOpen ? "py-4 md:py-[26px]" : "h-[56px] md:h-[72px] flex items-center"}`}
     >
       <button
         type="button"
@@ -61,7 +61,7 @@ export default function FAQCard({
       </button>
 
       {isOpen && (
-        <p className="mt-5 font-poppins text-[12px] md:text-[14px] lg:text-[16px] leading-[20px] text-[var(--color-text-sub)]">
+        <p className="mt-3 md:mt-5 font-poppins text-[12px] md:text-[14px] lg:text-[16px] leading-[18px] md:leading-[20px] text-[var(--color-text-sub)]">
           {item.answer}
         </p>
       )}
