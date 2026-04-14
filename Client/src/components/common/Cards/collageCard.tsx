@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../Button";
@@ -38,7 +37,7 @@ export default function CollegeCard({
 }) {
   const router = useRouter();
   const bannerSrc = college?.campusImages?.[0] || college?.logo || FALLBACK_BANNER;
-  const [imgSrc, setImgSrc] = useState(bannerSrc);
+  const isExternal = bannerSrc.startsWith("http");
 
   const viewDetails = (id: string) => {
     router.push(`/colleges/${id}`);
@@ -48,14 +47,12 @@ export default function CollegeCard({
       <Link href={`/colleges/${college?._id}`} className="block">
       {/* Banner */}
       <div className="relative h-[160px] w-full rounded-[10px] overflow-hidden mb-4">
-        <Image
-          src={imgSrc}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={bannerSrc}
           alt={college?.name || "College banner"}
-          fill
-          sizes="(max-width: 768px) 100vw, 340px"
-          className="object-cover"
-          onError={() => setImgSrc(FALLBACK_BANNER)}
-          unoptimized={imgSrc.includes("wikimedia.org") || imgSrc.includes("wikipedia.org")}
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
         />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.25)] to-transparent" />
