@@ -10,7 +10,8 @@
     "start": "node dist/server.js",
     "seed:demo": "tsx scripts/seed-demo-data.ts",
     "seed:real": "tsx scripts/seed-real-data.ts",
-    "verify:unsplash": "tsx scripts/check-unsplash-pool.ts"
+    "verify:unsplash": "tsx scripts/check-unsplash-pool.ts",
+    "update:photos": "tsx scripts/update-college-photos.ts"
   },
   "keywords": [],
   "author": "",

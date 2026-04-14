@@ -188,9 +188,7 @@ export default function ApplyNowModal({
     );
 
     if (Object.keys(newErrors).length === 0) {
-      // Handle form submission here
-      console.log("Form submitted:", formData);
-      // You can add API call here
+      // TODO: Handle form submission here (API call)
 
       // Reset form and close modal after successful submission
       setTimeout(() => {
@@ -275,7 +273,7 @@ export default function ApplyNowModal({
               <div className="aspect-square relative shrink-0 w-full">
                 <Image
                   src="/Dummy_College_Logo.png"
-                  alt="Course"
+                  alt="College logo"
                   width={40}
                   height={40}
                   className="w-full h-full object-cover"

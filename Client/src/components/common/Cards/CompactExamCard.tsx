@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Badge } from "../badge";
 
@@ -26,18 +28,20 @@ export default function CompactExamCard({
     const router = useRouter();
 
     return (
-        <div
-            onClick={() => id && router.push(`/exams/${id}`)}
+        <Link href={id ? `/exams/${id}` : "#"} className="block w-full">
+        <article
             className="bg-white rounded-[12px] shadow-[0px_2px_12px_rgba(0,0,0,0.04)] p-3 flex flex-col gap-2 font-poppins cursor-pointer border border-gray-100 active:scale-[0.98] transition-all duration-200 w-full h-[145px] overflow-hidden"
         >
             {/* Top: Image on Left, Basic Info on Right */}
             <div className="flex gap-3">
                 {/* Logo/Image on Left */}
                 <div className="relative w-[60px] h-[60px] rounded-[10px] bg-[#f6f7ff] flex-shrink-0 flex items-center justify-center p-2 border border-gray-50 shadow-sm">
-                    <img
+                    <Image
                         src={logo || "/minority.png"}
-                        alt={title}
-                        className="w-full h-full object-contain"
+                        alt={`${title || "Exam"} logo`}
+                        width={44}
+                        height={44}
+                        className="object-contain"
                     />
                 </div>
 
@@ -72,6 +76,7 @@ export default function CompactExamCard({
                     <span className="text-[11px] font-bold text-[#513392]">{examDate}</span>
                 </div>
             </div>
-        </div>
+        </article>
+        </Link>
     );
 }

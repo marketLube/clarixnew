@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useRef, useCallback } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { BookmarkIcon } from "@/components/common/Icons";
 
@@ -22,12 +22,31 @@ export default function SimilarArticles({
   articles,
   currentArticleId,
 }: SimilarArticlesProps) {
-  const router = useRouter();
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   // Filter out current article
   const filteredArticles = articles.filter(
     (article) => article.id !== currentArticleId
   );
+
+  // Translate vertical wheel events to horizontal scroll for trackpad support
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const atStart = el.scrollLeft <= 0;
+    const atEnd = el.scrollLeft >= maxScroll - 1;
+
+    if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) return;
+
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, []);
 
   return (
     <div className="flex flex-col gap-6 md:gap-[48px]">
@@ -35,12 +54,17 @@ export default function SimilarArticles({
         Similar Articles
       </h2>
 
-      <div className="flex gap-[22px] overflow-x-auto pb-4 scrollbar-hide">
+      <div
+        ref={scrollRef}
+        onWheel={handleWheel}
+        className="flex gap-[22px] overflow-x-auto pb-4 scrollbar-hide"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
         {filteredArticles.slice(0, 4).map((article) => (
-          <div
+          <Link
             key={article.id}
-            className="bg-white rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] flex-shrink-0 w-[280px] sm:w-[302px] cursor-pointer hover:shadow-[1px_6px_41px_0px_rgba(0,0,0,0.08)] transition-shadow"
-            onClick={() => router.push(`/blog/${article.slug}`)}
+            href={`/blog/${article.slug}`}
+            className="bg-white rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] flex-shrink-0 w-[280px] sm:w-[302px] cursor-pointer hover:shadow-[1px_6px_41px_0px_rgba(0,0,0,0.08)] transition-shadow block"
           >
             <div className="flex flex-col gap-[16px] p-[16px] pb-[34px]">
               {/* Image */}
@@ -74,7 +98,7 @@ export default function SimilarArticles({
                 </h3>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { useRouter } from "next/navigation";
 
@@ -16,9 +17,10 @@ export default function CourseCard({
 
   const router = useRouter();
   return (
-    <div className="bg-white rounded-[20px] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.05)] max-w-[21rem] h-full flex flex-col">
-      <div className="w-full flex justify-center pt-4 shrink-0">
-        <div className="relative h-[192px] w-[310px]">
+    <Link href={`/courses/${course?._id}`} className="block h-full">
+    <article className="bg-white rounded-[20px] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.05)] max-w-[21rem] h-full flex flex-col">
+      <div className="w-full flex justify-center pt-4 px-2 shrink-0">
+        <div className="relative h-[192px] w-full max-w-[310px]">
           <Image
             src={course?.cardImage || "/DummycourseImage.png"}
             alt={course?.name || "course"}
@@ -38,7 +40,7 @@ export default function CourseCard({
         <div className="mt-5 flex flex-wrap gap-4 text-[13px] text-[var(--text-sub)]">
           <InfoPill label={course?.duration} Icon={ClockIcon} />
           <InfoPill label={course?.fees} Icon={GraphUpIcon} />
-          <InfoPill label={course?.intakeCapacity || 50} Icon={GraduationCapIcon} />
+          <InfoPill label={course?.intakeCapacity ? `${course.intakeCapacity} seats` : "N/A"} Icon={GraduationCapIcon} />
           <InfoPill label={course?.type} Icon={VerifyIcon} />
         </div>
 
@@ -64,13 +66,18 @@ export default function CourseCard({
             variant="primary"
             size="md"
             className="rounded-[30px] px-4 py-[5px] flex items-center gap-3 w-fit"
-            onClick={() => router.push(`/courses/${course?._id}`)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              router.push(`/courses/${course?._id}`);
+            }}
           >
             Course Details <span className="text-lg">→</span>
           </Button>
         </div>
       </div>
-    </div>
+    </article>
+    </Link>
   );
 }
 

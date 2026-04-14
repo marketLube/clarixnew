@@ -1,11 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Poppins } from "next/font/google";
 import ConditionalLayout from "@/app/components/ConditionalLayout";
 import ReduxProvider from "@/global/redux/Store/ReduxProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import "./globals.css";
-import FontLoader from "./components/FontLoader";
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import GoogleAnalytics from "@/components/common/GoogleAnalytics";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-poppins",
+});
 
 const helveticaNeue = localFont({
   src: [
@@ -84,12 +92,70 @@ const helveticaNeue = localFont({
   display: "swap",
 });
 
+const siteTitle =
+  "Clarix Education - Find Your Perfect College, Course & Career";
+const siteDescription =
+  "Discover top colleges, courses, entrance exams, scholarships, and career opportunities across India. Clarix Education helps students make informed decisions about their academic and professional future.";
+
 export const metadata: Metadata = {
-  title: "Clarix Education",
-  description: "Clarix demo routes with placeholder pages",
+  metadataBase: new URL("https://clarix.in"),
+  title: {
+    default: siteTitle,
+    template: "%s | Clarix Education",
+  },
+  description: siteDescription,
+  keywords: [
+    "colleges in India",
+    "courses",
+    "entrance exams",
+    "scholarships",
+    "career guidance",
+    "higher education",
+    "university admissions",
+    "engineering colleges",
+    "medical colleges",
+    "MBA colleges",
+    "study abroad",
+    "jobs for freshers",
+    "Clarix Education",
+  ],
+  authors: [{ name: "Clarix Education" }],
+  creator: "Clarix Education",
   icons: {
     icon: "/favicon.ico",
   },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName: "Clarix Education",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export default function RootLayout({
@@ -100,12 +166,37 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${helveticaNeue.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}
+        className={`${helveticaNeue.variable} ${poppins.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}
       >
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-white focus:px-4 focus:py-2 focus:text-[#513392] focus:rounded focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
+        <GoogleAnalytics />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Clarix Education",
+              url: "https://clarix.in",
+              description: siteDescription,
+              logo: "https://clarix.in/favicon.ico",
+              sameAs: [],
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer support",
+                availableLanguage: ["English", "Hindi"],
+              },
+            }),
+          }}
+        />
         <ReduxProvider>
           <ReactQueryProvider>
             <AntdRegistry>
-              <FontLoader />
               <ConditionalLayout>{children}</ConditionalLayout>
             </AntdRegistry>
           </ReactQueryProvider>

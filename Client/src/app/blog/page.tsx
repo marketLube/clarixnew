@@ -1,18 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useCallback, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import BlogHero from "./components/BlogHero";
 import FeaturedBlogSection from "./components/FeaturedBlogSection";
 import LatestArticlesSection from "./components/LatestArticlesSection";
 import Pagination from "@/components/Ui/Pagination";
 import { useBlogs } from "@/hooks/blog/useBlogs";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import Loader from "@/components/common/Loader";
 
-export default function BlogPage() {
+function BlogPageContent() {
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+
+  const currentPage = Number(searchParams.get("page")) || 1;
+  const search = searchParams.get("q") || "";
+  const hasActiveFilters = Boolean(search);
   const cardsPerPage = 8;
 
   const { data } = useBlogs(search);
@@ -20,14 +25,16 @@ export default function BlogPage() {
 
   // Featured blog: First blog
   const featuredBlogData = blogs[0];
-  const featuredBlog = featuredBlogData ? {
-    id: featuredBlogData._id,
-    imageUrl: featuredBlogData.thumbnail || "",
-    category: featuredBlogData.category || "",
-    readTime: featuredBlogData.readTime || "",
-    title: featuredBlogData.title,
-    description: featuredBlogData.excerpt || "",
-  } : null;
+  const featuredBlog = featuredBlogData
+    ? {
+        id: featuredBlogData._id,
+        imageUrl: featuredBlogData.thumbnail || "",
+        category: featuredBlogData.category || "",
+        readTime: featuredBlogData.readTime || "",
+        title: featuredBlogData.title,
+        description: featuredBlogData.excerpt || "",
+      }
+    : null;
 
   // Horizontal blogs: Next 2 blogs
   const horizontalBlogsData = blogs.slice(1, 3);
@@ -44,7 +51,17 @@ export default function BlogPage() {
   const allBlogs = allBlogsData.map((blog) => ({
     id: blog._id,
     imageUrl: blog.thumbnail || "",
-    date: blog.date ? new Date(blog.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : new Date(blog.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
+    date: blog.date
+      ? new Date(blog.date).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })
+      : new Date(blog.createdAt).toLocaleDateString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        }),
     title: blog.title,
     slug: blog.slug,
   }));
@@ -55,10 +72,69 @@ export default function BlogPage() {
   const endIndex = startIndex + cardsPerPage;
   const currentBlogs = allBlogs.slice(startIndex, endIndex);
 
+  const handlePageChange = useCallback(
+    (page: number) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (page <= 1) {
+        params.delete("page");
+      } else {
+        params.set("page", String(page));
+      }
+      const qs = params.toString();
+      router.push(`/blog${qs ? `?${qs}` : ""}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    [router, searchParams]
+  );
+
+  const handleSearch = useCallback(
+    (q: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (q) {
+        params.set("q", q);
+      } else {
+        params.delete("q");
+      }
+      params.delete("page");
+      router.push(`/blog?${params.toString()}`);
+    },
+    [router, searchParams]
+  );
+
+  // Build rel prev/next links for SEO
+  const paginationLinks = useMemo(() => {
+    const links: React.ReactNode[] = [];
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      const href = prevPage === 1 ? "/blog" : `/blog?page=${prevPage}`;
+      links.push(<link key="prev" rel="prev" href={href} />);
+    }
+    if (currentPage < totalPages) {
+      links.push(
+        <link key="next" rel="next" href={`/blog?page=${currentPage + 1}`} />
+      );
+    }
+    return links;
+  }, [currentPage, totalPages]);
+
   return (
     <div className="min-h-screen bg-[#fdfdfd]">
+      {/* noindex for filtered/paginated pages & rel prev/next links for SEO */}
+      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
+        <head>
+          {(hasActiveFilters || currentPage > 1) && (
+            <meta name="robots" content="noindex,follow" />
+          )}
+          {paginationLinks}
+        </head>
+      )}
+
+      <ContentWrapper className="pt-6">
+        <Breadcrumb items={[{ label: "Blog" }]} />
+      </ContentWrapper>
+
       {/* Hero Section */}
-      <BlogHero onSearch={setSearch} />
+      <BlogHero onSearch={handleSearch} />
 
       {/* Main Content */}
       <ContentWrapper className="flex flex-col gap-8 md:gap-16 py-4 md:py-16">
@@ -68,14 +144,13 @@ export default function BlogPage() {
             featuredBlog={featuredBlog}
             horizontalBlogs={horizontalBlogs}
             onBlogClick={(blogId) => {
-
-              const blog = blogs.find(b => b._id === blogId);
+              const blog = blogs.find((b) => b._id === blogId);
               if (blog) {
                 router.push(`/blog/${blog.slug}`);
               }
             }}
             onBookmark={(blogId) => {
-              const blog = blogs.find(b => b._id === blogId);
+              const blog = blogs.find((b) => b._id === blogId);
               if (blog) {
                 router.push(`/blog/${blog.slug}`);
               }
@@ -87,7 +162,7 @@ export default function BlogPage() {
         <LatestArticlesSection
           blogs={currentBlogs}
           onBlogClick={(blogId) => {
-            const blog = blogs.find(b => b._id === blogId);
+            const blog = blogs.find((b) => b._id === blogId);
             if (blog) {
               router.push(`/blog/${blog.slug}`);
             }
@@ -100,11 +175,19 @@ export default function BlogPage() {
             <Pagination
               totalPages={totalPages}
               currentPage={currentPage}
-              onPageChange={(page) => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+              onPageChange={handlePageChange}
             />
           </div>
         )}
       </ContentWrapper>
     </div>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={<Loader fullPage label="Loading blog..." />}>
+      <BlogPageContent />
+    </Suspense>
   );
 }

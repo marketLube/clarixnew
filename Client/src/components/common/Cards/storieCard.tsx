@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { Rate } from "antd";
 
 const defaultAvatar = "/dummyImg/student.jpg";
@@ -50,17 +51,19 @@ export default function StoryCard({
   const hasSubRatings = subRatings && Object.values(subRatings).some((v) => v !== undefined);
 
   return (
-    <div
+    <article
       className={`relative flex h-full w-full flex-col justify-between rounded-[20px] md:rounded-[24px] bg-white p-4 md:p-6 shadow-[0px_2px_12px_rgba(0,0,0,0.06)] transition-all duration-300 hover:shadow-[0px_4px_20px_rgba(0,0,0,0.1)] ${className}`}
     >
       {/* Top Row: User Info + Rating */}
       <div className="mb-3 md:mb-4 flex items-start justify-between gap-2">
         <div className="flex items-center gap-2.5 md:gap-3 min-w-0">
-          <div className="h-[36px] w-[36px] md:h-[48px] md:w-[48px] shrink-0 overflow-hidden rounded-full bg-gray-200 ring-2 ring-[#F0EAFF]">
-            <img
+          <div className="relative h-[36px] w-[36px] md:h-[48px] md:w-[48px] shrink-0 overflow-hidden rounded-full bg-gray-200 ring-2 ring-[#F0EAFF]">
+            <Image
               src={avatarUrl}
               alt={name}
-              className="h-full w-full object-cover"
+              fill
+              sizes="48px"
+              className="object-cover"
             />
           </div>
           <div className="min-w-0">
@@ -135,6 +138,6 @@ export default function StoryCard({
           <p className="font-helvetica text-[10px] md:text-[12px] text-[#9AA2B1]">{timeAgo}</p>
         </div>
       )}
-    </div>
+    </article>
   );
 }

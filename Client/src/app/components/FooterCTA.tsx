@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/common/Button";
 import { ArrowRightIcon } from "@/components/common/Icons";
 import { useCmsFooter } from "@/hooks/cms/useCmsFooter";
@@ -50,7 +51,7 @@ export default function FooterCTA() {
           </p>
 
           <div className="mt-6 flex justify-center">
-            <a href={buttonLink}>
+            <Link href={buttonLink}>
               <Button
                 variant="secondaryRound"
                 size="lg"
@@ -59,7 +60,7 @@ export default function FooterCTA() {
                 <span>{buttonText}</span>
                 <ArrowRightIcon width={24} height={24} fill="#513392" />
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

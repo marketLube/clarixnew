@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/common/Button";
 import {
   ArrowRightIcon,
@@ -9,6 +10,7 @@ import {
 } from "@/components/common/Icons";
 import { Badge } from "@/components/common/badge";
 import { Heart } from "lucide-react";
+import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
 
 
 
@@ -68,7 +70,7 @@ export default function ExamCardDetailed({
   const currentStatus = statusConfig[status];
 
   return (
-    <div className="bg-white border-[0.5px] border-[#f2f2f2] min-h-0 sm:min-h-[336px] overflow-hidden relative rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full p-3 sm:p-6 flex flex-col">
+    <article className="bg-white border-[0.5px] border-[#f2f2f2] min-h-0 sm:min-h-[336px] overflow-hidden relative rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full p-3 sm:p-6 flex flex-col">
       {/* Main Content Area */}
       <div className="flex flex-col lg:flex-row gap-4 flex-1">
         {/* Left Section */}
@@ -77,9 +79,11 @@ export default function ExamCardDetailed({
           <div className="flex items-start gap-2">
             <div className="shrink-0 w-[48px] h-[48px] sm:w-[60px] sm:h-[60px] rounded-[12px] bg-white border-[0.462px] border-[#f2f2f2] flex items-center justify-center p-[4.615px]">
               <div className="w-[36px] h-[36px] sm:w-[46px] sm:h-[46px] rounded-[8px] bg-[#faf9f6] border-[0.462px] border-[#f2f2f2] flex items-center justify-center overflow-hidden">
-                <img
-                  src={"/images/examlo.png"}
-                  alt={title}
+                <Image
+                  src={logo || "/images/examlo.png"}
+                  alt={`${title} logo`}
+                  width={46}
+                  height={46}
                   className="w-[36px] h-[36px] sm:w-[46px] sm:h-[46px] rounded-[8px] object-cover"
                 />
               </div>
@@ -140,7 +144,7 @@ export default function ExamCardDetailed({
 
           {/* Description */}
           <p className="font-poppins text-[12px] sm:text-[16px] leading-[18px] sm:leading-[20px] text-[#162447] break-words">
-            {description}
+            {stripMarkdown(description || "")}
           </p>
         </div>
 
@@ -238,6 +242,6 @@ export default function ExamCardDetailed({
           <ArrowRightIcon width={20} height={20} fill="#f6f7ff" />
         </Button>
       </div>
-    </div>
+    </article>
   );
 }

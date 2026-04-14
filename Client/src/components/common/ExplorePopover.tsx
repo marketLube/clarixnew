@@ -143,6 +143,7 @@ export default function ExplorePopover({
   children,
   className,
 }: ExplorePopoverProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0); // Default to first item
 
@@ -267,8 +268,12 @@ export default function ExplorePopover({
         mouseLeaveDelay={0.15}
         overlayStyle={{ padding: 0, margin: 0 }}
         rootClassName="explore-popover-root"
+        open={isOpen}
+        onOpenChange={setIsOpen}
       >
-        {children}
+        <button type="button" aria-expanded={isOpen} className="appearance-none bg-transparent border-none p-0 m-0 cursor-pointer">
+          {children}
+        </button>
       </Popover>
     </div>
   );

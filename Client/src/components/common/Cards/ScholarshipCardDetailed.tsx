@@ -58,7 +58,7 @@ export default function ScholarshipCardDetailed({
   const currentStatus = statusConfig[status];
 
   return (
-    <div className="bg-white border-[0.5px] border-[#f2f2f2] min-h-[330px] overflow-hidden relative rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full p-6 flex flex-col">
+    <article className="bg-white border-[0.5px] border-[#f2f2f2] min-h-[330px] overflow-hidden relative rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full p-6 flex flex-col">
 
 
       {/* Main Content */}
@@ -151,6 +151,6 @@ export default function ScholarshipCardDetailed({
         onClose={() => setIsModalOpen(false)}
         title={title}
       />
-    </div>
+    </article>
   );
 }

@@ -2,13 +2,24 @@
 
 import React from "react";
 import Image from "next/image";
+import Markdown from "react-markdown";
 
 interface BlogContentProps {
   content: string;
   imageUrl?: string;
 }
 
+/**
+ * Detect whether a string is likely HTML rather than plain markdown.
+ * Checks for common block-level HTML tags.
+ */
+function isHtml(text: string): boolean {
+  return /<(?:p|div|h[1-6]|ul|ol|li|table|br|hr|img|a|blockquote)\b/i.test(text);
+}
+
 export default function BlogContent({ content, imageUrl }: BlogContentProps) {
+  const contentIsHtml = isHtml(content);
+
   return (
     <div className="flex flex-col gap-4 md:gap-[40px]">
       {/* Image if provided */}
@@ -16,26 +27,44 @@ export default function BlogContent({ content, imageUrl }: BlogContentProps) {
         <div className="relative w-full max-w-[930px] h-[320px] md:h-[550px] rounded-[20px] overflow-hidden">
           <Image
             src={imageUrl}
-            alt="Blog content"
+            alt="Blog article featured image"
             fill
             className="object-cover"
+            sizes="(max-width: 930px) 100vw, 930px"
+            priority
           />
         </div>
       )}
 
       {/* Main Content Text */}
-      <div
-        className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px] 
-        prose prose-lg max-w-none 
-        prose-headings:font-medium prose-headings:text-[#162447] 
-        prose-p:text-[#767e92] prose-p:leading-[28px] prose-p:mb-4
-        prose-a:text-[#513392] prose-a:no-underline hover:prose-a:underline
-        prose-strong:text-[#162447] prose-strong:font-bold
-        prose-ul:list-disc prose-ul:pl-5 prose-ul:my-4
-        prose-ol:list-decimal prose-ol:pl-5 prose-ol:my-4
-        prose-li:text-[#767e92] prose-li:my-2"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
+      {contentIsHtml ? (
+        <div
+          className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
+          prose prose-lg max-w-none
+          prose-headings:font-medium prose-headings:text-[#162447]
+          prose-p:text-[#767e92] prose-p:leading-[28px] prose-p:mb-4
+          prose-a:text-[#513392] prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-[#162447] prose-strong:font-bold
+          prose-ul:list-disc prose-ul:pl-5 prose-ul:my-4
+          prose-ol:list-decimal prose-ol:pl-5 prose-ol:my-4
+          prose-li:text-[#767e92] prose-li:my-2"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      ) : (
+        <div
+          className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
+          prose prose-lg max-w-none
+          prose-headings:font-medium prose-headings:text-[#162447]
+          prose-p:text-[#767e92] prose-p:leading-[28px] prose-p:mb-4
+          prose-a:text-[#513392] prose-a:no-underline hover:prose-a:underline
+          prose-strong:text-[#162447] prose-strong:font-bold
+          prose-ul:list-disc prose-ul:pl-5 prose-ul:my-4
+          prose-ol:list-decimal prose-ol:pl-5 prose-ol:my-4
+          prose-li:text-[#767e92] prose-li:my-2"
+        >
+          <Markdown>{content}</Markdown>
+        </div>
+      )}
 
       {/* Guide Section */}
       <div className="flex flex-col gap-[16px] max-w-[795px]">

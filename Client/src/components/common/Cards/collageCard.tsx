@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "../Button";
 import {
   LocationIcon,
@@ -13,6 +15,7 @@ import {
 } from "@/components/common/Icons";
 import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
+import { formatSalaryLPA, formatFeeRange } from "@/lib/helperFunctions/formatCurrency";
 
 const Facility = ["Hostel", "Wifi", "Sports", "Labs", "Library"]
 
@@ -30,20 +33,22 @@ export default function CollegeCard({
   isFavorite?: boolean;
   onToggleFavorite?: (id: string) => void;
 }) {
-  console.log(college, "college in colege card")
   const router = useRouter();
 
   const viewDetails = (id: string) => {
     router.push(`/colleges/${id}`);
   };
   return (
-    <div className="bg-white rounded-[20px] shadow-[1px_6px_41px_rgba(0,0,0,0.04)] p-4 w-full md:max-w-[340px] font-poppins">
+    <article className="bg-white rounded-[20px] shadow-[1px_6px_41px_rgba(0,0,0,0.04)] p-4 w-full md:max-w-[340px] font-poppins">
+      <Link href={`/colleges/${college?._id}`} className="block">
       {/* Banner */}
       <div className="relative h-[160px] w-full rounded-[10px] overflow-hidden mb-4">
-        <img
+        <Image
           src={college?.bannerImageUrl || "/college-details-bg.png"}
-          alt={college?.name}
-          className="w-full h-full object-cover"
+          alt={college?.name || "College banner"}
+          fill
+          sizes="(max-width: 768px) 100vw, 340px"
+          className="object-cover"
         />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.25)] to-transparent" />
@@ -51,13 +56,15 @@ export default function CollegeCard({
         {/* Favorite Button */}
         <button
           onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation();
             onToggleFavorite?.(college?._id);
           }}
-          className={`absolute top-3 right-3 p-[6px] rounded-full transition-all flex items-center justify-center ${isFavorite
+          className={`absolute top-3 right-3 p-[6px] rounded-full transition-all flex items-center justify-center cursor-pointer ${isFavorite
             ? "bg-[#513392] text-white"
             : "bg-white/80 hover:bg-white text-[#767e92]"
             }`}
+          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           <Heart
             size={18}
@@ -68,12 +75,20 @@ export default function CollegeCard({
 
         {/* College logo + name + location */}
         <div className="absolute left-[10px] bottom-[10px] flex items-center gap-[6px]">
-          <div className="w-[24px] h-[24px] rounded-md overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.15)] bg-[#af4b4b] flex items-center justify-center">
-            <img
-              src={college?.logo}
-              alt={`${college?.name} logo`}
-              className="w-full h-full object-cover"
-            />
+          <div className="w-[24px] h-[24px] rounded-md overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.15)] bg-white flex items-center justify-center relative">
+            {college?.logo ? (
+              <Image
+                src={college.logo}
+                alt={`${college?.name || "College"} logo`}
+                width={24}
+                height={24}
+                className="object-cover"
+              />
+            ) : (
+              <span className="text-[10px] font-bold text-[#513392]">
+                {college?.name?.charAt(0) || "C"}
+              </span>
+            )}
           </div>
           <div className="flex flex-col">
             <p className="font-helvetica text-[16px] leading-[20px] font-medium tracking-[-0.32px] text-white">
@@ -81,7 +96,7 @@ export default function CollegeCard({
             </p>
             <p className="flex items-center gap-1 font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[rgba(255,255,255,0.7)]">
               <LocationIcon width={12} height={12} />
-              <span>{college?.state} , {college?.city}</span>
+              <span>{college?.city}{college?.city && college?.state ? ", " : ""}{college?.state}</span>
             </p>
           </div>
         </div>
@@ -95,7 +110,7 @@ export default function CollegeCard({
             Annual Fees
           </p>
           <p className="font-helvetica text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
-            {college?.annualFeesRange}
+            {formatFeeRange(college?.annualFeesRange)}
           </p>
         </div>
 
@@ -142,7 +157,7 @@ export default function CollegeCard({
               Avg Package
             </p>
             <p className="font-helvetica text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
-              {college?.averageSalary}
+              {formatSalaryLPA(college?.averageSalary)}
             </p>
           </div>
           <div className="flex flex-col gap-[4px]">
@@ -150,7 +165,7 @@ export default function CollegeCard({
               Highest Package
             </p>
             <p className="font-helvetica text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
-              {college?.highestSalary}
+              {formatSalaryLPA(college?.highestSalary)}
             </p>
           </div>
         </div>
@@ -195,6 +210,7 @@ export default function CollegeCard({
         </div>
       </div>
 
+      </Link>
       {/* Actions */}
       <div className="flex items-center justify-between gap-2">
         <Button
@@ -224,6 +240,6 @@ export default function CollegeCard({
           {isSelectedForCompare ? "Added" : "Add to Compare"}
         </Button>
       </div>
-    </div>
+    </article>
   );
 }

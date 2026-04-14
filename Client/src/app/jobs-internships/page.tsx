@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useEffect, useMemo, useState, useCallback } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import JobsList from "./components/JobsList";
 import BlogsSection from "./components/BlogsSection";
@@ -10,6 +10,8 @@ import { jobsInternshipsFaqsData } from "@/app/utilities/DummyData";
 import { useJobs } from "@/hooks/job/useJobs";
 import { useBlogs } from "@/hooks/blog/useBlogs";
 import { useSavedItems } from "@/hooks/useSavedItems";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import Loader from "@/components/common/Loader";
 
 function timeAgo(isoDate?: string) {
   if (!isoDate) return "Recently";
@@ -32,13 +34,15 @@ function formatSalary(salary?: { min: number; max: number; unit: string }) {
   const max = salary.max ?? 0;
   const unit = salary.unit ?? "";
   if (!min && !max) return unit ? `(${unit})` : "";
-  return `₹${min} - ₹${max}${unit ? ` (${unit})` : ""}`;
+  return `\u20B9${min} - \u20B9${max}${unit ? ` (${unit})` : ""}`;
 }
 
-export default function JobsInternshipsPage() {
+function JobsInternshipsPageContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const [page, setPage] = useState(1);
+  const initialPage = Number(searchParams.get("page")) || 1;
+  const [page, setPage] = useState(initialPage);
   const limit = 8;
   const { jobs, pagination, isLoading, isError, isFetching } = useJobs({
     page,
@@ -60,7 +64,8 @@ export default function JobsInternshipsPage() {
         salaryRange: formatSalary(job.salary),
         location: job.location,
         postedTime: timeAgo(job.createdAt),
-        isBookmarked: savedItems?.jobs?.some((j: any) => j._id === job._id) || false,
+        isBookmarked:
+          savedItems?.jobs?.some((j: any) => j._id === job._id) || false,
       })),
     [jobs, savedItems.jobs]
   );
@@ -77,13 +82,63 @@ export default function JobsInternshipsPage() {
   }, [mappedPageJobs, page]);
 
   const hasMore = pagination ? page < pagination.totalPages : false;
+  const totalPages = pagination?.totalPages ?? 1;
+
+  // Sync page state to URL
+  const handleLoadMore = useCallback(() => {
+    if (!hasMore || isFetching) return;
+    const nextPage = page + 1;
+    setPage(nextPage);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(nextPage));
+    router.push(`/jobs-internships?${params.toString()}`, { scroll: false });
+  }, [hasMore, isFetching, page, router, searchParams]);
 
   const { data: blogData } = useBlogs();
   const blogs = blogData?.blogs?.slice(0, 4) || [];
 
+  const search = searchParams.get("search") || "";
+  const jobType = searchParams.get("jobType") || "";
+  const hasActiveFilters = Boolean(search || jobType);
+
+  // Build rel prev/next links for SEO
+  const paginationLinks = useMemo(() => {
+    const links: React.ReactNode[] = [];
+    if (page > 1) {
+      const prevPage = page - 1;
+      const href =
+        prevPage === 1
+          ? "/jobs-internships"
+          : `/jobs-internships?page=${prevPage}`;
+      links.push(<link key="prev" rel="prev" href={href} />);
+    }
+    if (page < totalPages) {
+      links.push(
+        <link
+          key="next"
+          rel="next"
+          href={`/jobs-internships?page=${page + 1}`}
+        />
+      );
+    }
+    return links;
+  }, [page, totalPages]);
+
   return (
     <section className="py-10 min-h-screen">
+      {/* noindex for filtered/paginated pages & rel prev/next links for SEO */}
+      {(hasActiveFilters || page > 1 || paginationLinks.length > 0) && (
+        <head>
+          {(hasActiveFilters || page > 1) && (
+            <meta name="robots" content="noindex,follow" />
+          )}
+          {paginationLinks}
+        </head>
+      )}
+
       <ContentWrapper className="flex flex-col gap-16">
+        <Breadcrumb items={[{ label: "Jobs & Internships" }]} />
+
         {/* Jobs List Section */}
         <JobsList
           jobs={allJobs}
@@ -91,15 +146,12 @@ export default function JobsInternshipsPage() {
             router.push(`/jobs-internships/${jobId}`);
           }}
           onApply={(jobId) => {
-            console.log("Apply for job:", jobId);
+            router.push(`/jobs-internships/${jobId}`);
           }}
           onBookmark={(jobId) => {
             toggleSavedItem({ itemId: jobId, itemType: "jobs" });
           }}
-          onLoadMore={() => {
-            if (!hasMore || isFetching) return;
-            setPage((p) => p + 1);
-          }}
+          onLoadMore={handleLoadMore}
           hasMore={hasMore}
           isLoading={isLoading}
           isError={isError}
@@ -110,7 +162,10 @@ export default function JobsInternshipsPage() {
         <BlogsSection
           blogs={blogs}
           onBlogClick={(blogId) => {
-            console.log("View blog:", blogId);
+            const blog = blogs.find((b: any) => b._id === blogId);
+            if (blog) {
+              router.push(`/blog/${blog.slug}`);
+            }
           }}
         />
 
@@ -118,5 +173,15 @@ export default function JobsInternshipsPage() {
         <FAQ questions={jobsInternshipsFaqsData} />
       </ContentWrapper>
     </section>
+  );
+}
+
+export default function JobsInternshipsPage() {
+  return (
+    <Suspense
+      fallback={<Loader fullPage label="Loading jobs & internships..." />}
+    >
+      <JobsInternshipsPageContent />
+    </Suspense>
   );
 }

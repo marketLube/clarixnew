@@ -1,4 +1,6 @@
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { Badge } from "../badge";
 import { Button } from "../Button";
 import {
@@ -41,7 +43,10 @@ export default function ExamCard({
   const router = useRouter();
 
   return (
-    <div className="w-full sm:max-w-[340px] mx-auto rounded-[24px] bg-white px-5 py-4 ">
+    <Link href={id ? `/exams/${id}` : "#"} className="block w-full sm:max-w-[340px] mx-auto">
+    <article
+      className="w-full rounded-[24px] bg-white px-5 py-4 cursor-pointer hover:shadow-md transition-shadow"
+    >
       {/* Top badges */}
       <div className="mb-4 flex items-center justify-between gap-3">
         <Badge variant="accent">{tagLabel}</Badge>
@@ -50,14 +55,13 @@ export default function ExamCard({
 
       {/* Main content row */}
       <div className="flex items-start gap-3">
-        <div className="flex h-[56px] w-[56px] items-center justify-center rounded-[16px] bg-[#e5e7f2] overflow-hidden">
-          <img
+        <div className="relative flex h-[56px] w-[56px] items-center justify-center rounded-[16px] bg-[#e5e7f2] overflow-hidden">
+          <Image
             src={logo || "/minority.png"}
-            alt={title || "exam logo"}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "/minority.png";
-            }}
+            alt={`${title || "Exam"} logo`}
+            width={56}
+            height={56}
+            className="object-cover"
           />
         </div>
         <div className="flex flex-col gap-[2px]">
@@ -106,16 +110,21 @@ export default function ExamCard({
       </div>
 
       {/* CTA */}
-      {/* <Button
+      <Button
         type="button"
         variant="primary"
         size="md"
-        className="flex w-fit items-center justify-center gap-2 rounded-full text-[13px] leading-[18px]  hover:from-[#43297a] hover:to-[#6a46c0]"
-        onClick={() => id && router.push(`/exams/${id}`)}
+        className="flex w-fit items-center justify-center gap-2 rounded-full text-[13px] leading-[18px]"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          id && router.push(`/exams/${id}`);
+        }}
       >
         <span>View Details</span>
         <ArrowRightIcon width={18} height={18} fill="currentColor" />
-      </Button> */}
-    </div>
+      </Button>
+    </article>
+    </Link>
   );
 }

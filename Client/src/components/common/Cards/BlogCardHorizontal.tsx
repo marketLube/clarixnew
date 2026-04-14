@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { ChevronRightIcon, ClockIcon } from "@/components/common/Icons";
 
 export interface BlogCardHorizontalProps {
@@ -23,13 +24,15 @@ export default function BlogCardHorizontal({
   onBookmark,
 }: BlogCardHorizontalProps) {
   return (
-    <div className="bg-white rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] h-auto md:h-[178px] flex items-center p-3 md:pl-4 md:pr-14 md:py-4 gap-3 md:gap-0">
+    <article className="bg-white rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] h-auto md:h-[178px] flex items-center p-3 md:pl-4 md:pr-14 md:py-4 gap-3 md:gap-0">
       {/* Image */}
-      <div className="w-[100px] h-[100px] md:w-[145px] md:h-[145px] rounded-[12px] overflow-hidden flex-shrink-0">
-        <img
+      <div className="relative w-[100px] h-[100px] md:w-[145px] md:h-[145px] rounded-[12px] overflow-hidden flex-shrink-0">
+        <Image
           src={imageUrl}
           alt={title}
-          className="w-full h-full object-cover"
+          fill
+          sizes="(max-width: 768px) 100px, 145px"
+          className="object-cover"
         />
       </div>
 
@@ -75,6 +78,6 @@ export default function BlogCardHorizontal({
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

@@ -14,6 +14,7 @@ import {
   Building2,
 } from "lucide-react";
 import Image from "next/image";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 function formatDate(dateStr: string | undefined): string {
   if (!dateStr) return "TBA";
@@ -80,18 +81,12 @@ export default function ExamDetailPage() {
   return (
     <section className="py-6 md:py-10 min-h-screen bg-[#FDFDFD]">
       <ContentWrapper className="flex flex-col gap-6 md:gap-10">
-        {/* Breadcrumb */}
-        <nav className="flex items-center gap-2 font-poppins text-sm text-[#767e92]">
-          <button
-            onClick={() => router.push("/exams")}
-            className="flex items-center gap-1.5 hover:text-[#513392] transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span>All Exams</span>
-          </button>
-          <span>/</span>
-          <span className="text-[#162447] font-medium">{exam.shortName}</span>
-        </nav>
+        <Breadcrumb
+          items={[
+            { label: "Exams", href: "/exams" },
+            { label: exam.shortName },
+          ]}
+        />
 
         {/* Hero Card */}
         <div className="bg-white rounded-2xl border border-[#e0e4f0] shadow-[0_4px_20px_rgba(0,0,0,0.04)] p-6 md:p-10">

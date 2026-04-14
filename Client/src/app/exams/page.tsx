@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { X, Filter, ChevronDown, Check } from "lucide-react";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import ExamsList from "./components/ExamsList";
@@ -12,6 +12,7 @@ import { useExams } from "@/hooks/exam/useExams";
 import { useStreams } from "@/hooks/stream/useStreams";
 import { useSavedItems } from "@/hooks/useSavedItems";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 export default function ExamsPage() {
   const router = useRouter();
@@ -40,6 +41,8 @@ export default function ExamsPage() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const hasActiveFilters = Boolean(stream);
 
   const { savedItems, toggleSavedItem } = useSavedItems();
 
@@ -83,10 +86,35 @@ export default function ExamsPage() {
   const title = heroSection?.primaryHeadline;
   const description = heroSection?.subHeadline;
 
+  // Build rel prev/next links for SEO
+  const paginationLinks = useMemo(() => {
+    const links: React.ReactNode[] = [];
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      const href = prevPage === 1 ? "/exams" : `/exams?page=${prevPage}`;
+      links.push(<link key="prev" rel="prev" href={href} />);
+    }
+    if (currentPage < totalPages) {
+      links.push(
+        <link key="next" rel="next" href={`/exams?page=${currentPage + 1}`} />
+      );
+    }
+    return links;
+  }, [currentPage, totalPages]);
+
   return (
     <section className="py-6 md:py-10 min-h-screen">
+      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
+        <head>
+          {(hasActiveFilters || currentPage > 1) && (
+            <meta name="robots" content="noindex,follow" />
+          )}
+          {paginationLinks}
+        </head>
+      )}
       <ContentWrapper className="flex flex-col gap-6 md:gap-10">
-        
+        <Breadcrumb items={[{ label: "Exams" }]} />
+
         {/* Header Section */}
         {heroSection?.enabled !== false && (
           <div className="flex flex-col gap-4 md:gap-[30px] items-start">
@@ -184,22 +212,22 @@ export default function ExamsPage() {
             totalPages={totalPages}
             onPageChange={(page) => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             onViewDetails={(examId) => {
-              console.log("View details for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onApplicationProcess={(examId) => {
-              console.log("Application process for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onExamPattern={(examId) => {
-              console.log("Exam pattern for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onPreparationTips={(examId) => {
-              console.log("Preparation tips for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onResults={(examId) => {
-              console.log("Results for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onApplyNow={(examId) => {
-              console.log("Apply now for exam:", examId);
+              router.push(`/exams/${examId}`);
             }}
             onBookmark={(examId) => {
               toggleSavedItem({ itemId: examId as string, itemType: "exams" });

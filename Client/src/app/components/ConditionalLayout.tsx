@@ -26,7 +26,7 @@ export default function ConditionalLayout({
   return (
     <>
       {!shouldHideNav && <Nav />}
-      <main className={isLoginPage ? "w-full h-screen" : "flex-1 w-full"}>
+      <main id="main-content" className={isLoginPage ? "w-full h-screen" : "flex-1 w-full"}>
         {children}
       </main>
       {!isLoginPage && <Footer />}

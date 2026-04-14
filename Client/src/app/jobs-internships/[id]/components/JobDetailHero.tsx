@@ -45,9 +45,9 @@ export default function JobDetailHero({ job }: JobDetailHeroProps) {
               </div>
             )}
           </div>
-          <h2 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+          <p className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
             {job.company}
-          </h2>
+          </p>
         </div>
 
         {/* Job Title and Info */}

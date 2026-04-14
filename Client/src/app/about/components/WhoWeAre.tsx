@@ -29,9 +29,10 @@ export default function WhoWeAre() {
           <div className="relative h-[250px] md:h-[397px] w-full rounded-[20px] overflow-hidden lg:hidden">
             <Image
               src="/images/abtimg.png"
-              alt="About Clarix Education"
+              alt="Clarix Education team helping students find the right college"
               fill
               className="object-cover"
+              sizes="100vw"
             />
           </div>
 
@@ -60,9 +61,10 @@ export default function WhoWeAre() {
         <div className="relative h-[397px] w-full lg:w-[606px] rounded-[20px] overflow-hidden flex-shrink-0 hidden lg:block">
           <Image
             src="/images/abtimg.png"
-            alt="About Clarix Education"
+            alt="Clarix Education team helping students find the right college"
             fill
             className="object-cover"
+            sizes="606px"
           />
         </div>
       </ContentWrapper>

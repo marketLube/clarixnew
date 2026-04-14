@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type RecruitersCardProps = {
   companyName: string;
   jobRoles: string;
@@ -38,10 +40,12 @@ export default function RecruitersCard({
 
         <div className="bg-white flex items-center justify-center px-[51px] py-[6px] rounded-[8px] shadow-[0px_0px_76.166px_0px_rgba(0,0,0,0.06)]">
           <div className="h-[40px] w-[148px] relative">
-            <img
+            <Image
               src={logoUrl}
-              alt={logoAlt || companyName}
-              className="absolute inset-0 w-full h-full object-contain object-center pointer-events-none"
+              alt={logoAlt || `${companyName} company logo`}
+              fill
+              className="object-contain object-center pointer-events-none"
+              sizes="148px"
             />
           </div>
         </div>

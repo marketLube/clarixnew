@@ -53,7 +53,7 @@ export default function NavigationTabs({ college }: any) {
     if (element) {
       const offset = 100; // Offset for sticky header
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+      const offsetPosition = elementPosition + window.scrollY - offset;
 
       window.scrollTo({
         top: offsetPosition,
@@ -64,19 +64,22 @@ export default function NavigationTabs({ college }: any) {
   };
 
   return (
-    <div className="hidden lg:block w-full sticky top-0 z-[40] mt-[8rem] p-4 bg-white shadow-[0_1px_4px_0_rgba(0,0,0,0.05)] border-b border-gray-100">
-      <div className="flex items-center justify-center gap-3">
+    <nav
+      className="w-full sticky top-0 z-[40] mt-[8rem] p-3 lg:p-4 bg-white shadow-[0_1px_4px_0_rgba(0,0,0,0.05)] border-b border-gray-100"
+      aria-label="College detail sections"
+    >
+      <div className="flex items-center lg:justify-center gap-2 lg:gap-3 overflow-x-auto scrollbar-hide">
         {NAV_TABS.map((tab) => (
           <Button
             key={tab.id}
             variant={activeTab === tab.id ? "primary" : "outline"}
             onClick={() => handleTabClick(tab.id)}
-            className="transition-all duration-200"
+            className="transition-all duration-200 whitespace-nowrap text-xs lg:text-sm shrink-0"
           >
             {tab.label}
           </Button>
         ))}
       </div>
-    </div>
+    </nav>
   );
 }

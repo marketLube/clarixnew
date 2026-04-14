@@ -1,4 +1,6 @@
 "use client";
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "../Button";
 import { ClockIcon, WifiIcon } from "@/components/common/Icons";
 import { useRouter } from "next/navigation";
@@ -26,15 +28,18 @@ export default function CareerCard({
 }: CareerCardProps) {
   const router = useRouter();
   return (
-    <div className="w-full max-w-[420px] rounded-[20px] bg-white shadow-[1px_6px_41px_rgba(0,0,0,0.04)] overflow-hidden font-poppins">
+    <Link href={`/jobs-internships/${jobId || '1'}`} className="block w-full max-w-[420px]">
+    <article className="w-full rounded-[20px] bg-white shadow-[1px_6px_41px_rgba(0,0,0,0.04)] overflow-hidden font-poppins">
       <div className="flex items-center justify-between px-3 py-3 md:px-[14px] md:py-[14px]">
         {/* Left: logo + text */}
         <div className="flex items-center gap-[10px] flex-1 min-w-0">
           <div className="relative size-[48px] md:size-[56px] shrink-0 rounded-[12px] md:rounded-[16px] bg-black shadow-[0_1px_4px_rgba(0,0,0,0.05)] overflow-hidden flex items-center justify-center">
-            <img
+            <Image
               src={logoUrl}
               alt={company}
-              className="h-full w-full object-cover"
+              width={56}
+              height={56}
+              className="object-cover"
             />
           </div>
 
@@ -72,11 +77,16 @@ export default function CareerCard({
           variant="primary"
           size="md"
           className="ml-2 shrink-0 rounded-[30px] bg-[#513392] px-4 py-2 md:px-6 md:py-[10px] text-[12px] md:text-[14px] leading-[20px] shadow-none hover:bg-[#3f2672] "
-          onClick={() => router.push(`/jobs-internships/${jobId || '1'}`)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            router.push(`/jobs-internships/${jobId || '1'}`);
+          }}
         >
           {ctaLabel}
         </Button>
       </div>
-    </div>
+    </article>
+    </Link>
   );
 }

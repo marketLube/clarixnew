@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import SectionHeading from "@/components/common/Section/SectionHeading";
 import SectionDescription from "@/components/common/Section/SectionDescription";
 import { Button } from "@/components/common/Button";
@@ -119,10 +120,12 @@ export default function CareerHub() {
               <div className="h-[150px] sm:h-[220px] rounded-[12px] border border-white/20 bg-white/10 p-[6px] backdrop-blur-sm">
                 <div className="h-full w-full overflow-hidden rounded-[10px]">
                   {bottomImageSrc && (
-                    <img
+                    <Image
                       src={bottomImageSrc}
-                      alt="Healthcare professional"
-                      className="h-full w-full object-cover"
+                      alt="Healthcare professional pursuing a career opportunity"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 260px"
                     />
                   )}
                 </div>
@@ -133,10 +136,12 @@ export default function CareerHub() {
                   <div className="flex flex-wrap items-center justify-between gap-3 ">
                     {firstRowLogos.map((logoSrc, index) =>
                       logoSrc ? (
-                        <img
+                        <Image
                           key={`recruiter-row1-${index}`}
                           src={logoSrc}
-                          alt={`Top recruiter logo ${index + 1}`}
+                          alt={`Top recruiter company logo ${index + 1}`}
+                          width={80}
+                          height={24}
                           className="h-6 w-auto object-contain"
                         />
                       ) : null
@@ -145,19 +150,23 @@ export default function CareerHub() {
                   <div className="flex flex-wrap items-center justify-between gap-3 ">
                     {secondRowLogos.map((logoSrc, index) =>
                       logoSrc ? (
-                        <img
+                        <Image
                           key={`recruiter-row2-${index}`}
                           src={logoSrc}
-                          alt={`Top recruiter logo ${index + 4}`}
+                          alt={`Top recruiter company logo ${index + 4}`}
+                          width={80}
+                          height={24}
                           className="h-6 w-auto object-contain"
                         />
                       ) : null
                     )}
                   </div>
                 </div>
-                <img
+                <Image
                   src={accentZigzag}
                   alt=""
+                  width={120}
+                  height={60}
                   className="h-[60px] w-auto max-w-full object-contain"
                 />
               </div>
@@ -168,10 +177,12 @@ export default function CareerHub() {
               <div className="h-[130px] sm:h-[190px] rounded-[12px] border border-white/20 bg-white/10 p-[6px] backdrop-blur-sm">
                 <div className="h-full w-full overflow-hidden rounded-[10px]">
                   {topImageSrc && (
-                    <img
+                    <Image
                       src={topImageSrc}
-                      alt="Students collaborating"
-                      className="h-full w-full object-cover"
+                      alt="Students collaborating on a project together"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 260px"
                     />
                   )}
                 </div>
@@ -179,10 +190,12 @@ export default function CareerHub() {
               <div className="h-[220px] sm:h-[320px] rounded-[12px] border border-white/20 bg-white/10 p-[6px] backdrop-blur-sm">
                 <div className="h-full w-full overflow-hidden rounded-[10px]">
                   {centralImageSrc && (
-                    <img
+                    <Image
                       src={centralImageSrc}
-                      alt="Professional at work"
-                      className="h-full w-full object-cover"
+                      alt="Professional working in their career field"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 260px"
                     />
                   )}
                 </div>

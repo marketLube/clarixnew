@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import PhoneIcon from "@/components/common/Icons/PhoneIcon";
 
@@ -13,7 +14,6 @@ const imgFrame2147225339 =
 export default function NeedHelpDeciding() {
   const handleGetCounselling = () => {
     // TODO: Implement get free counselling functionality
-    console.log("Get Free Counselling clicked");
   };
 
   return (
@@ -34,10 +34,11 @@ export default function NeedHelpDeciding() {
               className="h-[594.496px] w-[99.717px] relative shrink-0"
             >
               <div className="absolute inset-[-0.06%_-0.86%_-0.06%_-0.34%]">
-                <img
+                <Image
                   alt=""
                   className="block max-w-none w-full h-full"
                   src={index === 18 ? imgFrame2147225339 : imgFrame2147225322}
+                  fill
                 />
               </div>
             </div>

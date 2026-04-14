@@ -29,9 +29,10 @@ export default function OurStory() {
         <div className="relative h-[315px] w-full lg:w-[546px] rounded-[20px] overflow-hidden flex-shrink-0">
           <Image
             src="/images/ourstory.png"
-            alt="Our Story"
+            alt="The Clarix Education team and our journey"
             fill
             className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 546px"
           />
         </div>
       </ContentWrapper>

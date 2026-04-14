@@ -1,3 +1,5 @@
+import { formatSalaryLPA } from "@/lib/helperFunctions/formatCurrency";
+
 export default function PlacementStatisticsCard({ college }: any) {
   return (
     <div
@@ -19,7 +21,7 @@ export default function PlacementStatisticsCard({ college }: any) {
               Average Placement
             </p>
             <p className="text-[24px] leading-7 tracking-[-0.48px] font-medium">
-              {college?.averageSalary || "₹8.5 LPA"}
+              {formatSalaryLPA(college?.averageSalary, "₹8.5 LPA")}
             </p>
           </div>
 
@@ -28,10 +30,10 @@ export default function PlacementStatisticsCard({ college }: any) {
               Placement Rate
             </p>
             <p className="text-[24px] leading-7 tracking-[-0.48px] font-medium">
-              {college?.placementPercentage + "%" || "92%"}
+              {college?.placementPercentage != null ? `${college.placementPercentage}%` : "N/A"}
             </p>
             <p className="text-[12px] leading-5 tracking-[-0.24px] text-[rgba(255,255,255,0.6)]">
-              Class of {new Date(college?.createdAt).getFullYear() - 1}
+              {college?.createdAt ? `Class of ${new Date(college.createdAt).getFullYear() - 1}` : ""}
             </p>
           </div>
 
@@ -41,11 +43,13 @@ export default function PlacementStatisticsCard({ college }: any) {
             </p>
             <div className="flex flex-col gap-2">
               <p className="text-[24px] leading-7 tracking-[-0.48px] font-medium">
-                {college?.highestSalary}
+                {formatSalaryLPA(college?.highestSalary)}
               </p>
-              <p className="text-[12px] leading-5 tracking-[-0.24px] text-[rgba(255,255,255,0.6)]">
-                Microsoft
-              </p>
+              {college?.topRecruiter && (
+                <p className="text-[12px] leading-5 tracking-[-0.24px] text-[rgba(255,255,255,0.6)]">
+                  {college.topRecruiter}
+                </p>
+              )}
             </div>
           </div>
 

@@ -1,19 +1,27 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import ScholarshipsList from "./components/ScholarshipsList";
 import HowScholarshipsWork from "./components/HowScholarshipsWork";
 // import StudentReviews from "@/app/components/common/StudentReviews";
 import FAQ from "@/app/components/common/FAQ";
 import { scholarshipsFaqsData } from "@/app/utilities/DummyData";
-import { Loader2 } from "lucide-react";
 import { useScholarships } from "@/hooks/scholarship/useScholarships";
+import Loader from "@/components/common/Loader";
 import { useSavedItems } from "@/hooks/useSavedItems";
 import StudentStories from "@/app/components/home/StudentStories";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import ContentWrapper from "@/components/Ui/ContentWrapper";
 
-export default function ScholarshipsPage() {
+function ScholarshipsPageContent() {
+  const searchParams = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 9;
+
+  const search = searchParams.get("search") || undefined;
+  const type = searchParams.get("type") || undefined;
+  const hasActiveFilters = Boolean(search || type);
 
   const { scholarships: rawScholarships, pagination, isLoading, isError, error } = useScholarships({
     page: currentPage,
@@ -47,14 +55,38 @@ export default function ScholarshipsPage() {
 
   const totalPages = pagination?.totalPages || 1;
 
+  // Build rel prev/next links for SEO
+  const paginationLinks = useMemo(() => {
+    const links: React.ReactNode[] = [];
+    if (currentPage > 1) {
+      const prevPage = currentPage - 1;
+      const href = prevPage === 1 ? "/scholarships" : `/scholarships?page=${prevPage}`;
+      links.push(<link key="prev" rel="prev" href={href} />);
+    }
+    if (currentPage < totalPages) {
+      links.push(
+        <link key="next" rel="next" href={`/scholarships?page=${currentPage + 1}`} />
+      );
+    }
+    return links;
+  }, [currentPage, totalPages]);
+
   return (
     <section className="py-10 min-h-screen">
+      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
+        <head>
+          {(hasActiveFilters || currentPage > 1) && (
+            <meta name="robots" content="noindex,follow" />
+          )}
+          {paginationLinks}
+        </head>
+      )}
+      <ContentWrapper>
+        <Breadcrumb items={[{ label: "Scholarships" }]} />
+      </ContentWrapper>
       <div className="flex flex-col gap-10">
         {isLoading ? (
-          <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
-            <Loader2 className="w-10 h-10 animate-spin text-blue-600" />
-            <p className="text-[#767e92] font-poppins">Loading scholarships...</p>
-          </div>
+          <Loader fullPage label="Loading scholarships..." />
         ) : isError ? (
           <div className="flex flex-col items-center justify-center min-h-[400px] gap-4">
             <p className="text-red-500 font-poppins">
@@ -62,7 +94,7 @@ export default function ScholarshipsPage() {
             </p>
             <button
               onClick={() => setCurrentPage(1)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-[#513392] text-white rounded-full hover:bg-[#3f2672] transition-colors"
             >
               Retry
             </button>
@@ -73,11 +105,11 @@ export default function ScholarshipsPage() {
             currentPage={currentPage}
             totalPages={totalPages}
             onPageChange={setCurrentPage}
-            onApplyNow={(scholarshipId) => {
-              console.log("Apply now for scholarship:", scholarshipId);
+            onApplyNow={() => {
+              // Apply now action handled by the ScholarshipCardDetailed modal
             }}
-            onCheckEligibility={(scholarshipId) => {
-              console.log("Check eligibility for scholarship:", scholarshipId);
+            onCheckEligibility={() => {
+              // Check eligibility - could navigate to eligibility checker
             }}
             onBookmark={(scholarshipId) => {
               toggleSavedItem({ itemId: scholarshipId as string, itemType: "scholarships" });
@@ -90,5 +122,13 @@ export default function ScholarshipsPage() {
         <FAQ questions={scholarshipsFaqsData} />
       </div>
     </section>
+  );
+}
+
+export default function ScholarshipsPage() {
+  return (
+    <Suspense fallback={<Loader fullPage label="Loading..." />}>
+      <ScholarshipsPageContent />
+    </Suspense>
   );
 }

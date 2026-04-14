@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { LocationIcon, StarIcon } from "@/components/common/Icons";
 import { useRouter } from "next/navigation";
+import { formatSalaryLPA, formatFeeRange } from "@/lib/helperFunctions/formatCurrency";
 
 export default function CompactCollegeCard({ college }: { college: any }) {
     const router = useRouter();
@@ -12,16 +15,18 @@ export default function CompactCollegeCard({ college }: { college: any }) {
     };
 
     return (
-        <div
-            onClick={() => viewDetails(college?._id)}
+        <Link href={`/colleges/${college?._id}`} className="block w-full">
+        <article
             className="bg-white rounded-[12px] shadow-[0px_2px_12px_rgba(0,0,0,0.04)] flex flex-col font-poppins cursor-pointer border border-gray-100 active:scale-[0.98] transition-all duration-200 w-full h-[225px] overflow-hidden"
         >
             {/* Top: Image Area */}
             <div className="relative h-[100px] w-full shrink-0">
-                <img
+                <Image
                     src={college?.bannerImageUrl || "/college-details-bg.png"}
-                    alt={college?.name}
-                    className="w-full h-full object-cover"
+                    alt={college?.name || "College banner"}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 200px"
+                    className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 
@@ -35,10 +40,12 @@ export default function CompactCollegeCard({ college }: { college: any }) {
 
                 {/* Logo Overlay */}
                 <div className="absolute bottom-2 left-2 w-6 h-6 rounded-md overflow-hidden bg-white p-0.5 shadow-md">
-                    <img
-                        src={college?.logo}
-                        alt="logo"
-                        className="w-full h-full object-contain"
+                    <Image
+                        src={college?.logo || "/minority.png"}
+                        alt={`${college?.name || "College"} logo`}
+                        width={24}
+                        height={24}
+                        className="object-contain"
                     />
                 </div>
             </div>
@@ -58,14 +65,15 @@ export default function CompactCollegeCard({ college }: { college: any }) {
                 <div className="flex flex-col gap-1 border-t border-gray-50 pt-1.5">
                     <div className="flex justify-between items-center">
                         <span className="text-[8px] text-[#767E92] font-medium uppercase">Fees</span>
-                        <span className="text-[10px] font-bold text-[#513392]">{college?.annualFeesRange}</span>
+                        <span className="text-[10px] font-bold text-[#513392]">{formatFeeRange(college?.annualFeesRange)}</span>
                     </div>
                     <div className="flex justify-between items-center">
                         <span className="text-[8px] text-[#767E92] font-medium uppercase">Avg Pack</span>
-                        <span className="text-[10px] font-bold text-[#162447]">{college?.averageSalary}</span>
+                        <span className="text-[10px] font-bold text-[#162447]">{formatSalaryLPA(college?.averageSalary)}</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
+        </Link>
     );
 }

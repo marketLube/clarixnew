@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type CampusLifeCardProps = {
   title: string;
   count: number | string;
@@ -63,10 +65,12 @@ export default function CampusLifeCard({
 
       {/* Image */}
       <div className="h-[220px] relative rounded-[16px] w-full overflow-hidden">
-        <img
+        <Image
           src={imageUrl}
-          alt={imageAlt || title}
-          className="absolute inset-0 w-full h-full object-cover object-center rounded-[16px]"
+          alt={imageAlt || `${title} campus life activity`}
+          fill
+          className="object-cover object-center rounded-[16px]"
+          sizes="(max-width: 768px) 100vw, 33vw"
         />
       </div>
     </div>

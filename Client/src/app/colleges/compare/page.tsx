@@ -7,6 +7,7 @@ import NeedHelpDeciding from "./components/NeedHelpDeciding";
 import CompareView, { College } from "./components/CompareView";
 import AddCollegeModal from "./components/AddCollegeModal";
 import api from "@/lib/api";
+import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
 
 // Transform API college data to CompareView College format
 const transformCollegeData = (apiCollege: any): College => {
@@ -86,7 +87,7 @@ const transformCollegeData = (apiCollege: any): College => {
     academicsRating: apiCollege.rating ? Number((apiCollege.rating * 0.98).toFixed(1)) : 0,
     infrastructureRating: apiCollege.rating ? Number((apiCollege.rating * 0.92).toFixed(1)) : 0,
     reviewHighlights: [
-      apiCollege.description?.substring(0, 50) || "Quality education",
+      stripMarkdown(apiCollege.description || "").substring(0, 50) || "Quality education",
     ],
     admissionProcess: apiCollege.admissionMode?.[0]?.mode || "Check website",
     importantDates: apiCollege.entranceExamDate

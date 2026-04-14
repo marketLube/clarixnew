@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import Loader from "@/components/common/Loader";
 
@@ -50,7 +51,6 @@ export default function NoCollegesSelected({
       onLoadSample();
     } else {
       // TODO: Implement load sample comparison functionality
-      console.log("Load sample comparison clicked");
     }
   };
 
@@ -58,11 +58,13 @@ export default function NoCollegesSelected({
     <ContentWrapper className="py-10 sm:py-16">
       <div className="flex flex-col gap-[34px] items-center w-full">
         {/* Illustration */}
-        <div className="h-[150px] sm:h-[220px] w-auto shrink-0">
-          <img
-            alt="City girl illustration"
-            className="block max-w-none w-full h-full object-contain"
+        <div className="relative h-[150px] sm:h-[220px] w-[300px] sm:w-[400px] shrink-0">
+          <Image
+            alt="No colleges selected for comparison"
+            className="object-contain"
             src="https://res.cloudinary.com/ds07e7rod/image/upload/v1770699792/undraw_city-girl_b84p_1_oyfrhp.png"
+            fill
+            sizes="(max-width: 640px) 300px, 400px"
           />
         </div>
 

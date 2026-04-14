@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import { Button } from "@/components/common/Button";
 import { ArrowRightIcon } from "@/components/common/Icons";
@@ -115,10 +116,12 @@ export default function StudentReviews() {
               <div className="flex gap-[10px] items-center mb-4">
                 <div className="w-[50px] h-[50px] rounded-[10px] bg-[#d9d9d9] flex-shrink-0 overflow-hidden relative">
                   {review.imageUrl ? (
-                    <img
+                    <Image
                       src={review.imageUrl}
-                      alt={review.studentName}
-                      className="w-full h-full object-cover rounded-[10px]"
+                      alt={`${review.studentName} profile photo`}
+                      fill
+                      className="object-cover rounded-[10px]"
+                      sizes="50px"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-[#513392] to-[#6a46c0] flex items-center justify-center rounded-[10px]">

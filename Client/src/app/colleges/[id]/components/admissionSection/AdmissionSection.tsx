@@ -14,7 +14,7 @@ export default function AdmissionSection({ college }: any) {
   let admissionTable = [
     { label: "Application Opens", value: FormateDate(college?.applicationOpeningDate) },
     { label: "Application Deadline", value: FormateDate(college?.applicationClosingDate) },
-    { label: "Entranc Exam Date", value: FormateDate(college?.entranceExamDate) },
+    { label: "Entrance Exam Date", value: FormateDate(college?.entranceExamDate) },
     { label: "Merit List Announcement", value: FormateDate(college?.meritListAnnouncementDate) },
     { label: "Counselling Rounds", value: FormateDate(college?.counsellingStartsFrom) },
     { label: "Academic Session Starts", value: FormateDate(college?.accademicSectionStartsFrom) },

@@ -68,7 +68,7 @@ export default function CourseCardDetailed({
   isWishListed = false,
 }: CourseCardDetailedProps) {
   return (
-    <div className="bg-white border border-[#f2f2f2] h-auto md:h-[314px] overflow-hidden relative rounded-[10px] md:rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full flex flex-col p-[14px] md:p-[20px] gap-1 md:gap-0">
+    <article className="bg-white border border-[#f2f2f2] h-auto md:h-[314px] overflow-hidden relative rounded-[10px] md:rounded-[20px] shadow-[0px_6px_32.4px_0px_rgba(0,0,0,0.05)] w-full flex flex-col p-[14px] md:p-[20px] gap-1 md:gap-0">
       {/* Header Section with Title and Bookmark */}
       <div className="flex items-start justify-between mb-[6px]">
         {/* Title and Meta Info */}
@@ -196,6 +196,6 @@ export default function CourseCardDetailed({
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

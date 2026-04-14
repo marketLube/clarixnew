@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { ChevronRightIcon, ClockIcon } from "@/components/common/Icons";
+import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
 
 export interface BlogCardDetailedProps {
   id?: string;
@@ -27,13 +29,15 @@ export default function BlogCardDetailed({
   onBookmark,
 }: BlogCardDetailedProps) {
   return (
-    <div className="bg-white rounded-[26px] p-4 shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full max-w-[592px]">
+    <article className="bg-white rounded-[26px] p-4 shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full max-w-[592px]">
       {/* Image */}
-      <div className="h-auto md:h-[410px] rounded-[16px] overflow-hidden mb-4 md:mb-[27.575px]">
-        <img
+      <div className="relative h-[250px] md:h-[410px] rounded-[16px] overflow-hidden mb-4 md:mb-[27.575px]">
+        <Image
           src={imageUrl}
           alt={title}
-          className="w-full h-full object-cover rounded-[16px]"
+          fill
+          sizes="(max-width: 768px) 100vw, 592px"
+          className="object-cover rounded-[16px]"
         />
       </div>
 
@@ -63,7 +67,7 @@ export default function BlogCardDetailed({
             {title}
           </h2>
           <p className="font-poppins text-[12px] md:text-[16px] leading-[20px] text-[#767e92]">
-            {description}
+            {stripMarkdown(description)}
           </p>
         </div>
 
@@ -87,6 +91,6 @@ export default function BlogCardDetailed({
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

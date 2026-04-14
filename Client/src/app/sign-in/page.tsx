@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { AuthRightPanel } from "@/components/common/AuthRightPanel";
 import { useOtpSignIn } from "@/hooks/auth/useOtpSignIn";
 
@@ -45,12 +46,10 @@ export default function SignInPage() {
 
   const handleGoogleLogin = () => {
     // TODO: Implement Google login
-    console.log("Google login");
   };
 
   const handleAppleLogin = () => {
     // TODO: Implement Apple login
-    console.log("Apple login");
   };
 
   return (
@@ -77,10 +76,12 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <img
+                  <Image
                     src={nameIcon}
-                    alt="Name Icon"
-                    className="w-full h-full object-contain"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="object-contain"
                   />
                 </div>
                 <input
@@ -107,10 +108,12 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <img
+                  <Image
                     src={emailIcon}
-                    alt="Email Icon"
-                    className="w-full h-full object-contain"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="object-contain"
                   />
                 </div>
                 <input
@@ -158,10 +161,12 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <img
+                  <Image
                     src={phoneFrame}
-                    alt="Phone Icon"
-                    className="w-full h-full object-contain"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="object-contain"
                   />
                 </div>
                 <input
@@ -277,20 +282,24 @@ export default function SignInPage() {
               {/* Divider */}
               <div className="flex items-center gap-[10px]">
                 <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <img
+                  <Image
                     src={dividerVector}
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
                   />
                 </div>
                 <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                   or
                 </p>
                 <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <img
+                  <Image
                     src={dividerVector}
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
                   />
                 </div>
               </div>
@@ -308,10 +317,12 @@ export default function SignInPage() {
                 >
                   <span>Continue with Google</span>
                   <div className="w-5 h-5 flex items-center justify-center">
-                    <img
+                    <Image
                       src={googleIcon}
-                      alt="Google Icon"
-                      className="w-full h-full object-contain"
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="object-contain"
                     />
                   </div>
                   <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_-1px_0px_1px_rgba(0,0,0,0.03)] rounded-[12px]" />
@@ -328,10 +339,12 @@ export default function SignInPage() {
                 >
                   <span>Continue with Apple</span>
                   <div className="w-5 h-5 flex items-center justify-center">
-                    <img
+                    <Image
                       src={appleIcon}
-                      alt="Apple Icon"
-                      className="w-full h-full object-contain"
+                      alt=""
+                      width={20}
+                      height={20}
+                      className="object-contain"
                     />
                   </div>
                   <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_-1px_0px_1px_rgba(0,0,0,0.03)] rounded-[12px]" />
@@ -341,20 +354,24 @@ export default function SignInPage() {
               {/* Divider */}
               <div className="flex items-center gap-[10px]">
                 <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <img
+                  <Image
                     src={dividerVector}
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
                   />
                 </div>
                 <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                   or
                 </p>
                 <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <img
+                  <Image
                     src={dividerVector}
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
                   />
                 </div>
               </div>

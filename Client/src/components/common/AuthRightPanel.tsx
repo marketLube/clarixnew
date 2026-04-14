@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 // Figma image assets
 const loginImage = "/images/Login-illu.png";
@@ -12,10 +13,12 @@ export const AuthRightPanel: React.FC = () => {
         <div className="pt-[80px]">
           <div className="border border-white/70 rounded-full px-8 py-1.5 shadow-[0px_0px_0px_2px_white,0px_12px_8px_0px_rgba(0,0,0,0.03)] bg-white">
             <div className="h-[50px] w-[130px] relative">
-              <img
+              <Image
                 src={logoGroup}
-                alt="Clarix Logo"
-                className="w-full h-full object-contain"
+                alt="Clarix Education logo"
+                fill
+                className="object-contain"
+                sizes="130px"
               />
             </div>
           </div>
@@ -32,10 +35,12 @@ export const AuthRightPanel: React.FC = () => {
         <div className="mt-auto w-full max-w-[500px] h-[300px] relative mb-0 self-end">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute inset-0">
-              <img
+              <Image
                 src={loginImage}
-                alt="Login Illustration"
-                className="w-full h-full object-contain"
+                alt="Students exploring education opportunities on Clarix platform"
+                fill
+                className="object-contain"
+                sizes="500px"
               />
             </div>
           </div>

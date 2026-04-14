@@ -60,8 +60,8 @@ export default function HeroSection({ course }: HeroSectionProps) {
             <div className="bg-white border border-[#f2f2f2] flex flex-col items-start p-[6px] md:p-[8px] rounded-[10px] md:rounded-[14px] shrink-0 w-[80px] md:w-[110px]">
               <div className="bg-[#faf9f6] border-[#f2f2f2] border-[0.929px] flex flex-col items-start overflow-hidden rounded-[6px] md:rounded-[8px] w-full aspect-square">
                 <Image
-                  src="/Dummy_College_Logo.png"
-                  alt="Course Image"
+                  src={course?.cardImage || "/Dummy_College_Logo.png"}
+                  alt={`${course?.name || "Course"} image`}
                   width={94}
                   height={94}
                   className="w-full h-full object-cover"
@@ -71,16 +71,17 @@ export default function HeroSection({ course }: HeroSectionProps) {
 
             {/* Title Section - Mobile only shows title */}
             <div className="flex-1 md:hidden">
-              <h1 className="text-[#162447] text-[20px] leading-[26px] font-semibold tracking-[-0.3px]">
+              <h2 className="text-[#162447] text-[20px] leading-[26px] font-semibold tracking-[-0.3px]">
                 {course?.name}
-              </h1>
-              {/* Location - Mobile */}
-              <div className="flex items-center gap-1 mt-2">
-                <MapPin size={14} className="text-[#767e92]" />
-                <span className="text-[#767e92] text-[12px] leading-[16px]">
-                  Mumbai, Maharashtra
-                </span>
-              </div>
+              </h2>
+              {/* Course Type - Mobile */}
+              {course?.type && (
+                <div className="flex items-center gap-1 mt-2">
+                  <span className="text-[#767e92] text-[12px] leading-[16px]">
+                    {course.type}{course.duration ? ` | ${course.duration}` : ""}
+                  </span>
+                </div>
+              )}
             </div>
           </div>
 

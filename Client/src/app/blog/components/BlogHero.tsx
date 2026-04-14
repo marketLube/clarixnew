@@ -66,8 +66,9 @@ export default function BlogHero({ onSearch }: BlogHeroProps) {
                   <SearchIcon />
                 </div>
                 <input
-                  type="text"
+                  type="search"
                   placeholder="Search for Blogs"
+                  aria-label="Search blog articles"
                   className="bg-transparent border-none outline-none font-poppins text-[12px] md:text-[16px] leading-[20px] text-[#2D2D2D] placeholder:text-[#767e92] w-full"
                   value={searchQuery}
                   onChange={(e) => {

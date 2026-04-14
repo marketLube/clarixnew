@@ -96,8 +96,8 @@ export default function Pagination({
               onClick={() => handlePageClick(page)}
               className={
                 isActive
-                  ? "flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#513392] to-[#734bca] text-white font-helvetica text-[16px] sm:text-[20px] leading-[28px] tracking-[-0.4px]"
-                  : "flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-full bg-[#f6f7ff] text-[#162447] font-helvetica text-[14px] sm:text-[16px] leading-[20px] tracking-[-0.32px]"
+                  ? "flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#513392] to-[#734bca] text-white font-helvetica text-[16px] sm:text-[20px] leading-[28px] tracking-[-0.4px] cursor-default"
+                  : "flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-full bg-[#f6f7ff] text-[#162447] font-helvetica text-[14px] sm:text-[16px] leading-[20px] tracking-[-0.32px] cursor-pointer hover:bg-[#edeeff] transition-colors"
               }
             >
               {page}
@@ -110,7 +110,7 @@ export default function Pagination({
         type="button"
         onClick={handleNext}
         disabled={currentPage === totalPages}
-        className="flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white border border-[rgba(147,97,255,0.2)] shadow-[0px_0px_76.166px_0px_rgba(0,0,0,0.06)] disabled:opacity-50"
+        className="flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-white border border-[rgba(147,97,255,0.2)] shadow-[0px_0px_76.166px_0px_rgba(0,0,0,0.06)] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer hover:bg-[#f6f7ff] transition-colors"
         aria-label="Next page"
       >
         <span className="inline-flex h-5 w-5 items-center justify-center text-[#513392]">

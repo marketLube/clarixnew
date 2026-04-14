@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Heart } from "lucide-react";
 
 export interface JobCardProps {
@@ -29,18 +30,20 @@ export default function JobCard({
   onBookmark,
 }: JobCardProps) {
   return (
-    <div
+    <article
       className="group bg-[#fcfcfc] rounded-[16px] md:rounded-[20px] p-[10px] md:p-[14px] flex items-center justify-between gap-3 md:gap-4 cursor-pointer hover:bg-[#f8f8f8] transition-colors"
       onClick={onViewDetails}
     >
       <div className="flex gap-[7.5px] items-center flex-1 min-w-0">
         {/* Company Logo */}
-        <div className="w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[40px] md:rounded-[52px] bg-[#bbb] flex-shrink-0 overflow-hidden shadow-[0px_0.75px_3px_0px_rgba(0,0,0,0.05)]">
+        <div className="relative w-[48px] h-[48px] md:w-[60px] md:h-[60px] rounded-[40px] md:rounded-[52px] bg-[#bbb] flex-shrink-0 overflow-hidden shadow-[0px_0.75px_3px_0px_rgba(0,0,0,0.05)]">
           {logoUrl ? (
-            <img
+            <Image
               src={logoUrl}
               alt={company}
-              className="w-full h-full object-cover rounded-[52px]"
+              fill
+              sizes="60px"
+              className="object-cover rounded-[52px]"
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-[#513392] to-[#6a46c0] flex items-center justify-center rounded-[40px] md:rounded-[52px]">
@@ -117,6 +120,6 @@ export default function JobCard({
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

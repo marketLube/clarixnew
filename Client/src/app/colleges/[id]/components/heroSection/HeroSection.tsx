@@ -80,11 +80,11 @@ export default function HeroSection({ college }: any) {
       <div className="bg-white/90 backdrop-blur-sm shadow-[0_10px_40px_rgba(0,0,0,0.12)] relative sm:absolute mt-auto sm:mt-0 sm:bottom-[-88px] sm:left-1/2 sm:-translate-x-1/2 rounded-2xl px-4 py-5 sm:px-5 sm:py-4 w-[92%] max-w-[960px] z-10 transition-all">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
           <Image
-            src={college?.logo}
-            alt="College Details"
+            src={college?.logo || "/minority.png"}
+            alt={`${college?.name || "College"} logo`}
             width={100}
             height={100}
-            className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] md:w-[100px] md:h-[100px]"
+            className="w-[72px] h-[72px] sm:w-[88px] sm:h-[88px] md:w-[100px] md:h-[100px] rounded-xl object-contain"
           />
           <div className="flex-1 flex flex-col gap-3 sm:gap-4">
             <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 sm:justify-between">
@@ -146,14 +146,17 @@ export default function HeroSection({ college }: any) {
                   )}
                 </Button>
               ))}
-              <div
-                className="sm:ml-2 mt-2 sm:mt-0 cursor-pointer flex justify-center sm:justify-start w-full sm:w-auto"
+              <button
+                type="button"
+                className="sm:ml-2 mt-2 sm:mt-0 cursor-pointer flex justify-center sm:justify-start w-full sm:w-auto bg-transparent border-none p-0"
+                aria-label={`Download brochure for ${college?.name || "this college"}`}
                 onClick={() => {
                   if (college?.brochure) {
                     const link = document.createElement("a");
                     link.href = college.brochure;
                     link.setAttribute("download", `${college.name}_Brochure.pdf`);
                     link.setAttribute("target", "_blank");
+                    link.setAttribute("rel", "noopener noreferrer");
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
@@ -164,7 +167,7 @@ export default function HeroSection({ college }: any) {
                   Download Brochure{" "}
                   <DownloadIcon width={16} height={16} fill="currentColor" />
                 </span>
-              </div>
+              </button>
             </div>
           </div>
         </div>

@@ -139,7 +139,7 @@ export default function Nav() {
             <input
               type="search"
               name="q"
-              className="w-full bg-transparent text-sm leading-5 text-white placeholder:text-white/70 focus:outline-none focus:bg-white focus:text-gray-900 focus:placeholder:text-gray-500"
+              className="w-full bg-transparent text-sm leading-5 text-white placeholder:text-white/70 focus:outline-none"
               placeholder="Search colleges, courses, exams, or scholarships…"
               aria-label="Search colleges, courses, exams, or scholarships"
             />
@@ -173,7 +173,7 @@ export default function Nav() {
                 if (link.hasDropdown) {
                   return (
                     <AboutPopover key={link.href}>
-                      <Link href={link.href} className="cursor-pointer">
+                      <Link href={link.href} className="cursor-pointer" aria-current={isActive ? "page" : undefined}>
                         {linkContent}
                       </Link>
                     </AboutPopover>
@@ -181,7 +181,7 @@ export default function Nav() {
                 }
 
                 return (
-                  <Link key={link.href} href={link.href}>
+                  <Link key={link.href} href={link.href} aria-current={isActive ? "page" : undefined}>
                     {linkContent}
                   </Link>
                 );

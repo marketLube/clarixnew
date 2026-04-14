@@ -21,9 +21,10 @@ export default function DescriptionSection({ course }: any) {
           <div className="relative w-full h-full rounded-[20px] bg-gradient-to-br from-[#160340] to-[#513392]">
             <Image
               src={course?.description?.image || DescriptionImg}
-              alt="Course description"
+              alt={`${course?.name || "Course"} overview`}
               fill
               className="rounded-[20px] object-cover opacity-90"
+              sizes="(max-width: 1024px) 100vw, 557px"
             />
           </div>
         </div>

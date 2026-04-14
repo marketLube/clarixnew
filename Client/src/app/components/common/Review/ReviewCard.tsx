@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ReviewCardProps = {
   name: string;
   degree: string;
@@ -24,10 +26,12 @@ export default function ReviewCard({
       {/* Header: Avatar + Name + Degree/University */}
       <div className="flex items-center gap-4">
         <div className="relative h-[60px] w-[60px] shrink-0 rounded-full overflow-hidden bg-[#d9d9d9]">
-          <img
+          <Image
             src={avatarUrl}
-            alt={name}
-            className="h-full w-full object-cover"
+            alt={`${name} profile photo`}
+            fill
+            className="object-cover"
+            sizes="60px"
           />
         </div>
 

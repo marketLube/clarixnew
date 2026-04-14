@@ -684,7 +684,7 @@ export default function Hero() {
 
           {/* Footer Buttons */}
           <div className="p-5 border-t border-gray-100 mt-auto">
-            {isLoggedIn ? (
+            {!isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <Link
                   href="/login"

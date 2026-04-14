@@ -1,4 +1,5 @@
 "use client";
+import React, { useRef, useCallback } from "react";
 import SectionHeading from "@/components/common/Section/SectionHeading";
 import SectionDescription from "@/components/common/Section/SectionDescription";
 import { Button } from "@/components/common/Button";
@@ -31,6 +32,27 @@ export default function StayUpdated() {
   const description = stayBlock?.description ?? "";
 
   const exams = examsData?.data?.exams || [];
+
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
+
+  // Translate vertical wheel events to horizontal scroll for trackpad support
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    const el = mobileScrollRef.current;
+    if (!el) return;
+
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+
+    const atStart = el.scrollLeft <= 0;
+    const atEnd = el.scrollLeft >= maxScroll - 1;
+
+    if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) return;
+
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, []);
 
   return (
     <section className="w-full bg-[#F6F7FF] py-4 sm:py-16">
@@ -90,7 +112,12 @@ export default function StayUpdated() {
                 </div>
 
                 {/* Mobile Scrolling View (1 Row if <= 2 cards, 2 Rows if > 2 cards) */}
-                <div className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide pb-6">
+                <div
+                  ref={mobileScrollRef}
+                  onWheel={handleWheel}
+                  className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide pb-6"
+                  style={{ WebkitOverflowScrolling: "touch" }}
+                >
                   <div className={`grid ${exams.length <= 2 ? "grid-rows-1" : "grid-rows-2"} grid-flow-col gap-3 w-max`}>
                     {exams.map((exam) => (
                       <div key={exam._id} className="w-[240px] h-full">

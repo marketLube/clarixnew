@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/common/Button";
 import { AuthRightPanel } from "@/components/common/AuthRightPanel";
@@ -112,20 +113,24 @@ export default function LoginPage() {
             {/* Divider */}
             <div className="flex items-center gap-[10px]">
               <div className="flex-1 h-px relative min-h-px min-w-px">
-                <img
+                <Image
                   src={dividerVector}
                   alt=""
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
                 />
               </div>
               <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                 or
               </p>
               <div className="flex-1 h-px relative min-h-px min-w-px">
-                <img
+                <Image
                   src={dividerVector}
                   alt=""
-                  className="w-full h-full object-cover"
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
                 />
               </div>
             </div>

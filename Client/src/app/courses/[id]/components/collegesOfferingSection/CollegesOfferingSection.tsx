@@ -10,82 +10,6 @@ import {
   ShieldIcon,
 } from "@/components/common/Icons";
 
-type Facility = "Hostel" | "Wifi" | "Sports" | "Labs" | "Library";
-
-interface CollegeCardData {
-  id: number;
-  name: string;
-  location: string;
-  image: string;
-  logo: string;
-  annualFeesRange: string;
-  rating: number;
-  ratingCount: number;
-  popularCourses: string[];
-  avgPackage: string;
-  highestPackage: string;
-  facilities: Facility[];
-}
-
-const collegeCards: CollegeCardData[] = [
-  {
-    id: 1,
-    name: "MIT College of Engineering",
-    location: "Mumbai, Maharashtra",
-    image: "/Testcollergeimage.png",
-    logo: "/collegelogo.png",
-    annualFeesRange: "₹3L - 4L",
-    rating: 4.9,
-    ratingCount: 12345,
-    popularCourses: ["M.Sc", "PhD", "M.Tech", "MBA"],
-    avgPackage: "₹20 LPA",
-    highestPackage: "₹2.5 Cr",
-    facilities: ["Hostel", "Wifi", "Sports", "Labs", "Library"],
-  },
-  {
-    id: 2,
-    name: "SDM Institute of Management",
-    location: "Mumbai, Maharashtra",
-    image: "/Testcollergeimage.png",
-    logo: "/collegelogo.png",
-    annualFeesRange: "₹3L - 4L",
-    rating: 4.9,
-    ratingCount: 12345,
-    popularCourses: ["M.Sc", "PhD", "M.Tech", "MBA"],
-    avgPackage: "₹20 LPA",
-    highestPackage: "₹2.5 Cr",
-    facilities: ["Hostel", "Wifi", "Sports", "Labs", "Library"],
-  },
-  {
-    id: 3,
-    name: "MIT College of Engineering",
-    location: "Mumbai, Maharashtra",
-    image: "/Testcollergeimage.png",
-    logo: "/collegelogo.png",
-    annualFeesRange: "₹3L - 4L",
-    rating: 4.9,
-    ratingCount: 12345,
-    popularCourses: ["M.Sc", "PhD", "M.Tech", "MBA"],
-    avgPackage: "₹20 LPA",
-    highestPackage: "₹2.5 Cr",
-    facilities: ["Hostel", "Wifi", "Sports", "Labs", "Library"],
-  },
-  {
-    id: 4,
-    name: "MIT College of Engineering",
-    location: "Mumbai, Maharashtra",
-    image: "/Testcollergeimage.png",
-    logo: "/collegelogo.png",
-    annualFeesRange: "₹3L - 4L",
-    rating: 4.9,
-    ratingCount: 12345,
-    popularCourses: ["M.Sc", "PhD", "M.Tech", "MBA"],
-    avgPackage: "₹20 LPA",
-    highestPackage: "₹2.5 Cr",
-    facilities: ["Hostel", "Wifi", "Sports", "Labs", "Library"],
-  },
-];
-
 export default function CollegesOfferingSection({ course }: any) {
   return (
     <section className="w-full bg-[#FDFDFD] py-8 md:py-16">
@@ -128,7 +52,9 @@ export default function CollegesOfferingSection({ course }: any) {
           {/* Cards */}
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {course?.colleges?.map((college: any) => (
-              <CollegeCard college={college}
+              <CollegeCard
+                key={college._id || college.id}
+                college={college}
               />
             ))}
           </div>

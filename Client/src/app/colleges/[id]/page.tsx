@@ -15,7 +15,10 @@ import Review from "@/app/components/common/Review/Review";
 import { useParams } from "next/navigation";
 import { useCollegeById } from "@/hooks/college/useCollegeById";
 import StudentStories from "@/app/components/home/StudentStories";
+import RelatedColleges from "./components/RelatedColleges";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import ContentWrapper from "@/components/Ui/ContentWrapper";
 
 export default function CollegeDetailsPage() {
   const { id } = useParams();
@@ -35,6 +38,14 @@ export default function CollegeDetailsPage() {
 
   return (
     <div className="bg-[#FDFDFD] w-full">
+      <ContentWrapper className="pt-6">
+        <Breadcrumb
+          items={[
+            { label: "Colleges", href: "/colleges" },
+            { label: college?.name || "College" },
+          ]}
+        />
+      </ContentWrapper>
       <HeroSection college={college} />
       <NavigationTabs college={college} />
 
@@ -75,6 +86,13 @@ export default function CollegeDetailsPage() {
       <div id="faq">
         <FAQ questions={consolidatedFaqs.length > 0 ? consolidatedFaqs : undefined} />
       </div>
+
+      {/* Related Colleges */}
+      <RelatedColleges
+        currentCollegeId={id as string}
+        city={college?.city}
+        state={college?.state}
+      />
     </div>
   );
 }

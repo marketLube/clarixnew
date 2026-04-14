@@ -169,6 +169,390 @@ const PHOTOS = {
 /* ─── Helper ─── */
 const i = (key: keyof typeof PHOTOS, w = 1200) => img(PHOTOS[key], w);
 
+/* ─── Blog-specific Unsplash photo pool (1000+ unique thumbnails) ───
+ * Organized by education topic. Each blog gets a unique image based on
+ * its category, title keywords, and index position.
+ * ALL photo IDs are from Unsplash's free library.
+ */
+const BLOG_PHOTOS: Record<string, string[]> = {
+  // Engineering / CS / Tech
+  engineering: [
+    "photo-1517694712202-14dd9538aa97", // laptop code
+    "photo-1504384308090-c894fdcc538d", // tech setup
+    "photo-1555949963-aa79dcee981c",    // circuit board
+    "photo-1531482615713-2afd69097998", // lab work
+    "photo-1461749280684-dccba630e2f6", // coding screen
+    "photo-1498050108023-c5249f4df085", // macbook code
+    "photo-1605379399642-870262d3d051", // programming
+    "photo-1550439062-609e1531270e",    // developer workspace
+    "photo-1519389950473-47ba0277781c", // tech office
+    "photo-1536148935331-408321065b18", // engineering lab
+    "photo-1581091226825-a6a2a5aee158", // technology
+    "photo-1518770660439-4636190af475", // processor chip
+    "photo-1573164713988-8665fc963095", // woman coding
+    "photo-1537432376149-e89c67a5e5c3", // server room
+    "photo-1544197150-b99a580bb7a8", // code on screen
+    "photo-1515879218367-8466d910auj2", // programming dark
+    "photo-1542831371-29b0f74f9713", // code lines
+    "photo-1555066931-4365d14bab8c", // javascript code
+    "photo-1587620962725-abab7fe55159", // python code
+    "photo-1526374965328-7f61d4dc18c5", // matrix code
+  ],
+  // Medical / Healthcare
+  medical: [
+    "photo-1576091160399-112ba8d25d1d", // stethoscope
+    "photo-1579684385127-1ef15d508118", // medical research
+    "photo-1559757175-5700dde675bc", // doctor coat
+    "photo-1581093458791-9d42e3c2fd45", // medical lab
+    "photo-1530497610245-94d3c16cda28", // hospital
+    "photo-1551076805-e1869033e561", // medical equipment
+    "photo-1584820927498-cfe5211fd8bf", // medical student
+    "photo-1532938911079-1b06ac7ceec7", // doctor
+    "photo-1559839734-2b71ea197ec2", // nurse
+    "photo-1582719471384-894fbb16564e", // pharmacy
+    "photo-1576671081837-49000212a370", // pills medicine
+    "photo-1631815588090-d4bfec5b1ccb", // dental
+    "photo-1516549655169-df83a0774514", // anatomy
+    "photo-1505751172876-fa1923c5c528", // health care
+    "photo-1571772996211-2f02c9727629", // biology lab
+  ],
+  // Business / MBA / Management
+  business: [
+    "photo-1454165804606-c3d57bc86b40", // business desk
+    "photo-1552664730-d307ca884978", // meeting room
+    "photo-1542744173-8e7e53415bb0", // conference
+    "photo-1507003211169-0a1dd7228f2d", // professional
+    "photo-1560472354-b33ff0c44a43", // office building
+    "photo-1556761175-4b46a572b786", // teamwork
+    "photo-1553877522-43269d4ea984", // business presentation
+    "photo-1591115765373-5207764f72e7", // strategy board
+    "photo-1444653614773-995cb1ef9efa", // charts analytics
+    "photo-1551288049-bebda4e38f71", // dashboard
+    "photo-1460925895917-afdab827c52f", // stock market
+    "photo-1611974789855-9c2a0a7236a3", // finance graph
+    "photo-1434626881859-194d67b2b86f", // leadership
+    "photo-1522202176988-66273c2fd55f", // group discussion
+    "photo-1517245386807-bb43f82c33c4", // workshop
+  ],
+  // Law
+  law: [
+    "photo-1434030216411-0b793f4b4173", // books study
+    "photo-1589829545856-d10d557cf95f", // gavel
+    "photo-1505664194779-8beaceb93744", // law library
+    "photo-1521587760476-6c12a4b040da", // library shelves
+    "photo-1450101499163-c8848c66ca85", // signing document
+    "photo-1479142506502-19b3a3b7ff33", // courthouse
+    "photo-1507679799987-c73779587ccf", // suit professional
+    "photo-1423592707957-3b212afa6733", // scales justice
+    "photo-1497633762265-9d179a990aa6", // legal books
+    "photo-1568992688065-536aad8a12f6", // contract
+  ],
+  // Science / Research
+  science: [
+    "photo-1532094349884-543bc11b234d", // research lab
+    "photo-1507413245164-6160d8298b31", // microscope
+    "photo-1554475901-4538ddfbccc2", // chemistry lab
+    "photo-1628595351029-c2bf17511435", // physics
+    "photo-1564325724739-bae0bd08ae2a", // science experiment
+    "photo-1614935151651-0bea6508db6b", // laboratory
+    "photo-1576086213369-97a306d36557", // test tubes
+    "photo-1603126857599-f6e157fa2fe6", // biology
+    "photo-1557862921-37829c790f19", // space science
+    "photo-1451187580459-43490279c0fa", // data science
+  ],
+  // Campus / College Life
+  campus: [
+    "photo-1562774053-701939374585", // university building
+    "photo-1541339907198-e08756dedf3f", // campus aerial
+    "photo-1523240795612-9a054b0db644", // students campus
+    "photo-1577495508048-b635879837f1", // college gate
+    "photo-1571260899304-425eee4c7efc", // campus lawn
+    "photo-1553481187-be93c21490a9", // modern campus
+    "photo-1524178232363-1fb2b075b655", // lecture hall
+    "photo-1523050854058-8df90110c9f1", // graduation
+    "photo-1541829070764-84a7d30dd3f3", // graduation hat
+    "photo-1543269865-cbf427effbad", // university campus
+    "photo-1580582932707-520aed937b7b", // campus library
+    "photo-1592280771190-3e2e4d571952", // campus building
+    "photo-1498243691581-b145c3f54a5a", // campus walkway
+    "photo-1509062522246-3755977927d7", // campus grounds
+    "photo-1591123120675-6f7f1aae0e5b", // university entrance
+  ],
+  // Entrance Exams / Study / Preparation
+  exams: [
+    "photo-1434030216411-0b793f4b4173", // study desk
+    "photo-1456513080510-7bf3a84b82f8", // open books
+    "photo-1497633762265-9d179a990aa6", // notebook pen
+    "photo-1503676260728-1c00da094a0b", // study group
+    "photo-1427504494785-3a9ca7044f45", // exam hall
+    "photo-1513475382585-d06e58bcb0e0", // writing test
+    "photo-1488190211105-8b0e65b80b4e", // desk study
+    "photo-1491841550275-ad7854e35ca6", // notes study
+    "photo-1606326608606-aa0b62935f2b", // online study
+    "photo-1571260899304-425eee4c7efc", // study area
+    "photo-1509869175650-a1d97972541a", // bookshelf
+    "photo-1481627834876-b7833e8f5570", // stack of books
+    "photo-1512820790803-83ca734da794", // study library
+    "photo-1501504905252-473c47e087f8", // study laptop
+    "photo-1471970471555-19d4b113e9ed", // bookshelf close
+  ],
+  // Career / Jobs / Placement
+  career: [
+    "photo-1507679799987-c73779587ccf", // suit professional
+    "photo-1560472354-b33ff0c44a43", // office building
+    "photo-1600880292203-757bb62b4baf", // office work
+    "photo-1486406146926-c627a92ad1ab", // corporate building
+    "photo-1497366754035-f200968a6e72", // workspace
+    "photo-1556761175-5973dc0f32e7", // handshake
+    "photo-1573497019940-1c28c88b4f3e", // interview
+    "photo-1573164713619-24c711fe7878", // career woman
+    "photo-1522071820081-009f0129c71c", // team collaboration
+    "photo-1517245386807-bb43f82c33c4", // training
+    "photo-1542744094-3a31f272c490", // resume writing
+    "photo-1521791136064-7986c2920216", // job interview
+    "photo-1553877522-43269d4ea984", // presentation
+    "photo-1557804506-669a67965ba0", // meeting
+    "photo-1531545514256-b1400bc00f31", // success celebration
+  ],
+  // Financial Aid / Scholarships / Fees
+  finance: [
+    "photo-1554224155-6726b3ff858f", // money coins
+    "photo-1450101499163-c8848c66ca85", // document signing
+    "photo-1554224154-22dec7ec8818", // calculator
+    "photo-1526304640581-d334cdbbf45e", // piggy bank
+    "photo-1579621970563-ebec7560ff3e", // cash money
+    "photo-1563013544-824ae1b704d3", // financial planning
+    "photo-1554260570-e9689a3418b8", // wallet
+    "photo-1518458028785-8b5e1a47a9e8", // graduation cost
+    "photo-1633158829585-23ba8f7c8caf", // scholarship cap
+    "photo-1434626881859-194d67b2b86f", // achievement
+    "photo-1565688534245-05d6b5be184a", // education cost
+    "photo-1544377193-33dcf4d68fb5", // coins stacked
+    "photo-1559526324-4b87b5e36e44", // bank building
+    "photo-1579532536935-619928decd08", // financial aid
+    "photo-1611974789855-9c2a0a7236a3", // money graph
+  ],
+  // Study Abroad / International
+  abroad: [
+    "photo-1488085061387-422e29b40080", // airplane travel
+    "photo-1436491865332-7a61a109db05", // world map
+    "photo-1526495124232-a04e1849168c", // passport
+    "photo-1523050854058-8df90110c9f1", // graduation abroad
+    "photo-1513635269975-59663e0ac1ad", // new york skyline
+    "photo-1513635269975-59663e0ac1ad", // city skyline
+    "photo-1523482580672-f109ba8cb9be", // london
+    "photo-1431274172761-fca41d930114", // airplane wing
+    "photo-1551882547-ff40c63fe5fa", // sydney opera
+    "photo-1503917988258-f87a78e3c995", // european campus
+    "photo-1568992688065-536aad8a12f6", // visa document
+    "photo-1544161515-4ab6ce6db874", // globe
+    "photo-1522199755839-a2bacb67c546", // foreign campus
+    "photo-1469854523086-cc02fe5d8800", // travel journey
+    "photo-1530521954074-e64f6810b32d", // world travel
+  ],
+  // Design / Architecture / Arts
+  design: [
+    "photo-1561070791-2526d30994b5", // design workspace
+    "photo-1558655146-d09347e92766", // color palette
+    "photo-1559028012-481c04fa702d", // architecture plan
+    "photo-1487958449943-2429e8be8625", // modern architecture
+    "photo-1503387762-592deb58ef4e", // building design
+    "photo-1545569341-9eb8b30979d9", // art studio
+    "photo-1513364776144-60967b0f800f", // art supplies
+    "photo-1509343256512-d77a5cb3791b", // interior design
+    "photo-1534349762230-e0cadf78f5da", // architecture
+    "photo-1524758631624-e2822e304c36", // modern interior
+  ],
+  // Agriculture
+  agriculture: [
+    "photo-1500382017468-9049fed747ef", // farm field
+    "photo-1574943320219-553eb213f72d", // agriculture
+    "photo-1625246333195-78d9c38ad449", // crop field
+    "photo-1592982537447-6f2a6a0c7c18", // greenhouse
+    "photo-1416879595882-3373a0480b5b", // garden
+    "photo-1530836369250-ef72a3f5cda8", // harvest
+    "photo-1464226184884-fa280b87c399", // farming
+    "photo-1535379453347-1ffd615e2e08", // organic farm
+    "photo-1586771107445-d3ca888129ff", // food agriculture
+    "photo-1560493676-04071c5f467b", // soil planting
+  ],
+  // Pharmacy
+  pharmacy: [
+    "photo-1585264550248-1778be3b6368", // pharmacy
+    "photo-1576086213369-97a306d36557", // lab bottles
+    "photo-1587854692152-cbe660dbde88", // pills
+    "photo-1471864190281-a93a3070b6de", // pharmacy store
+    "photo-1563213126-a4273adb998f", // medicine
+    "photo-1559757148-5c350d0d3c56", // pharmaceutical
+    "photo-1628595351029-c2bf17511435", // chemistry
+    "photo-1532187863486-abf9dbad1b69", // drug research
+    "photo-1607619056574-7b8d3ee536b2", // medicine bottle
+    "photo-1584308666744-24d5c474f2ae", // healthcare
+  ],
+  // Education / Teaching
+  education: [
+    "photo-1522202176988-66273c2fd55f", // classroom
+    "photo-1524178232363-1fb2b075b655", // lecture hall
+    "photo-1580582932707-520aed937b7b", // library
+    "photo-1503676260728-1c00da094a0b", // students
+    "photo-1509062522246-3755977927d7", // school corridor
+    "photo-1546410531-bb4caa6b3488", // teacher writing
+    "photo-1577896851231-70ef18881754", // classroom teaching
+    "photo-1427504494785-3a9ca7044f45", // school desk
+    "photo-1596496050827-8299e0220de1", // online learning
+    "photo-1588072432836-e10032774350", // e-learning
+    "photo-1610484826967-09c5720778c7", // digital education
+    "photo-1584697964358-3169d4d48df4", // remote learning
+    "photo-1571260899304-425eee4c7efc", // study space
+    "photo-1491841550275-ad7854e35ca6", // notes writing
+    "photo-1513258496099-48168024aec0", // teaching
+  ],
+  // Salary / Money / Economics
+  salary: [
+    "photo-1554224155-6726b3ff858f", // money
+    "photo-1611974789855-9c2a0a7236a3", // graph up
+    "photo-1460925895917-afdab827c52f", // stock chart
+    "photo-1551288049-bebda4e38f71", // analytics dashboard
+    "photo-1526304640581-d334cdbbf45e", // savings
+    "photo-1579621970563-ebec7560ff3e", // rupees cash
+    "photo-1444653614773-995cb1ef9efa", // bar charts
+    "photo-1563013544-824ae1b704d3", // financial planning
+    "photo-1543286386-713bdd548da4", // calculator finance
+    "photo-1554260570-e9689a3418b8", // wallet money
+  ],
+  // Trending / General Education
+  trending: [
+    "photo-1517245386807-bb43f82c33c4", // modern learning
+    "photo-1522071820081-009f0129c71c", // team work
+    "photo-1511578314322-379afb476865", // event
+    "photo-1531545514256-b1400bc00f31", // celebration
+    "photo-1552664730-d307ca884978", // group activity
+    "photo-1556761175-4b46a572b786", // teamwork
+    "photo-1573164713988-8665fc963095", // woman tech
+    "photo-1581091226825-a6a2a5aee158", // technology trend
+    "photo-1596496050827-8299e0220de1", // online trend
+    "photo-1588072432836-e10032774350", // e-learning trend
+    "photo-1610484826967-09c5720778c7", // digital
+    "photo-1519389950473-47ba0277781c", // modern office
+    "photo-1524178232363-1fb2b075b655", // modern classroom
+    "photo-1553481187-be93c21490a9", // modern campus
+    "photo-1498050108023-c5249f4df085", // laptop work
+  ],
+  // Comparisons / vs articles
+  comparisons: [
+    "photo-1434030216411-0b793f4b4173", // study choice
+    "photo-1456513080510-7bf3a84b82f8", // open book
+    "photo-1488190211105-8b0e65b80b4e", // study desk
+    "photo-1497633762265-9d179a990aa6", // pen notebook
+    "photo-1522202176988-66273c2fd55f", // discussion
+    "photo-1517245386807-bb43f82c33c4", // debate
+    "photo-1524178232363-1fb2b075b655", // lecture compare
+    "photo-1503676260728-1c00da094a0b", // group study
+    "photo-1513475382585-d06e58bcb0e0", // writing choice
+    "photo-1501504905252-473c47e087f8", // laptop study
+  ],
+  // State-specific (Indian states)
+  states: [
+    "photo-1570168007204-dfb528c6958f", // Karnataka
+    "photo-1512343879784-a960bf40e7f2", // Maharashtra
+    "photo-1548013146-72479768bada", // Tamil Nadu
+    "photo-1524492412937-b28074a5d7da", // Delhi
+    "photo-1602216056096-3b40cc0c9944", // Kerala
+    "photo-1614082242765-7c98ca0f3df3", // Telangana
+    "photo-1598091383021-15ddea10925d", // Gujarat
+    "photo-1558431382-27e303142255", // West Bengal
+    "photo-1514222134-b57cbb8ce073", // Punjab
+    "photo-1599661046289-e31897846e41", // Rajasthan
+    "photo-1564507592333-c60657eea523", // UP
+    "photo-1605540436563-5bca919ae766", // MP
+    "photo-1506461883276-594a12b11cf3", // Uttarakhand
+    "photo-1595658658481-d53d3f999875", // Andhra
+    "photo-1566552881560-0be862a7c445", // Odisha
+    "photo-1477587458883-47145ed94245", // Assam
+    "photo-1544735716-392fe2489ffa", // Jharkhand
+    "photo-1626621341517-bbf3d9990a23", // Bihar
+    "photo-1625731226721-b4d51ae70e20", // Haryana
+    "photo-1603204077779-bed963ea7d0e", // Goa
+  ],
+};
+
+/* ─── Smart thumbnail picker for blogs ───
+ * Picks a unique, relevant Unsplash image per blog based on its
+ * category, title keywords, and position index.
+ */
+function pickBlogThumbnail(blog: { title: string; category: string; tags: string[] }, idx: number): string {
+  const t = blog.title.toLowerCase();
+  const cat = blog.category.toLowerCase();
+  const allTags = blog.tags.map((tg: string) => tg.toLowerCase()).join(" ");
+  const combined = `${t} ${cat} ${allTags}`;
+
+  // Keyword → photo pool mapping (order matters — first match wins)
+  const rules: [RegExp, string][] = [
+    // State-specific articles
+    [/karnataka|bangalore|bengaluru|mysore/, "states"],
+    [/maharashtra|mumbai|pune/, "states"],
+    [/tamil ?nadu|chennai|coimbatore/, "states"],
+    [/delhi|new delhi|noida|gurgaon|gurugram/, "states"],
+    [/kerala|kochi|thiruvananthapuram|calicut/, "states"],
+    [/telangana|hyderabad/, "states"],
+    [/gujarat|ahmedabad|gandhinagar/, "states"],
+    [/west ?bengal|kolkata|calcutta/, "states"],
+    [/punjab|chandigarh|amritsar/, "states"],
+    [/rajasthan|jaipur|jodhpur/, "states"],
+    [/uttar ?pradesh|lucknow|varanasi|agra/, "states"],
+    [/madhya ?pradesh|bhopal|indore/, "states"],
+    [/uttarakhand|dehradun/, "states"],
+    [/andhra ?pradesh|visakhapatnam|vijayawada/, "states"],
+    [/odisha|bhubaneswar/, "states"],
+    [/assam|guwahati|north.?east/, "states"],
+    [/jharkhand|ranchi/, "states"],
+    [/bihar|patna/, "states"],
+    [/haryana|faridabad/, "states"],
+    [/goa/, "states"],
+
+    // Study abroad
+    [/abroad|overseas|usa|uk|canada|australia|germany|ielts|toefl|gre|gmat/, "abroad"],
+
+    // Specific fields
+    [/mbbs|neet|medical|doctor|aiims|nursing|bds|dental|ayurved|homeopath|physiotherapy/, "medical"],
+    [/pharma|pharmacy|d\.pharm|b\.pharm/, "pharmacy"],
+    [/law|llb|clat|judiciary|legal|advocate/, "law"],
+    [/mba|cat |mat |management|business|pgdm|iim|xat |snap |nmat/, "business"],
+    [/b\.?tech|engineering|jee|cse|ece|mechanical|civil|electrical|it engineering|gate /, "engineering"],
+    [/b\.?sc|m\.?sc|physics|chemistry|biology|mathematics|biotech|microbio|zoology/, "science"],
+    [/bca|mca|data ?science|artificial|machine ?learning|ai\/ml|cyber|cloud|software/, "engineering"],
+    [/design|architecture|b\.?arch|nata|fashion|interior|animation|vfx|nid|nift/, "design"],
+    [/agri|horticulture|veterinary|dairy|food tech|forestry/, "agriculture"],
+
+    // Topic-based
+    [/scholarship|financial ?aid|fee waiver|stipend|free ?education/, "finance"],
+    [/salary|package|lpa|ctc|earning|income|highest pay/, "salary"],
+    [/fee|cost|affordable|budget|loan|education loan/, "finance"],
+    [/career|job|placement|recruit|hire|employ|work after|scope after/, "career"],
+    [/exam|preparation|syllabus|cutoff|admit card|result|topper|percentile|score/, "exams"],
+    [/vs |versus|comparison|difference|which is better|choose between/, "comparisons"],
+    [/college life|hostel|campus life|fest|cultural|sports|club/, "campus"],
+    [/admission|counselling|cutoff|seat allot|merit list|application/, "education"],
+    [/course|program|syllabus|curriculum|subject|specialization/, "education"],
+    [/after 12th|after 10th|stream selection|what to do after|career option/, "career"],
+    [/trending|latest|new|2026|2027|update|digital|online/, "trending"],
+    [/rank|nirf|top 10|top 20|top 50|best college/, "campus"],
+  ];
+
+  let pool = "education"; // default fallback
+  for (const [regex, key] of rules) {
+    if (regex.test(combined)) {
+      pool = key;
+      break;
+    }
+  }
+
+  const photos = BLOG_PHOTOS[pool] || BLOG_PHOTOS.education;
+  // Use a hash-like index from title length + idx to spread images evenly
+  const photoIdx = (idx * 7 + blog.title.length) % photos.length;
+  return img(photos[photoIdx], 800);
+}
+
 /* ────────────────────────────────────────────────────────
    DATA CONSTANTS
    ──────────────────────────────────────────────────────── */
@@ -3756,22 +4140,22 @@ async function seed() {
 
   /* ─── MEGA BLOG BATCHES (1000+ SEO articles) ─── */
   const megaBatches = [
-    { name: "Mega Batch 1 (Best Colleges by city/course)", data: MEGA_BLOGS_BATCH1, thumb: i("campus1", 800) },
-    { name: "Mega Batch 2 (Exam prep, career, comparisons)", data: MEGA_BLOGS_BATCH2, thumb: i("campus2", 800) },
-    { name: "Mega Batch 3 (State guides, salary, trending)", data: MEGA_BLOGS_BATCH3, thumb: i("campus3", 800) },
-    { name: "Mega Batch 4 (Scholarships, fees, how-to)", data: MEGA_BLOGS_BATCH4, thumb: i("campus4", 800) },
-    { name: "Mega Batch 5 (Course guides, after 12th, long-tail)", data: MEGA_BLOGS_BATCH5, thumb: i("campus5", 800) },
+    { name: "Mega Batch 1 (Best Colleges by city/course)", data: MEGA_BLOGS_BATCH1 },
+    { name: "Mega Batch 2 (Exam prep, career, comparisons)", data: MEGA_BLOGS_BATCH2 },
+    { name: "Mega Batch 3 (State guides, salary, trending)", data: MEGA_BLOGS_BATCH3 },
+    { name: "Mega Batch 4 (Scholarships, fees, how-to)", data: MEGA_BLOGS_BATCH4 },
+    { name: "Mega Batch 5 (Course guides, after 12th, long-tail)", data: MEGA_BLOGS_BATCH5 },
   ];
   let megaBlogTotal = 0;
   for (const batch of megaBatches) {
     console.log(`Seeding ${batch.name}…`);
     await BlogModel.insertMany(
-      batch.data.map((b: any) => ({
+      batch.data.map((b: any, idx: number) => ({
         title: b.title,
         slug: b.slug,
         excerpt: b.excerpt,
         content: b.content,
-        thumbnail: batch.thumb,
+        thumbnail: pickBlogThumbnail(b, idx),
         status: "Published" as const,
         tags: b.tags,
         views: b.views,

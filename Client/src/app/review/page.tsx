@@ -94,6 +94,7 @@ export default function Review() {
             <SectionHeading
                 title="Share Your College Experience"
                 className="text-center"
+                as="h1"
             />
             <SectionDescription className="text-center max-w-[600px]">
                 Your honest review helps thousands of students make better decisions.

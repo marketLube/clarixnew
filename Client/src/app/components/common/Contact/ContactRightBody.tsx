@@ -5,6 +5,7 @@ import TextArea from "@/components/common/TextArea";
 import Checkbox from "@/components/common/Checkbox";
 import GridWrapper from "@/components/Ui/GridWrapper";
 import { useState } from "react";
+import { message } from "antd";
 
 type FormData = {
   name: string;
@@ -88,7 +89,7 @@ export default function ContactRightBody() {
     );
 
     if (Object.keys(newErrors).length === 0) {
-      alert("Form submitted successfully!");
+      message.success("Form submitted successfully!");
       // Reset form
       setFormData({
         name: "",

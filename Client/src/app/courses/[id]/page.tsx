@@ -9,9 +9,12 @@ import WhatWillYouLearn from "./components/whatWillYouLearn/WhatWillYouLearn";
 import CurriculumSection from "./components/curriculumSection/CurriculumSection";
 import CareerPathsSection from "./components/careerPathsSection/CareerPathsSection";
 import CollegesOfferingSection from "./components/collegesOfferingSection/CollegesOfferingSection";
+import RelatedCourses from "./components/RelatedCourses";
 import FAQ from "@/app/components/common/FAQ";
 import { useCourseById } from "@/hooks/course/useCourseById";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import ContentWrapper from "@/components/Ui/ContentWrapper";
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -25,6 +28,14 @@ export default function CourseDetailPage() {
 
   return (
     <div className="bg-[#FDFDFD] w-full min-h-screen">
+      <ContentWrapper className="pt-6">
+        <Breadcrumb
+          items={[
+            { label: "Courses", href: "/courses" },
+            { label: course?.name || "Course" },
+          ]}
+        />
+      </ContentWrapper>
       <HeroSection course={course} />
       <TabsSection />
 
@@ -59,6 +70,13 @@ export default function CourseDetailPage() {
       <div id="faq">
         <FAQ questions={course?.faqs?.items} />
       </div>
+
+      {/* Related Courses */}
+      <RelatedCourses
+        currentCourseId={courseId as string}
+        stream={course?.stream}
+        courseLevel={course?.courseLevel}
+      />
     </div>
   );
 }

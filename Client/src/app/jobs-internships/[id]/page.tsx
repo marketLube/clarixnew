@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import JobDetailHero from "./components/JobDetailHero";
@@ -11,6 +12,7 @@ import JobDetailSidebar from "./components/JobDetailSidebar";
 import RelatedJobs from "./components/RelatedJobs";
 import { useJobById } from "@/hooks/job/useJobById";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 function timeAgo(isoDate?: string) {
   if (!isoDate) return "Recently";
@@ -36,7 +38,7 @@ function formatSalary(salary?: { min: number; max: number; unit: string }) {
   return `₹${min} - ₹${max}${unit ? ` (${unit})` : ""}`;
 }
 
-export default function JobDetailPage() {
+function JobDetailPageContent() {
   const params = useParams();
   const searchParams = useSearchParams();
   const jobId =
@@ -73,7 +75,13 @@ export default function JobDetailPage() {
           </div>
         ) : (
           <>
-            <div className="flex gap-8 items-start justify-between">
+            <Breadcrumb
+              items={[
+                { label: "Jobs & Internships", href: "/jobs-internships" },
+                { label: job.title },
+              ]}
+            />
+            <div className="flex gap-8 items-start justify-between mt-6">
               {/* Main Content */}
               <div className="flex-1 max-w-[1116px]">
                 <JobDetailHero job={job} />
@@ -95,5 +103,13 @@ export default function JobDetailPage() {
         )}
       </ContentWrapper>
     </div>
+  );
+}
+
+export default function JobDetailPage() {
+  return (
+    <Suspense fallback={<Loader fullPage label="Loading..." />}>
+      <JobDetailPageContent />
+    </Suspense>
   );
 }

@@ -8,6 +8,7 @@ import PlacementRightBottomCard from "./components/PlacementRightBottomCard";
 import GridWrapper from "@/components/Ui/GridWrapper";
 
 import { useMemo } from "react";
+import { formatSalaryLPA } from "@/lib/helperFunctions/formatCurrency";
 
 export default function PlacementSection({ college }: any) {
   const internshipStats = useMemo(() => {
@@ -45,12 +46,12 @@ export default function PlacementSection({ college }: any) {
           <div className="flex gap-2">
             <PlacementStatCard
               label="Average Package"
-              value={college?.averageSalary ? `₹${college.averageSalary} LPA` : "0 LPA"}
+              value={formatSalaryLPA(college?.averageSalary, "0 LPA")}
               className="flex-1"
             />
             <PlacementStatCard
               label="Highest Package"
-              value={college?.highestSalary ? `₹${college.highestSalary} LPA` : "0 LPA"}
+              value={formatSalaryLPA(college?.highestSalary, "0 LPA")}
               className="flex-1"
             />
             <PlacementStatCard

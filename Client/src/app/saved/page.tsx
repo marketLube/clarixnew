@@ -170,7 +170,7 @@ export default function SavedPage() {
   return (
     <ContentWrapper>
       <section className="space-y-3 w-full flex flex-col justify-center items-center mb-6 sm:mb-8 px-4 sm:px-0">
-        <SectionHeading title="Saved Items" />
+        <SectionHeading title="Saved Items" as="h1" />
         <SectionDescription className="max-w-[35rem] text-center text-sm sm:text-base">
           Everything you've bookmarked — colleges, courses, scholarships, exams, and jobs — all in one place.
         </SectionDescription>

@@ -194,10 +194,12 @@ export default function FooterMain() {
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-start relative w-full">
           {/* Logo */}
           <div className="h-[50px] relative shrink-0 w-[130px]">
-            <img
+            <Image
               alt="Clarix Education Logo"
               className="block max-w-none size-full"
               src="/images/log.png"
+              width={130}
+              height={50}
             />
           </div>
 
@@ -238,6 +240,8 @@ export default function FooterMain() {
           <input
             type="email"
             placeholder="Your email address"
+            aria-label="Email address for newsletter subscription"
+            required
             className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[13px] sm:text-sm bg-transparent border-none outline-none flex-1 min-w-0 px-1 sm:px-2 py-1.5"
           />
           <button className="bg-[#513392] flex items-center justify-center px-5 py-2 relative rounded-[50px] shrink-0 hover:bg-[#3f2672] transition-colors cursor-pointer">
@@ -262,21 +266,21 @@ export default function FooterMain() {
             </p>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
-              href="#"
+              href="/privacy-policy"
               className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Privacy Policy
             </Link>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
-              href="#"
+              href="/terms"
               className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Terms & Conditions
             </Link>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
-              href="#"
+              href="/disclaimer"
               className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Disclaimer
@@ -289,13 +293,17 @@ export default function FooterMain() {
               <a
                 key={social.name}
                 href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative shrink-0 size-5 hover:opacity-70 transition-opacity"
                 aria-label={social.ariaLabel}
               >
-                <img
+                <Image
                   alt={social.name}
                   className="block max-w-none size-full"
                   src={social.icon}
+                  width={20}
+                  height={20}
                 />
               </a>
             ))}

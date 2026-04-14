@@ -66,98 +66,67 @@ export default function CareerStreams() {
   }, []);
 
   return (
-    <section className="w-full bg-[#F6F7FF] py-4 sm:py-16 px-4 sm:px-0">
-      <div className="mx-auto">
-        {/* Hero Section */}
-        <ContentWrapper className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 sm:gap-50 mb-6 sm:mb-12 px-0 sm:px-10">
-          {/* Left: Heading */}
-          <div className="flex-1 lg:w-[519px]">
-            <SectionHeading
-              title={headingTitle}
-              className=""
-            />
+    <section className="w-full bg-[#F6F7FF] py-6 sm:py-10 px-4 sm:px-0">
+      <ContentWrapper className="px-0 sm:px-10">
+        {/* Header Row */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6 mb-5 sm:mb-8">
+          <div className="flex-1 max-w-xl">
+            <SectionHeading title={headingTitle} className="!mb-2" />
+            <SectionDescription>{descriptionText}</SectionDescription>
           </div>
 
-          {/* Right: Description and Button */}
-          <div className="flex-1 lg:w-[458px] flex flex-col gap-[31px]">
-            <SectionDescription>
-              {descriptionText}
-            </SectionDescription>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="primary"
+              className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full font-poppins text-[13px] sm:text-[15px] leading-5 whitespace-nowrap"
+              onClick={handleExploreAllStreams}
+            >
+              Explore All Streams
+              <ArrowRightIcon width={16} height={16} className="sm:w-5 sm:h-5" fill="#faf9f6" />
+            </Button>
 
-            <div className="flex items-center justify-between sm:justify-start gap-4 w-full">
-              <Button
-                variant="primary"
-                className="flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-5 sm:py-[10px] rounded-[30px] font-poppins text-[13px] sm:text-[16px] leading-[16px] sm:leading-[20px] w-fit whitespace-nowrap"
-                onClick={handleExploreAllStreams}
+            <div className="flex gap-1.5">
+              <button
+                onClick={() => scroll("left")}
+                className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
+                aria-label="Scroll left"
               >
-                Explore All Streams
-                <ArrowRightIcon width={16} height={16} className="sm:w-[24px] sm:h-[24px]" fill="#faf9f6" />
-              </Button>
-
-              <div className="flex sm:hidden gap-2">
-                <button
-                  onClick={() => scroll("left")}
-                  className="p-1.5 rounded-full bg-white shadow-md hover:bg-[#513392] transition-all border border-gray-100 group cursor-pointer"
-                  aria-label="Scroll left"
-                >
-                  <ChevronLeftIcon className="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" />
-                </button>
-                <button
-                  onClick={() => scroll("right")}
-                  className="p-1.5 rounded-full bg-white shadow-md hover:bg-[#513392] transition-all border border-gray-100 group cursor-pointer"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRightIcon className="w-5 h-5 text-gray-600 group-hover:text-white" fill="currentColor" />
-                </button>
-              </div>
+                <ChevronLeftIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
+              </button>
+              <button
+                onClick={() => scroll("right")}
+                className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
+                aria-label="Scroll right"
+              >
+                <ChevronRightIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
+              </button>
             </div>
           </div>
-        </ContentWrapper>
+        </div>
 
-        {/* Grid Container */}
-        <ContentWrapper className="px-0 sm:px-10 relative">
-          {isLoading ? (
-            <Loader containerClassName="h-[300px]" />
-          ) : (
-            <>
-              <div className="hidden sm:flex justify-end gap-2 mb-4">
-                <button
-                  onClick={() => scroll("left")}
-                  className="p-2 rounded-full bg-white shadow-md hover:bg-[#513392] transition-all border border-gray-100 group cursor-pointer"
-                  aria-label="Scroll left"
-                >
-                  <ChevronLeftIcon className="w-6 h-6 text-gray-600 group-hover:text-white" fill="currentColor" />
-                </button>
-                <button
-                  onClick={() => scroll("right")}
-                  className="p-2 rounded-full bg-white shadow-md hover:bg-[#513392] transition-all border border-gray-100 group cursor-pointer"
-                  aria-label="Scroll right"
-                >
-                  <ChevronRightIcon className="w-6 h-6 text-gray-600 group-hover:text-white" fill="currentColor" />
-                </button>
-              </div>
-
-              <div
-                ref={scrollRef}
-                onWheel={handleWheel}
-                className="grid grid-rows-2 grid-flow-col auto-cols-[35%] overflow-x-auto gap-3 sm:gap-5 pb-4 snap-x snap-mandatory scrollbar-hide lg:auto-cols-[calc(25%-16px)]"
-                style={{ WebkitOverflowScrolling: "touch" }}
-              >
-                {apiStreams.map((stream) => (
-                  <StreamCard
-                    key={stream._id}
-                    title={stream.name}
-                    description={`${stream.examsCount || 0} Exams`}
-                    image={stream.image}
-                    className="w-full flex-shrink-0 snap-start"
-                    onClick={() => router.push(`/exams?stream=${stream._id}`)}
-                  />
-                ))}
-              </div>
-            </>
-          )}
-        </ContentWrapper>
-      </div>
+        {/* Grid */}
+        {isLoading ? (
+          <Loader containerClassName="h-[200px]" />
+        ) : (
+          <div
+            ref={scrollRef}
+            onWheel={handleWheel}
+            className="grid grid-rows-2 grid-flow-col auto-cols-[40%] sm:auto-cols-[30%] lg:auto-cols-[calc(20%-12px)] overflow-x-auto gap-2.5 sm:gap-3 pb-2 snap-x snap-mandatory scrollbar-hide"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
+            {apiStreams.map((stream) => (
+              <StreamCard
+                key={stream._id}
+                title={stream.name}
+                description={`${stream.examsCount || 0} Exams`}
+                image={stream.image}
+                className="w-full flex-shrink-0 snap-start"
+                onClick={() => router.push(`/exams?stream=${stream._id}`)}
+              />
+            ))}
+          </div>
+        )}
+      </ContentWrapper>
     </section>
   );
 }

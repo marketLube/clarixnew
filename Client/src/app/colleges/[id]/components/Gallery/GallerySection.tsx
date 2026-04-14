@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/common/Button";
 import SectionDescription from "@/components/common/Section/SectionDescription";
 import SectionHeading from "@/components/common/Section/SectionHeading";
@@ -84,11 +85,12 @@ export default function GallerySection({ college }: GallerySectionProps) {
                                 className={`relative rounded-[16px] overflow-hidden h-[400px] border border-gray-100 shadow-sm ${isSmall ? "col-span-1" : "col-span-2"
                                   }`}
                               >
-                                <img
+                                <Image
                                   src={imageUrl}
-                                  alt={`${activeCategory} image ${rowIndex * 3 + imageIndex + 1
-                                    }`}
-                                  className="absolute inset-0 w-full h-full object-cover transition-transform hover:scale-105 duration-500"
+                                  alt={`${college?.name || "College"} ${activeCategory.toLowerCase()} photo ${rowIndex * 3 + imageIndex + 1}`}
+                                  fill
+                                  className="object-cover transition-transform hover:scale-105 duration-500"
+                                  sizes="(max-width: 768px) 100vw, 40vw"
                                 />
                               </div>
                             );
@@ -113,11 +115,12 @@ export default function GallerySection({ college }: GallerySectionProps) {
                                 className={`relative rounded-[16px] overflow-hidden h-[220px] border border-gray-100 ${isSmall ? "col-span-1" : "col-span-2"
                                   }`}
                               >
-                                <img
+                                <Image
                                   src={imageUrl}
-                                  alt={`${activeCategory} image ${rowIndex * 2 + imageIndex + 1
-                                    }`}
-                                  className="absolute inset-0 w-full h-full object-cover"
+                                  alt={`${college?.name || "College"} ${activeCategory.toLowerCase()} photo ${rowIndex * 2 + imageIndex + 1}`}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(max-width: 768px) 66vw, 40vw"
                                 />
                               </div>
                             );
