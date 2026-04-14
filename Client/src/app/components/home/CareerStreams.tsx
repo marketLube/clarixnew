@@ -69,37 +69,39 @@ export default function CareerStreams() {
     <section className="w-full bg-[#F6F7FF] py-6 sm:py-10 px-4 sm:px-0">
       <ContentWrapper className="px-0 sm:px-10">
         {/* Header Row */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 sm:gap-6 mb-5 sm:mb-8">
-          <div className="flex-1 max-w-xl">
-            <SectionHeading title={headingTitle} className="!mb-2" />
-            <SectionDescription>{descriptionText}</SectionDescription>
-          </div>
+        <div className="mb-5 sm:mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 sm:gap-6 items-start">
+            <div>
+              <SectionHeading title={headingTitle} className="!mb-2" />
+              <SectionDescription>{descriptionText}</SectionDescription>
+            </div>
 
-          <div className="flex items-center gap-3">
-            <Button
-              variant="primary"
-              className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full font-poppins text-[13px] sm:text-[15px] leading-5 whitespace-nowrap"
-              onClick={handleExploreAllStreams}
-            >
-              Explore All Streams
-              <ArrowRightIcon width={16} height={16} className="sm:w-5 sm:h-5" fill="#faf9f6" />
-            </Button>
+            <div className="flex items-center gap-3 shrink-0">
+              <Button
+                variant="primary"
+                className="flex items-center gap-1.5 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full font-poppins text-[13px] sm:text-[15px] leading-5 whitespace-nowrap"
+                onClick={handleExploreAllStreams}
+              >
+                Explore All Streams
+                <ArrowRightIcon width={16} height={16} className="sm:w-5 sm:h-5" fill="#faf9f6" />
+              </Button>
 
-            <div className="flex gap-1.5">
-              <button
-                onClick={() => scroll("left")}
-                className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
-                aria-label="Scroll left"
-              >
-                <ChevronLeftIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
-              </button>
-              <button
-                onClick={() => scroll("right")}
-                className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
-                aria-label="Scroll right"
-              >
-                <ChevronRightIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
-              </button>
+              <div className="flex gap-1.5">
+                <button
+                  onClick={() => scroll("left")}
+                  className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
+                  aria-label="Scroll left"
+                >
+                  <ChevronLeftIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
+                </button>
+                <button
+                  onClick={() => scroll("right")}
+                  className="p-1.5 rounded-full bg-white shadow-sm hover:bg-[#513392] transition-all border border-gray-200 group cursor-pointer"
+                  aria-label="Scroll right"
+                >
+                  <ChevronRightIcon className="w-4 h-4 sm:w-5 sm:h-5 text-gray-500 group-hover:text-white" fill="currentColor" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
