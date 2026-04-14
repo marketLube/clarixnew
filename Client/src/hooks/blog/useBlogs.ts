@@ -28,16 +28,27 @@ interface BlogListResponse {
     };
 }
 
-const fetchBlogs = async (search?: string) => {
-    const { data } = await api.get<{ data: BlogListResponse }>("/blog", {
-        params: { search }
-    });
+export interface UseBlogsOptions {
+    page?: number;
+    limit?: number;
+    search?: string;
+}
+
+const fetchBlogs = async (opts: UseBlogsOptions) => {
+    const params: Record<string, any> = {
+        page: opts.page ?? 1,
+        limit: opts.limit ?? 12,
+    };
+    if (opts.search) params.search = opts.search;
+
+    const { data } = await api.get<{ data: BlogListResponse }>("/blog", { params });
     return data.data;
 };
 
-export const useBlogs = (search?: string) => {
+export const useBlogs = (opts: UseBlogsOptions = {}) => {
     return useQuery({
-        queryKey: ["blogs", search],
-        queryFn: () => fetchBlogs(search),
+        queryKey: ["blogs", opts],
+        queryFn: () => fetchBlogs(opts),
+        staleTime: 5 * 60 * 1000,
     });
 };
