@@ -19,20 +19,18 @@ export default function Stats() {
         {isLoading ? (
           <Loader containerClassName="py-0" />
         ) : (
-          <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-nowrap sm:justify-between sm:items-stretch">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="flex justify-center"
+                className="flex flex-col items-center text-center text-[#767e92] py-2"
               >
-                <div className="flex flex-col gap-0 lg:gap-[6px] items-center text-center text-[#767e92]">
-                  <p className="font-poppins font-medium text-[16px] leading-[20px] tracking-[-0.28px] sm:text-[20px] lg:text-[48px] lg:leading-[48px] lg:tracking-[-0.96px]">
-                    {stat.value}
-                  </p>
-                  <p className="font-poppins text-[10px] leading-[14px] sm:text-[12px] lg:text-[16px] lg:leading-[20px]">
-                    {stat.label}
-                  </p>
-                </div>
+                <p className="font-poppins font-medium text-[20px] leading-[24px] tracking-[-0.28px] md:text-[28px] lg:text-[48px] lg:leading-[48px] lg:tracking-[-0.96px]">
+                  {stat.value}
+                </p>
+                <p className="font-poppins text-[11px] leading-[16px] md:text-[13px] lg:text-[16px] lg:leading-[20px] mt-1">
+                  {stat.label}
+                </p>
               </div>
             ))}
           </div>

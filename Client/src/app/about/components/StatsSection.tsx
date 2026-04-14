@@ -40,17 +40,17 @@ export default function StatsSection() {
     <section className="w-full py-6 md:py-12">
       <ContentWrapper>
         {/* <div className=""> */}
-        <div className="bg-[#f6f7ff] rounded-[14px] px-4 md:px-[212px] py-6 md:py-[30px] my-8 md:my-0">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 items-center justify-center">
+        <div className="bg-[#f6f7ff] rounded-[14px] px-4 md:px-16 lg:px-[212px] py-6 md:py-[30px] my-4 md:my-0">
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-8 items-center justify-center">
             {stats.map((stat) => (
               <div
                 key={stat.id}
-                className="flex flex-col gap-1 sm:gap-[14px] items-center text-center"
+                className="flex flex-col items-center text-center py-2"
               >
-                <p className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-[#767e92] text-[28px] sm:text-[48px] tracking-[-0.96px]">
+                <p className="font-poppins font-medium text-[20px] leading-[24px] md:text-[28px] md:leading-[32px] lg:text-[48px] lg:leading-[48px] text-[#767e92] tracking-[-0.5px] md:tracking-[-0.96px]">
                   {stat.value}
                 </p>
-                <p className="font-poppins text-[12px] sm:text-[16px] leading-[16px] sm:leading-[20px] text-[#767e92]">
+                <p className="font-poppins text-[11px] md:text-[13px] lg:text-[16px] leading-[16px] md:leading-[20px] text-[#767e92] mt-1">
                   {stat.label}
                 </p>
               </div>

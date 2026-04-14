@@ -85,7 +85,7 @@ export default function ExploreColleges() {
       <ContentWrapper className="px-4 sm:px-10">
         {/* Hero Section */}
 
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 sm:gap-50 mb-12 ">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3 sm:gap-6 mb-6 sm:mb-12">
           {/* Left: Heading */}
           <div className="flex-1 lg:w-[600px]">
             <SectionHeading title={title} className=" " />
@@ -106,7 +106,7 @@ export default function ExploreColleges() {
         </div>
         <div className="">
           {/* Filters */}
-          <div className="mb-8 flex items-center flex-nowrap gap-3 overflow-x-auto sm:flex-wrap sm:overflow-x-visible">
+          <div className="mb-4 sm:mb-8 flex items-center flex-nowrap gap-2 sm:gap-3 overflow-x-auto sm:flex-wrap sm:overflow-x-visible scrollbar-hide">
             {renderFilterButton("reviews", "By Reviews", MedalIcon)}
             {renderFilterButton("placements", "By Placements", BadgeIcon)}
             {renderFilterButton("fees", "By Fees", FundingIcon)}
