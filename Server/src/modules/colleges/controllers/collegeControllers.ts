@@ -5,20 +5,99 @@ import { College } from '../models/collegeModel.js';
 import { Course } from '../../courses/models/courseModel.js';
 import { Stream } from '../../streams/model/streamModel.js';
 
+/**
+ * Parse a single fee value from a string.
+ * Handles formats like:
+ *   "₹2,09,550 / year (IITs)" → 209550
+ *   "₹50,000"                 → 50000
+ *   "₹5,00,000"               → 500000
+ *   "15 Lakh"                  → 1500000
+ *   "2.5L"                     → 250000
+ */
+const parseSingleFee = (str: string): number => {
+    const cleaned = str.trim();
+
+    // Check for "Lakh" or "L" multiplier
+    const lakhMatch = cleaned.match(/([\d,.]+)\s*(?:lakh|lac|l)\b/i);
+    if (lakhMatch) {
+        const num = parseFloat(lakhMatch[1].replace(/,/g, ''));
+        return isNaN(num) ? NaN : num * 100000;
+    }
+
+    // Check for "Crore" or "Cr" multiplier
+    const croreMatch = cleaned.match(/([\d,.]+)\s*(?:crore|cr)\b/i);
+    if (croreMatch) {
+        const num = parseFloat(croreMatch[1].replace(/,/g, ''));
+        return isNaN(num) ? NaN : num * 10000000;
+    }
+
+    // Check for "K" multiplier
+    const kMatch = cleaned.match(/([\d,.]+)\s*k\b/i);
+    if (kMatch) {
+        const num = parseFloat(kMatch[1].replace(/,/g, ''));
+        return isNaN(num) ? NaN : num * 1000;
+    }
+
+    // Plain number with commas: "₹2,09,550" or "₹50,000"
+    const numMatch = cleaned.match(/([\d,]+(?:\.\d+)?)/);
+    if (numMatch) {
+        const num = parseFloat(numMatch[1].replace(/,/g, ''));
+        return isNaN(num) ? NaN : num;
+    }
+
+    return NaN;
+};
+
+/**
+ * Extract all fee values from a fee string that may contain ranges.
+ * Handles: "₹2-15 Lakh / year" → [200000, 1500000]
+ *          "₹50,000 - ₹5,00,000 / year" → [50000, 500000]
+ *          "₹2,09,550 / year" → [209550]
+ */
+const extractFeeValues = (feeStr: string): number[] => {
+    if (!feeStr) return [];
+
+    // Check for range pattern like "₹2-15 Lakh" (numbers separated by dash with a shared unit)
+    const rangeWithUnitMatch = feeStr.match(/([\d,.]+)\s*[-–]\s*([\d,.]+)\s*(lakh|lac|l|crore|cr|k)/i);
+    if (rangeWithUnitMatch) {
+        const unit = rangeWithUnitMatch[3].toLowerCase();
+        let multiplier = 1;
+        if (/^(lakh|lac|l)$/i.test(unit)) multiplier = 100000;
+        else if (/^(crore|cr)$/i.test(unit)) multiplier = 10000000;
+        else if (/^k$/i.test(unit)) multiplier = 1000;
+
+        const low = parseFloat(rangeWithUnitMatch[1].replace(/,/g, '')) * multiplier;
+        const high = parseFloat(rangeWithUnitMatch[2].replace(/,/g, '')) * multiplier;
+        const values: number[] = [];
+        if (!isNaN(low)) values.push(low);
+        if (!isNaN(high)) values.push(high);
+        return values;
+    }
+
+    // Check for range pattern like "₹50,000 - ₹5,00,000"
+    const parts = feeStr.split(/\s*[-–]\s*(?=₹|Rs|INR|\d)/i);
+    if (parts.length > 1) {
+        return parts.map(p => parseSingleFee(p)).filter(n => !isNaN(n));
+    }
+
+    // Single value
+    const val = parseSingleFee(feeStr);
+    return isNaN(val) ? [] : [val];
+};
+
 const calculateFeesRange = (courses: any[]) => {
     if (!courses || !Array.isArray(courses) || courses.length === 0) return 'N/A';
 
-    const fees = courses
-        .map((c: any) => {
-            const feeStr = c.fees?.toString().replace(/[^0-9.]/g, '');
-            return feeStr ? parseFloat(feeStr) : NaN;
-        })
-        .filter((f: any) => !isNaN(f));
+    const allFees: number[] = [];
+    for (const c of courses) {
+        const values = extractFeeValues(c.fees?.toString() || '');
+        allFees.push(...values);
+    }
 
-    if (fees.length === 0) return 'N/A';
+    if (allFees.length === 0) return 'N/A';
 
-    const minFee = Math.min(...fees);
-    const maxFee = Math.max(...fees);
+    const minFee = Math.min(...allFees);
+    const maxFee = Math.max(...allFees);
 
     const formatNumber = (num: number) => {
         if (num >= 100000) return `${(num / 100000).toFixed(1).replace(/\.0$/, '')}L`;

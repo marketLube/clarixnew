@@ -6,6 +6,7 @@ interface IReview extends Document {
     reviewType: 'College' | 'Organization';
     collegeId?: Schema.Types.ObjectId;
     collegeName?: string;
+    rating?: number;
     reviewDate: Date;
     content: string;
     status: 'Pending' | 'Approved' | 'Rejected';
@@ -40,6 +41,11 @@ const reviewSchema = new Schema<IReview>(
         collegeName: {
             type: String,
             trim: true,
+        },
+        rating: {
+            type: Number,
+            min: 1,
+            max: 5,
         },
         city: {
             type: String,

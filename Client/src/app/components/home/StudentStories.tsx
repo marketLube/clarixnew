@@ -1,20 +1,18 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { PenLine, ChevronDown, ChevronUp, ChevronLeft, ChevronRight } from "lucide-react";
-import StoryCard from "@/components/common/Cards/storieCard";
+import { PenLine, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Star } from "lucide-react";
 import { useReviews } from "@/hooks/review/useReviews";
 import Link from "next/link";
 import Loader from "@/components/common/Loader";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
+import SectionHeading from "@/components/common/Section/SectionHeading";
 
-// Helper for time ago
 function timeAgo(dateString: string) {
   const date = new Date(dateString);
   const now = new Date();
   const seconds = Math.floor((now.getTime() - date.getTime()) / 1000);
   let interval = seconds / 31536000;
-
   if (interval > 1) return Math.floor(interval) + " years ago";
   interval = seconds / 2592000;
   if (interval > 1) return Math.floor(interval) + " months ago";
@@ -23,28 +21,83 @@ function timeAgo(dateString: string) {
   return "Just now";
 }
 
-// Derive a meaningful review title from content
-function deriveTitle(content: string, collegeName?: string): string {
-  if (!content) return "Student Review";
-  // Take first sentence, max 65 chars
-  const first = content.split(/[.!?]/)[0]?.trim() || "";
-  if (first.length > 10 && first.length <= 65) return first;
-  if (first.length > 65) return first.slice(0, 62) + "…";
-  // Fallback: use college name context
-  if (collegeName) return `My experience at ${collegeName}`;
-  return "Student Review";
-}
+function ReviewCard({
+  avatarUrl,
+  name,
+  college,
+  course,
+  content,
+  rating,
+  createdAt,
+}: {
+  avatarUrl?: string;
+  name: string;
+  college?: string;
+  course?: string;
+  content: string;
+  rating?: number;
+  createdAt: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const MAX_LENGTH = 180;
+  const isLong = content.length > MAX_LENGTH;
+  const displayedContent = !expanded && isLong ? content.slice(0, MAX_LENGTH) + "..." : content;
+  const displayRating = rating ?? 4;
 
-// Generate a rating from content sentiment (simple heuristic)
-function deriveRating(content: string, index: number): number {
-  const positive = ["excellent", "amazing", "great", "best", "love", "outstanding", "exceptional", "phenomenal", "unmatched", "strong", "world-class"];
-  const negative = ["poor", "bad", "worst", "terrible", "lacking", "disappointing"];
-  const lower = content.toLowerCase();
-  let score = 3.5;
-  positive.forEach((w) => { if (lower.includes(w)) score += 0.2; });
-  negative.forEach((w) => { if (lower.includes(w)) score -= 0.3; });
-  // Clamp between 3.0 and 5.0 for realistic range
-  return Math.round(Math.min(5, Math.max(3, score + (index % 3) * 0.3)) * 2) / 2;
+  return (
+    <div className="flex h-full w-full flex-col justify-between rounded-[20px] bg-white p-5 md:p-6 shadow-[0px_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0px_6px_24px_rgba(0,0,0,0.1)]">
+      {/* Header: Avatar + Info + Rating */}
+      <div className="mb-4 flex items-start justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="h-10 w-10 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-[#F0EAFF]">
+            {avatarUrl ? (
+              <img src={avatarUrl} alt={name} className="h-full w-full object-cover" />
+            ) : (
+              <div className="h-full w-full flex items-center justify-center text-[#513392] font-helvetica font-bold text-sm md:text-base">
+                {name.charAt(0).toUpperCase()}
+              </div>
+            )}
+          </div>
+          <div className="min-w-0">
+            <h4 className="font-helvetica text-[14px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
+              {name}
+            </h4>
+            <p className="font-helvetica text-[11px] md:text-[13px] text-[#767E92] truncate leading-relaxed">
+              {college}{course ? ` • ${course}` : ""}
+            </p>
+          </div>
+        </div>
+        <div className="flex items-center gap-1 shrink-0 rounded-full bg-[#FFF8E1] px-2.5 py-1">
+          <Star className="h-3.5 w-3.5 fill-[#FFB800] text-[#FFB800]" />
+          <span className="font-helvetica text-[13px] font-semibold text-[#162447]">
+            {displayRating.toFixed(1)}
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="mb-4 flex-grow">
+        <p className="font-helvetica text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] text-[#5D6677]">
+          {displayedContent}
+        </p>
+        {isLong && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-1.5 font-helvetica text-[12px] md:text-[13px] font-medium text-[#513392] hover:underline"
+          >
+            {expanded ? "Show less" : "Read more"}
+          </button>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="pt-3 border-t border-[#F0F1F5]">
+        <p className="font-helvetica text-[11px] md:text-[12px] text-[#9AA2B1]">
+          {timeAgo(createdAt)}
+        </p>
+      </div>
+    </div>
+  );
 }
 
 export default function StudentStories() {
@@ -52,21 +105,15 @@ export default function StudentStories() {
   const [showAllMobile, setShowAllMobile] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   const { data, isLoading, isError } = useReviews(1, 12);
   const reviews = data?.data?.reviews ?? [];
 
-  // Calculate scroll state
   const updateScrollState = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
     setCanScrollLeft(el.scrollLeft > 10);
     setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
-    // Calculate active dot index
-    const cardWidth = el.firstElementChild ? (el.firstElementChild as HTMLElement).offsetWidth + 24 : 400;
-    const idx = Math.round(el.scrollLeft / cardWidth);
-    setActiveIndex(idx);
   }, []);
 
   useEffect(() => {
@@ -88,7 +135,6 @@ export default function StudentStories() {
       const maxScroll = el.scrollWidth - el.clientWidth;
 
       if (el.scrollLeft >= maxScroll - 10) {
-        // Reset to beginning smoothly
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
         el.scrollBy({ left: cardWidth, behavior: "smooth" });
@@ -108,40 +154,39 @@ export default function StudentStories() {
     });
   };
 
-  const totalDots = Math.max(1, reviews.length - 2); // Approximate number of scroll positions
+  const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    const maxScroll = el.scrollWidth - el.clientWidth;
+    if (maxScroll <= 0) return;
+    const atStart = el.scrollLeft <= 0;
+    const atEnd = el.scrollLeft >= maxScroll - 1;
+    if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) return;
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, []);
 
   return (
     <section className="relative w-full overflow-hidden py-10 sm:py-20 bg-[#F6F7FF]">
       <ContentWrapper>
-        <div className="w-full text-center">
-          {/* Top Label */}
-          <span className="mb-4 inline-flex items-center rounded-full bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary shadow-sm mx-auto font-helvetica">
-            Student Stories
-          </span>
-
-          {/* Heading */}
-          <h2 className="mx-auto mb-4 w-full max-w-7xl font-helvetica text-[22px] font-bold leading-tight text-[#162447] md:text-[48px]">
-            Real Students. Real Experiences.
-          </h2>
-
-          {/* Subheading */}
-          <p className="mx-auto mb-8 w-full max-w-5xl font-helvetica text-[14px] text-[#5D6677] md:text-[18px]">
-            Verified reviews from real students across India — helping you make
-            confident college choices.
-          </p>
-
-          {/* Write a Review Button */}
-          <div className="mb-10 md:mb-14 flex justify-center">
-            <Link href="/review">
-              <button className="group flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 md:px-8 md:py-3 font-helvetica text-[14px] md:text-[16px] font-medium text-white transition-all hover:bg-primary-hover hover:shadow-lg">
-                Write a Review
-                <PenLine className="h-4 w-4" />
-              </button>
-            </Link>
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 md:mb-12 gap-4">
+          <div>
+            <SectionHeading title="What Students Say" />
+            <p className="mt-2 font-helvetica text-[14px] md:text-[16px] text-[#5D6677] max-w-xl">
+              Honest reviews from real students across India helping you make confident college choices.
+            </p>
           </div>
+          <Link href="/review">
+            <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-helvetica text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
+              Write a Review
+              <PenLine className="h-4 w-4" />
+            </button>
+          </Link>
         </div>
 
-        {/* Carousel Section */}
+        {/* Content */}
         {isLoading ? (
           <Loader containerClassName="h-[300px]" label="Loading reviews..." />
         ) : isError || reviews.length === 0 ? (
@@ -150,13 +195,12 @@ export default function StudentStories() {
           </div>
         ) : (
           <>
-            {/* Desktop horizontal scroll carousel */}
+            {/* Desktop Carousel */}
             <div className="relative hidden md:block">
-              {/* Navigation arrows */}
               {canScrollLeft && (
                 <button
                   onClick={() => scroll("left")}
-                  className="absolute -left-2 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-[#E0E0FF] bg-white shadow-md transition-all hover:border-primary hover:shadow-lg"
+                  className="absolute -left-2 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full border border-[#dac9ff] bg-white shadow-md transition-all hover:border-[#513392]"
                 >
                   <ChevronLeft className="h-5 w-5 text-[#162447]" />
                 </button>
@@ -164,105 +208,59 @@ export default function StudentStories() {
               {canScrollRight && (
                 <button
                   onClick={() => scroll("right")}
-                  className="absolute -right-2 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-primary shadow-md transition-all hover:bg-primary-hover hover:shadow-lg"
+                  className="absolute -right-2 top-1/2 -translate-y-1/2 z-30 flex h-10 w-10 items-center justify-center rounded-full bg-[#513392] shadow-md transition-all hover:bg-[#412876]"
                 >
                   <ChevronRight className="h-5 w-5 text-white" />
                 </button>
               )}
 
-              {/* Fade edges */}
-              <div
-                className="pointer-events-none absolute left-0 top-0 z-20 h-full w-[80px]"
-                style={{
-                  background: "linear-gradient(90deg, #F6F7FF 0%, rgba(246,247,255,0) 100%)",
-                }}
-              />
-              <div
-                className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[80px]"
-                style={{
-                  background: "linear-gradient(270deg, #F6F7FF 0%, rgba(246,247,255,0) 100%)",
-                }}
-              />
-
-              {/* Scrollable container */}
               <div
                 ref={scrollRef}
-                className="flex gap-6 overflow-x-auto scroll-smooth px-6 pb-8 pt-2 scrollbar-hide"
-                style={{
-                  scrollbarWidth: "none",
-                  msOverflowStyle: "none",
-                  WebkitOverflowScrolling: "touch",
-                }}
+                onWheel={handleWheel}
+                className="flex gap-6 overflow-x-auto scroll-smooth px-4 pb-6 pt-2 scrollbar-hide"
+                style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
               >
-                {reviews.map((review, index) => (
-                  <div
-                    key={review._id}
-                    className="w-[360px] flex-shrink-0"
-                  >
-                    <StoryCard
+                {reviews.map((review) => (
+                  <div key={review._id} className="w-[360px] flex-shrink-0">
+                    <ReviewCard
                       avatarUrl={review.userAvatar}
                       name={review.userName}
-                      course={review.collegeName || review.course || ""}
-                      batch={review.city ? review.city : ""}
-                      story={review.content}
-                      rating={deriveRating(review.content, index)}
-                      reviewTitle={deriveTitle(review.content, review.collegeName)}
-                      timeAgo={timeAgo(review.createdAt)}
-                      className="h-full"
+                      college={review.collegeName}
+                      course={review.course}
+                      content={review.content}
+                      rating={review.rating}
+                      createdAt={review.createdAt}
                     />
                   </div>
-                ))}
-              </div>
-
-              {/* Dot indicators */}
-              <div className="mt-4 flex justify-center gap-1.5">
-                {Array.from({ length: Math.min(totalDots, 12) }).map((_, idx) => (
-                  <div
-                    key={idx}
-                    className={`h-[4px] rounded-full transition-all duration-300 ${
-                      idx === activeIndex
-                        ? "w-[32px] bg-primary"
-                        : "w-[32px] bg-[#E0E0FF]"
-                    }`}
-                  />
                 ))}
               </div>
             </div>
 
             {/* Mobile List */}
-            <div className="flex flex-col gap-4 px-1 md:hidden">
-              {(showAllMobile ? reviews : reviews.slice(0, 3)).map(
-                (review, index) => (
-                  <div key={review._id} className="w-full">
-                    <StoryCard
-                      avatarUrl={review.userAvatar}
-                      name={review.userName}
-                      course={review.collegeName || review.course || ""}
-                      batch={review.city ? review.city : ""}
-                      story={review.content}
-                      rating={deriveRating(review.content, index)}
-                      reviewTitle={deriveTitle(review.content, review.collegeName)}
-                      timeAgo={timeAgo(review.createdAt)}
-                      className="w-full"
-                    />
-                  </div>
-                )
-              )}
+            <div className="flex flex-col gap-4 md:hidden">
+              {(showAllMobile ? reviews : reviews.slice(0, 3)).map((review) => (
+                <div key={review._id} className="w-full">
+                  <ReviewCard
+                    avatarUrl={review.userAvatar}
+                    name={review.userName}
+                    college={review.collegeName}
+                    course={review.course}
+                    content={review.content}
+                    rating={review.rating}
+                    createdAt={review.createdAt}
+                  />
+                </div>
+              ))}
             </div>
 
-            {/* Mobile Toggle Button */}
             {reviews.length > 3 && (
               <div className="mt-6 flex justify-center md:hidden">
                 <button
                   onClick={() => setShowAllMobile(!showAllMobile)}
-                  className="flex items-center gap-2 rounded-full border border-[#D0D5DD] bg-white px-4 py-2 font-helvetica text-[14px] font-medium text-[#162447] transition-all hover:bg-gray-50 hover:shadow-sm"
+                  className="flex items-center gap-2 rounded-full border border-[#D0D5DD] bg-white px-4 py-2 font-helvetica text-[14px] font-medium text-[#162447] transition-all hover:bg-gray-50"
                 >
-                  {showAllMobile ? "Read Less Reviews" : "Read More Reviews"}
-                  {showAllMobile ? (
-                    <ChevronUp className="h-4 w-4 text-[#162447]" />
-                  ) : (
-                    <ChevronDown className="h-4 w-4 text-[#162447]" />
-                  )}
+                  {showAllMobile ? "Show Less" : "Show More Reviews"}
+                  {showAllMobile ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                 </button>
               </div>
             )}
@@ -270,11 +268,8 @@ export default function StudentStories() {
         )}
       </ContentWrapper>
 
-      {/* Hide scrollbar */}
       <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
       `}</style>
     </section>
   );

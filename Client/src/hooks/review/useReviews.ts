@@ -11,6 +11,7 @@ export interface Review {
   reviewType: "College" | "Organization";
   collegeId?: string;
   collegeName?: string;
+  rating?: number;
   course?: string;
   city?: string;
   reviewDate: string;
