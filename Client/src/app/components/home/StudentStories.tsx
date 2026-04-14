@@ -222,7 +222,7 @@ export default function StudentStories() {
                 style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
               >
                 {reviews.map((review) => (
-                  <div key={review._id} className="w-[360px] flex-shrink-0">
+                  <div key={review._id} className="w-[280px] sm:w-[360px] flex-shrink-0">
                     <ReviewCard
                       avatarUrl={review.userAvatar}
                       name={review.userName}

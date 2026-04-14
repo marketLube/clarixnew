@@ -236,7 +236,7 @@ export default function FooterMain() {
         </div>
 
         {/* Email Subscription */}
-        <div className="bg-[#f6f7ff] border-[0.5px] border-[rgba(147,97,255,0.2)] border-solid flex flex-row gap-2 sm:gap-3 items-center justify-center pl-3 sm:pl-5 pr-1 py-1 relative rounded-[90px] shrink-0 w-full sm:w-auto sm:min-w-[500px]">
+        <div className="bg-[#f6f7ff] border-[0.5px] border-[rgba(147,97,255,0.2)] border-solid flex flex-row gap-2 sm:gap-3 items-center justify-center pl-3 sm:pl-5 pr-1 py-1 relative rounded-[90px] shrink-0 w-full max-w-[500px]">
           <input
             type="email"
             placeholder="Your email address"

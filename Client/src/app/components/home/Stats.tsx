@@ -19,17 +19,17 @@ export default function Stats() {
         {isLoading ? (
           <Loader containerClassName="py-0" />
         ) : (
-          <div className="flex flex-nowrap justify-between items-stretch">
+          <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-nowrap sm:justify-between sm:items-stretch">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`flex-1 flex justify-center lg:justify-center `}
+                className="flex justify-center"
               >
                 <div className="flex flex-col gap-0 lg:gap-[6px] items-center text-center text-[#767e92]">
-                  <p className="font-poppins font-medium text-[14px] leading-[18px] tracking-[-0.28px] lg:text-[48px] lg:leading-[48px] lg:tracking-[-0.96px] lg:[leading-trim:both] lg:[text-edge:cap]">
+                  <p className="font-poppins font-medium text-[16px] leading-[20px] tracking-[-0.28px] sm:text-[20px] lg:text-[48px] lg:leading-[48px] lg:tracking-[-0.96px]">
                     {stat.value}
                   </p>
-                  <p className="font-poppins text-[10px] leading-[14px] lg:text-[16px] lg:leading-[20px] lg:[leading-trim:both] lg:[text-edge:cap] whitespace-nowrap">
+                  <p className="font-poppins text-[10px] leading-[14px] sm:text-[12px] lg:text-[16px] lg:leading-[20px]">
                     {stat.label}
                   </p>
                 </div>
