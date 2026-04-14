@@ -271,9 +271,9 @@ export default function ExplorePopover({
         open={isOpen}
         onOpenChange={setIsOpen}
       >
-        <button type="button" aria-expanded={isOpen} className="appearance-none bg-transparent border-none p-0 m-0 cursor-pointer">
+        <div role="button" tabIndex={0} aria-expanded={isOpen} className="cursor-pointer">
           {children}
-        </button>
+        </div>
       </Popover>
     </div>
   );
