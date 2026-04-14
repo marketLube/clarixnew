@@ -33,12 +33,13 @@ const Loader = ({
         : `flex ${isRow ? "" : "flex-col"} justify-center items-center py-10 ${containerClassName}`;
 
     return (
-        <div className={containerStyles}>
+        <div className={containerStyles} role="status" aria-label={label || "Loading"}>
             {fullPage && (
                 <div className="mb-8 animate-pulse">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src="/images/log.png"
-                        alt="Clarix Education"
+                        alt="Clarix Education logo"
                         className="h-12 md:h-16 w-auto brightness-0 invert"
                     />
                 </div>
