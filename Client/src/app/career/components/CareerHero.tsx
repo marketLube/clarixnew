@@ -30,7 +30,7 @@ export default function CareerHero() {
             height={12}
             fill="rgba(255,255,255,0.87)"
           />
-          <p className="font-helvetica font-light text-[16px] leading-[20px] text-[rgba(255,255,255,0.87)] tracking-[-0.32px]">
+          <p className="font-poppins font-light text-[16px] leading-[20px] text-[rgba(255,255,255,0.87)] tracking-[-0.32px]">
             Career
           </p>
         </div>
@@ -38,7 +38,7 @@ export default function CareerHero() {
         {/* Content */}
         <div className="flex flex-col gap-8 md:gap-[40px] items-start max-w-[721px]">
           <div className="flex flex-col gap-4 md:gap-[30px]">
-            <h1 className="font-helvetica font-medium leading-[32px] sm:leading-[48px] text-white text-[22px] sm:text-[48px] tracking-[-0.96px]">
+            <h1 className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-white text-[22px] sm:text-[48px] tracking-[-0.96px]">
               {heroSection?.primaryHeadline ||
                 "Work With Us to Make Education Transparent for Everyone"}
             </h1>

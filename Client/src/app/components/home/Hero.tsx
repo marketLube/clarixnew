@@ -238,7 +238,7 @@ export default function Hero() {
               onFocus={() => setIsSearchOpen(true)}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search colleges, courses, exams, or scholarships.."
-              className={`flex-1 bg-transparent text-[14px] font-helvetica focus:outline-none ${isSearchOpen ? 'text-gray-900 placeholder:text-gray-400' : 'text-white placeholder:text-white/80'}`}
+              className={`flex-1 bg-transparent text-[14px] font-poppins focus:outline-none ${isSearchOpen ? 'text-gray-900 placeholder:text-gray-400' : 'text-white placeholder:text-white/80'}`}
             />
             {isSearchOpen && (
               <button
@@ -458,7 +458,7 @@ export default function Hero() {
 
             <ExplorePopover>
               <button className="hidden sm:flex items-center gap-2 px-3 py-2 text-white/90 hover:text-white transition-colors cursor-pointer group/explore">
-                <span className="font-helvetica text-[16px] font-medium tracking-[-0.32px]">Explore</span>
+                <span className="font-poppins text-[16px] font-medium tracking-[-0.32px]">Explore</span>
                 <ChevronDownIcon
                   width={18}
                   height={18}
@@ -476,7 +476,7 @@ export default function Hero() {
             <nav className="hidden xl:flex items-center gap-6">
               <Link
                 href="/blog"
-                className="text-white/90 hover:text-white text-[16px] font-medium font-helvetica tracking-[-0.02em] transition-colors"
+                className="text-white/90 hover:text-white text-[16px] font-medium font-poppins tracking-[-0.02em] transition-colors"
               >
                 Blog
               </Link>
@@ -484,7 +484,7 @@ export default function Hero() {
 
 
               <AboutPopover>
-                <button className="flex items-center gap-2 text-white/90 hover:text-white text-[16px] font-medium font-helvetica tracking-[-0.02em] transition-colors cursor-pointer group/about">
+                <button className="flex items-center gap-2 text-white/90 hover:text-white text-[16px] font-medium font-poppins tracking-[-0.02em] transition-colors cursor-pointer group/about">
                   <span>About</span>
                   <ChevronDownIcon
                     width={18}
@@ -512,7 +512,7 @@ export default function Hero() {
               {!isLoggedIn ? (
                 <Link
                   href="/login"
-                  className="hidden sm:inline-block text-white/90 hover:text-white text-[16px] font-medium font-helvetica transition-colors"
+                  className="hidden sm:inline-block text-white/90 hover:text-white text-[16px] font-medium font-poppins transition-colors"
                 >
                   Login
                 </Link>
@@ -530,7 +530,7 @@ export default function Hero() {
                 href="/sign-in"
                 className="group flex items-center gap-3 bg-white hover:bg-gray-50 text-[#513392] rounded-[40px] px-1 py-1 pl-6 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
               >
-                <span className="text-[14px] sm:text-[16px] font-bold font-helvetica leading-none">Start Free</span>
+                <span className="text-[14px] sm:text-[16px] font-bold font-poppins leading-none">Start Free</span>
                 <div className="bg-[#513392] p-1.5 rounded-full text-white transition-transform group-hover:translate-x-0.5">
                   <ChevronRightIcon width={20} height={20} fill="white" />
                 </div>
@@ -550,13 +550,13 @@ export default function Hero() {
                 <>
                   {/* Verified Badge */}
                   <div className="mb-6 rounded-[30px] border border-white/50 bg-white/20 backdrop-blur-[42px] px-3 sm:px-5 py-1.5 shadow-[0_4px_4px_rgba(0,0,0,0.05)] hover:bg-white/30 transition-colors cursor-default max-w-[90vw] sm:max-w-none overflow-hidden">
-                    <p className="font-helvetica text-[11px] sm:text-[12px] leading-[18px] sm:leading-[20px] text-white font-medium text-center">
+                    <p className="font-poppins text-[11px] sm:text-[12px] leading-[18px] sm:leading-[20px] text-white font-medium text-center">
                       {badgeText}
                     </p>
                   </div>
 
                   {/* Headline */}
-                  <h1 className="text-white font-helvetica text-[28px] sm:text-[36px] md:text-[48px] font-medium leading-tight tracking-[-1.2px] text-center mb-10 transition-all max-w-[90vw] sm:max-w-[600px] mx-auto">
+                  <h1 className="text-white font-poppins text-[28px] sm:text-[36px] md:text-[48px] font-medium leading-tight tracking-[-1.2px] text-center mb-10 transition-all max-w-[90vw] sm:max-w-[600px] mx-auto">
                     {heroHeading}
                   </h1>
                 </>
@@ -621,7 +621,7 @@ export default function Hero() {
         closeIcon={null}
         styles={{ body: { padding: 0 }, wrapper: { width: 320 } }}
       >
-        <div className="flex flex-col h-full bg-white font-helvetica">
+        <div className="flex flex-col h-full bg-white font-poppins">
           {/* Header */}
           <div className="flex items-center justify-between p-5 pb-2">
             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>

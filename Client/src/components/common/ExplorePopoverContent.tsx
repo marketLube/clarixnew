@@ -119,7 +119,7 @@ export default function ExplorePopoverContent({
                   fill={isActive ? "#162447" : "white"}
                 />
                 <span
-                  className={`text-[14px] font-medium leading-5 font-helvetica ${isActive ? "text-[#162447] flex-1" : "text-white"
+                  className={`text-[14px] font-medium leading-5 font-poppins ${isActive ? "text-[#162447] flex-1" : "text-white"
                     }`}
                 >
                   {item.label}
@@ -134,7 +134,7 @@ export default function ExplorePopoverContent({
 
         {/* Social Media Links */}
         <div className="absolute bottom-[38px] left-1/2 -translate-x-1/2 flex flex-col gap-3 items-center w-[188px]">
-          <p className="text-white text-[14px] font-medium leading-5 font-helvetica w-full">
+          <p className="text-white text-[14px] font-medium leading-5 font-poppins w-full">
             Follow More
           </p>
           <div className="flex gap-[22px] items-center w-full">
@@ -233,7 +233,7 @@ export default function ExplorePopoverContent({
                       className="flex flex-col gap-10 w-[217px]"
                     >
                       <div className={`flex flex-col gap-2 ${columnWidth}`}>
-                        <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
+                        <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-poppins">
                           {column.title}
                         </h3>
                         <div className="flex flex-col gap-1">
@@ -262,7 +262,7 @@ export default function ExplorePopoverContent({
                         <div
                           className={`flex flex-col gap-2 ${ownershipColumn.width || "w-[217px]"}`}
                         >
-                          <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
+                          <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-poppins">
                             {ownershipColumn.title}
                           </h3>
                           <div className="flex flex-col gap-1">
@@ -307,7 +307,7 @@ export default function ExplorePopoverContent({
                     key={columnIndex}
                     className={`flex flex-col gap-2 ${columnWidth}`}
                   >
-                    <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
+                    <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-poppins">
                       {column.title}
                     </h3>
                     <div className="flex flex-col gap-1">

@@ -66,7 +66,7 @@ export default function JobDetailSidebar({ job }: JobDetailSidebarProps) {
       {/* Company Info Card */}
       <div className="bg-[#f6f7ff] rounded-[12px] p-[18px] w-full min-h-[265px]">
         <div className="flex flex-col gap-4 items-start mb-4">
-          <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+          <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
             About {job.company}
           </h3>
           <p className="font-poppins text-[14px] leading-[20px] text-[#767e92]">

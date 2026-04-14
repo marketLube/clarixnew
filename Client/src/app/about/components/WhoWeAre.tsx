@@ -15,7 +15,7 @@ export default function WhoWeAre() {
         <div className="flex flex-col gap-8 md:gap-[60px] flex-1">
           {/* Who We Are */}
           <div className="flex flex-col gap-4 md:gap-[30px] max-w-[414px]">
-            <h2 className="font-helvetica font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[42px] tracking-[-0.96px]">
+            <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[42px] tracking-[-0.96px]">
               {secondSection?.headline}
             </h2>
             <div className="font-poppins text-[14px] md:text-[16px] leading-[22px] md:leading-[24px] text-[#767e92]">
@@ -39,7 +39,7 @@ export default function WhoWeAre() {
           {/* Mission and Vision */}
           <div className="flex flex-col md:flex-row gap-6 md:gap-12">
             <div className="flex flex-col gap-3 md:gap-5 flex-1">
-              <h3 className="font-helvetica font-medium leading-[28px] md:leading-[32px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
+              <h3 className="font-poppins font-medium leading-[28px] md:leading-[32px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
                 Our Mission
               </h3>
               <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#767e92] max-w-[329px]">
@@ -47,7 +47,7 @@ export default function WhoWeAre() {
               </p>
             </div>
             <div className="flex flex-col gap-3 md:gap-5 flex-1">
-              <h3 className="font-helvetica font-medium leading-[28px] md:leading-[32px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
+              <h3 className="font-poppins font-medium leading-[28px] md:leading-[32px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
                 Our Vision
               </h3>
               <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#767e92] max-w-[296px]">

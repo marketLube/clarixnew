@@ -38,7 +38,7 @@ export default function StatsSection() {
                 key={stat.id}
                 className="flex flex-col gap-1 sm:gap-[14px] items-center text-center"
               >
-                <p className="font-helvetica font-medium leading-[32px] sm:leading-[48px] text-[#767e92] text-[28px] sm:text-[48px] tracking-[-0.96px]">
+                <p className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-[#767e92] text-[28px] sm:text-[48px] tracking-[-0.96px]">
                   {stat.value}
                 </p>
                 <p className="font-poppins text-[12px] sm:text-[16px] leading-[16px] sm:leading-[20px] text-[#767e92]">

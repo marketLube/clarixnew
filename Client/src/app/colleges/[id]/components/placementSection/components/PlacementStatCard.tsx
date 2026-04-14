@@ -16,7 +16,7 @@ export default function PlacementStatCard({
       <p className="font-poppins text-[12px] leading-[16px] text-[rgba(255,255,255,0.79)] mb-2">
         {label}
       </p>
-      <p className="font-helvetica font-medium text-[20px] leading-[20px] tracking-[-0.32px] text-white">
+      <p className="font-poppins font-medium text-[20px] leading-[20px] tracking-[-0.32px] text-white">
         {value}
       </p>
     </div>

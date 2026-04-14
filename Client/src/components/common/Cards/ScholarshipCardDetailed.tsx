@@ -66,7 +66,7 @@ export default function ScholarshipCardDetailed({
         {/* Title and Badges */}
         <div className="flex flex-col gap-[18px]">
           <div className="flex items-start justify-between gap-4">
-            <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[18px] sm:text-[20px] tracking-[-0.4px] flex-1 break-words">
+            <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[18px] sm:text-[20px] tracking-[-0.4px] flex-1 break-words">
               {title}
             </h3>
             <div className="flex flex-col-reverse md:flex-row items-end md:items-center gap-3 shrink-0 ">
@@ -104,7 +104,7 @@ export default function ScholarshipCardDetailed({
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
             Amount
           </p>
-          <p className="font-helvetica font-medium text-[18px] sm:text-[20px] leading-[28px] text-[#162447] tracking-[-0.4px]">
+          <p className="font-poppins font-medium text-[18px] sm:text-[20px] leading-[28px] text-[#162447] tracking-[-0.4px]">
             {amount}
           </p>
         </div>

@@ -29,11 +29,11 @@ export default function CampusLifeCard({
     >
       {/* Title with Count Badge */}
       <div className="flex gap-2 items-center w-full">
-        <h3 className="flex-1 font-helvetica font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[#29363f]">
+        <h3 className="flex-1 font-poppins font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[#29363f]">
           {title}
         </h3>
         <div className="bg-[var(--background)] flex items-center justify-center rounded-full size-[40px] shrink-0">
-          <p className="font-helvetica font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--primary-color)]">
+          <p className="font-poppins font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--primary-color)]">
             {formattedCount}
           </p>
         </div>

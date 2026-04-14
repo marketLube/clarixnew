@@ -21,17 +21,17 @@ export default function BlogTable({ title, rows }: BlogTableProps) {
       {/* Table Header */}
       <div className="grid grid-cols-[1.5fr_1.2fr_0.8fr] sm:grid-cols-[320px_319px_291px] border-b border-[#eaeaea]">
         <div className="bg-[#f6f7ff] border-r border-white min-h-[50px] sm:h-[60px] flex items-center justify-start px-3 sm:pl-[30px]">
-          <p className="font-helvetica font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px]">
+          <p className="font-poppins font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px]">
             Name of the College
           </p>
         </div>
         <div className="bg-[#f6f7ff] border-r border-white min-h-[50px] sm:h-[60px] flex items-center justify-start px-3">
-          <p className="font-helvetica font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px]">
+          <p className="font-poppins font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px]">
             Expected Course
           </p>
         </div>
         <div className="bg-[#f6f7ff] min-h-[50px] sm:h-[60px] flex items-center justify-center px-3">
-          <p className="font-helvetica font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px] text-center">
+          <p className="font-poppins font-medium leading-tight text-[#162447] text-[13px] sm:text-[20px] tracking-[-0.4px] text-center">
             Category
           </p>
         </div>

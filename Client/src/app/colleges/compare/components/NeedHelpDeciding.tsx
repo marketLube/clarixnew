@@ -58,7 +58,7 @@ export default function NeedHelpDeciding() {
 
             {/* Text content */}
             <div className="flex flex-col gap-9 items-center w-full">
-              <h2 className="font-helvetica font-medium text-[32px] sm:text-[64px] md:text-[80px] lg:text-[104px] leading-[1.1] lg:leading-[104px] text-white tracking-[-0.96px] sm:tracking-[-1.28px] md:tracking-[-1.6px] lg:tracking-[-2.08px] text-center w-full">
+              <h2 className="font-poppins font-medium text-[32px] sm:text-[64px] md:text-[80px] lg:text-[104px] leading-[1.1] lg:leading-[104px] text-white tracking-[-0.96px] sm:tracking-[-1.28px] md:tracking-[-1.6px] lg:tracking-[-2.08px] text-center w-full">
                 Need Help Deciding?
               </h2>
               <p className="text-[16px] sm:text-[24px] leading-[22px] sm:leading-[28px] text-[rgba(255,255,255,0.7)] text-center tracking-[-0.48px] w-full max-w-[800px]">
@@ -74,7 +74,7 @@ export default function NeedHelpDeciding() {
               onClick={handleGetCounselling}
               className="bg-white border border-[#c6abff] rounded-[40px] pl-6 sm:pl-[38px] pr-2 sm:pr-[8px] py-1.5 sm:py-[8px] flex items-center gap-4 sm:gap-8 hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
             >
-              <p className="font-helvetica font-medium text-[16px] sm:text-[24px] leading-[20px] sm:leading-[28px] text-[#513392] whitespace-nowrap tracking-[-0.48px]">
+              <p className="font-poppins font-medium text-[16px] sm:text-[24px] leading-[20px] sm:leading-[28px] text-[#513392] whitespace-nowrap tracking-[-0.48px]">
                 Get Free Counselling
               </p>
               <div className="bg-[#513392] rounded-[40px] p-2 sm:p-[14px] flex items-center shrink-0">

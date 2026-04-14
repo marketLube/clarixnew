@@ -45,7 +45,7 @@ export default function WhyChooseSection({ course }: any) {
       <ContentWrapper className="flex flex-col gap-8 md:gap-10">
         {/* Header */}
         <div className="flex flex-col gap-4 md:gap-6 items-center text-center">
-          <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
+          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
             {course?.whyChoose?.title}
           </h2>
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
@@ -60,7 +60,7 @@ export default function WhyChooseSection({ course }: any) {
               key={feature.id}
               className="bg-white rounded-[20px] p-5 md:p-[34px] h-auto md:h-[300px] flex flex-col gap-4 md:gap-6 shadow-[0px_6px_42.4px_0px_rgba(0,0,0,0.03)] md:overflow-hidden"
             >
-              <h3 className="font-helvetica font-medium leading-tight md:leading-[28px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
+              <h3 className="font-poppins font-medium leading-tight md:leading-[28px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
                 {feature.title}
               </h3>
               <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">

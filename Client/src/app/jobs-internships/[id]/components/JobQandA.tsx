@@ -25,7 +25,7 @@ const qaData = [
 export default function JobQandA({ job }: JobQandAProps) {
   return (
     <div className="flex flex-col gap-[26px] items-start mb-[60px]">
-      <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+      <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
         Questions & answers for this job
       </h3>
 

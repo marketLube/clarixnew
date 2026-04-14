@@ -54,7 +54,7 @@ export default function LoginPage() {
         <div className="w-full max-w-[399px]">
           {/* Welcome Section */}
           <div className="mb-5 text-center lg:text-left">
-            <h1 className="font-helvetica font-medium text-[36px] leading-[40px] text-[#162447] tracking-[-0.72px] mb-2">
+            <h1 className="font-poppins font-medium text-[36px] leading-[40px] text-[#162447] tracking-[-0.72px] mb-2">
               Welcome Back
             </h1>
             <p className="font-poppins text-[14px] leading-[18px] text-[#767e92]">
@@ -137,7 +137,7 @@ export default function LoginPage() {
 
             {/* Clarix Sign In Section */}
             <div className="space-y-3 text-center max-w-[319px] mx-auto">
-              <p className="font-helvetica text-[18px] leading-[24px] text-[#162447] tracking-[-0.36px]">
+              <p className="font-poppins text-[18px] leading-[24px] text-[#162447] tracking-[-0.36px]">
                 Clarix sign in
               </p>
               <div className="flex items-center justify-center gap-3 font-poppins text-[14px] leading-[18px] whitespace-nowrap">

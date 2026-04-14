@@ -36,7 +36,7 @@ export default function ReviewCard({
         </div>
 
         <div className="flex flex-col gap-1 flex-1">
-          <p className="font-helvetica font-medium text-[20px] leading-[28px] tracking-[-0.4px] text-[var(--text-headline)]">
+          <p className="font-poppins font-medium text-[20px] leading-[28px] tracking-[-0.4px] text-[var(--text-headline)]">
             {name}
           </p>
           <p className="font-poppins text-[16px] leading-[20px] text-[var(--text-sub)]">

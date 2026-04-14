@@ -59,7 +59,7 @@ export default function BlogCard({
       </div>
 
       {/* Title */}
-      <h3 className="font-helvetica text-[18px] md:text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
+      <h3 className="font-poppins text-[18px] md:text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
         {title}
       </h3>
     </article>

@@ -79,7 +79,7 @@ export default function CourseSection({ college }: any) {
 
             {streams.length > 0 && (
               <div className="flex flex-col gap-2 md:gap-4 ">
-                <h3 className="text-[18px] md:text-[24px] leading-[22px] md:leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-helvetica">
+                <h3 className="text-[18px] md:text-[24px] leading-[22px] md:leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-poppins">
                   Streams
                 </h3>
                 <div className="flex flex-wrap gap-[14px] items-center">

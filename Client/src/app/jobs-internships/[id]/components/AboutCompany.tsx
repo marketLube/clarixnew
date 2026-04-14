@@ -10,7 +10,7 @@ interface AboutCompanyProps {
 export default function AboutCompany({ job }: AboutCompanyProps) {
   return (
     <div className="flex flex-col gap-10 items-start mb-[60px]">
-      <h2 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+      <h2 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
         About {job.company}
       </h2>
 

@@ -39,7 +39,7 @@ export default function BlogContent({ content, imageUrl }: BlogContentProps) {
       {/* Main Content Text */}
       {contentIsHtml ? (
         <div
-          className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
+          className="font-poppins font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
           prose prose-lg max-w-none
           prose-headings:font-medium prose-headings:text-[#162447]
           prose-p:text-[#767e92] prose-p:leading-[28px] prose-p:mb-4
@@ -52,7 +52,7 @@ export default function BlogContent({ content, imageUrl }: BlogContentProps) {
         />
       ) : (
         <div
-          className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
+          className="font-poppins font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] max-w-[930px]
           prose prose-lg max-w-none
           prose-headings:font-medium prose-headings:text-[#162447]
           prose-p:text-[#767e92] prose-p:leading-[28px] prose-p:mb-4
@@ -68,11 +68,11 @@ export default function BlogContent({ content, imageUrl }: BlogContentProps) {
 
       {/* Guide Section */}
       <div className="flex flex-col gap-[16px] max-w-[795px]">
-        <p className="font-helvetica font-medium leading-[28px] text-[#162447] text-[16px] md:text-[20px] tracking-[-0.4px]">
+        <p className="font-poppins font-medium leading-[28px] text-[#162447] text-[16px] md:text-[20px] tracking-[-0.4px]">
           Use this guide to:
         </p>
         <div className="relative pl-[12px]">
-          <ul className="font-helvetica font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] list-none space-y-0">
+          <ul className="font-poppins font-normal leading-[28px] text-[#767e92] text-[16px] md:text-[20px] tracking-[-0.4px] list-none space-y-0">
             <li className="mb-0 pl-[20px] relative before:content-['•'] before:absolute before:left-0 before:text-[#767e92] before:text-[24px]">
               Know how to filter colleges based on previous-year cutoffs & seat
               availability

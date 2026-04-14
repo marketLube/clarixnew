@@ -97,7 +97,7 @@ const ContentColumn = ({ column }: { column: ContentColumn }) => {
 
   return (
     <div className={`flex flex-col gap-[26px] ${columnWidth}`}>
-      <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
+      <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-poppins">
         {column.title}
       </h3>
       <div className="flex flex-col gap-2 text-[#767e92] text-base leading-5">

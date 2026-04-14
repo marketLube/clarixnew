@@ -111,7 +111,7 @@ export default function Nav() {
             </Link>
             <ExplorePopover>
               <button className="hidden md:inline-flex items-center gap-1 rounded-[999px] px-4 py-2 text-sm font-medium text-white/90 hover:text-white transition-colors cursor-pointer">
-                <span className="font-helvetica tracking-[-0.02em]">
+                <span className="font-poppins tracking-[-0.02em]">
                   Explore
                 </span>
                 <ChevronDownIcon
@@ -147,7 +147,7 @@ export default function Nav() {
 
           {/* Right section: links + profile + cta */}
           <div className="flex items-center gap-4">
-            <nav className="hidden lg:flex items-center gap-4 font-helvetica">
+            <nav className="hidden lg:flex items-center gap-4 font-poppins">
               {navLinks.map((link) => {
                 const isActive =
                   pathname === link.href ||

@@ -49,7 +49,7 @@ export default function OverviewSection({ college }: any) {
           </SectionDescription>
 
           <div className="flex flex-col gap-[10px] md:gap-[22px]">
-            <h3 className="text-[24px] leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-helvetica">
+            <h3 className="text-[24px] leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-poppins">
               Key Highlights
             </h3>
 
@@ -62,7 +62,7 @@ export default function OverviewSection({ college }: any) {
                   <p className="text-[12px] md:text-[16px] tracking-[-0.28px] text-[var(--text-sub)]">
                     {item.label}
                   </p>
-                  <p className="text-[12px] md:text-[16px] tracking-[-0.32px] text-[var(--text-headline)] font-medium font-helvetica">
+                  <p className="text-[12px] md:text-[16px] tracking-[-0.32px] text-[var(--text-headline)] font-medium font-poppins">
                     {item.value}
                   </p>
                 </div>

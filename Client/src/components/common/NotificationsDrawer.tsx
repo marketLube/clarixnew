@@ -126,7 +126,7 @@ export default function NotificationsDrawer({
                 <BellIcon width={24} height={24} fill="#162447" />
               </div>
               <div className="flex flex-col gap-[10px] items-start">
-                <h2 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+                <h2 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
                   Your Notifications
                 </h2>
                 <p className="font-['Poppins',sans-serif] font-normal leading-[20px] text-[#767e92] text-[16px] max-w-[310px]">

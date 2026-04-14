@@ -11,7 +11,7 @@ export default function SectionDescription({
 }: SectionDescriptionProps) {
   return (
     <p
-      className={`font-helvetica text-[12px] md:text-[14px] lg:text-[16px] leading-[20px] tracking-[-0.32px] text-[#767e92] ${className}`}
+      className={`font-poppins text-[12px] md:text-[14px] lg:text-[16px] leading-[20px] tracking-[-0.32px] text-[#767e92] ${className}`}
     >
       {children}
     </p>

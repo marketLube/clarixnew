@@ -51,7 +51,7 @@ export default function HeroSection() {
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12">
           {/* Left Content */}
           <div className="flex flex-col gap-6 max-w-[600px]">
-            <h1 className="font-helvetica font-medium leading-[34px] sm:leading-[48px] text-white text-[28px] sm:text-[48px] tracking-[-0.96px]">
+            <h1 className="font-poppins font-medium leading-[34px] sm:leading-[48px] text-white text-[28px] sm:text-[48px] tracking-[-0.96px]">
               Compare Colleges Side-by-Side— Instantly
             </h1>
             <p className="font-poppins text-[14px] sm:text-[16px] leading-[22px] sm:leading-[24px] text-[rgba(255,255,255,0.9)]">
@@ -71,7 +71,7 @@ export default function HeroSection() {
                 key={index}
                 className="flex flex-col items-center justify-center text-center rounded-[50px] border border-[#ffffff] bg-[#62479D] backdrop-blur-[0.5px] py-1"
               >
-                <p className="font-helvetica font-medium text-white text-[14px] leading-[22px] mb-1">
+                <p className="font-poppins font-medium text-white text-[14px] leading-[22px] mb-1">
                   {stat.value}
                 </p>
                 <p className="font-poppins text-[10px] leading-[18px] text-[rgba(255,255,255,0.8)]">

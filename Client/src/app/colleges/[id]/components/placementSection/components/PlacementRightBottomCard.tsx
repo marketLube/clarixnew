@@ -18,11 +18,11 @@ export default function PlacementRightBottomCard({
 }: PlacementRightBottomCardProps) {
   return (
     <div
-      className={`bg-[var(--white-color)] rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full px-[18px] py-[18px] ${className} font-helvetica`}
+      className={`bg-[var(--white-color)] rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full px-[18px] py-[18px] ${className} font-poppins`}
     >
       <div className="flex flex-col gap-[4px]">
         <div className="bg-[var(--primary-color)] inline-flex items-center justify-center px-[16px] py-[3px] rounded-[40px] w-fit">
-          <p className="font-helvetica text-[16px] leading-[20px] text-white">
+          <p className="font-poppins text-[16px] leading-[20px] text-white">
             {title}
           </p>
         </div>
@@ -33,7 +33,7 @@ export default function PlacementRightBottomCard({
               key={index}
               className="flex items-center justify-between"
             >
-              <p className="font-helvetica text-[16px] leading-[20px] text-[var(--text-headline)]">
+              <p className="font-poppins text-[16px] leading-[20px] text-[var(--text-headline)]">
                 {stat.label}
               </p>
               {stat.isBadge ? (
@@ -45,7 +45,7 @@ export default function PlacementRightBottomCard({
                   }`}
                 >
                   <p
-                    className={`font-helvetica text-[16px] leading-[20px] ${
+                    className={`font-poppins text-[16px] leading-[20px] ${
                       stat.badgeColor === "green"
                         ? "text-[#3ab971]"
                         : "text-white"
@@ -55,7 +55,7 @@ export default function PlacementRightBottomCard({
                   </p>
                 </div>
               ) : (
-                <p className="font-helvetica text-[16px] leading-[20px] text-[var(--text-headline)]">
+                <p className="font-poppins text-[16px] leading-[20px] text-[var(--text-headline)]">
                   {stat.value}
                 </p>
               )}

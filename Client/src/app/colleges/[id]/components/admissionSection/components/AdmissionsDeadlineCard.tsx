@@ -73,7 +73,7 @@ export default function AdmissionsDeadlineCard({
               <p className="font-poppins leading-[20px] text-[16px] text-[var(--white-color)] whitespace-nowrap">
                 Closed on
               </p>
-              <p className="font-helvetica leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
+              <p className="font-poppins leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
                 {formattedDate}
               </p>
             </div>
@@ -103,7 +103,7 @@ export default function AdmissionsDeadlineCard({
                     borderColor: "rgba(255, 255, 255, 0.2)",
                   }}
                 >
-                  <p className="font-helvetica leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
+                  <p className="font-poppins leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
                     {mounted ? timeLeft.days : 0}
                   </p>
                   <p
@@ -120,7 +120,7 @@ export default function AdmissionsDeadlineCard({
                     borderColor: "rgba(255, 255, 255, 0.2)",
                   }}
                 >
-                  <p className="font-helvetica leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
+                  <p className="font-poppins leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
                     {mounted ? timeLeft.hours : 0}
                   </p>
                   <p
@@ -137,7 +137,7 @@ export default function AdmissionsDeadlineCard({
                     borderColor: "rgba(255, 255, 255, 0.2)",
                   }}
                 >
-                  <p className="font-helvetica leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
+                  <p className="font-poppins leading-[24px] text-[20px] text-[var(--white-color)] tracking-[-0.4px] font-medium">
                     {mounted ? timeLeft.minutes : 0}
                   </p>
                   <p

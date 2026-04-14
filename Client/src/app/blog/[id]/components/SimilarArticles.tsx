@@ -50,7 +50,7 @@ export default function SimilarArticles({
 
   return (
     <div className="flex flex-col gap-6 md:gap-[48px]">
-      <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[22px] md:text-[48px] tracking-[-0.96px] text-black">
+      <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[22px] md:text-[48px] tracking-[-0.96px] text-black">
         Similar Articles
       </h2>
 
@@ -93,7 +93,7 @@ export default function SimilarArticles({
                     <BookmarkIcon width={24} height={24} fill="#513392" stroke="#513392" />
                   </button> */}
                 </div>
-                <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+                <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
                   {article.title}
                 </h3>
               </div>

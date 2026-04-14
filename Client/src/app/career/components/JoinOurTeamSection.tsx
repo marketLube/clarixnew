@@ -28,7 +28,7 @@ export default function JoinOurTeamSection() {
     <section id="open-roles" className="bg-[#f6f7ff] py-8 md:py-20">
       <ContentWrapper className="flex flex-col gap-8 md:gap-[30px] items-center">
         <div className="flex flex-col gap-4 md:gap-[30px] items-center text-center max-w-[746px]">
-          <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[375px]">
+          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[375px]">
             {thirdSection?.primaryHeadline}
           </h2>
           <p className="font-poppins leading-[20px] text-[#767e92] text-[14px] md:text-[16px] text-center">
@@ -39,7 +39,7 @@ export default function JoinOurTeamSection() {
         <div className="bg-white rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full p-4 md:p-[34px]">
           <div className="flex flex-col lg:flex-row gap-6 lg:gap-[166px] items-start lg:items-center justify-between mb-6">
             <div className="flex flex-col gap-[26px]">
-              <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+              <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
                 Open Roles
               </h3>
               <div className="flex gap-[10px] items-center flex-wrap">
@@ -93,10 +93,10 @@ export default function JoinOurTeamSection() {
                   <div className="flex flex-col sm:px-4 py-1 sm:py-[10px] flex-1">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 sm:gap-4">
                       <div className="flex flex-col">
-                        <p className="font-helvetica font-normal leading-tight md:leading-[28px] text-[#162447] text-[16px] md:text-[20px] tracking-[-0.4px]">
+                        <p className="font-poppins font-normal leading-tight md:leading-[28px] text-[#162447] text-[16px] md:text-[20px] tracking-[-0.4px]">
                           {job.jobTitle}
                         </p>
-                        <p className="font-helvetica font-light leading-tight md:leading-[28px] text-[#767e92] text-[14px] md:text-[20px] tracking-[-0.4px]">
+                        <p className="font-poppins font-light leading-tight md:leading-[28px] text-[#767e92] text-[14px] md:text-[20px] tracking-[-0.4px]">
                           {job.location}
                         </p>
                       </div>

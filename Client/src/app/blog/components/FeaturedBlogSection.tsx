@@ -63,7 +63,7 @@ export default function FeaturedBlogSection({
             />
             <div className="flex flex-col gap-[22px] max-w-[430px] w-full relative z-10">
               <div className="flex flex-col gap-[8px] md:gap-[10px] text-white">
-                <h2 className="font-helvetica font-medium leading-[24px] md:leading-[28px] text-[18px] md:text-[22px] tracking-[-0.48px] line-clamp-2">
+                <h2 className="font-poppins font-medium leading-[24px] md:leading-[28px] text-[18px] md:text-[22px] tracking-[-0.48px] line-clamp-2">
                   {newsletter.title}
                 </h2>
                 <p className="font-poppins text-[12px] md:text-[14px] leading-[18px] md:leading-[20px] opacity-80">

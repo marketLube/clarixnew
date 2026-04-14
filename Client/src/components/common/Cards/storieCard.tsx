@@ -67,10 +67,10 @@ export default function StoryCard({
             />
           </div>
           <div className="min-w-0">
-            <h4 className="font-helvetica text-[13px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
+            <h4 className="font-poppins text-[13px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
               {name}
             </h4>
-            <p className="font-helvetica text-[10px] md:text-[12px] text-[#767E92] truncate leading-relaxed">
+            <p className="font-poppins text-[10px] md:text-[12px] text-[#767E92] truncate leading-relaxed">
               {course}{batch ? ` • ${batch}` : ""}
             </p>
           </div>
@@ -83,7 +83,7 @@ export default function StoryCard({
             className="text-[10px] md:text-[14px] text-[#FFB800] !leading-none whitespace-nowrap [&_.ant-rate-star]:!mr-0.5"
             style={{ fontSize: "14px" }}
           />
-          <span className="font-helvetica text-[13px] md:text-[14px] font-semibold text-[#162447] ml-1">
+          <span className="font-poppins text-[13px] md:text-[14px] font-semibold text-[#162447] ml-1">
             {rating}
           </span>
         </div>
@@ -91,16 +91,16 @@ export default function StoryCard({
 
       {/* Review Content */}
       <div className="mb-3 md:mb-4 flex-grow">
-        <h3 className="mb-1.5 md:mb-2 font-helvetica text-[14px] md:text-[15px] font-bold text-[#162447] leading-snug line-clamp-2">
+        <h3 className="mb-1.5 md:mb-2 font-poppins text-[14px] md:text-[15px] font-bold text-[#162447] leading-snug line-clamp-2">
           {displayTitle}
         </h3>
-        <p className="font-helvetica text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] text-[#5D6677]">
+        <p className="font-poppins text-[12px] md:text-[14px] leading-[18px] md:leading-[22px] text-[#5D6677]">
           {displayedStory}
         </p>
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="mt-1.5 font-helvetica text-[12px] md:text-[13px] font-medium text-primary hover:underline"
+            className="mt-1.5 font-poppins text-[12px] md:text-[13px] font-medium text-primary hover:underline"
           >
             {expanded ? "Show less" : "Show more"}
           </button>
@@ -113,7 +113,7 @@ export default function StoryCard({
           {Object.entries(subRatings!).map(([key, value]) => (
             (value !== undefined) && (
               <div key={key} className="flex items-center gap-0.5 whitespace-nowrap">
-                <span className="font-helvetica text-[9px] md:text-[10px] capitalize text-[#767E92]">
+                <span className="font-poppins text-[9px] md:text-[10px] capitalize text-[#767E92]">
                   {key}:
                 </span>
                 <div className="flex ml-0.5">
@@ -135,7 +135,7 @@ export default function StoryCard({
       {/* Footer: Time Ago + College */}
       {timeAgo && (
         <div className="flex items-center justify-between pt-2 border-t border-[#F0F1F5]">
-          <p className="font-helvetica text-[10px] md:text-[12px] text-[#9AA2B1]">{timeAgo}</p>
+          <p className="font-poppins text-[10px] md:text-[12px] text-[#9AA2B1]">{timeAgo}</p>
         </div>
       )}
     </article>

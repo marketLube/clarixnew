@@ -211,7 +211,7 @@ function CollegesPageContent() {
       {/* Filter Section */}
       <div className="relative z-10 mt-8 flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 text-[#162447] font-helvetica font-medium">
+          <div className="flex items-center gap-2 text-[#162447] font-poppins font-medium">
             <Filter className="w-5 h-5" />
             <span>Filters</span>
           </div>
@@ -222,7 +222,7 @@ function CollegesPageContent() {
               type="button"
               onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
               aria-expanded={isCityDropdownOpen}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-helvetica hover:border-[#513392] transition-colors shadow-sm"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins hover:border-[#513392] transition-colors shadow-sm"
             >
               <span>{city ? `City: ${city}` : "City"}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${isCityDropdownOpen ? "rotate-180" : ""}`} />
@@ -245,7 +245,7 @@ function CollegesPageContent() {
                         handleFilterUpdate("city", c);
                         setIsCityDropdownOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2.5 text-sm font-helvetica flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
+                      className="w-full text-left px-4 py-2.5 text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
                     >
                       <span className={city === c ? "text-[#513392] font-medium" : "text-[#162447]"}>
                         {c}
@@ -264,7 +264,7 @@ function CollegesPageContent() {
               type="button"
               onClick={() => setIsStreamDropdownOpen(!isStreamDropdownOpen)}
               aria-expanded={isStreamDropdownOpen}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-helvetica hover:border-[#513392] transition-colors shadow-sm"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins hover:border-[#513392] transition-colors shadow-sm"
             >
               <span>{stream ? `Stream: ${cmsStreams.find((s: any) => s._id === stream)?.name || stream}` : "Stream"}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${isStreamDropdownOpen ? "rotate-180" : ""}`} />
@@ -287,7 +287,7 @@ function CollegesPageContent() {
                         handleFilterUpdate("stream", s._id);
                         setIsStreamDropdownOpen(false);
                       }}
-                      className="w-full text-left px-4 py-2.5 text-sm font-helvetica flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
+                      className="w-full text-left px-4 py-2.5 text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
                     >
                       <span className={stream === s._id ? "text-[#513392] font-medium" : "text-[#162447]"}>
                         {s.name}
@@ -304,10 +304,10 @@ function CollegesPageContent() {
         {/* Active Filters */}
         {(city || stream || ownership) && (
           <div className="flex flex-wrap items-center gap-2 mt-2">
-            <span className="text-sm font-helvetica text-[#767e92] mr-2">Active:</span>
+            <span className="text-sm font-poppins text-[#767e92] mr-2">Active:</span>
 
             {city && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
                 City: {city}
                 <button
                   onClick={() => handleFilterUpdate("city", city)}
@@ -320,7 +320,7 @@ function CollegesPageContent() {
             )}
 
             {stream && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
                 Stream: {cmsStreams.find((s: any) => s._id === stream)?.name || stream}
                 <button
                   onClick={() => handleFilterUpdate("stream", stream)}
@@ -333,7 +333,7 @@ function CollegesPageContent() {
             )}
 
             {ownership && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
                 Type: {ownership}
                 <button
                   onClick={() => handleFilterUpdate("ownership", ownership)}
@@ -347,7 +347,7 @@ function CollegesPageContent() {
 
             <button
               onClick={handleClearFilters}
-              className="text-sm font-helvetica text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"
+              className="text-sm font-poppins text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"
             >
               Clear All
             </button>
@@ -359,7 +359,7 @@ function CollegesPageContent() {
         <Loader fullPage label="Loading colleges..." />
       ) : error ? (
         <div className="flex justify-center items-center h-64">
-          <p className="text-[#ff4b4b] font-helvetica font-medium">Failed to load colleges. Please try again later.</p>
+          <p className="text-[#ff4b4b] font-poppins font-medium">Failed to load colleges. Please try again later.</p>
         </div>
       ) : colleges?.length === 0 ? (
         <EmptyState onClearFilters={handleClearFilters} />
@@ -388,7 +388,7 @@ function CollegesPageContent() {
           )}
 
           {!hasNextPage && colleges.length > 0 && (
-            <p className="text-center text-sm text-[#767e92] font-helvetica py-8">
+            <p className="text-center text-sm text-[#767e92] font-poppins py-8">
               You have seen all {colleges.length} colleges.
             </p>
           )}
@@ -401,7 +401,7 @@ function CollegesPageContent() {
           <div className="w-full rounded-t-[24px] bg-white shadow-[0_-18px_40px_rgba(0,0,0,0.12)] border-t border-[#f0f2ff] px-4 py-3 md:px-8 md:py-4">
             <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6 max-w-[1750px] mx-auto">
               <div className="flex-1 min-w-0">
-                <p className="font-helvetica text-xs md:text-sm text-[#767e92] mb-2">
+                <p className="font-poppins text-xs md:text-sm text-[#767e92] mb-2">
                   Your Compared Colleges ({selectedColleges.length}/4)
                 </p>
                 <div className="flex flex-wrap gap-3">
@@ -421,10 +421,10 @@ function CollegesPageContent() {
                           />
                         </div>
                         <div className="flex flex-col">
-                          <span className="font-helvetica text-sm md:text-base font-semibold text-[#162447] max-w-[180px] truncate">
+                          <span className="font-poppins text-sm md:text-base font-semibold text-[#162447] max-w-[180px] truncate">
                             {college?.name}
                           </span>
-                          <span className="mt-0.5 inline-flex items-center gap-1 font-helvetica text-xs md:text-sm text-[#767e92] max-w-[190px] truncate">
+                          <span className="mt-0.5 inline-flex items-center gap-1 font-poppins text-xs md:text-sm text-[#767e92] max-w-[190px] truncate">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               viewBox="0 0 24 24"
@@ -458,7 +458,7 @@ function CollegesPageContent() {
                 <button
                   type="button"
                   onClick={handleClearAll}
-                  className="font-helvetica text-sm md:text-base text-[#ff4b4b] hover:text-[#e73b3b]"
+                  className="font-poppins text-sm md:text-base text-[#ff4b4b] hover:text-[#e73b3b]"
                 >
                   Clear all ✕
                 </button>
@@ -466,7 +466,7 @@ function CollegesPageContent() {
                   type="button"
                   onClick={handleCompareNow}
                   disabled={selectedColleges.length < 2}
-                  className={`inline-flex items-center justify-center gap-3 rounded-full px-10 py-3 text-base font-helvetica font-medium transition-colors shadow-sm ${selectedColleges.length >= 2
+                  className={`inline-flex items-center justify-center gap-3 rounded-full px-10 py-3 text-base font-poppins font-medium transition-colors shadow-sm ${selectedColleges.length >= 2
                     ? "bg-[#513392] text-white hover:bg-[#3d2770]"
                     : "bg-[#f5eefe] text-[#b9a5f0] cursor-not-allowed"
                     }`}

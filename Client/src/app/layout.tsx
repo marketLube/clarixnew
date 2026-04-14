@@ -88,7 +88,7 @@ const helveticaNeue = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-helvetica-neue",
+  variable: "--font-poppins-neue",
   display: "swap",
 });
 

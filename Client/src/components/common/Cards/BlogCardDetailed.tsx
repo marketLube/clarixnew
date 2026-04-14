@@ -63,7 +63,7 @@ export default function BlogCardDetailed({
 
         {/* Title and Description */}
         <div className="flex flex-col gap-2 md:gap-[18px]">
-          <h2 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[16px] md:text-[24px] tracking-[-0.48px] line-clamp-2">
+          <h2 className="font-poppins font-medium leading-[28px] text-[#162447] text-[16px] md:text-[24px] tracking-[-0.48px] line-clamp-2">
             {title}
           </h2>
           <p className="font-poppins text-[12px] md:text-[16px] leading-[20px] text-[#767e92]">

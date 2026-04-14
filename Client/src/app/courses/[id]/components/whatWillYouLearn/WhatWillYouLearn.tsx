@@ -8,7 +8,7 @@ function AboutCard({ title, description }: any) {
         <TagIcon />
       </div>
       <div className="flex flex-col gap-[10px] md:gap-[18px]">
-        <h3 className="font-helvetica font-medium leading-[24px] md:leading-[28px] text-[#162447] text-[18px] md:text-[20px] tracking-[-0.4px]">
+        <h3 className="font-poppins font-medium leading-[24px] md:leading-[28px] text-[#162447] text-[18px] md:text-[20px] tracking-[-0.4px]">
           {title}
         </h3>
         <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
@@ -27,7 +27,7 @@ export default function WhatWillYouLearn({ course }: any) {
       <ContentWrapper className="flex flex-col gap-8 md:gap-20 items-center">
         {/* Header */}
         <div className="flex flex-col gap-4 md:gap-6 items-center text-center">
-          <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
+          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
             {course?.about?.title || "What Will You Learn?"}
           </h2>
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">

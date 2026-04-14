@@ -20,11 +20,11 @@ export default function CareerStreams() {
 
   const headingTitle =
     streams?.title?.trim() ||
-    "Find what you love. Build a career around it.";
+    "Never Miss an Entrance Exam";
 
   const descriptionText =
     streams?.paragraph?.trim() ||
-    "Start your journey with the field that excites you most. Choose a stream you're passionate about and discover the perfect colleges, courses, exams, and career paths curated just for you.";
+    "Track registration windows, exam dates, and results for every major entrance exam across streams — JEE, NEET, CAT, CLAT, GATE, and more.";
 
   const apiStreams = data?.data?.streams ?? [];
 

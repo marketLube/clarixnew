@@ -51,7 +51,7 @@ export default function WhatClarixOffers() {
       <ContentWrapper className="flex flex-col gap-8 md:gap-16">
         {/* Header */}
         <div className="flex flex-col gap-2 md:gap-6 items-center text-center">
-          <h2 className="font-helvetica font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[40px] tracking-[-0.96px]">
+          <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[40px] tracking-[-0.96px]">
             {thirdSection.headline}
           </h2>
           <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#767e92] max-w-[416px]">
@@ -75,7 +75,7 @@ export default function WhatClarixOffers() {
 
               {/* Content */}
               <div className="flex flex-col gap-2 md:gap-5 flex-1">
-                <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
+                <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] md:text-[24px] tracking-[-0.48px]">
                   {feature.title}
                 </h3>
                 <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">

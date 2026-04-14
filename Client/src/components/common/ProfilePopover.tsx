@@ -73,13 +73,13 @@ export default function ProfilePopover({ children }: ProfilePopoverProps) {
         <div className="flex gap-[10px] items-center w-full">
           {/* Avatar */}
           <div className="bg-[rgba(147,97,255,0.23)] rounded-[70px] w-[50px] h-[50px] flex items-center justify-center shrink-0">
-            <p className="font-helvetica font-medium text-[20px] leading-[28px] text-[#513392] tracking-[-0.48px] m-0">
+            <p className="font-poppins font-medium text-[20px] leading-[28px] text-[#513392] tracking-[-0.48px] m-0">
               {userInitials}
             </p>
           </div>
           {/* Name and Email */}
           <div className="flex flex-col gap-[6px] items-start flex-1 min-w-0">
-            <p className="font-helvetica font-medium text-[20px] leading-[28px] text-[#162447] tracking-[-0.4px] m-0 truncate w-full">
+            <p className="font-poppins font-medium text-[20px] leading-[28px] text-[#162447] tracking-[-0.4px] m-0 truncate w-full">
               {userName}
             </p>
             <p className="font-poppins text-[16px] leading-[20px] text-[#767e92] m-0 truncate w-full">

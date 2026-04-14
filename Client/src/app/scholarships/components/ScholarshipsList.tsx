@@ -38,7 +38,7 @@ export default function ScholarshipsList({
     <ContentWrapper className="px-0">
       {/* Header Section */}
       <div className="flex flex-col gap-4 md:gap-[30px] items-start mb-8 md:mb-10">
-        <h1 className="font-helvetica font-medium leading-[32px] sm:leading-[48px] text-[#162447] text-[22px] sm:text-[48px] tracking-[-0.96px] max-w-[627px]">
+        <h1 className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-[#162447] text-[22px] sm:text-[48px] tracking-[-0.96px] max-w-[627px]">
           Find Scholarships That Match Your Dream Education
         </h1>
         <div className="font-poppins leading-6 text-[#767e92] text-[14px] sm:text-[16px] max-w-[625px]">

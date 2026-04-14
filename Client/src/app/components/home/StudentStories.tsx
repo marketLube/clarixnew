@@ -54,23 +54,23 @@ function ReviewCard({
             {avatarUrl ? (
               <Image src={avatarUrl} alt={name} fill sizes="48px" className="object-cover" />
             ) : (
-              <div className="h-full w-full flex items-center justify-center text-[#513392] font-helvetica font-bold text-sm md:text-base">
+              <div className="h-full w-full flex items-center justify-center text-[#513392] font-poppins font-bold text-sm md:text-base">
                 {name.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
           <div className="min-w-0">
-            <h4 className="font-helvetica text-[14px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
+            <h4 className="font-poppins text-[14px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
               {name}
             </h4>
-            <p className="font-helvetica text-[11px] md:text-[13px] text-[#767E92] truncate leading-relaxed">
+            <p className="font-poppins text-[11px] md:text-[13px] text-[#767E92] truncate leading-relaxed">
               {college}{course ? ` • ${course}` : ""}
             </p>
           </div>
         </div>
         <div className="flex items-center gap-1 shrink-0 rounded-full bg-[#FFF8E1] px-2.5 py-1">
           <Star className="h-3.5 w-3.5 fill-[#FFB800] text-[#FFB800]" />
-          <span className="font-helvetica text-[13px] font-semibold text-[#162447]">
+          <span className="font-poppins text-[13px] font-semibold text-[#162447]">
             {displayRating.toFixed(1)}
           </span>
         </div>
@@ -78,13 +78,13 @@ function ReviewCard({
 
       {/* Content */}
       <div className="mb-4 flex-grow">
-        <p className="font-helvetica text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] text-[#5D6677]">
+        <p className="font-poppins text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] text-[#5D6677]">
           {displayedContent}
         </p>
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="mt-1.5 font-helvetica text-[12px] md:text-[13px] font-medium text-[#513392] hover:underline"
+            className="mt-1.5 font-poppins text-[12px] md:text-[13px] font-medium text-[#513392] hover:underline"
           >
             {expanded ? "Show less" : "Read more"}
           </button>
@@ -93,7 +93,7 @@ function ReviewCard({
 
       {/* Footer */}
       <div className="pt-3 border-t border-[#F0F1F5]">
-        <p className="font-helvetica text-[11px] md:text-[12px] text-[#9AA2B1]">
+        <p className="font-poppins text-[11px] md:text-[12px] text-[#9AA2B1]">
           {timeAgo(createdAt)}
         </p>
       </div>
@@ -176,10 +176,10 @@ export default function StudentStories() {
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start gap-4 sm:gap-8">
             <div>
               <SectionHeading title="What Students Say" />
-              <p className="mt-3 font-helvetica text-[14px] md:text-[16px] text-[#5D6677] leading-relaxed">Honest reviews from real students across India — helping you make confident college choices.</p>
+              <p className="mt-3 font-poppins text-[14px] md:text-[16px] text-[#5D6677] leading-relaxed">Honest reviews from real students across India — helping you make confident college choices.</p>
             </div>
             <Link href="/review" className="shrink-0 self-start">
-              <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-helvetica text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
+              <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-poppins text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
                 Write a Review
                 <PenLine className="h-4 w-4" />
               </button>
@@ -192,7 +192,7 @@ export default function StudentStories() {
           <Loader containerClassName="h-[300px]" label="Loading reviews..." />
         ) : isError || reviews.length === 0 ? (
           <div className="flex h-[250px] items-center justify-center">
-            <p className="font-helvetica text-[#767e92]">No reviews available right now.</p>
+            <p className="font-poppins text-[#767e92]">No reviews available right now.</p>
           </div>
         ) : (
           <>
@@ -258,7 +258,7 @@ export default function StudentStories() {
               <div className="mt-6 flex justify-center md:hidden">
                 <button
                   onClick={() => setShowAllMobile(!showAllMobile)}
-                  className="flex items-center gap-2 rounded-full border border-[#D0D5DD] bg-white px-4 py-2 font-helvetica text-[14px] font-medium text-[#162447] transition-all hover:bg-gray-50"
+                  className="flex items-center gap-2 rounded-full border border-[#D0D5DD] bg-white px-4 py-2 font-poppins text-[14px] font-medium text-[#162447] transition-all hover:bg-gray-50"
                 >
                   {showAllMobile ? "Show Less" : "Show More Reviews"}
                   {showAllMobile ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}

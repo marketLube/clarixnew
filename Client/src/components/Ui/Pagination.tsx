@@ -79,7 +79,7 @@ export default function Pagination({
             return (
               <span
                 key={`ellipsis-${index}`}
-                className="flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center text-[#162447] font-helvetica text-[14px] sm:text-[16px] leading-[20px]"
+                className="flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center text-[#162447] font-poppins text-[14px] sm:text-[16px] leading-[20px]"
               >
                 ...
               </span>
@@ -96,8 +96,8 @@ export default function Pagination({
               onClick={() => handlePageClick(page)}
               className={
                 isActive
-                  ? "flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#513392] to-[#734bca] text-white font-helvetica text-[16px] sm:text-[20px] leading-[28px] tracking-[-0.4px] cursor-default"
-                  : "flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-full bg-[#f6f7ff] text-[#162447] font-helvetica text-[14px] sm:text-[16px] leading-[20px] tracking-[-0.32px] cursor-pointer hover:bg-[#edeeff] transition-colors"
+                  ? "flex h-8 w-8 sm:h-11 sm:w-11 items-center justify-center rounded-full bg-gradient-to-b from-[#513392] to-[#734bca] text-white font-poppins text-[16px] sm:text-[20px] leading-[28px] tracking-[-0.4px] cursor-default"
+                  : "flex h-8 w-8 sm:h-[34px] sm:w-[34px] items-center justify-center rounded-full bg-[#f6f7ff] text-[#162447] font-poppins text-[14px] sm:text-[16px] leading-[20px] tracking-[-0.32px] cursor-pointer hover:bg-[#edeeff] transition-colors"
               }
             >
               {page}

@@ -45,10 +45,10 @@ export default function CareerCard({
 
           <div className="flex flex-col gap-[4px] md:gap-[8px] flex-1 min-w-0">
             <div className="flex flex-col gap-0.5 md:gap-[4px]">
-              <p className="font-helvetica text-[16px] md:text-[18px] leading-tight md:leading-[24px] tracking-[-0.36px] text-[#162447] truncate">
+              <p className="font-poppins text-[16px] md:text-[18px] leading-tight md:leading-[24px] tracking-[-0.36px] text-[#162447] truncate">
                 {title}
               </p>
-              <p className="font-helvetica text-[13px] md:text-[14px] leading-tight md:leading-[20px] tracking-[-0.28px] text-[#767e92] truncate">
+              <p className="font-poppins text-[13px] md:text-[14px] leading-tight md:leading-[20px] tracking-[-0.28px] text-[#767e92] truncate">
                 {company}
               </p>
             </div>

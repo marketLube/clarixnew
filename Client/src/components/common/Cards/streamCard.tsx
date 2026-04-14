@@ -35,7 +35,7 @@ const StreamCard = forwardRef<HTMLElement, StreamCardProps>(
 
         {/* Title and Description */}
         <div className="flex flex-col gap-0.5 min-w-0">
-          <h3 className="font-helvetica text-[13px] sm:text-[16px] font-semibold leading-tight text-[#162447] truncate">
+          <h3 className="font-poppins text-[13px] sm:text-[16px] font-semibold leading-tight text-[#162447] truncate">
             {title}
           </h3>
           <p className="font-poppins text-[11px] sm:text-[13px] leading-tight text-[#767e92]">

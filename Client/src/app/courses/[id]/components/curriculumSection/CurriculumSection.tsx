@@ -29,14 +29,14 @@ export default function CurriculumSection({ course }: any) {
               {code}
             </span>
           </div>
-          <p className="font-helvetica font-medium text-[18px] md:text-[20px] leading-[28px] tracking-[-0.48px] text-[#162447]">
+          <p className="font-poppins font-medium text-[18px] md:text-[20px] leading-[28px] tracking-[-0.48px] text-[#162447]">
             Semester {index + 1}
           </p>
         </>
       ),
       content: hasDetails ? (
         <>
-          <h3 className="font-helvetica font-medium text-[18px] md:text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447] mb-3">
+          <h3 className="font-poppins font-medium text-[18px] md:text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447] mb-3">
             {semester.title}
           </h3>
           <ul className="flex flex-col gap-2">

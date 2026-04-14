@@ -17,7 +17,7 @@ export default function OurStory() {
       <ContentWrapper className="flex flex-col lg:flex-row gap-8 md:gap-[314px] items-center">
         {/* Left: Content */}
         <div className="flex flex-col gap-6 md:gap-[30px] flex-1 max-w-[543px]">
-          <h2 className="font-helvetica font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] sm:text-[48px] tracking-[-0.96px]">
+          <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] sm:text-[48px] tracking-[-0.96px]">
             {fourthSection?.headline}
           </h2>
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">

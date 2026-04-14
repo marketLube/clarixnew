@@ -137,7 +137,7 @@ export default function HowScholarshipsWork() {
       <ContentWrapper className="flex flex-col gap-16">
         {/* Header */}
         <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="font-helvetica font-medium leading-[48px] text-[#162447] text-[40px] sm:text-[48px] tracking-[-0.96px] max-w-[613px]">
+          <h2 className="font-poppins font-medium leading-[48px] text-[#162447] text-[40px] sm:text-[48px] tracking-[-0.96px] max-w-[613px]">
             Understand How Scholarships Work
           </h2>
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92] max-w-[501px]">
@@ -195,7 +195,7 @@ export default function HowScholarshipsWork() {
                 <div
                   className={`absolute left-[23px] ${contentTop} flex flex-col gap-5 w-[276px]`}
                 >
-                  <h3 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+                  <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
                     {step.title}
                   </h3>
                   <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">

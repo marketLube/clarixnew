@@ -26,7 +26,7 @@ export const AuthRightPanel: React.FC = () => {
 
         {/* Headline Text */}
         <div className="text-center flex-1 flex items-center justify-center mb-[100px]">
-          <p className="font-helvetica font-medium text-[48px] leading-[48px] text-white tracking-[-0.96px] max-w-[410px]">
+          <p className="font-poppins font-medium text-[48px] leading-[48px] text-white tracking-[-0.96px] max-w-[410px]">
             Your education journey starts here.
           </p>
         </div>

@@ -61,17 +61,17 @@ export default function EmptyState({
       </div>
 
       {/* Content */}
-      <h3 className="w-full text-2xl md:text-3xl font-helvetica font-bold text-[#162447] text-center mb-3">
+      <h3 className="w-full text-2xl md:text-3xl font-poppins font-bold text-[#162447] text-center mb-3">
         {title}
       </h3>
-      <p className="w-full text-[#767e92] font-helvetica text-center text-sm md:text-base leading-relaxed mb-8">
+      <p className="w-full text-[#767e92] font-poppins text-center text-sm md:text-base leading-relaxed mb-8">
         {description}
       </p>
       
       {onClearFilters && (
         <button 
           onClick={onClearFilters}
-          className="bg-[#513392] text-white px-8 py-3.5 rounded-full font-helvetica font-medium hover:bg-[#3d2770] transition-all shadow-[0_8px_20px_rgba(81,51,146,0.2)] hover:shadow-[0_12px_24px_rgba(81,51,146,0.3)] hover:-translate-y-0.5 flex items-center gap-2"
+          className="bg-[#513392] text-white px-8 py-3.5 rounded-full font-poppins font-medium hover:bg-[#3d2770] transition-all shadow-[0_8px_20px_rgba(81,51,146,0.2)] hover:shadow-[0_12px_24px_rgba(81,51,146,0.3)] hover:-translate-y-0.5 flex items-center gap-2"
         >
           <X className="w-4 h-4" />
           {actionLabel}

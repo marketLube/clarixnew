@@ -66,7 +66,7 @@ export default function ComparisonSections({
           {
             label: "College Name",
             getValue: (college) => (
-              <p className="font-helvetica font-medium text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px] text-[#162447] tracking-[-0.4px]">
+              <p className="font-poppins font-medium text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px] text-[#162447] tracking-[-0.4px]">
                 {college.name}
               </p>
             ),
@@ -573,7 +573,7 @@ export default function ComparisonSections({
         >
           <div className="flex gap-[6px] items-center">
             <IconComponent width={20} height={20} fill="#162447" />
-            <p className="font-helvetica font-medium text-[18px] sm:text-[24px] leading-[22px] sm:leading-[28px] text-[#162447] tracking-[-0.48px]">
+            <p className="font-poppins font-medium text-[18px] sm:text-[24px] leading-[22px] sm:leading-[28px] text-[#162447] tracking-[-0.48px]">
               {section.title}
             </p>
           </div>

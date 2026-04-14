@@ -75,15 +75,15 @@ export default function BlogDetailHero({
           <div className="flex flex-col gap-6 md:gap-[40px] max-w-[900px] w-full">
             <div className="flex items-center gap-[16px]">
               <div className="backdrop-blur-[2px] bg-[rgba(255,255,255,0.14)] flex items-center justify-center px-[14px] py-[10px] rounded-[50px]">
-                <p className="font-helvetica text-[16px] leading-[20px] text-white">
+                <p className="font-poppins text-[16px] leading-[20px] text-white">
                   {category}
                 </p>
               </div>
-              <p className="font-helvetica text-[16px] leading-[20px] text-white">
+              <p className="font-poppins text-[16px] leading-[20px] text-white">
                 {date}
               </p>
             </div>
-            <h1 className="font-helvetica font-medium leading-[1.2] text-white text-[22px] sm:text-[36px] md:text-[48px] tracking-[-0.96px] break-words">
+            <h1 className="font-poppins font-medium leading-[1.2] text-white text-[22px] sm:text-[36px] md:text-[48px] tracking-[-0.96px] break-words">
               {title}
             </h1>
           </div>

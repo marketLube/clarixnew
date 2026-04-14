@@ -19,7 +19,7 @@ const requirements = [
 export default function AboutYou({ job }: AboutYouProps) {
   return (
     <div className="flex flex-col gap-10 items-start mb-[60px]">
-      <h2 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+      <h2 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
         About you
       </h2>
 

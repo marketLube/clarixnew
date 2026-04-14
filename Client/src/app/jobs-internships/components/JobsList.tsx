@@ -54,7 +54,7 @@ export default function JobsList({
       {/* Header */}
       {heroSection?.enabled !== false && (
         <div className="flex flex-col gap-[16px]">
-          <h1 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[24px] md:text-[42px] tracking-[-0.96px] max-w-[629px]">
+          <h1 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[24px] md:text-[42px] tracking-[-0.96px] max-w-[629px]">
             {title}
           </h1>
           <p className="text-[12px] md:text-[16px] leading-[20px] text-[#767e92]">

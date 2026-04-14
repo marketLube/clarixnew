@@ -11,7 +11,7 @@ export default function ContactSection() {
       <ContentWrapper className="flex flex-col lg:flex-row gap-12 lg:gap-[249px] items-start">
         <div className="flex flex-col gap-[47px] max-w-[367px]">
           <div className="flex flex-col gap-[18px]">
-            <h2 className="font-helvetica font-medium leading-[48px] text-[#162447] text-[48px] tracking-[-0.96px]">
+            <h2 className="font-poppins font-medium leading-[48px] text-[#162447] text-[48px] tracking-[-0.96px]">
               Get Personalized Guidance
             </h2>
             <div className="font-poppins leading-[20px] text-[#767e92] text-[16px]">
@@ -31,7 +31,7 @@ export default function ContactSection() {
                 <p className="font-poppins leading-[20px] text-[#767e92] text-[16px]">
                   Location
                 </p>
-                <p className="font-helvetica font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+                <p className="font-poppins font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
                   Palakkad,Kerala,India
                 </p>
               </div>
@@ -45,7 +45,7 @@ export default function ContactSection() {
                 <p className="font-poppins leading-[20px] text-[#767e92] text-[16px]">
                   Call us
                 </p>
-                <p className="font-helvetica font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+                <p className="font-poppins font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
                   +9100000000
                 </p>
               </div>
@@ -59,7 +59,7 @@ export default function ContactSection() {
                 <p className="font-poppins leading-[20px] text-[#767e92] text-[16px]">
                   Email
                 </p>
-                <p className="font-helvetica font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
+                <p className="font-poppins font-normal leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
                   Clarixedu@gmail.com
                 </p>
               </div>

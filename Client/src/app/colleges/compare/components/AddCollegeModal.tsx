@@ -173,7 +173,7 @@ export default function AddCollegeModal({
 
                                         {/* Info */}
                                         <div className="flex flex-col gap-1 min-w-0">
-                                            <h3 className="font-helvetica font-medium text-[15px] leading-[20px] text-[#162447] truncate group-hover:text-[#513392] transition-colors">
+                                            <h3 className="font-poppins font-medium text-[15px] leading-[20px] text-[#162447] truncate group-hover:text-[#513392] transition-colors">
                                                 {college.name}
                                             </h3>
                                             <div className="flex items-center gap-1.5 text-[#767E92]">
@@ -181,7 +181,7 @@ export default function AddCollegeModal({
                                                     <path d="M5 6.5C5.82843 6.5 6.5 5.82843 6.5 5C6.5 4.17157 5.82843 3.5 5 3.5C4.17157 3.5 3.5 4.17157 3.5 5C3.5 5.82843 4.17157 6.5 5 6.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                                                     <path d="M5 11C7.5 8.5 9 6.66667 9 5C9 2.79086 7.20914 1 5 1C2.79086 1 1 2.79086 1 5C1 6.66667 2.5 8.5 5 11Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
-                                                <p className="font-helvetica text-[12px] leading-[15px] truncate">
+                                                <p className="font-poppins text-[12px] leading-[15px] truncate">
                                                     {college.city || "City"}, {college.state || "State"}
                                                 </p>
                                             </div>

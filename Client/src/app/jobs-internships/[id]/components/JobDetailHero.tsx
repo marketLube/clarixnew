@@ -45,7 +45,7 @@ export default function JobDetailHero({ job }: JobDetailHeroProps) {
               </div>
             )}
           </div>
-          <p className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+          <p className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
             {job.company}
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function JobDetailHero({ job }: JobDetailHeroProps) {
         {/* Job Title and Info */}
         <div className="flex flex-col gap-4 items-start">
           <div className="flex flex-col gap-[18px] items-start">
-            <h1 className="font-helvetica font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+            <h1 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
               {job.title}
             </h1>
             <p className="font-poppins text-[14px] leading-[20px] text-[#767e92]">

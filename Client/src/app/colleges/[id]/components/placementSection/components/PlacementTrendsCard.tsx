@@ -19,7 +19,7 @@ export default function PlacementTrendsCard({
     <div
       className={`bg-[var(--white-color)] rounded-[20px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] w-full px-6 py-6 ${className}`}
     >
-      <h3 className="font-helvetica font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--text-headline)] mb-6">
+      <h3 className="font-poppins font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--text-headline)] mb-6">
         {title}
       </h3>
 
@@ -28,7 +28,7 @@ export default function PlacementTrendsCard({
           stats.map(({ year, avgSalary, placementPercentage }) => (
             <div key={year} className="flex flex-col gap-[5px]">
               <div className="flex items-center justify-between">
-                <p className="font-helvetica text-[16px] leading-[16px] text-[#252c32]">
+                <p className="font-poppins text-[16px] leading-[16px] text-[#252c32]">
                   {year}
                 </p>
                 <div className="flex items-center gap-[5.333px]">

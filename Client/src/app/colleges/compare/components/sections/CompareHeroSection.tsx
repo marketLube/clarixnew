@@ -80,7 +80,7 @@ export default function CompareHeroSection({
           {/* Main Content */}
           <div className="flex flex-col gap-6 max-w-[1200px]">
             {/* Title */}
-            <h1 className="font-helvetica font-medium leading-[34px] sm:leading-[56px] text-white text-[28px] sm:text-[44px] lg:text-[52px] tracking-[-0.96px]">
+            <h1 className="font-poppins font-medium leading-[34px] sm:leading-[56px] text-white text-[28px] sm:text-[44px] lg:text-[52px] tracking-[-0.96px]">
               {title}
             </h1>
 

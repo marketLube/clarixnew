@@ -47,7 +47,7 @@ export default function RelatedJobs({ currentJobId }: RelatedJobsProps) {
   return (
     <div className="flex flex-col gap-[60px] items-start mt-[60px]">
       <div className="flex items-center justify-between w-full">
-        <h2 className="font-helvetica font-medium leading-[28px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[629px]">
+        <h2 className="font-poppins font-medium leading-[28px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[629px]">
           More Jobs You Might Like
         </h2>
         <Link

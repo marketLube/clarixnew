@@ -99,7 +99,7 @@ export default function ComparisonTable({
         <div className="flex items-start overflow-x-auto w-full">
           {/* Comparison Criteria Column */}
           <div className="bg-white border-r border-[#e4e3e3] h-[140px] sm:h-[170px] w-[120px] sm:w-[160px] shrink-0 flex items-start justify-center sticky left-0 z-20 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none">
-            <p className="font-helvetica font-medium text-[10px] sm:text-[14px] leading-[14px] sm:leading-[20px] text-[#767e92] text-center uppercase tracking-[-0.3px] px-2 pt-6">
+            <p className="font-poppins font-medium text-[10px] sm:text-[14px] leading-[14px] sm:leading-[20px] text-[#767e92] text-center uppercase tracking-[-0.3px] px-2 pt-6">
               Compare
             </p>
           </div>
@@ -134,7 +134,7 @@ export default function ComparisonTable({
 
                         {/* College Info */}
                         <div className="flex flex-col items-start gap-1.5 min-w-0 flex-1">
-                          <h3 className="font-helvetica font-medium text-[14px] md:text-[16px] lg:text-[18px] leading-[18px] md:leading-[22px] text-[#162447] tracking-[-0.48px] text-left line-clamp-1">
+                          <h3 className="font-poppins font-medium text-[14px] md:text-[16px] lg:text-[18px] leading-[18px] md:leading-[22px] text-[#162447] tracking-[-0.48px] text-left line-clamp-1">
                             {college.name}
                           </h3>
                           <div className="flex items-center gap-1.5 justify-start">

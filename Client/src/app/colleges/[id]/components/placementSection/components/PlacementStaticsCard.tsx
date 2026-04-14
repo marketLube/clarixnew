@@ -11,7 +11,7 @@ export default function PlacementStatisticsCard({ college }: any) {
       }}
     >
       <div className="px-3 md:px-6 pt-3 md:pt-6 pb-3 md:pb-6 text-[var(--white-color)]">
-        <h3 className="text-[18px] md:text-[22px] leading-[22px] md:leading-[26px] font-medium mb-2 md:mb-4 font-helvetica">
+        <h3 className="text-[18px] md:text-[22px] leading-[22px] md:leading-[26px] font-medium mb-2 md:mb-4 font-poppins">
           Placement Statistics
         </h3>
 
@@ -71,7 +71,7 @@ export default function PlacementStatisticsCard({ college }: any) {
         <div className="h-px w-full bg-[rgba(255,255,255,0.4)] mb-6" />
 
         <div className="flex flex-col gap-3">
-          <p className="text-[20px] leading-[24px] font-medium font-helvetica">
+          <p className="text-[20px] leading-[24px] font-medium font-poppins">
             Popular Courses
           </p>
           <div className="flex flex-wrap gap-2">

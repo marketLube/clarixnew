@@ -190,7 +190,7 @@ export default function Destinations() {
                 <div className="flex gap-2 mb-6 sm:mb-10">
                     <button
                         onClick={() => setActiveTab("india")}
-                        className={`px-5 py-2 rounded-full text-sm font-medium font-helvetica transition-all ${
+                        className={`px-5 py-2 rounded-full text-sm font-medium font-poppins transition-all ${
                             activeTab === "india"
                                 ? "bg-[#513392] text-white shadow-[0px_4px_12px_rgba(81,51,146,0.3)]"
                                 : "bg-[#f6f7ff] text-[#162447] hover:bg-[#edefff]"
@@ -200,7 +200,7 @@ export default function Destinations() {
                     </button>
                     <button
                         onClick={() => setActiveTab("abroad")}
-                        className={`px-5 py-2 rounded-full text-sm font-medium font-helvetica transition-all ${
+                        className={`px-5 py-2 rounded-full text-sm font-medium font-poppins transition-all ${
                             activeTab === "abroad"
                                 ? "bg-[#513392] text-white shadow-[0px_4px_12px_rgba(81,51,146,0.3)]"
                                 : "bg-[#f6f7ff] text-[#162447] hover:bg-[#edefff]"
@@ -245,7 +245,7 @@ export default function Destinations() {
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/10 group-hover:from-black/0 group-hover:to-black/5 transition-all duration-300" />
                                     </div>
-                                    <p className="font-helvetica font-medium text-[#162447] text-[14px] sm:text-[20px] leading-[20px] sm:leading-[28px] tracking-[-0.4px] text-center">
+                                    <p className="font-poppins font-medium text-[#162447] text-[14px] sm:text-[20px] leading-[20px] sm:leading-[28px] tracking-[-0.4px] text-center">
                                         {city.name}
                                     </p>
                                 </div>

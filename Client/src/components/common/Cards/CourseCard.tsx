@@ -32,7 +32,7 @@ export default function CourseCard({
 
       <div className="p-[22px] flex flex-col flex-1">
         <div className="min-h-[42px]">
-          <h3 className="font-helvetica text-[20px] leading-[21px] tracking-[-0.4px] text-[#141219] line-clamp-2">
+          <h3 className="font-poppins text-[20px] leading-[21px] tracking-[-0.4px] text-[#141219] line-clamp-2">
             {course?.name}
           </h3>
         </div>

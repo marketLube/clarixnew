@@ -59,7 +59,7 @@ export default function SignInPage() {
         <div className="w-full max-w-[399px]">
           {/* Welcome Section */}
           <div className="mb-5">
-            <h1 className="font-helvetica font-medium text-[36px] leading-[40px] text-[#162447] tracking-[-0.72px] mb-2">
+            <h1 className="font-poppins font-medium text-[36px] leading-[40px] text-[#162447] tracking-[-0.72px] mb-2">
               Welcome to Clarix
             </h1>
             <p className="font-poppins text-[14px] leading-[18px] text-[#767e92]">
@@ -219,7 +219,7 @@ export default function SignInPage() {
                         value={value}
                         onChange={(e) => handleOtpChange(index, e.target.value)}
                         onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                        className="w-full h-[48px] bg-white border-[0.5px] border-[#ff2e2c] rounded-[10px] px-3 py-2 font-helvetica font-medium text-[20px] leading-[24px] text-[#ff2e2c] tracking-[-0.4px] text-center focus:outline-none focus:ring-2 focus:ring-[#ff2e2c]/20 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.03)] relative"
+                        className="w-full h-[48px] bg-white border-[0.5px] border-[#ff2e2c] rounded-[10px] px-3 py-2 font-poppins font-medium text-[20px] leading-[24px] text-[#ff2e2c] tracking-[-0.4px] text-center focus:outline-none focus:ring-2 focus:ring-[#ff2e2c]/20 shadow-[0px_4px_6px_0px_rgba(0,0,0,0.03)] relative"
                         style={{
                           backgroundImage:
                             "linear-gradient(rgba(35, 35, 35, 0) 0%, rgba(255, 46, 44, 0.06) 100%), linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%)",
@@ -378,7 +378,7 @@ export default function SignInPage() {
 
               {/* Clarix Login Section */}
               <div className="space-y-3 text-center max-w-[319px] mx-auto">
-                <p className="font-helvetica text-[18px] leading-[24px] text-[#162447] tracking-[-0.36px]">
+                <p className="font-poppins text-[18px] leading-[24px] text-[#162447] tracking-[-0.36px]">
                   Clarix Login
                 </p>
                 <div className="flex items-center justify-center gap-3 font-poppins text-[14px] leading-[18px] whitespace-nowrap">

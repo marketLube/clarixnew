@@ -21,7 +21,7 @@ export default function LatestArticlesSection({
     <section className="flex flex-col gap-6">
       {/* Header */}
       <div className="flex flex-col gap-0 md:gap-6 max-w-[320px]">
-        <h2 className="font-helvetica font-medium leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px]">
+        <h2 className="font-poppins font-medium leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px]">
           Latest Articles
         </h2>
         <p className="font-poppins leading-[20px] text-[#767e92] text-[14px] md:text-[16px]">

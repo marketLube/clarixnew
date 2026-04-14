@@ -282,7 +282,7 @@ export default function ApplyNowModal({
             </div>
           </div>
           <div className="flex flex-col gap-[8px] items-start">
-            <h2 className="font-helvetica text-[#162447] text-[20px] leading-[28px] tracking-[-0.4px] font-medium">
+            <h2 className="font-poppins text-[#162447] text-[20px] leading-[28px] tracking-[-0.4px] font-medium">
               Register Now To Apply
             </h2>
             <p className="font-poppins text-[#767e92] text-[16px] leading-[20px]">

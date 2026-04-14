@@ -54,7 +54,7 @@ export default function BlogCardHorizontal({
         </div>
 
         {/* Title */}
-        <h3 className="font-helvetica font-medium leading-[20px] md:leading-[28px] text-[#162447] text-[14px] md:text-[24px] tracking-[-0.3px] md:tracking-[-0.48px] line-clamp-2">
+        <h3 className="font-poppins font-medium leading-[20px] md:leading-[28px] text-[#162447] text-[14px] md:text-[24px] tracking-[-0.3px] md:tracking-[-0.48px] line-clamp-2">
           {title}
         </h3>
 

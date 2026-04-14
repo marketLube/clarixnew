@@ -212,12 +212,12 @@ export default function FooterMain() {
                   } ${section.overflowClip ? "overflow-clip" : ""}`}
               >
                 <p
-                  className={`font-helvetica font-medium leading-5 text-sm relative shrink-0 text-[#767e92] uppercase ${section.titleWidth || "whitespace-nowrap"
+                  className={`font-poppins font-medium leading-5 text-sm relative shrink-0 text-[#767e92] uppercase ${section.titleWidth || "whitespace-nowrap"
                     }`}
                 >
                   {section.title}
                 </p>
-                <div className="font-helvetica font-normal leading-7 relative shrink-0 text-[#162447] w-full text-[12px] sm:text-sm">
+                <div className="font-poppins font-normal leading-7 relative shrink-0 text-[#162447] w-full text-[12px] sm:text-sm">
                   {section.links.map((link, linkIndex) => (
                     <Link
                       key={linkIndex}
@@ -242,7 +242,7 @@ export default function FooterMain() {
             placeholder="Your email address"
             aria-label="Email address for newsletter subscription"
             required
-            className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[13px] sm:text-sm bg-transparent border-none outline-none flex-1 min-w-0 px-1 sm:px-2 py-1.5"
+            className="font-poppins font-normal leading-5 relative shrink-0 text-[#767e92] text-[13px] sm:text-sm bg-transparent border-none outline-none flex-1 min-w-0 px-1 sm:px-2 py-1.5"
           />
           <button className="bg-[#513392] flex items-center justify-center px-5 py-2 relative rounded-[50px] shrink-0 hover:bg-[#3f2672] transition-colors cursor-pointer">
             <p className="font-poppins font-normal leading-5 relative shrink-0 text-sm whitespace-nowrap text-white">
@@ -261,27 +261,27 @@ export default function FooterMain() {
         <div className="flex  flex-col-reverse md:flex-row gap-6 sm:gap-[89px] items-start sm:items-center justify-between w-full">
           {/* Copyright and Legal Links */}
           <div className="flex flex-wrap gap-2 md:gap-6 items-center">
-            <p className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm">
+            <p className="font-poppins font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm">
               © {year} Clarix Education. All rights reserved.
             </p>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
               href="/privacy-policy"
-              className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
+              className="font-poppins font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Privacy Policy
             </Link>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
               href="/terms"
-              className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
+              className="font-poppins font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Terms & Conditions
             </Link>
             <div className="h-3 w-px bg-[#767e92] opacity-50"></div>
             <Link
               href="/disclaimer"
-              className="font-helvetica font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
+              className="font-poppins font-normal leading-5 relative shrink-0 text-[#767e92] text-[11px] sm:text-sm hover:text-[#513392] transition-colors"
             >
               Disclaimer
             </Link>

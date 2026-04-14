@@ -89,10 +89,10 @@ export default function ExamCardDetailed({
               </div>
             </div>
             <div className="flex-1 flex flex-col gap-1 sm:gap-2 min-w-0">
-              <h3 className="font-helvetica font-medium leading-[22px] sm:leading-[28px] text-[#162447] text-[16px] sm:text-[20px] tracking-[-0.4px] break-words">
+              <h3 className="font-poppins font-medium leading-[22px] sm:leading-[28px] text-[#162447] text-[16px] sm:text-[20px] tracking-[-0.4px] break-words">
                 {title}
               </h3>
-              <p className="font-helvetica text-[10px] sm:text-[12px] leading-[13px] sm:leading-[14px] text-[#767e92] tracking-[-0.24px] break-words">
+              <p className="font-poppins text-[10px] sm:text-[12px] leading-[13px] sm:leading-[14px] text-[#767e92] tracking-[-0.24px] break-words">
                 {subtitle}
               </p>
             </div>
@@ -173,26 +173,26 @@ export default function ExamCardDetailed({
           <div className="bg-[#f6f7ff] p-2 sm:p-[10px] rounded-[10px]">
             <div className="flex flex-row lg:flex-col flex-wrap gap-2 lg:gap-[14px] justify-between lg:justify-start">
               <div className="flex flex-col gap-[2px] lg:gap-[6px]">
-                <p className="font-helvetica text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
+                <p className="font-poppins text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
                   Registration
                 </p>
-                <p className="font-helvetica font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
+                <p className="font-poppins font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
                   {registrationDate}
                 </p>
               </div>
               <div className="flex flex-col gap-[4px] lg:gap-[6px]">
-                <p className="font-helvetica text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
+                <p className="font-poppins text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
                   Exam Date
                 </p>
-                <p className="font-helvetica font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
+                <p className="font-poppins font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
                   {examDate}
                 </p>
               </div>
               <div className="flex flex-col gap-[4px] lg:gap-[6px]">
-                <p className="font-helvetica text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
+                <p className="font-poppins text-[10px] sm:text-[11px] leading-[14px] text-[#767e92] tracking-[-0.24px] whitespace-nowrap">
                   Results
                 </p>
-                <p className="font-helvetica font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
+                <p className="font-poppins font-medium text-[11px] sm:text-[12px] leading-[16px] text-[#162447] tracking-[-0.28px] whitespace-nowrap">
                   {resultsDate}
                 </p>
               </div>
@@ -209,25 +209,25 @@ export default function ExamCardDetailed({
         <div className="flex flex-wrap items-center gap-0 md:gap-2">
           <button
             onClick={onApplicationProcess}
-            className="font-helvetica text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
+            className="font-poppins text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
           >
             APPLICATION PROCESS
           </button>
           <button
             onClick={onExamPattern}
-            className="font-helvetica text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
+            className="font-poppins text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
           >
             EXAM PATTERN
           </button>
           <button
             onClick={onPreparationTips}
-            className="font-helvetica text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
+            className="font-poppins text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
           >
             PREPARATION TIPS
           </button>
           <button
             onClick={onResults}
-            className="font-helvetica text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
+            className="font-poppins text-[9px] sm:text-[11px] leading-[14px] sm:leading-[16px] text-[#513392] px-1.5 py-1 sm:px-2 sm:py-1.5 tracking-[-0.24px] hover:bg-[#f6f7ff] transition-colors whitespace-nowrap cursor-pointer"
           >
             RESULTS
           </button>

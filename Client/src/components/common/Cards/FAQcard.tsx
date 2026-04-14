@@ -30,7 +30,7 @@ export default function FAQCard({
         className="flex w-full items-center justify-between gap-4 cursor-pointer"
       >
         <p
-          className={`font-helvetica text-[14px] md:text-[16px] lg:text-[20px] leading-[20px] tracking-[-0.4px] text-left ${isOpen
+          className={`font-poppins text-[14px] md:text-[16px] lg:text-[20px] leading-[20px] tracking-[-0.4px] text-left ${isOpen
               ? "text-[var(--color-primary)]"
               : "text-[var(--color-text-headline)]"
             }`}

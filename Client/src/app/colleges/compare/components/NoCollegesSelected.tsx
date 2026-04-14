@@ -71,7 +71,7 @@ export default function NoCollegesSelected({
         {/* Text Content */}
         <div className="flex flex-col gap-[34px] items-center w-full">
           <div className="flex flex-col gap-[24px] items-center w-full">
-            <h2 className="font-helvetica leading-[34px] sm:leading-[48px] text-[#162447] text-[28px] sm:text-[48px] tracking-[-0.96px] text-center">
+            <h2 className="font-poppins leading-[34px] sm:leading-[48px] text-[#162447] text-[28px] sm:text-[48px] tracking-[-0.96px] text-center">
               No Colleges Selected
             </h2>
             <p className="leading-[20px] sm:leading-[22px] text-[#767e92] text-[16px] sm:text-[20px] text-center tracking-[-0.4px] max-w-[323px]">

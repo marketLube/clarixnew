@@ -56,7 +56,7 @@ export default function ReviewSection({ formData, setFormData }: ReviewSectionPr
         <div className="flex flex-col gap-6 md:gap-[24px] w-full">
             {/* Overall Rating */}
             <div className="flex flex-col gap-2 md:gap-[12px]">
-                <h3 className="font-helvetica font-medium text-lg md:text-[20px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                <h3 className="font-poppins font-medium text-lg md:text-[20px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                     Overall Rating
                 </h3>
                 {renderStars(formData.overallRating, (val) => handleRatingChange('overall', val), 24)}
@@ -64,7 +64,7 @@ export default function ReviewSection({ formData, setFormData }: ReviewSectionPr
 
             {/* Category Ratings */}
             <div className="flex flex-col gap-2 md:gap-[12px]">
-                <h3 className="font-helvetica font-medium text-lg md:text-[20px] leading-[24px] tracking-[-0.2px] text-[#101828]">
+                <h3 className="font-poppins font-medium text-lg md:text-[20px] leading-[24px] tracking-[-0.2px] text-[#101828]">
                     Category Ratings
                 </h3>
                 <div className="flex flex-wrap gap-x-6 md:gap-x-[40px] gap-y-4 md:gap-y-[16px]">
@@ -76,7 +76,7 @@ export default function ReviewSection({ formData, setFormData }: ReviewSectionPr
                         { key: 'campusLife', label: 'Campus Life' },
                     ].map((cat) => (
                         <div key={cat.key} className="flex flex-col gap-1 md:gap-[8px]">
-                            <span className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                            <span className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                                 {cat.label}
                             </span>
                             {renderStars(
@@ -91,7 +91,7 @@ export default function ReviewSection({ formData, setFormData }: ReviewSectionPr
 
             {/* Review Title */}
             <div className="flex flex-col gap-2 md:gap-[12px]">
-                <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                     Review Title
                 </label>
                 <input
@@ -105,7 +105,7 @@ export default function ReviewSection({ formData, setFormData }: ReviewSectionPr
 
             {/* Review Description */}
             <div className="flex flex-col gap-2 md:gap-[12px]">
-                <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                     Review Description
                 </label>
                 <textarea

@@ -104,21 +104,14 @@ export default function ExamsPage() {
 
   return (
     <section className="py-6 md:py-10 min-h-screen">
-      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
-        <head>
-          {(hasActiveFilters || currentPage > 1) && (
-            <meta name="robots" content="noindex,follow" />
-          )}
-          {paginationLinks}
-        </head>
-      )}
+      {/* SEO meta handled via layout metadata */}
       <ContentWrapper className="flex flex-col gap-6 md:gap-10">
         <Breadcrumb items={[{ label: "Exams" }]} />
 
         {/* Header Section */}
         {heroSection?.enabled !== false && (
           <div className="flex flex-col gap-4 md:gap-[30px] items-start">
-            <h1 className="font-helvetica font-medium leading-[30px] md:leading-[40px] lg:leading-[48px] text-[#162447] text-[20px] md:text-[32px] lg:text-[48px] tracking-[-0.96px] max-w-[638px]">
+            <h1 className="font-poppins font-medium leading-[30px] md:leading-[40px] lg:leading-[48px] text-[#162447] text-[20px] md:text-[32px] lg:text-[48px] tracking-[-0.96px] max-w-[638px]">
               {title}
             </h1>
             <div className="font-poppins leading-5 text-[#767e92] text-[13px] md:text-[16px] lg:text-[16px] max-w-[567px]">
@@ -132,7 +125,7 @@ export default function ExamsPage() {
         {/* Filter Section */}
         <div className="mt-8 flex flex-col gap-4">
           <div className="flex flex-wrap items-center gap-4">
-            <div className="flex items-center gap-2 text-[#162447] font-helvetica font-medium">
+            <div className="flex items-center gap-2 text-[#162447] font-poppins font-medium">
               <Filter className="w-5 h-5" />
               <span>Filters</span>
             </div>
@@ -142,7 +135,7 @@ export default function ExamsPage() {
               <button
                 type="button"
                 onClick={() => setIsStreamDropdownOpen(!isStreamDropdownOpen)}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-helvetica hover:border-[#513392] transition-colors shadow-sm"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins hover:border-[#513392] transition-colors shadow-sm"
               >
                 <span>{stream ? `Stream: ${cmsStreams.find((s) => s._id === stream)?.name || stream}` : "Stream"}</span>
                 <ChevronDown className={`w-4 h-4 transition-transform ${isStreamDropdownOpen ? "rotate-180" : ""}`} />
@@ -165,7 +158,7 @@ export default function ExamsPage() {
                           handleFilterUpdate("stream", s._id);
                           setIsStreamDropdownOpen(false);
                         }}
-                        className="w-full text-left px-4 py-2.5 text-sm font-helvetica flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
+                        className="w-full text-left px-4 py-2.5 text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
                       >
                         <span className={stream === s._id ? "text-[#513392] font-medium" : "text-[#162447]"}>
                           {s.name}
@@ -182,8 +175,8 @@ export default function ExamsPage() {
           {/* Active Filters */}
           {stream && (
             <div className="flex flex-wrap items-center gap-2 mt-2">
-              <span className="text-sm font-helvetica text-[#767e92] mr-2">Active:</span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
+              <span className="text-sm font-poppins text-[#767e92] mr-2">Active:</span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
                 Stream: {cmsStreams.find((s) => s._id === stream)?.name || stream}
                 <button
                   onClick={() => handleFilterUpdate("stream", null)}
@@ -195,7 +188,7 @@ export default function ExamsPage() {
               </span>
               <button
                 onClick={handleClearFilters}
-                className="text-sm font-helvetica text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"
+                className="text-sm font-poppins text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"
               >
                 Clear All
               </button>

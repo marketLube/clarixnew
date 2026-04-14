@@ -73,7 +73,7 @@ export default function CourseCardDetailed({
       <div className="flex items-start justify-between mb-[6px]">
         {/* Title and Meta Info */}
         <div className="flex flex-col items-start flex-1 pr-0 md:pr-4 gap-1 md:gap-[5px] ">
-          <h3 className="font-helvetica font-medium text-[#513392] text-[15px] md:text-[20px] m-0 p-0 leading-tight">
+          <h3 className="font-poppins font-medium text-[#513392] text-[15px] md:text-[20px] m-0 p-0 leading-tight">
             {title}
           </h3>
           <div className="flex font-poppins gap-2 md:gap-4 items-center flex-wrap leading-tight text-[#767e92] md:leading-[20px] text-[11px] md:text-[14px]">
@@ -190,7 +190,7 @@ export default function CourseCardDetailed({
             <p className="font-poppins leading-tight md:leading-5 text-[#767e92] text-[11px] md:text-[16px]">
               Colleges :
             </p>
-            <p className="font-helvetica font-medium leading-tight md:leading-[28px] text-[#513392] text-[13px] md:text-[21px] tracking-[-0.48px]">
+            <p className="font-poppins font-medium leading-tight md:leading-[28px] text-[#513392] text-[13px] md:text-[21px] tracking-[-0.48px]">
               {collegeCount.toLocaleString()}
             </p>
           </div>

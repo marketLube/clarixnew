@@ -91,10 +91,10 @@ export default function CollegeCard({
             )}
           </div>
           <div className="flex flex-col">
-            <p className="font-helvetica text-[16px] leading-[20px] font-medium tracking-[-0.32px] text-white">
+            <p className="font-poppins text-[16px] leading-[20px] font-medium tracking-[-0.32px] text-white">
               {college?.name}
             </p>
-            <p className="flex items-center gap-1 font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[rgba(255,255,255,0.7)]">
+            <p className="flex items-center gap-1 font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[rgba(255,255,255,0.7)]">
               <LocationIcon width={12} height={12} />
               <span>{college?.city}{college?.city && college?.state ? ", " : ""}{college?.state}</span>
             </p>
@@ -106,10 +106,10 @@ export default function CollegeCard({
       {/* Fees + rating */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex flex-col gap-2">
-          <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
+          <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
             Annual Fees
           </p>
-          <p className="font-helvetica text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
+          <p className="font-poppins text-[20px] leading-[28px] tracking-[-0.4px] text-[#162447]">
             {formatFeeRange(college?.annualFeesRange)}
           </p>
         </div>
@@ -120,7 +120,7 @@ export default function CollegeCard({
             <span className="inline-flex size-[16px] items-center justify-center">
               <StarIcon width={16} height={16} />
             </span>
-            <p className="font-helvetica text-[12px] leading-[14px] font-medium tracking-[-0.24px] text-[#162447]">
+            <p className="font-poppins text-[12px] leading-[14px] font-medium tracking-[-0.24px] text-[#162447]">
               {college?.rating?.toFixed(1)}
             </p>
           </div>
@@ -130,14 +130,14 @@ export default function CollegeCard({
 
       {/* Key courses */}
       <div className="mb-4">
-        <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92] mb-2">
+        <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92] mb-2">
           Key Courses
         </p>
         <div className="flex flex-nowrap gap-[6px] overflow-hidden">
           {college?.courses?.slice(0, 2)?.map((course: any) => (
             <span
               key={course._id || course.name}
-              className="flex-shrink-0 inline-flex items-center justify-start rounded-full bg-[#f6f7ff] px-[10px] py-[6px] font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#162447] max-w-[150px] truncate text-left"
+              className="flex-shrink-0 inline-flex items-center justify-start rounded-full bg-[#f6f7ff] px-[10px] py-[6px] font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#162447] max-w-[150px] truncate text-left"
               title={course?.name || course}
             >
               <span className="truncate">{course?.name || course}</span>
@@ -148,23 +148,23 @@ export default function CollegeCard({
 
       {/* Placements card */}
       <div className="bg-[#f6f7ff] rounded-[10px] px-[12px] py-[10px] mb-4">
-        <p className="font-helvetica text-[14px] leading-[15px] tracking-[-0.28px] text-[#513392] mb-3">
+        <p className="font-poppins text-[14px] leading-[15px] tracking-[-0.28px] text-[#513392] mb-3">
           Placements
         </p>
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-col gap-[4px]">
-            <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
+            <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
               Avg Package
             </p>
-            <p className="font-helvetica text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
+            <p className="font-poppins text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
               {formatSalaryLPA(college?.averageSalary)}
             </p>
           </div>
           <div className="flex flex-col gap-[4px]">
-            <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
+            <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
               Highest Package
             </p>
-            <p className="font-helvetica text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
+            <p className="font-poppins text-[16px] leading-[20px] tracking-[-0.32px] text-[#162447]">
               {formatSalaryLPA(college?.highestSalary)}
             </p>
           </div>
@@ -173,7 +173,7 @@ export default function CollegeCard({
 
       {/* Facilities */}
       <div className="mb-5">
-        <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92] mb-2">
+        <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92] mb-2">
           Facilities
         </p>
         <div className="flex flex-wrap items-center gap-[12px] text-center">
@@ -202,7 +202,7 @@ export default function CollegeCard({
                   )}
                 </span>
               </div>
-              <p className="font-helvetica text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
+              <p className="font-poppins text-[12px] leading-[15px] tracking-[-0.24px] text-[#767e92]">
                 {facility}
               </p>
             </div>

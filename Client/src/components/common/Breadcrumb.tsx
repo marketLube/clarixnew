@@ -35,7 +35,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label="Breadcrumb" className="font-helvetica text-[13px] md:text-[14px] text-[#767e92]">
+      <nav aria-label="Breadcrumb" className="font-poppins text-[13px] md:text-[14px] text-[#767e92]">
         <ol className="flex flex-wrap items-center gap-1">
           {allItems.map((item, index) => {
             const isLast = index === allItems.length - 1;

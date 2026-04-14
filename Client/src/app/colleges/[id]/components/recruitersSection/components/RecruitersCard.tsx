@@ -24,7 +24,7 @@ export default function RecruitersCard({
       <div className="flex flex-col gap-5 items-center">
         <div className="flex flex-col gap-[14px] items-center text-center max-w-[183px]">
           <div className="flex flex-col gap-3 items-center">
-            <h3 className="font-helvetica font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--text-headline)]">
+            <h3 className="font-poppins font-medium text-[24px] leading-[28px] tracking-[-0.48px] text-[var(--text-headline)]">
               {companyName}
             </h3>
             <p className="font-poppins text-[16px] leading-[20px] text-[var(--text-sub)] max-w-[164px]">

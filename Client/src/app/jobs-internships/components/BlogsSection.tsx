@@ -29,7 +29,7 @@ export default function BlogsSection({
             Blogs
           </p>
         </div>
-        <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[24px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
+        <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[24px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
           Explore Education Trends, Careers & College Life
         </h2>
         <p className=" text-[14px] md:text-[16px] leading-[20px] text-[#767e92] max-w-[472px]">

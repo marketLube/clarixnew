@@ -65,7 +65,7 @@ export default function ExamCard({
           />
         </div>
         <div className="flex flex-col gap-[2px]">
-          <p className="font-helvetica text-[16px] leading-[20px] font-medium tracking-[-0.32px] text-[#162447]">
+          <p className="font-poppins text-[16px] leading-[20px] font-medium tracking-[-0.32px] text-[#162447]">
             {title}
           </p>
           <p className="whitespace-pre-line text-[11px] leading-[14px] text-[#767e92]">

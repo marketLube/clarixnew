@@ -16,7 +16,7 @@ export default function OurPeopleSection() {
     <section className="bg-white py-8 md:py-20">
       <ContentWrapper className="flex flex-col gap-6 md:gap-[60px]">
         <div className="flex flex-col gap-4 md:gap-[30px] max-w-[742px]">
-          <h2 className="font-helvetica font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[375px]">
+          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[375px]">
             {secondSection?.primaryHeadline}
           </h2>
           <div className="font-poppins leading-[20px] text-[#767e92] text-[14px] md:text-[16px] space-y-4">

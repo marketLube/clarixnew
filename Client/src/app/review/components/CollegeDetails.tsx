@@ -22,7 +22,7 @@ export default function CollegeDetails({ formData, setFormData }: CollegeDetails
             <div className="flex flex-col md:flex-row gap-4 md:gap-[16px] w-full">
                 {/* Student Name */}
                 <div className="flex flex-col gap-2 md:gap-[8px] w-full md:w-1/2">
-                    <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                    <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                         Student Name
                     </label>
                     <Input
@@ -36,7 +36,7 @@ export default function CollegeDetails({ formData, setFormData }: CollegeDetails
 
                 {/* Graduation Year */}
                 <div className="flex flex-col gap-2 md:gap-[8px] w-full md:w-1/2">
-                    <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                    <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                         Graduation Year
                     </label>
                     <Input
@@ -53,7 +53,7 @@ export default function CollegeDetails({ formData, setFormData }: CollegeDetails
             <div className="flex flex-col md:flex-row gap-4 md:gap-[16px] w-full">
                 {/* College Name */}
                 <div className="flex flex-col gap-2 md:gap-[8px] w-full md:w-1/2">
-                    <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                    <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                         College Name
                     </label>
                     <Input
@@ -67,7 +67,7 @@ export default function CollegeDetails({ formData, setFormData }: CollegeDetails
 
                 {/* Course */}
                 <div className="flex flex-col gap-2 md:gap-[8px] w-full md:w-1/2">
-                    <label className="font-helvetica font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
+                    <label className="font-poppins font-medium text-sm md:text-[16px] leading-[24px] tracking-[-0.2px] text-[#162447]">
                         Course
                     </label>
                     <Input

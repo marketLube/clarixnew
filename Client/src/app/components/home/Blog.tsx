@@ -34,7 +34,7 @@ export default function Blog() {
               Blogs
             </p>
           </div>
-          <h2 className="font-helvetica text-[22px] leading-[28px] tracking-[-0.02em] text-(--text-headline) md:text-[40px] md:leading-[46px] lg:text-[48px] lg:leading-[48px]">
+          <h2 className="font-poppins text-[22px] leading-[28px] tracking-[-0.02em] text-(--text-headline) md:text-[40px] md:leading-[46px] lg:text-[48px] lg:leading-[48px]">
             {title}
           </h2>
           <p className="font-poppins text-base leading-5 text-text-sub md:max-w-[472px]">
