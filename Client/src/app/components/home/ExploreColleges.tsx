@@ -130,20 +130,11 @@ export default function ExploreColleges() {
                 ))}
               </div>
 
-              {/* Mobile Scrolling View (1 Row if <= 2 cards, 2 Rows if > 2 cards) */}
-              <div
-                ref={mobileScrollRef}
-                onWheel={handleWheel}
-                className="md:hidden -mx-4 px-4 overflow-x-auto scrollbar-hide pb-6"
-                style={{ WebkitOverflowScrolling: "touch" }}
-              >
-                <div className={`grid ${colleges.length <= 2 ? "grid-rows-1" : "grid-rows-2"} grid-flow-col gap-3 w-max`}>
-                  {colleges.map((college) => (
-                    <div key={college._id} className="w-[150px] h-full">
-                      <CompactCollegeCard college={college} />
-                    </div>
-                  ))}
-                </div>
+              {/* Mobile Grid View — 2 columns, centered */}
+              <div className="md:hidden grid grid-cols-2 gap-3 w-full">
+                {colleges.slice(0, 6).map((college) => (
+                  <CompactCollegeCard college={college} key={college._id} />
+                ))}
               </div>
             </>
           ) : (
