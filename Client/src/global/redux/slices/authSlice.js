@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit'; ''
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isLoggedIn: (typeof window !== "undefined" && localStorage.getItem("ClientToken") === "true"),
+  isLoggedIn: false,
   user: null,
 };
 
