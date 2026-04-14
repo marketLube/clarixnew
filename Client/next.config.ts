@@ -10,6 +10,19 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
   },
+  {
+    key: "Content-Security-Policy",
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+      "style-src 'self' 'unsafe-inline' https:",
+      "img-src 'self' data: blob: https://images.unsplash.com https://upload.wikimedia.org https://*.wikimedia.org https://*.wikipedia.org https://campusways.com https://*.campusways.com https://xalesassets.sgp1.digitaloceanspaces.com https://res.cloudinary.com https://ui-avatars.com https://*.googleusercontent.com",
+      "font-src 'self' https: data:",
+      "connect-src 'self' https://api.clarixeducation.com https://*.clarixeducation.com http://localhost:8000 ws://localhost:3000 wss://localhost:3000",
+      "frame-src 'self'",
+      "object-src 'none'",
+    ].join("; "),
+  },
 ];
 
 const cacheHeaders = [

@@ -12,7 +12,48 @@ import { notFoundHandler, errorHandler } from "../middlewares/error.middleware.j
 export const createExpressApp = (): Application => {
   const app = express();
 
-  app.use(helmet());
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"],
+          scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+          styleSrc: ["'self'", "'unsafe-inline'", "https:"],
+          imgSrc: [
+            "'self'",
+            "data:",
+            "blob:",
+            "https://images.unsplash.com",
+            "https://upload.wikimedia.org",
+            "https://*.wikimedia.org",
+            "https://*.wikipedia.org",
+            "https://campusways.com",
+            "https://*.campusways.com",
+            "https://xalesassets.sgp1.digitaloceanspaces.com",
+            "https://res.cloudinary.com",
+            "https://ui-avatars.com",
+            "https://api.duckduckgo.com",
+            "https://*.googleusercontent.com",
+          ],
+          connectSrc: [
+            "'self'",
+            "https://api.clarixeducation.com",
+            "https://*.clarixeducation.com",
+            "http://localhost:8000",
+            "http://localhost:3000",
+            "ws://localhost:3000",
+            "wss://localhost:3000",
+          ],
+          fontSrc: ["'self'", "https:", "data:"],
+          objectSrc: ["'none'"],
+          mediaSrc: ["'self'"],
+          frameSrc: ["'self'"],
+        },
+      },
+      crossOriginEmbedderPolicy: false,
+      crossOriginResourcePolicy: { policy: "cross-origin" },
+    })
+  );
 
   app.use(
     cors({
