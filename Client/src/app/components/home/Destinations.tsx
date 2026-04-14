@@ -234,7 +234,7 @@ export default function Destinations() {
                                             router.push(`/colleges?country=${encodeURIComponent(city.name)}`);
                                         }
                                     }}
-                                    className="flex-shrink-0 w-[27%] sm:w-[calc(33.333%-16px)] lg:w-[calc(16.666%-20px)] flex flex-col items-center gap-2 sm:gap-4 group cursor-pointer"
+                                    className="flex-shrink-0 w-[30%] sm:w-[calc(33.333%-16px)] lg:w-[calc(16.666%-20px)] flex flex-col items-center gap-1.5 sm:gap-4 group cursor-pointer"
                                 >
                                     <div className="relative w-full aspect-[172/150] rounded-[20px] overflow-hidden shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300 group-hover:shadow-[0px_8px_24px_rgba(0,0,0,0.15)]">
                                         <Image
@@ -245,7 +245,7 @@ export default function Destinations() {
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/10 group-hover:from-black/0 group-hover:to-black/5 transition-all duration-300" />
                                     </div>
-                                    <p className="font-poppins font-medium text-[#162447] text-[14px] sm:text-[20px] leading-[20px] sm:leading-[28px] tracking-[-0.4px] text-center">
+                                    <p className="font-poppins font-medium text-[#162447] text-[12px] sm:text-[16px] md:text-[20px] leading-[16px] sm:leading-[24px] md:leading-[28px] tracking-[-0.3px] text-center">
                                         {city.name}
                                     </p>
                                 </div>

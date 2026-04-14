@@ -230,7 +230,7 @@ function CollegesPageContent() {
             </button>
 
             {isCityDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
+              <div className="absolute top-full left-0 mt-2 w-[calc(100vw-32px)] sm:w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
                 <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
                   Select a City
                 </div>
@@ -272,7 +272,7 @@ function CollegesPageContent() {
             </button>
 
             {isStreamDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
+              <div className="absolute top-full left-0 mt-2 w-[calc(100vw-32px)] sm:w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
                 <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
                   Select a Stream
                 </div>
@@ -435,7 +435,7 @@ function CollegesPageContent() {
                   {selectedColleges.map((college) => (
                     <div
                       key={college._id}
-                      className="flex items-center justify-between gap-4 rounded-2xl bg-[#f7f8ff] px-4 py-3 shadow-sm min-w-[260px]"
+                      className="flex items-center justify-between gap-3 rounded-2xl bg-[#f7f8ff] px-3 py-2 md:px-4 md:py-3 shadow-sm min-w-[180px] sm:min-w-[260px]"
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-[40px] h-[40px] rounded-xl overflow-hidden bg-white shadow-[0_4px_10px_rgba(0,0,0,0.06)] flex items-center justify-center">
@@ -481,7 +481,7 @@ function CollegesPageContent() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center justify-between gap-3 sm:gap-6">
                 <button
                   type="button"
                   onClick={handleClearAll}

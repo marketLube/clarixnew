@@ -75,7 +75,7 @@ export default function HeroSection({ college }: any) {
   return (
     <div
       style={{ backgroundImage: `url('${college?.campusImages?.[0] || college?.logo || "/college-details-bg.png"}')` }}
-      className="w-full min-h-[26rem] pt-[100px] pb-6 sm:pt-0 sm:pb-0 sm:min-h-0 sm:h-[28rem] lg:h-[35rem] bg-cover bg-center relative flex items-end sm:items-center justify-center"
+      className="w-full min-h-[20rem] pt-[80px] pb-4 sm:pt-0 sm:pb-0 sm:min-h-0 sm:h-[28rem] lg:h-[35rem] bg-cover bg-center relative flex items-end sm:items-center justify-center"
     >
       <div className="bg-white/90 backdrop-blur-sm shadow-[0_10px_40px_rgba(0,0,0,0.12)] relative sm:absolute mt-auto sm:mt-0 sm:bottom-[-88px] sm:left-1/2 sm:-translate-x-1/2 rounded-2xl px-4 py-5 sm:px-5 sm:py-4 w-[92%] max-w-[960px] z-10 transition-all">
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">

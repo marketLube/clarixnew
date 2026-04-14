@@ -144,7 +144,7 @@ export default function ExamsPage() {
               </button>
 
               {isStreamDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-20 py-2 custom-scrollbar">
+                <div className="absolute top-full left-0 mt-2 w-[calc(100vw-32px)] sm:w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-20 py-2 custom-scrollbar">
                   <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
                     Select a Stream
                   </div>

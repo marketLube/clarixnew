@@ -202,7 +202,7 @@ export default function Hero() {
           layout
           initial={false}
           animate={isSearchOpen ? "open" : "closed"}
-          className={`${isSearchOpen ? "flex px-4 box-border" : "hidden xl:flex"} flex-col absolute top-3 xl:top-6 left-1/2 -translate-x-1/2 w-[94%] xl:w-[45%] max-w-[650px] z-50 overflow-hidden`}
+          className={`${isSearchOpen ? "flex px-4 box-border" : "hidden xl:flex"} flex-col absolute top-3 xl:top-6 left-1/2 -translate-x-1/2 w-[calc(100%-24px)] xl:w-[45%] max-w-[650px] z-50 overflow-hidden`}
           variants={{
             open: {
               backgroundColor: "#ffffff",
@@ -564,7 +564,7 @@ export default function Hero() {
 
               {/* Floating Tabs Bar */}
               <div className="bg-white border-[6px] border-white/24 rounded-[16px] mb-6 flex items-center justify-center w-full max-w-[800px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] py-1 px-1">
-                <div className="bg-[#F6F7FF] rounded-[16px] md:rounded-[30px] p-1.5 md:p-2 grid grid-cols-3 md:flex items-center gap-2 md:gap-1 w-full md:w-auto md:overflow-x-auto md:no-scrollbar md:max-w-full">
+                <div className="bg-[#F6F7FF] rounded-[16px] md:rounded-[30px] p-1 md:p-2 grid grid-cols-3 md:flex items-center gap-1.5 md:gap-1 w-full md:w-auto md:overflow-x-auto md:no-scrollbar md:max-w-full">
                   {tabs.map((tab) => (
                     <Link
                       key={tab.name}
@@ -588,7 +588,7 @@ export default function Hero() {
               <Link
                 href={primaryCtaLink || "/colleges"}
                 prefetch={true}
-                className="group flex items-center gap-2 md:gap-4 bg-[#513392] hover:bg-[#412876] text-white rounded-[40px] px-2 py-2 md:px-6 md:py-3 transition-all shadow-[0_8px_24px_rgba(81,51,146,0.3)] hover:shadow-[0_12px_32px_rgba(81,51,146,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="group flex items-center gap-2 md:gap-4 bg-[#513392] hover:bg-[#412876] text-white rounded-[40px] px-4 py-2.5 md:px-6 md:py-3 transition-all shadow-[0_8px_24px_rgba(81,51,146,0.3)] hover:shadow-[0_12px_32px_rgba(81,51,146,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 <span className="text-[14px] md:text-[16px] font-normal font-poppins">{primaryCtaText || "Explore Colleges"}</span>
                 <div className="bg-white p-1 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-1">
