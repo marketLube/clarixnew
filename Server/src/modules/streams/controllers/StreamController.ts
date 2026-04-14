@@ -2,6 +2,8 @@ import type { Request, Response } from 'express';
 import { asyncHandler, ApiResponse, ApiError } from '../../../utils/index.js';
 import { Stream } from '../model/streamModel.js';
 import { Exam } from '../../exams/model/examModel.js';
+import { Course } from '../../courses/models/courseModel.js';
+import { College } from '../../colleges/models/collegeModel.js';
 
 const listStreams = asyncHandler(async (req: Request, res: Response) => {
     const {
@@ -44,10 +46,14 @@ const listStreams = asyncHandler(async (req: Request, res: Response) => {
         Stream.countDocuments(filter),
     ]);
 
-    // Enhance streams with current exam counts
+    // Enhance streams with current exam and college counts
     const streams = await Promise.all(streamsData.map(async (stream: any) => {
         const examsCount = await Exam.countDocuments({ stream: stream._id });
-        return { ...stream, examsCount };
+        const courseIds = await Course.find({ stream: stream._id }).distinct('_id');
+        const collegesCount = courseIds.length > 0
+            ? await College.countDocuments({ courses: { $in: courseIds } })
+            : 0;
+        return { ...stream, examsCount, collegesCount };
     }));
 
     return ApiResponse.success(

@@ -171,19 +171,19 @@ export default function StudentStories() {
     <section className="relative w-full overflow-hidden py-10 sm:py-20 bg-[#F6F7FF]">
       <ContentWrapper>
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 md:mb-12 gap-4">
-          <div className="max-w-2xl">
+        <div className="mb-8 md:mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
             <SectionHeading title="What Students Say" />
-            <p className="mt-2 font-helvetica text-[14px] md:text-[16px] text-[#5D6677]">
-              Honest reviews from real students across India — helping you make confident college choices.
-            </p>
+            <Link href="/review" className="shrink-0">
+              <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-helvetica text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
+                Write a Review
+                <PenLine className="h-4 w-4" />
+              </button>
+            </Link>
           </div>
-          <Link href="/review">
-            <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-helvetica text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
-              Write a Review
-              <PenLine className="h-4 w-4" />
-            </button>
-          </Link>
+          <p className="font-helvetica text-[14px] md:text-[16px] text-[#5D6677] max-w-2xl">
+            Honest reviews from real students across India — helping you make confident college choices.
+          </p>
         </div>
 
         {/* Content */}
