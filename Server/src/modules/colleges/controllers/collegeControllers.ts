@@ -20,28 +20,28 @@ const parseSingleFee = (str: string): number => {
     // Check for "Lakh" or "L" multiplier
     const lakhMatch = cleaned.match(/([\d,.]+)\s*(?:lakh|lac|l)\b/i);
     if (lakhMatch) {
-        const num = parseFloat(lakhMatch[1].replace(/,/g, ''));
+        const num = parseFloat(lakhMatch[1]!.replace(/,/g, ''));
         return isNaN(num) ? NaN : num * 100000;
     }
 
     // Check for "Crore" or "Cr" multiplier
     const croreMatch = cleaned.match(/([\d,.]+)\s*(?:crore|cr)\b/i);
     if (croreMatch) {
-        const num = parseFloat(croreMatch[1].replace(/,/g, ''));
+        const num = parseFloat(croreMatch[1]!.replace(/,/g, ''));
         return isNaN(num) ? NaN : num * 10000000;
     }
 
     // Check for "K" multiplier
     const kMatch = cleaned.match(/([\d,.]+)\s*k\b/i);
     if (kMatch) {
-        const num = parseFloat(kMatch[1].replace(/,/g, ''));
+        const num = parseFloat(kMatch[1]!.replace(/,/g, ''));
         return isNaN(num) ? NaN : num * 1000;
     }
 
     // Plain number with commas: "₹2,09,550" or "₹50,000"
     const numMatch = cleaned.match(/([\d,]+(?:\.\d+)?)/);
     if (numMatch) {
-        const num = parseFloat(numMatch[1].replace(/,/g, ''));
+        const num = parseFloat(numMatch[1]!.replace(/,/g, ''));
         return isNaN(num) ? NaN : num;
     }
 
@@ -60,14 +60,14 @@ const extractFeeValues = (feeStr: string): number[] => {
     // Check for range pattern like "₹2-15 Lakh" (numbers separated by dash with a shared unit)
     const rangeWithUnitMatch = feeStr.match(/([\d,.]+)\s*[-–]\s*([\d,.]+)\s*(lakh|lac|l|crore|cr|k)/i);
     if (rangeWithUnitMatch) {
-        const unit = rangeWithUnitMatch[3].toLowerCase();
+        const unit = rangeWithUnitMatch[3]!.toLowerCase();
         let multiplier = 1;
         if (/^(lakh|lac|l)$/i.test(unit)) multiplier = 100000;
         else if (/^(crore|cr)$/i.test(unit)) multiplier = 10000000;
         else if (/^k$/i.test(unit)) multiplier = 1000;
 
-        const low = parseFloat(rangeWithUnitMatch[1].replace(/,/g, '')) * multiplier;
-        const high = parseFloat(rangeWithUnitMatch[2].replace(/,/g, '')) * multiplier;
+        const low = parseFloat(rangeWithUnitMatch[1]!.replace(/,/g, '')) * multiplier;
+        const high = parseFloat(rangeWithUnitMatch[2]!.replace(/,/g, '')) * multiplier;
         const values: number[] = [];
         if (!isNaN(low)) values.push(low);
         if (!isNaN(high)) values.push(high);
