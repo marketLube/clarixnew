@@ -39,13 +39,13 @@ export default function ContactLeftBody() {
   const email = footer?.email || "hello@clarixeducation.com";
 
   return (
-    <div className="w-full md:max-w-[24rem] space-y-3 md:space-y-6 self-start">
+    <div className="w-full md:max-w-[24rem] space-y-2 md:space-y-6 self-start">
       <SectionHeading title={title} />
-      <SectionDescription className="max-w-[426px]">
+      <SectionDescription className="max-w-[426px] text-[13px] md:text-base">
         {description}
       </SectionDescription>
 
-      <div className="flex flex-wrap gap-x-6 gap-y-3 md:flex-col md:gap-y-5">
+      <div className="grid grid-cols-3 gap-2 md:flex md:flex-col md:gap-y-5">
         {/* Office Locations */}
         <div className="flex items-start gap-2 md:gap-3">
           <div className="h-8 w-8 md:h-9 md:w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white shrink-0">

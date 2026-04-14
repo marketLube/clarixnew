@@ -108,9 +108,9 @@ export default function ContactRightBody() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full mx-auto space-y-3 md:space-y-4 bg-white p-3 md:p-4 rounded-lg"
+      className="w-full mx-auto space-y-2.5 md:space-y-4 bg-white p-3 md:p-4 rounded-lg"
     >
-      <GridWrapper colsDesktop={2}>
+      <GridWrapper colsDesktop={2} colsMobile={2} colsTablet={2} className="gap-2.5 md:gap-4">
         <FormField
           label="Student Name"
           required
@@ -261,7 +261,7 @@ export default function ContactRightBody() {
 
       <button
         type="submit"
-        className="w-full bg-[var(--color-primary)] text-white font-poppins text-[16px] leading-[20px] py-3 px-6 rounded-[12px] hover:bg-[var(--primary-hover)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)] cursor-pointer"
+        className="w-full bg-[var(--color-primary)] text-white font-poppins text-[14px] md:text-[16px] leading-[20px] py-2.5 md:py-3 px-6 rounded-[12px] hover:bg-[var(--primary-hover)] transition-colors focus:outline-none focus:ring-2 focus:ring-[var(--primary-light)] cursor-pointer"
       >
         Submit
       </button>
