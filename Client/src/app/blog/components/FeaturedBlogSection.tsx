@@ -55,12 +55,13 @@ export default function FeaturedBlogSection({
         {/* Newsletter Card */}
         {isNewsletterEnabled && newsletter && (
           <div className="border-[6px] md:border-[10px] border-[#d5c2ff] rounded-[20px] min-h-[200px] md:min-h-[250px] relative overflow-hidden shadow-[0px_0px_24px_0px_rgba(178,144,252,0.6)] bg-gradient-to-br from-[#8554ef] via-[#6b44c0] to-[#513392] flex flex-col justify-center px-5 py-6 md:px-[34px] md:py-0">
-            <Image
-              src={newsletter.image as string}
-              alt={newsletter.title as string}
-              fill
-              className="absolute inset-0 object-cover pointer-events-none"
-            />
+            {newsletter.image && (
+              <img
+                src={newsletter.image as string}
+                alt={newsletter.title as string || ""}
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+              />
+            )}
             <div className="flex flex-col gap-[22px] max-w-[430px] w-full relative z-10">
               <div className="flex flex-col gap-[8px] md:gap-[10px] text-white">
                 <h2 className="font-poppins font-medium leading-[24px] md:leading-[28px] text-[18px] md:text-[22px] tracking-[-0.48px] line-clamp-2">

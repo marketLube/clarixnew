@@ -25,13 +25,11 @@ export default function BlogContent({ content, imageUrl }: BlogContentProps) {
       {/* Image if provided */}
       {imageUrl && (
         <div className="relative w-full max-w-[930px] h-[320px] md:h-[550px] rounded-[20px] overflow-hidden">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src={imageUrl}
             alt="Blog article featured image"
-            fill
-            className="object-cover"
-            sizes="(max-width: 930px) 100vw, 930px"
-            priority
+            className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
       )}

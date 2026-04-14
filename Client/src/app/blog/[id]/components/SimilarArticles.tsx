@@ -69,11 +69,12 @@ export default function SimilarArticles({
             <div className="flex flex-col gap-[16px] p-[16px] pb-[34px]">
               {/* Image */}
               <div className="relative w-full h-[258px] rounded-[10px] overflow-hidden">
-                <Image
-                  src={article.imageUrl}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={article.imageUrl || "/dummyimg/blogcard.png"}
                   alt={article.title}
-                  fill
-                  className={undefined}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  loading="lazy"
                 />
               </div>
 
