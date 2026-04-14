@@ -23,6 +23,7 @@ export interface CampusLifeItem {
 
 export interface College {
     name?: string;
+    country?: string;
     state?: string;
     city?: string;
     type?: 'Public' | 'Private' | 'Government' | 'Deemed';
@@ -128,33 +129,32 @@ const collegeSchema = new Schema<College>(
     {
         //basic details
         name: { type: String, required: true, trim: true },
-        state: { type: String, required: true, trim: true },
-        city: { type: String, required: true, trim: true },
+        country: { type: String, default: 'India', trim: true },
+        state: { type: String, trim: true },
+        city: { type: String, trim: true },
         type: { type: String, required: true, enum: ['Public', 'Private', 'Government', 'Deemed'] },
         rating: { type: Number, default: 0, min: 0, max: 5 },
-        establishedYear: { type: Number, required: true, min: 0 },
+        establishedYear: { type: Number, min: 0 },
         accreditation: {
             type: [String],
-            required: true,
-            // enum: ['AACSB', 'EQUIS', 'AMBA', 'NIRF', 'Other'],
-        
+            default: [],
         },
-        logo: { type: String, required: true, trim: true },
-        brochure: { type: String, required: true, trim: true },
+        logo: { type: String, trim: true },
+        brochure: { type: String, trim: true, default: '' },
 
         //Overview
-        description: { type: String, required: true, trim: true },
-        university: { type: Schema.Types.ObjectId, ref: 'University', required: true },
-        students: { type: Number, required: true, min: 0 },
-        campusSize: { type: String, required: true, trim: true },
+        description: { type: String, trim: true },
+        university: { type: Schema.Types.ObjectId, ref: 'University' },
+        students: { type: Number, min: 0 },
+        campusSize: { type: String, trim: true },
 
         //placement details
-        averageSalary: { type: Number, required: true, min: 0 },
-        placementPercentage: { type: Number, required: true, min: 0, max: 100 },
-        highestSalary: { type: Number, required: true, min: 0 },
+        averageSalary: { type: Number, default: 0, min: 0 },
+        placementPercentage: { type: Number, default: 0, min: 0, max: 100 },
+        highestSalary: { type: Number, default: 0, min: 0 },
         placementTrends: { type: [placementTrendSchema], default: [] },
-        recruiters: { type: [Schema.Types.ObjectId], ref: 'Recruiter', required: true },
-        recruitersCount: { type: Number, required: true, min: 0 },
+        recruiters: { type: [Schema.Types.ObjectId], ref: 'Recruiter', default: [] },
+        recruitersCount: { type: Number, default: 0, min: 0 },
         studentsWithInternships: { type: Number, default: 0, min: 0, max: 100 },
         avgStipend: { type: Number, default: 0, min: 0 },
         ppoConversionRate: { type: Number, default: 0, min: 0, max: 100 },

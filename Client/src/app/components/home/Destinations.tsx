@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
@@ -50,34 +50,9 @@ export default function Destinations() {
     const router = useRouter();
 
     const [activeTab, setActiveTab] = useState<"india" | "abroad">("india");
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [cardsPerView, setCardsPerView] = useState(1);
-    const [stepSizePx, setStepSizePx] = useState(0);
-    const containerRef = useRef<HTMLDivElement | null>(null);
-    const cardRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        const GAP_PX = window.innerWidth < 640 ? 12 : 24;
-
-        const measureLayout = () => {
-            if (!containerRef.current || !cardRef.current) return;
-
-            const containerWidth = containerRef.current.offsetWidth;
-            const cardWidth = cardRef.current.offsetWidth;
-
-            const perView = Math.max(
-                1,
-                Math.floor((containerWidth + GAP_PX) / (cardWidth + GAP_PX))
-            );
-
-            setCardsPerView(perView);
-            setStepSizePx(cardWidth + GAP_PX);
-        };
-
-        measureLayout();
-        window.addEventListener("resize", measureLayout);
-        return () => window.removeEventListener("resize", measureLayout);
-    }, []);
+    const scrollRef = useRef<HTMLDivElement | null>(null);
+    const autoScrollRef = useRef<ReturnType<typeof setInterval> | null>(null);
+    const userInteractedRef = useRef(false);
 
     const indiaDestinations =
         (location?.items ?? [])
@@ -100,31 +75,89 @@ export default function Destinations() {
 
     const destinationsToShow = activeTab === "india" ? indiaDestinations : abroadToShow;
 
-    const maxIndex = Math.max(0, destinationsToShow.length - cardsPerView);
-
-    // Reset carousel when tab changes
+    // Reset scroll position when tab changes
     useEffect(() => {
-        setCurrentIndex(0);
+        if (scrollRef.current) {
+            scrollRef.current.scrollTo({ left: 0 });
+        }
+        userInteractedRef.current = false;
     }, [activeTab]);
 
-    // Auto-slide effect
+    // Get the width of one card + gap for scrolling by card
+    const getCardScrollAmount = useCallback(() => {
+        const el = scrollRef.current;
+        if (!el || !el.firstElementChild) return 300;
+        const card = el.firstElementChild as HTMLElement;
+        const gap = window.innerWidth < 640 ? 12 : 24;
+        return card.offsetWidth + gap;
+    }, []);
+
+    // Auto-scroll effect
     useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prev) => {
-                if (prev >= maxIndex) return 0;
-                return prev + 1;
-            });
-        }, 3000);
-        return () => clearInterval(timer);
-    }, [maxIndex]);
+        const startAutoScroll = () => {
+            if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+
+            autoScrollRef.current = setInterval(() => {
+                if (userInteractedRef.current) return;
+                const el = scrollRef.current;
+                if (!el) return;
+
+                const maxScroll = el.scrollWidth - el.clientWidth;
+                if (el.scrollLeft >= maxScroll - 10) {
+                    el.scrollTo({ left: 0, behavior: "smooth" });
+                } else {
+                    el.scrollBy({ left: getCardScrollAmount(), behavior: "smooth" });
+                }
+            }, 3000);
+        };
+
+        startAutoScroll();
+        return () => {
+            if (autoScrollRef.current) clearInterval(autoScrollRef.current);
+        };
+    }, [destinationsToShow.length, getCardScrollAmount]);
+
+    // Pause auto-scroll on user interaction, resume after 5s
+    const handleUserScroll = useCallback(() => {
+        userInteractedRef.current = true;
+        const timeout = setTimeout(() => {
+            userInteractedRef.current = false;
+        }, 5000);
+        return () => clearTimeout(timeout);
+    }, []);
 
     const handlePrev = () => {
-        setCurrentIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+        handleUserScroll();
+        scrollRef.current?.scrollBy({ left: -getCardScrollAmount(), behavior: "smooth" });
     };
 
     const handleNext = () => {
-        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+        handleUserScroll();
+        scrollRef.current?.scrollBy({ left: getCardScrollAmount(), behavior: "smooth" });
     };
+
+    // Translate vertical wheel events to horizontal scroll for trackpad support
+    const handleWheel = useCallback((e: React.WheelEvent<HTMLDivElement>) => {
+        const el = scrollRef.current;
+        if (!el) return;
+
+        // If the user is scrolling horizontally (trackpad horizontal swipe), let it happen natively
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+        // Only intercept vertical scroll if there is room to scroll horizontally
+        const maxScroll = el.scrollWidth - el.clientWidth;
+        if (maxScroll <= 0) return;
+
+        const atStart = el.scrollLeft <= 0;
+        const atEnd = el.scrollLeft >= maxScroll - 1;
+
+        // If scrolling down and at the end, or scrolling up and at the start, let page scroll normally
+        if ((e.deltaY > 0 && atEnd) || (e.deltaY < 0 && atStart)) return;
+
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+        handleUserScroll();
+    }, [handleUserScroll]);
 
     return (
         <section className="w-full bg-white py-4 sm:py-20">
@@ -181,42 +214,42 @@ export default function Destinations() {
                     <Loader containerClassName="h-[200px]" />
                 ) : (
                     <>
-                        {/* Carousel Container */}
-                        <div ref={containerRef} className="relative overflow-hidden">
-                            <div
-                                className="flex transition-transform duration-700 ease-out gap-3 sm:gap-6"
-                                style={{
-                                    transform: `translateX(-${currentIndex * stepSizePx}px)`,
-                                }}
-                            >
-                                {destinationsToShow.map((city, index) => (
-                                    <div
-                                        key={`${activeTab}-${city.name}-${index}`}
-                                        ref={index === 0 ? cardRef : undefined}
-                                        onClick={() =>
-                                            activeTab === "india"
-                                                ? router.push(`/colleges?city=${encodeURIComponent(city.name)}`)
-                                                : undefined
+                        {/* Carousel Container - native scroll for trackpad support */}
+                        <div
+                            ref={scrollRef}
+                            onWheel={handleWheel}
+                            onScroll={handleUserScroll}
+                            className="flex gap-3 sm:gap-6 overflow-x-auto scroll-smooth pb-4 scrollbar-hide"
+                            style={{
+                                WebkitOverflowScrolling: "touch",
+                            }}
+                        >
+                            {destinationsToShow.map((city, index) => (
+                                <div
+                                    key={`${activeTab}-${city.name}-${index}`}
+                                    onClick={() => {
+                                        if (activeTab === "india") {
+                                            router.push(`/colleges?city=${encodeURIComponent(city.name)}`);
+                                        } else {
+                                            router.push(`/colleges?country=${encodeURIComponent(city.name)}`);
                                         }
-                                        className={`flex-shrink-0 w-[27%] sm:w-[calc(33.333%-16px)] lg:w-[calc(16.666%-20px)] flex flex-col items-center gap-2 sm:gap-4 group ${
-                                            activeTab === "india" ? "cursor-pointer" : ""
-                                        }`}
-                                    >
-                                        <div className="relative w-full aspect-[172/150] rounded-[20px] overflow-hidden shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300 group-hover:shadow-[0px_8px_24px_rgba(0,0,0,0.15)]">
-                                            <Image
-                                                src={city.image}
-                                                alt={city.name}
-                                                fill
-                                                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/10 group-hover:from-black/0 group-hover:to-black/5 transition-all duration-300" />
-                                        </div>
-                                        <p className="font-helvetica font-medium text-[#162447] text-[14px] sm:text-[20px] leading-[20px] sm:leading-[28px] tracking-[-0.4px] text-center">
-                                            {city.name}
-                                        </p>
+                                    }}
+                                    className="flex-shrink-0 w-[27%] sm:w-[calc(33.333%-16px)] lg:w-[calc(16.666%-20px)] flex flex-col items-center gap-2 sm:gap-4 group cursor-pointer"
+                                >
+                                    <div className="relative w-full aspect-[172/150] rounded-[20px] overflow-hidden shadow-[0px_4px_12px_rgba(0,0,0,0.08)] transition-shadow duration-300 group-hover:shadow-[0px_8px_24px_rgba(0,0,0,0.15)]">
+                                        <Image
+                                            src={city.image}
+                                            alt={city.name}
+                                            fill
+                                            className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/10 group-hover:from-black/0 group-hover:to-black/5 transition-all duration-300" />
                                     </div>
-                                ))}
-                            </div>
+                                    <p className="font-helvetica font-medium text-[#162447] text-[14px] sm:text-[20px] leading-[20px] sm:leading-[28px] tracking-[-0.4px] text-center">
+                                        {city.name}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     </>
                 )}

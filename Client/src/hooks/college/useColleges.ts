@@ -10,8 +10,9 @@ export interface UseCollegesOptions {
   stream?: string;
   city?: string;
   location?: string;
-  sortBy?: string; // Add sortBy
-  order?: "asc" | "desc"; // Add order
+  country?: string;
+  sortBy?: string;
+  order?: "asc" | "desc";
 }
 
 interface CollegesApiResponse {
@@ -34,7 +35,8 @@ async function fetchColleges(opts: UseCollegesOptions): Promise<CollegesApiRespo
   if (opts.stream) params.stream = opts.stream;
   if (opts.city) params.city = opts.city;
   if (opts.location) params.location = opts.location;
-  if (opts.sortBy) params.sortBy = opts.sortBy; // Add to params
+  if (opts.country) params.country = opts.country;
+  if (opts.sortBy) params.sortBy = opts.sortBy;
   if (opts.order) params.order = opts.order;     // Add to params
 
   const { data } = await api.get("/college", { params });

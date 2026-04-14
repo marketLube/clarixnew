@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Suspense, useState, useEffect, useRef, useCallback, useMemo } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { X, GitCompareArrows, Filter, ChevronDown, Check } from "lucide-react";
 import CollegeCard from "@/components/common/Cards/collageCard";
@@ -9,32 +10,107 @@ import SectionDescription from "@/components/common/Section/SectionDescription";
 import SectionHeading from "@/components/common/Section/SectionHeading";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import GridWrapper from "@/components/Ui/GridWrapper";
-import Pagination from "@/components/Ui/Pagination";
-import FAQ from "@/app/components/common/FAQ";
 import { useSearchParams } from "next/navigation";
-import { useColleges } from "@/hooks/college/useColleges";
+import { useInfiniteColleges } from "@/hooks/college/useInfiniteColleges";
 import { useCmsCollegesPage } from "@/hooks/cms/useCmsCollegesPage";
 import { useCmsHomepage } from "@/hooks/cms/useCmsHomepage";
 import { useStreams } from "@/hooks/stream/useStreams";
 import { useSavedItems } from "@/hooks/useSavedItems";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
+
+/** Number of columns at each breakpoint — must match GridWrapper defaults. */
+const COLS_DESKTOP = 4;
+const COLS_TABLET = 2;
+const COLS_MOBILE = 1;
+
+/**
+ * Returns the number of grid columns currently visible, so we can trim
+ * the list to show only complete rows while more data is available.
+ */
+function useGridColumns() {
+  const [cols, setCols] = useState(COLS_DESKTOP);
+
+  useEffect(() => {
+    function update() {
+      const w = window.innerWidth;
+      if (w >= 1024) setCols(COLS_DESKTOP);
+      else if (w >= 768) setCols(COLS_TABLET);
+      else setCols(COLS_MOBILE);
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return cols;
+}
 
 export default function CollegesPage() {
+  return (
+    <Suspense fallback={<Loader fullPage label="Loading colleges..." />}>
+      <CollegesPageContent />
+    </Suspense>
+  );
+}
+
+function CollegesPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
 
   const stream = searchParams.get("stream") || undefined;
   const city = searchParams.get("city") || undefined;
+  const ownership = searchParams.get("ownership") || undefined;
+  const country = searchParams.get("country") || undefined;
 
-  const { colleges, pagination, isLoading, error } = useColleges({
-    page: currentPage,
-    limit: itemsPerPage,
-    stream: stream,
+  // When filters are active, add noindex to avoid duplicate content indexing
+  const hasActiveFilters = Boolean(stream || city || ownership || country);
+
+  const {
+    colleges,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+    error,
+  } = useInfiniteColleges({
+    limit: 12,
+    stream,
     location: city,
+    country,
+    type: ownership,
   });
 
+  const cols = useGridColumns();
+
+  // --- Intersection Observer for infinite scroll ---
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  // --- Trim to complete rows while more pages remain ---
+  const visibleColleges = useMemo(() => {
+    if (!hasNextPage) return colleges;
+    const completeRowCount = Math.floor(colleges.length / cols) * cols;
+    return completeRowCount > 0 ? colleges.slice(0, completeRowCount) : colleges;
+  }, [colleges, cols, hasNextPage]);
+
+  // --- CMS & filter data ---
   const { location, isLoading: isLocationLoading } = useCmsHomepage();
   const cmsCities = (location?.items ?? [])
     .filter((item) => (item?.isActive ?? true) && item?.name)
@@ -73,7 +149,6 @@ export default function CollegesPage() {
     } else {
       params.delete(key);
     }
-    params.set("page", "1");
     router.push(`/colleges?${params.toString()}`);
   };
 
@@ -81,31 +156,22 @@ export default function CollegesPage() {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("city");
     params.delete("stream");
-    params.set("page", "1");
+    params.delete("ownership");
+    params.delete("ranking");
     router.push(`/colleges?${params.toString()}`);
   };
 
-  const totalPages = pagination?.totalPages || 1;
-
+  // --- Compare logic ---
   const [selectedColleges, setSelectedColleges] = useState<any[]>([]);
 
-  const handleToggleCompare = (college: any) => {
+  const handleToggleCompare = useCallback((college: any) => {
     setSelectedColleges((prev) => {
       const exists = prev.find((item) => item._id === college._id);
-
-      // Remove if already selected
-      if (exists) {
-        return prev.filter((item) => item._id !== college._id);
-      }
-
-      // Limit to max 4 colleges
-      if (prev.length >= 4) {
-        return prev;
-      }
-
+      if (exists) return prev.filter((item) => item._id !== college._id);
+      if (prev.length >= 4) return prev;
       return [...prev, college];
     });
-  };
+  }, []);
 
   const handleRemoveFromBar = (id: string) => {
     setSelectedColleges((prev) => prev.filter((item) => item._id !== id));
@@ -121,26 +187,21 @@ export default function CollegesPage() {
 
   const { savedItems, toggleSavedItem } = useSavedItems();
 
-  const currentItems = colleges?.map((college) => (
-    <CollegeCard
-      key={college._id}
-      college={college}
-      onToggleCompare={handleToggleCompare}
-      isSelectedForCompare={selectedColleges.some(
-        (item) => item._id === college._id
-      )}
-      isFavorite={savedItems.colleges?.some((c: any) => c._id === college._id)}
-      onToggleFavorite={() => toggleSavedItem({ itemId: college._id, itemType: 'colleges' })}
-    />
-  ));
-
   const { heroSection } = useCmsCollegesPage();
 
   return (
+    <>
+      {hasActiveFilters && (
+        <head>
+          <meta name="robots" content="noindex,follow" />
+        </head>
+      )}
     <ContentWrapper>
+      <Breadcrumb items={[{ label: "Colleges" }]} />
+
       {heroSection?.enabled && (
         <section className="space-y-3 max-w-[38rem]  md:px-0">
-          <SectionHeading title={heroSection?.primaryHeadline || ""} />
+          <SectionHeading title={heroSection?.primaryHeadline || ""} as="h1" />
           <SectionDescription className="max-w-[35rem]">
             {heroSection?.subHeadline || ""}
           </SectionDescription>
@@ -148,7 +209,7 @@ export default function CollegesPage() {
       )}
 
       {/* Filter Section */}
-      <div className="mt-8 flex flex-col gap-4">
+      <div className="relative z-10 mt-8 flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 text-[#162447] font-helvetica font-medium">
             <Filter className="w-5 h-5" />
@@ -160,6 +221,7 @@ export default function CollegesPage() {
             <button
               type="button"
               onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
+              aria-expanded={isCityDropdownOpen}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-helvetica hover:border-[#513392] transition-colors shadow-sm"
             >
               <span>{city ? `City: ${city}` : "City"}</span>
@@ -167,7 +229,7 @@ export default function CollegesPage() {
             </button>
 
             {isCityDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-20 py-2 custom-scrollbar">
+              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
                 <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
                   Select a City
                 </div>
@@ -201,14 +263,15 @@ export default function CollegesPage() {
             <button
               type="button"
               onClick={() => setIsStreamDropdownOpen(!isStreamDropdownOpen)}
+              aria-expanded={isStreamDropdownOpen}
               className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-helvetica hover:border-[#513392] transition-colors shadow-sm"
             >
-              <span>{stream ? `Stream: ${cmsStreams.find((s) => s._id === stream)?.name || stream}` : "Stream"}</span>
+              <span>{stream ? `Stream: ${cmsStreams.find((s: any) => s._id === stream)?.name || stream}` : "Stream"}</span>
               <ChevronDown className={`w-4 h-4 transition-transform ${isStreamDropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {isStreamDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-20 py-2 custom-scrollbar">
+              <div className="absolute top-full left-0 mt-2 w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
                 <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
                   Select a Stream
                 </div>
@@ -217,7 +280,7 @@ export default function CollegesPage() {
                 ) : cmsStreams.length === 0 ? (
                   <div className="px-4 py-3 text-sm text-[#767e92]">No streams found</div>
                 ) : (
-                  cmsStreams.map((s) => (
+                  cmsStreams.map((s: any) => (
                     <button
                       key={s._id}
                       onClick={() => {
@@ -239,7 +302,7 @@ export default function CollegesPage() {
         </div>
 
         {/* Active Filters */}
-        {(city || stream) && (
+        {(city || stream || ownership) && (
           <div className="flex flex-wrap items-center gap-2 mt-2">
             <span className="text-sm font-helvetica text-[#767e92] mr-2">Active:</span>
 
@@ -258,11 +321,24 @@ export default function CollegesPage() {
 
             {stream && (
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
-                Stream: {cmsStreams.find((s) => s._id === stream)?.name || stream}
+                Stream: {cmsStreams.find((s: any) => s._id === stream)?.name || stream}
                 <button
                   onClick={() => handleFilterUpdate("stream", stream)}
                   className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
                   aria-label="Remove stream filter"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </span>
+            )}
+
+            {ownership && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-helvetica font-medium border border-[#e5d5ff] transition-all">
+                Type: {ownership}
+                <button
+                  onClick={() => handleFilterUpdate("ownership", ownership)}
+                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
+                  aria-label="Remove ownership filter"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -289,20 +365,35 @@ export default function CollegesPage() {
         <EmptyState onClearFilters={handleClearFilters} />
       ) : (
         <>
-          <GridWrapper colsDesktop={4} className="mt-8">
-            {currentItems}
+          <GridWrapper colsDesktop={COLS_DESKTOP} className="mt-8">
+            {visibleColleges.map((college) => (
+              <CollegeCard
+                key={college._id}
+                college={college}
+                onToggleCompare={handleToggleCompare}
+                isSelectedForCompare={selectedColleges.some(
+                  (item) => item._id === college._id
+                )}
+                isFavorite={savedItems.colleges?.some((c: any) => c._id === college._id)}
+                onToggleFavorite={() => toggleSavedItem({ itemId: college._id, itemType: 'colleges' })}
+              />
+            ))}
           </GridWrapper>
 
-          <div className="w-full flex justify-center mt-12 mb-8">
-            <Pagination
-              totalPages={totalPages}
-              currentPage={currentPage}
-              onPageChange={(page) => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-            />
-          </div>
+          {/* Sentinel element — triggers next page fetch when scrolled into view */}
+          <div ref={sentinelRef} className="w-full h-1" />
+
+          {isFetchingNextPage && (
+            <Loader label="Loading more colleges..." />
+          )}
+
+          {!hasNextPage && colleges.length > 0 && (
+            <p className="text-center text-sm text-[#767e92] font-helvetica py-8">
+              You have seen all {colleges.length} colleges.
+            </p>
+          )}
         </>
       )}
-      {/* <FAQ /> */}
 
       {/* Bottom compare bar */}
       {selectedColleges.length > 0 && (
@@ -321,11 +412,12 @@ export default function CollegesPage() {
                     >
                       <div className="flex items-center gap-3">
                         <div className="w-[40px] h-[40px] rounded-xl overflow-hidden bg-white shadow-[0_4px_10px_rgba(0,0,0,0.06)] flex items-center justify-center">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={college?.logo}
-                            alt={college?.name}
-                            className="w-full h-full object-contain"
+                          <Image
+                            src={college?.logo || "/minority.png"}
+                            alt={college?.name || "College logo"}
+                            width={40}
+                            height={40}
+                            className="object-contain"
                           />
                         </div>
                         <div className="flex flex-col">
@@ -389,7 +481,7 @@ export default function CollegesPage() {
           </div>
         </div>
       )}
-      <FAQ />
     </ContentWrapper>
+    </>
   );
 }

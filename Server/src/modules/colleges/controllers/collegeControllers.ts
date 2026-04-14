@@ -133,6 +133,7 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
         location,
         stream,
         category,
+        country,
         sortBy = 'createdAt',
         order = 'desc',
     } = req.query;
@@ -172,6 +173,10 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
 
     if (category) {
         matchFilter.category = category as string;
+    }
+
+    if (country) {
+        matchFilter.country = { $regex: `^${country}$`, $options: 'i' };
     }
 
     // --- Handle stream filter: find matching course IDs first ---
