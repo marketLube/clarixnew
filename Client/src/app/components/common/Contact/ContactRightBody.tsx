@@ -108,7 +108,7 @@ export default function ContactRightBody() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full  mx-auto space-y-4 bg-white p-4 rounded-lg"
+      className="w-full mx-auto space-y-3 md:space-y-4 bg-white p-3 md:p-4 rounded-lg"
     >
       <GridWrapper colsDesktop={2}>
         <FormField

@@ -11,15 +11,15 @@ type InfoItemProps = {
 
 function InfoItem({ icon, title, value }: InfoItemProps) {
   return (
-    <div className="flex items-start gap-3">
-      <div className="h-9 w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white text-sm p-[10px] md:p-0">
+    <div className="flex items-start gap-2 md:gap-3">
+      <div className="h-8 w-8 md:h-9 md:w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white shrink-0">
         {icon}
       </div>
       <div>
-        <p className="text-[12px] leading-[20px] text-[var(--text-sub)] font-poppins">
+        <p className="text-[11px] md:text-[12px] leading-[16px] md:leading-[20px] text-[var(--text-sub)] font-poppins">
           {title}
         </p>
-        <p className="text-[14px] leading-[20px] text-[var(--text-headline)] font-poppins md:text-[16px]">
+        <p className="text-[12px] md:text-[16px] leading-[16px] md:leading-[20px] text-[var(--text-headline)] font-poppins">
           {value}
         </p>
       </div>
@@ -39,32 +39,32 @@ export default function ContactLeftBody() {
   const email = footer?.email || "hello@clarixeducation.com";
 
   return (
-    <div className="max-w-[15rem] md:max-w-[24rem] space-y-6 self-start">
+    <div className="w-full md:max-w-[24rem] space-y-3 md:space-y-6 self-start">
       <SectionHeading title={title} />
       <SectionDescription className="max-w-[426px]">
         {description}
       </SectionDescription>
 
-      <div className="space-y-[24px]">
+      <div className="flex flex-wrap gap-x-6 gap-y-3 md:flex-col md:gap-y-5">
         {/* Office Locations */}
-        <div className="flex items-start gap-3">
-          <div className="h-9 w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white text-sm p-[10px] md:p-0 flex-shrink-0">
-            <MapPin />
+        <div className="flex items-start gap-2 md:gap-3">
+          <div className="h-8 w-8 md:h-9 md:w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white shrink-0">
+            <MapPin className="w-4 h-4 md:w-5 md:h-5" />
           </div>
           <div>
-            <p className="text-[12px] leading-[20px] text-[var(--text-sub)] font-poppins">
+            <p className="text-[11px] md:text-[12px] leading-[16px] md:leading-[20px] text-[var(--text-sub)] font-poppins">
               Our Offices
             </p>
-            <div className="flex flex-col gap-2 mt-1">
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] flex-shrink-0" />
-                <p className="text-[14px] leading-[20px] text-[var(--text-headline)] font-poppins md:text-[16px]">
+            <div className="flex flex-col gap-1 mt-0.5">
+              <div className="flex items-center gap-1.5">
+                <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[var(--color-primary)] flex-shrink-0" />
+                <p className="text-[12px] md:text-[16px] leading-[16px] md:leading-[20px] text-[var(--text-headline)] font-poppins">
                   Kochi, Kerala, India
                 </p>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-primary)] flex-shrink-0" />
-                <p className="text-[14px] leading-[20px] text-[var(--text-headline)] font-poppins md:text-[16px]">
+              <div className="flex items-center gap-1.5">
+                <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[var(--color-primary)] flex-shrink-0" />
+                <p className="text-[12px] md:text-[16px] leading-[16px] md:leading-[20px] text-[var(--text-headline)] font-poppins">
                   Calicut, Kerala, India
                 </p>
               </div>
@@ -72,8 +72,8 @@ export default function ContactLeftBody() {
           </div>
         </div>
 
-        <InfoItem icon={<PhoneIcon />} title="Call us" value={phone} />
-        <InfoItem icon={<MailIcon />} title="Email" value={email} />
+        <InfoItem icon={<PhoneIcon className="w-4 h-4 md:w-5 md:h-5" />} title="Call us" value={phone} />
+        <InfoItem icon={<MailIcon className="w-4 h-4 md:w-5 md:h-5" />} title="Email" value={email} />
       </div>
     </div>
   );

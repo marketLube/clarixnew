@@ -46,45 +46,45 @@ function ReviewCard({
   const displayRating = rating ?? 4;
 
   return (
-    <div className="flex h-full w-full flex-col justify-between rounded-[20px] bg-white p-5 md:p-6 shadow-[0px_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0px_6px_24px_rgba(0,0,0,0.1)]">
+    <div className="flex h-full w-full flex-col justify-between rounded-[12px] md:rounded-[20px] bg-white p-3 md:p-6 shadow-[0px_2px_16px_rgba(0,0,0,0.06)] transition-shadow duration-300 hover:shadow-[0px_6px_24px_rgba(0,0,0,0.1)]">
       {/* Header: Avatar + Info + Rating */}
-      <div className="mb-4 flex items-start justify-between gap-3">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="h-10 w-10 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-[#F0EAFF] relative">
+      <div className="mb-2 md:mb-4 flex items-start justify-between gap-2 md:gap-3">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
+          <div className="h-8 w-8 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-[#F0EAFF] relative">
             {avatarUrl ? (
               <Image src={avatarUrl} alt={name} fill sizes="48px" className="object-cover" />
             ) : (
-              <div className="h-full w-full flex items-center justify-center text-[#513392] font-poppins font-bold text-sm md:text-base">
+              <div className="h-full w-full flex items-center justify-center text-[#513392] font-poppins font-bold text-[11px] md:text-base">
                 {name.charAt(0).toUpperCase()}
               </div>
             )}
           </div>
           <div className="min-w-0">
-            <h4 className="font-poppins text-[14px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
+            <h4 className="font-poppins text-[11px] md:text-[16px] font-semibold text-[#162447] leading-tight truncate">
               {name}
             </h4>
-            <p className="font-poppins text-[11px] md:text-[13px] text-[#767E92] truncate leading-relaxed">
+            <p className="font-poppins text-[9px] md:text-[13px] text-[#767E92] truncate leading-relaxed">
               {college}{course ? ` • ${course}` : ""}
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1 shrink-0 rounded-full bg-[#FFF8E1] px-2.5 py-1">
-          <Star className="h-3.5 w-3.5 fill-[#FFB800] text-[#FFB800]" />
-          <span className="font-poppins text-[13px] font-semibold text-[#162447]">
+        <div className="flex items-center gap-0.5 md:gap-1 shrink-0 rounded-full bg-[#FFF8E1] px-1.5 py-0.5 md:px-2.5 md:py-1">
+          <Star className="h-2.5 w-2.5 md:h-3.5 md:w-3.5 fill-[#FFB800] text-[#FFB800]" />
+          <span className="font-poppins text-[10px] md:text-[13px] font-semibold text-[#162447]">
             {displayRating.toFixed(1)}
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="mb-4 flex-grow">
-        <p className="font-poppins text-[13px] md:text-[14px] leading-[20px] md:leading-[22px] text-[#5D6677]">
+      <div className="mb-2 md:mb-4 flex-grow">
+        <p className="font-poppins text-[10px] md:text-[14px] leading-[15px] md:leading-[22px] text-[#5D6677] line-clamp-4 md:line-clamp-none">
           {displayedContent}
         </p>
         {isLong && (
           <button
             onClick={() => setExpanded(!expanded)}
-            className="mt-1.5 font-poppins text-[12px] md:text-[13px] font-medium text-[#513392] hover:underline"
+            className="mt-1 font-poppins text-[10px] md:text-[13px] font-medium text-[#513392] hover:underline"
           >
             {expanded ? "Show less" : "Read more"}
           </button>
@@ -92,8 +92,8 @@ function ReviewCard({
       </div>
 
       {/* Footer */}
-      <div className="pt-3 border-t border-[#F0F1F5]">
-        <p className="font-poppins text-[11px] md:text-[12px] text-[#9AA2B1]">
+      <div className="pt-2 md:pt-3 border-t border-[#F0F1F5]">
+        <p className="font-poppins text-[9px] md:text-[12px] text-[#9AA2B1]">
           {timeAgo(createdAt)}
         </p>
       </div>
@@ -237,9 +237,9 @@ export default function StudentStories() {
               </div>
             </div>
 
-            {/* Mobile List */}
-            <div className="flex flex-col gap-4 md:hidden">
-              {(showAllMobile ? reviews : reviews.slice(0, 3)).map((review) => (
+            {/* Mobile Grid — 2 columns */}
+            <div className="grid grid-cols-2 gap-2.5 md:hidden">
+              {(showAllMobile ? reviews : reviews.slice(0, 4)).map((review) => (
                 <div key={review._id} className="w-full">
                   <ReviewCard
                     avatarUrl={review.userAvatar}
