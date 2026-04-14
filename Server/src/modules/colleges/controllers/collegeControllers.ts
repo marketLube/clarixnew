@@ -139,8 +139,8 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc',
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50); // cap at 50
     const skip = (pageNum - 1) * limitNum;
 
     // --- Build base match filter (fields on the college document) ---
@@ -218,13 +218,14 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
     const [total, paginatedColleges] = await Promise.all([
         College.countDocuments(matchFilter),
         College.find(matchFilter)
+            .select('-admissionFaqs -courseFaqs -feesPaymentFaqs -scholarshipFaqs -campusLife -hostelImages -labsImages -eventsImages -description')
             .sort({ [sortField]: sortOrder })
             .skip(skip)
             .limit(limitNum)
-            .populate('university')
-            .populate('recruiters')
-            .populate('courses')
-            .populate('scholarships')
+            .populate('university', 'name')
+            .populate('recruiters', 'name logo')
+            .populate('courses', 'name fees duration stream')
+            .populate('scholarships', 'scholarshipName')
             .allowDiskUse(true)
             .lean(),
     ]);
