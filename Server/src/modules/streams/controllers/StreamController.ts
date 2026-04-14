@@ -46,7 +46,7 @@ const listStreams = asyncHandler(async (req: Request, res: Response) => {
 
     // Enhance streams with current exam counts
     const streams = await Promise.all(streamsData.map(async (stream: any) => {
-        const examsCount = await Exam.countDocuments({ category: stream.name });
+        const examsCount = await Exam.countDocuments({ stream: stream._id });
         return { ...stream, examsCount };
     }));
 
