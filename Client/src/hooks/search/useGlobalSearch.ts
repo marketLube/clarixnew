@@ -7,10 +7,11 @@ export interface SearchResult {
   courses: any[];
   exams: any[];
   jobs: any[];
+  blogs: any[];
 }
 
 async function fetchGlobalSearch(query: string): Promise<SearchResult> {
-  if (!query) return { colleges: [], courses: [], exams: [], jobs: [] };
+  if (!query) return { colleges: [], courses: [], exams: [], jobs: [], blogs: [] };
   const { data } = await api.get("/search", { params: { query } });
   return data?.data as SearchResult;
 }
@@ -24,7 +25,7 @@ export function useGlobalSearch(query: string) {
   });
 
   return {
-    results: queryResult.data ?? { colleges: [], courses: [], exams: [], jobs: [] },
+    results: queryResult.data ?? { colleges: [], courses: [], exams: [], jobs: [], blogs: [] },
     isLoading: queryResult.isLoading,
     isError: queryResult.isError,
     error: queryResult.error,

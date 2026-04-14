@@ -380,10 +380,43 @@ export default function Nav() {
                             </div>
                           )}
 
+                          {searchResults.blogs?.length > 0 && (
+                            <div>
+                              <h3 className="text-[#737C91] text-[12px] font-medium font-poppins mb-2 uppercase tracking-wider">
+                                Articles
+                              </h3>
+                              <div className="flex flex-col gap-1">
+                                {searchResults.blogs.map((blog: any) => (
+                                  <Link
+                                    key={blog._id}
+                                    href={`/blog/${blog.slug}`}
+                                    onClick={() => setIsSearchOpen(false)}
+                                    className="flex items-center gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                                  >
+                                    <div className="w-7 h-7 relative rounded overflow-hidden bg-gray-100 flex-shrink-0">
+                                      {blog.thumbnail ? (
+                                        <img src={blog.thumbnail} alt="" className="w-full h-full object-cover" />
+                                      ) : (
+                                        <div className="w-full h-full bg-[#f0ecfc] flex items-center justify-center text-[10px] text-[#513392] font-bold">B</div>
+                                      )}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-[13px] text-[#162447] font-medium truncate group-hover:text-[#513392] transition-colors">
+                                        {blog.title}
+                                      </p>
+                                      <p className="text-[11px] text-[#767e92]">{blog.category}</p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
                           {!searchResults.colleges?.length &&
                             !searchResults.courses?.length &&
                             !searchResults.exams?.length &&
-                            !searchResults.jobs?.length && (
+                            !searchResults.jobs?.length &&
+                            !searchResults.blogs?.length && (
                               <div className="text-center py-6 text-gray-500 text-sm">
                                 No results found for &ldquo;{searchQuery}&rdquo;
                               </div>

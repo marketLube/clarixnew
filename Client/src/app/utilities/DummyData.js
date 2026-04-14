@@ -818,6 +818,7 @@ export const coursesContent = {
     {
       title: "Popular Courses",
       items: [
+        "BCA",
         "B.Tech",
         "MBBS",
         "BBA",

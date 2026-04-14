@@ -5,6 +5,7 @@ import { College } from '../../colleges/models/collegeModel.js';
 import { Course } from '../../courses/models/courseModel.js';
 import { Exam } from '../../exams/model/examModel.js';
 import { Job } from '../../jobs/model/jobModel.js';
+import { BlogModel } from '../../blogs/model/blogModel.js';
 
 const globalSearch = asyncHandler(async (req: Request, res: Response) => {
     const { query } = req.query;
@@ -14,13 +15,14 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
             colleges: [],
             courses: [],
             exams: [],
-            jobs: []
+            jobs: [],
+            blogs: [],
         }, 'No query provided');
     }
 
     const searchRegex = new RegExp(query, 'i');
 
-    const [colleges, courses, exams, jobs] = await Promise.all([
+    const [colleges, courses, exams, jobs, blogs] = await Promise.all([
         College.find({
             $or: [
                 { name: searchRegex },
@@ -45,14 +47,23 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
                 { jobTitle: searchRegex },
                 { companyName: searchRegex }
             ]
-        }).select('jobTitle companyName location salary').limit(5).lean()
+        }).select('jobTitle companyName location salary').limit(5).lean(),
+
+        BlogModel.find({
+            $or: [
+                { title: searchRegex },
+                { tags: searchRegex },
+                { category: searchRegex }
+            ]
+        }).select('title slug thumbnail category').limit(5).lean(),
     ]);
 
     return ApiResponse.success(res, 200, {
         colleges,
         courses,
         exams,
-        jobs
+        jobs,
+        blogs,
     }, 'Search results fetched successfully');
 });
 
