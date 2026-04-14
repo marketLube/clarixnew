@@ -236,8 +236,8 @@ export default function ApplyNowModal({
       closeIcon={null}
       width={788}
       centered
-      maskStyle={{
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      styles={{
+        mask: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
       }}
       wrapClassName="apply-now-modal-wrapper"
       className="apply-now-modal"
