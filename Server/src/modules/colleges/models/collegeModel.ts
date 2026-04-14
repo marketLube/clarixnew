@@ -213,4 +213,9 @@ const collegeSchema = new Schema<College>(
     },
 );
 
+// Indexes for query performance
+collegeSchema.index({ createdAt: -1 });
+collegeSchema.index({ country: 1, createdAt: -1 });
+collegeSchema.index({ name: 'text', description: 'text' });
+
 export const College = model<College>('College', collegeSchema);

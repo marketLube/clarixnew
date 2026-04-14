@@ -225,6 +225,7 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
             .populate('recruiters')
             .populate('courses')
             .populate('scholarships')
+            .allowDiskUse(true)
             .lean(),
     ]);
 
