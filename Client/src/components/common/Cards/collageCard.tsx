@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../Button";
@@ -16,6 +17,8 @@ import {
 import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import { formatSalaryLPA, formatFeeRange } from "@/lib/helperFunctions/formatCurrency";
+
+const FALLBACK_BANNER = "/college-details-bg.png";
 
 const Facility = ["Hostel", "Wifi", "Sports", "Labs", "Library"]
 
@@ -34,6 +37,8 @@ export default function CollegeCard({
   onToggleFavorite?: (id: string) => void;
 }) {
   const router = useRouter();
+  const bannerSrc = college?.campusImages?.[0] || college?.logo || FALLBACK_BANNER;
+  const [imgSrc, setImgSrc] = useState(bannerSrc);
 
   const viewDetails = (id: string) => {
     router.push(`/colleges/${id}`);
@@ -44,11 +49,13 @@ export default function CollegeCard({
       {/* Banner */}
       <div className="relative h-[160px] w-full rounded-[10px] overflow-hidden mb-4">
         <Image
-          src={college?.bannerImageUrl || "/college-details-bg.png"}
+          src={imgSrc}
           alt={college?.name || "College banner"}
           fill
           sizes="(max-width: 768px) 100vw, 340px"
           className="object-cover"
+          onError={() => setImgSrc(FALLBACK_BANNER)}
+          unoptimized={imgSrc.includes("wikimedia.org") || imgSrc.includes("wikipedia.org")}
         />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] via-[rgba(0,0,0,0.25)] to-transparent" />
@@ -83,6 +90,7 @@ export default function CollegeCard({
                 width={24}
                 height={24}
                 className="object-cover"
+                unoptimized
               />
             ) : (
               <span className="text-[10px] font-bold text-[#513392]">

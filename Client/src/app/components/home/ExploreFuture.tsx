@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import SectionHeading from "@/components/common/Section/SectionHeading";
-import SectionDescription from "@/components/common/Section/SectionDescription";
 import {
     Briefcase,
     FlaskConical,
@@ -17,22 +16,12 @@ import {
     Layout,
     Hammer,
     ChevronRight,
-    ChevronLeft,
-    GraduationCap // Add a fallback icon
+    GraduationCap,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useCmsHomepage } from "@/hooks/cms/useCmsHomepage";
 import { useStreams } from "@/hooks/stream/useStreams";
 import { useRouter } from "next/navigation";
 import Loader from "@/components/common/Loader";
-
-interface Category {
-    id: string;
-    name: string;
-    collegeCount: string;
-    examCount: string;
-    icon: React.ElementType;
-}
 
 const iconMap: Record<string, React.ElementType> = {
     Management: Briefcase,
@@ -50,166 +39,90 @@ const iconMap: Record<string, React.ElementType> = {
 };
 
 export default function ExploreFuture() {
-    const { isLoading: isCmsLoading } = useCmsHomepage();
-    const { data: streamsData, isLoading: isStreamsLoading } = useStreams();
+    const { data: streamsData, isLoading } = useStreams();
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<"College" | "Exam">("College");
-    const [currentPage, setCurrentPage] = useState(0);
-    const [itemsPerPage, setItemsPerPage] = useState(12);
 
-    const isLoading = isCmsLoading || isStreamsLoading;
-
-    // Map API data to Category format
-    const categories: Category[] = (streamsData?.data.streams || []).map((stream) => ({
-        id: stream._id,
-        name: stream.name,
-        collegeCount: `${stream.collegesCount} Colleges`,
-        examCount: `${stream.examsCount ?? 0} Exams`,
-        icon: iconMap[stream.name] || GraduationCap,
-    }));
-
-    // Responsive items per page
-    useEffect(() => {
-        const handleResize = () => {
-            if (window.innerWidth < 768) {
-                setItemsPerPage(5);
-            } else {
-                setItemsPerPage(12);
-            }
-        };
-
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
-
-    const totalPages = Math.ceil(categories.length / itemsPerPage);
-
-    useEffect(() => {
-        setCurrentPage(0);
-    }, [activeTab, itemsPerPage]);
-
-    const handleNext = () => {
-        setCurrentPage((prev) => (prev + 1) % totalPages);
-    };
-
-    const handlePrev = () => {
-        setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
-    };
-
-    const startIndex = currentPage * itemsPerPage;
-    const visibleCategories = categories.slice(startIndex, startIndex + itemsPerPage);
+    const streams = streamsData?.data?.streams || [];
 
     return (
-        <section className="w-full bg-white py-4 md:py-16">
+        <section className="w-full bg-[#F6F7FF] py-8 md:py-16">
             <ContentWrapper className="px-4 sm:px-10">
-                <div className="mb-6 md:mb-10">
-                    <SectionHeading title="Explore your Future" className="" />
-                    <SectionDescription className="mt-1 text-text-sub">
-                        Select for {activeTab}
-                    </SectionDescription>
+                {/* Header */}
+                <div className="mb-8 md:mb-10">
+                    <SectionHeading title="Explore your Future" />
+                    <p className="mt-2 font-poppins text-[13px] md:text-[15px] text-[#767e92]">
+                        Browse by stream — find the right colleges and exams for your career path.
+                    </p>
                 </div>
 
                 {/* Tabs */}
-                <div className="flex gap-6 border-b border-border mb-6 md:mb-8">
-                    {["College", "Exam"].map((tab) => (
+                <div className="flex gap-2 mb-6 md:mb-8">
+                    {(["College", "Exam"] as const).map((tab) => (
                         <button
                             key={tab}
-                            onClick={() => setActiveTab(tab as any)}
-                            className={`pb-2 text-[15px] md:text-[16px] font-medium transition-all relative cursor-pointer ${activeTab === tab ? "text-primary font-semibold" : "text-text-sub"
-                                }`}
+                            onClick={() => setActiveTab(tab)}
+                            className={`px-5 py-2 rounded-full text-[14px] font-medium font-poppins transition-all ${
+                                activeTab === tab
+                                    ? "bg-[#513392] text-white shadow-[0px_4px_12px_rgba(81,51,146,0.3)]"
+                                    : "bg-white text-[#162447] hover:bg-[#edefff] border border-[#e0e4f0]"
+                            }`}
                         >
-                            {tab}
-                            {activeTab === tab && (
-                                <motion.div
-                                    layoutId="activeTabUnderline"
-                                    className="absolute bottom-[-1px] left-0 w-full h-[2px] bg-primary rounded-t-full"
-                                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                />
-                            )}
+                            {tab === "College" ? "Colleges" : "Exams"}
                         </button>
                     ))}
                 </div>
 
-                {/* Content with Animation */}
-                <div className="relative min-h-[250px]">
-                    {isLoading ? (
-                        <Loader containerClassName="h-[250px]" />
-                    ) : (
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`${activeTab}-${currentPage}`}
-                                initial={{ opacity: 0, scale: 0.98 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.98 }}
-                                transition={{ duration: 0.2 }}
-                                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4"
-                            >
-                                {visibleCategories.map((category) => (
+                {/* Grid */}
+                {isLoading ? (
+                    <Loader containerClassName="h-[250px]" />
+                ) : (
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -8 }}
+                            transition={{ duration: 0.2 }}
+                            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4"
+                        >
+                            {streams.map((stream) => {
+                                const Icon = iconMap[stream.name] || GraduationCap;
+                                const count = activeTab === "College"
+                                    ? stream.collegesCount
+                                    : (stream.examsCount ?? 0);
+                                const label = activeTab === "College" ? "Colleges" : "Exams";
+
+                                return (
                                     <motion.div
-                                        key={category.name}
-                                        whileHover={{ y: -3 }}
+                                        key={stream._id}
+                                        whileHover={{ y: -2 }}
                                         onClick={() => {
                                             if (activeTab === "College") {
-                                                router.push(`/colleges?stream=${category.id}`);
+                                                router.push(`/colleges?stream=${stream._id}`);
                                             } else {
-                                                router.push(`/exams?stream=${category.id}`);
+                                                router.push(`/exams?stream=${stream._id}`);
                                             }
                                         }}
-                                        className="flex items-center p-3 md:p-4 border border-border rounded-[12px] bg-white group/card hover:shadow-md hover:border-primary-light transition-all cursor-pointer"
+                                        className="flex items-center p-3.5 md:p-4 rounded-[14px] bg-white group/card hover:shadow-[0px_4px_20px_rgba(0,0,0,0.08)] hover:border-[#d4c4f0] border border-[#e8eaf0] transition-all cursor-pointer"
                                     >
-                                        <div className="w-[44px] h-[44px] md:w-[48px] md:h-[48px] flex items-center justify-center rounded-[10px] bg-background text-text-headline group-hover/card:bg-primary-light group-hover/card:text-primary transition-colors">
-                                            <category.icon size={22} strokeWidth={1.5} />
+                                        <div className="w-[42px] h-[42px] md:w-[46px] md:h-[46px] flex items-center justify-center rounded-[10px] bg-[#f5f3ff] text-[#513392] group-hover/card:bg-[#513392] group-hover/card:text-white transition-colors shrink-0">
+                                            <Icon size={20} strokeWidth={1.5} />
                                         </div>
-                                        <div className="ml-3 flex-1">
-                                            <h3 className="text-[14px] md:text-[15px] font-bold text-text-headline group-hover/card:text-primary transition-colors">
-                                                {category.name}
+                                        <div className="ml-3 flex-1 min-w-0">
+                                            <h3 className="text-[14px] md:text-[15px] font-semibold text-[#162447] group-hover/card:text-[#513392] transition-colors font-poppins">
+                                                {stream.name}
                                             </h3>
-                                            <p className="text-[11px] md:text-[12px] text-text-sub">
-                                                {activeTab === "College" ? category.collegeCount : category.examCount}
+                                            <p className="text-[11px] md:text-[12px] text-[#767e92] font-poppins">
+                                                {count} {label}
                                             </p>
                                         </div>
-                                        <div className="text-border group-hover/card:text-primary transition-colors">
-                                            <ChevronRight size={18} />
-                                        </div>
+                                        <ChevronRight size={16} className="text-[#c5c9d6] group-hover/card:text-[#513392] transition-colors shrink-0" />
                                     </motion.div>
-                                ))}
-                            </motion.div>
-                        </AnimatePresence>
-                    )}
-                </div>
-
-                {/* Pagination & Nav Arrows */}
-                {totalPages > 1 && (
-                    <div className="flex items-center justify-center mt-8 gap-6 md:gap-10">
-                        <button
-                            onClick={handlePrev}
-                            className="p-2 md:p-2.5 rounded-full border border-border hover:bg-primary hover:text-white hover:border-primary transition-all text-text-headline shadow-sm cursor-pointer group/btn"
-                            aria-label="Previous"
-                        >
-                            <ChevronLeft size={20} className="group-hover/btn:scale-110 transition-transform" />
-                        </button>
-
-                        <div className="flex gap-2">
-                            {[...Array(totalPages)].map((_, idx) => (
-                                <button
-                                    key={idx}
-                                    onClick={() => setCurrentPage(idx)}
-                                    className={`w-2 h-2 rounded-full transition-all cursor-pointer ${currentPage === idx ? "bg-primary scale-110 shadow-sm" : "bg-border hover:bg-primary-light"
-                                        }`}
-                                    aria-label={`Page ${idx + 1}`}
-                                />
-                            ))}
-                        </div>
-
-                        <button
-                            onClick={handleNext}
-                            className="p-2 md:p-2.5 rounded-full border border-border hover:bg-primary hover:text-white hover:border-primary transition-all text-text-headline shadow-sm cursor-pointer group/btn"
-                            aria-label="Next"
-                        >
-                            <ChevronRight size={20} className="group-hover/btn:scale-110 transition-transform" />
-                        </button>
-                    </div>
+                                );
+                            })}
+                        </motion.div>
+                    </AnimatePresence>
                 )}
             </ContentWrapper>
         </section>

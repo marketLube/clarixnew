@@ -35,7 +35,7 @@ const transformCollegeData = (apiCollege: any): College => {
     location: apiCollege.city && apiCollege.state
       ? `${apiCollege.city}, ${apiCollege.state}`
       : apiCollege.city || apiCollege.state || "N/A",
-    image: apiCollege.bannerImageUrl || apiCollege.campusImages?.[0] || "/Testcollergeimage.png",
+    image: apiCollege.campusImages?.[0] || apiCollege.logo || "/Testcollergeimage.png",
     logo: apiCollege.logo || "/collegelogo.png",
     type: apiCollege.type || "N/A",
     establishedYear: apiCollege.establishedYear?.toString() || "N/A",

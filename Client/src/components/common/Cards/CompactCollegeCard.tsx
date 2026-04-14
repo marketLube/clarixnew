@@ -1,14 +1,18 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { LocationIcon, StarIcon } from "@/components/common/Icons";
 import { useRouter } from "next/navigation";
 import { formatSalaryLPA, formatFeeRange } from "@/lib/helperFunctions/formatCurrency";
 
+const FALLBACK_BANNER = "/college-details-bg.png";
+
 export default function CompactCollegeCard({ college }: { college: any }) {
     const router = useRouter();
+    const bannerSrc = college?.campusImages?.[0] || college?.logo || FALLBACK_BANNER;
+    const [imgSrc, setImgSrc] = useState(bannerSrc);
 
     const viewDetails = (id: string) => {
         router.push(`/colleges/${id}`);
@@ -22,11 +26,13 @@ export default function CompactCollegeCard({ college }: { college: any }) {
             {/* Top: Image Area */}
             <div className="relative h-[100px] w-full shrink-0">
                 <Image
-                    src={college?.bannerImageUrl || "/college-details-bg.png"}
+                    src={imgSrc}
                     alt={college?.name || "College banner"}
                     fill
                     sizes="(max-width: 768px) 50vw, 200px"
                     className="object-cover"
+                    onError={() => setImgSrc(FALLBACK_BANNER)}
+                    unoptimized={imgSrc.includes("wikimedia.org") || imgSrc.includes("wikipedia.org")}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
 

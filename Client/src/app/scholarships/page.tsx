@@ -73,14 +73,7 @@ function ScholarshipsPageContent() {
 
   return (
     <section className="py-10 min-h-screen">
-      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
-        <head>
-          {(hasActiveFilters || currentPage > 1) && (
-            <meta name="robots" content="noindex,follow" />
-          )}
-          {paginationLinks}
-        </head>
-      )}
+      {/* SEO noindex handled via layout metadata */}
       <ContentWrapper>
         <Breadcrumb items={[{ label: "Scholarships" }]} />
       </ContentWrapper>

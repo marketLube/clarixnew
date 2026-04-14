@@ -63,14 +63,7 @@ function CoursesPageContent() {
 
   return (
     <section className="py-6 md:py-10 min-h-screen">
-      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
-        <head>
-          {(hasActiveFilters || currentPage > 1) && (
-            <meta name="robots" content="noindex,follow" />
-          )}
-          {paginationLinks}
-        </head>
-      )}
+      {/* SEO noindex handled via layout metadata */}
       <ContentWrapper className="flex flex-col">
         <Breadcrumb items={[{ label: "Courses" }]} />
 

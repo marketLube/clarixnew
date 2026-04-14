@@ -17,7 +17,7 @@ const DEFAULT_ABROAD_COUNTRIES = [
     },
     {
         name: "United States",
-        image: "https://images.unsplash.com/photo-1485738422979-f5c462d49f04?w=400&h=350&fit=crop",
+        image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=400&h=350&fit=crop",
     },
     {
         name: "Canada",

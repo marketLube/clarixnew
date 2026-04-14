@@ -1,7 +1,7 @@
 "use client";
 
 import Hero from "@/app/components/home/Hero";
-import CareerStreams from "@/app/components/home/CareerStreams";
+// CareerStreams removed — merged into ExploreFuture
 import Stats from "@/app/components/home/Stats";
 import ExploreColleges from "@/app/components/home/ExploreColleges";
 import CareerHub from "@/app/components/home/CareerHub";
@@ -26,7 +26,6 @@ export default function Home() {
       <Hero />
       <Destinations />
       <ExploreFuture />
-      <CareerStreams />
       <Stats />
       <ExploreColleges />
       <StayUpdated />

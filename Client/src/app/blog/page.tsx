@@ -119,15 +119,7 @@ function BlogPageContent() {
 
   return (
     <div className="min-h-screen bg-[#fdfdfd]">
-      {/* noindex for filtered/paginated pages & rel prev/next links for SEO */}
-      {(hasActiveFilters || currentPage > 1 || paginationLinks.length > 0) && (
-        <head>
-          {(hasActiveFilters || currentPage > 1) && (
-            <meta name="robots" content="noindex,follow" />
-          )}
-          {paginationLinks}
-        </head>
-      )}
+      {/* SEO noindex handled via layout metadata */}
 
       <ContentWrapper className="pt-6">
         <Breadcrumb items={[{ label: "Blog" }]} />

@@ -126,15 +126,7 @@ function JobsInternshipsPageContent() {
 
   return (
     <section className="py-10 min-h-screen">
-      {/* noindex for filtered/paginated pages & rel prev/next links for SEO */}
-      {(hasActiveFilters || page > 1 || paginationLinks.length > 0) && (
-        <head>
-          {(hasActiveFilters || page > 1) && (
-            <meta name="robots" content="noindex,follow" />
-          )}
-          {paginationLinks}
-        </head>
-      )}
+      {/* SEO noindex handled via layout metadata */}
 
       <ContentWrapper className="flex flex-col gap-16">
         <Breadcrumb items={[{ label: "Jobs & Internships" }]} />
