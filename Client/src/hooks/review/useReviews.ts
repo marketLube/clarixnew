@@ -11,6 +11,8 @@ export interface Review {
   reviewType: "College" | "Organization";
   collegeId?: string;
   collegeName?: string;
+  course?: string;
+  city?: string;
   reviewDate: string;
   content: string;
   status: "Pending" | "Approved" | "Rejected";

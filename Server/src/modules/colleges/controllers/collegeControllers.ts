@@ -62,135 +62,85 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
     const limitNum = Number(limit);
     const skip = (pageNum - 1) * limitNum;
 
-    const pipeline: any[] = [{
-        $lookup: {
-            from: 'universities',
-            localField: 'university',
-            foreignField: '_id',
-            as: 'university',
-        },
-    }, {
-        $lookup: {
-            from: 'recruiters',
-            localField: 'recruiters',
-            foreignField: '_id',
-            as: 'recruiters',
-        },
-    }, {
-        $lookup: {
-            from: 'courses',
-            localField: 'courses',
-            foreignField: '_id',
-            as: 'courses',
-        },
-    }, {
-        $lookup: {
-            from: 'scholarships',
-            localField: 'scholarships',
-            foreignField: '_id',
-            as: 'scholarships',
-        },
-    }, {
-        $lookup: {
-            from: 'streams',
-            let: { categoryId: '$category' },
-            pipeline: [
-                {
-                    $match: {
-                        $expr: {
-                            $and: [
-                                { $eq: [{ $type: '$$categoryId' }, 'objectId'] },
-                                { $eq: ['$_id', '$$categoryId'] }
-                            ]
-                        }
-                    }
-                }
-            ],
-            as: 'category_obj'
-        }
-    }, {
-        $addFields: {
-            university: { $arrayElemAt: ['$university', 0] },
-            category: {
-                $cond: {
-                    if: { $gt: [{ $size: '$category_obj' }, 0] },
-                    then: { $arrayElemAt: ['$category_obj.name', 0] },
-                    else: '$category'
-                }
-            }
-        }
-    }];
-
-
-    const matchCriteria: any[] = [];
+    // --- Build base match filter (fields on the college document) ---
+    const matchFilter: any = {};
 
     if (search) {
-        matchCriteria.push({
-            $or: [
-                { name: { $regex: search, $options: 'i' } },
-                { description: { $regex: search, $options: 'i' } },
-            ],
-        });
+        matchFilter.$or = [
+            { name: { $regex: search, $options: 'i' } },
+            { description: { $regex: search, $options: 'i' } },
+        ];
     }
 
     if (type) {
-        matchCriteria.push({ type: (type as string) });
+        matchFilter.type = type as string;
     }
 
     if (location) {
-        matchCriteria.push({
+        const locationFilter = {
             $or: [
                 { city: { $regex: location, $options: 'i' } },
                 { state: { $regex: location, $options: 'i' } },
             ],
-        });
-
-
-    }
-
-    if (category) {
-        matchCriteria.push({ category: category as string });
-    }
-
-    if (stream) {
-        const streamStr = stream as string;
-        if (isValidObjectId(streamStr)) {
-            matchCriteria.push({
-                $or: [
-                    { 'courses.stream': streamStr },
-                    { 'courses.stream': new Types.ObjectId(streamStr) }
-                ]
-            });
+        };
+        if (matchFilter.$or) {
+            matchFilter.$and = [{ $or: matchFilter.$or }, locationFilter];
+            delete matchFilter.$or;
         } else {
-            matchCriteria.push({ 'courses.stream': streamStr });
+            Object.assign(matchFilter, locationFilter);
         }
     }
 
-    if (matchCriteria.length > 0) {
-        pipeline.push({ $match: { $and: matchCriteria } });
+    if (category) {
+        matchFilter.category = category as string;
     }
 
+    // --- Handle stream filter: find matching course IDs first ---
+    if (stream) {
+        const streamStr = stream as string;
+        const streamMatch: any = {};
+        if (isValidObjectId(streamStr)) {
+            streamMatch.stream = new Types.ObjectId(streamStr);
+        } else {
+            streamMatch.stream = streamStr;
+        }
+        const matchingCourseIds = await Course.find(streamMatch).distinct('_id');
+        matchFilter.courses = { $in: matchingCourseIds };
+    }
 
+    // --- Sort, paginate, then populate ---
     const sortField = sortBy as string;
     const sortOrder = order === 'desc' ? -1 : 1;
-    pipeline.push({ $sort: { [sortField]: sortOrder } });
 
+    const [total, paginatedColleges] = await Promise.all([
+        College.countDocuments(matchFilter),
+        College.find(matchFilter)
+            .sort({ [sortField]: sortOrder })
+            .skip(skip)
+            .limit(limitNum)
+            .populate('university')
+            .populate('recruiters')
+            .populate('courses')
+            .populate('scholarships')
+            .lean(),
+    ]);
 
-    pipeline.push({
-        $facet: {
-            metadata: [{ $count: 'total' }],
-            data: [{ $skip: skip }, { $limit: limitNum }],
-        },
-    });
+    // Resolve category name from streams if it's an ObjectId
+    for (const college of paginatedColleges as any[]) {
+        if (isValidObjectId(college.category)) {
+            const streamDoc = await Stream.findById(college.category).lean();
+            if (streamDoc) {
+                college.category = (streamDoc as any).name;
+            }
+        }
+    }
 
-    const [result] = await College.aggregate(pipeline);
     const totalCourse = await Course.countDocuments();
 
-    const colleges = result.data.map((college: any) => ({
+    const colleges = (paginatedColleges as any[]).map((college: any) => ({
         ...college,
         annualFeesRange: calculateFeesRange(college.courses)
     }));
-    const total = result.metadata[0]?.total || 0;
 
     return ApiResponse.success(
         res,
