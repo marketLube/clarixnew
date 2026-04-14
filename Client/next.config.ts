@@ -77,6 +77,14 @@ const nextConfig: NextConfig = {
         hostname: "ui-avatars.com",
       },
       {
+        protocol: "https",
+        hostname: "campusways.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.campusways.com",
+      },
+      {
         protocol: "http",
         hostname: "localhost",
         port: "3845",
