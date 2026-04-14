@@ -2,7 +2,7 @@
 
 import { ChevronRightIcon } from "./Icons";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface NavItem {
   href: string;
@@ -34,6 +34,40 @@ interface ExplorePopoverContentProps {
   activeContentIndex: number;
 }
 
+function getItemHref(
+  activeContentIndex: number,
+  columnIndex: number,
+  value: string
+): string {
+  const encoded = encodeURIComponent(value);
+
+  switch (activeContentIndex) {
+    case 0: // Colleges
+      if (columnIndex === 0) return `/colleges?stream=${encoded}`;
+      if (columnIndex === 1) return `/colleges?city=${encoded}`;
+      if (columnIndex === 2) return `/colleges?ranking=${encoded}`;
+      if (columnIndex === 3) return `/colleges?ownership=${encoded}`;
+      return "/colleges";
+    case 1: // Courses
+      if (columnIndex === 0) return `/courses?degree=${encoded}`;
+      if (columnIndex === 1) return `/courses?stream=${encoded}`;
+      if (columnIndex === 2) return `/courses?search=${encoded}`;
+      return "/courses";
+    case 2: // Exams
+      if (columnIndex === 0) return `/exams?stream=${encoded}`;
+      if (columnIndex === 1) return `/exams?search=${encoded}`;
+      return "/exams";
+    case 3: // Scholarships
+      if (columnIndex === 0) return `/scholarships?type=${encoded}`;
+      if (columnIndex === 1) return `/scholarships?search=${encoded}`;
+      return "/scholarships";
+    case 4: // Jobs & Internships
+      return "/jobs-internships";
+    default:
+      return "/";
+  }
+}
+
 export default function ExplorePopoverContent({
   navItems,
   contentSections,
@@ -44,33 +78,6 @@ export default function ExplorePopoverContent({
   getIsActive,
   activeContentIndex,
 }: ExplorePopoverContentProps) {
-  const router = useRouter();
-
-  const handleItemClick = (item: string, columnIndex: number) => {
-    let url = "/";
-    switch (activeContentIndex) {
-      case 0: // Colleges
-        if (columnIndex === 0) url = `/colleges?stream=${encodeURIComponent(item)}`;
-        else if (columnIndex === 1) url = `/colleges?city=${encodeURIComponent(item)}`;
-        else url = "/colleges";
-        break;
-      case 1: // Courses
-        if (columnIndex === 1) url = `/courses?stream=${encodeURIComponent(item)}`;
-        else url = "/courses";
-        break;
-      case 2: // Exams
-        if (columnIndex === 0) url = `/exams?stream=${encodeURIComponent(item)}`;
-        else url = "/exams";
-        break;
-      case 3: // Scholarships
-        url = "/scholarships";
-        break;
-      case 4: // Jobs
-        url = "/jobs-internships";
-        break;
-    }
-    router.push(url);
-  };
 
   return (
     <div
@@ -86,20 +93,24 @@ export default function ExplorePopoverContent({
             const IconComponent = item.icon;
 
             return (
-              <div
+              <Link
                 key={item.href}
-                onClick={() => {
-                  setSelectedIndex(index);
-                  setHoveredIndex(null); // Reset hover when clicking
-                  router.push(item.href);
+                href={item.href}
+                onClick={(e) => {
+                  // Prevent navigation on hover-select; only navigate on deliberate click
+                  if (selectedIndex !== index) {
+                    e.preventDefault();
+                    setSelectedIndex(index);
+                    setHoveredIndex(null);
+                  }
                 }}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => {
                   // Don't reset hover here - let it persist when moving to right side
                 }}
-                className={`h-[46px] w-full flex items-center justify-start gap-[6px] transition-colors cursor-pointer ${isActive
-                    ? "bg-[#f6f7ff] rounded-[6px] pl-[14px] pr-[16px]"
-                    : "pl-[14px] rounded-[6px]"
+                className={`h-[46px] w-full flex items-center justify-start gap-[6px] transition-colors cursor-pointer no-underline ${isActive
+                    ? "bg-white rounded-[6px] pl-[14px] pr-[16px] shadow-sm"
+                    : "pl-[14px] rounded-[6px] hover:bg-white/15"
                   }`}
               >
                 <IconComponent
@@ -116,7 +127,7 @@ export default function ExplorePopoverContent({
                 {isActive && (
                   <ChevronRightIcon width={18} height={18} fill="#162447" />
                 )}
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -128,7 +139,9 @@ export default function ExplorePopoverContent({
           </p>
           <div className="flex gap-[22px] items-center w-full">
             <a
-              href="#"
+              href="https://www.facebook.com/profile.php?id=61582068009039"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Facebook"
               className="w-5 h-5 flex items-center justify-center"
             >
@@ -140,7 +153,9 @@ export default function ExplorePopoverContent({
               />
             </a>
             <a
-              href="#"
+              href="https://www.instagram.com/clarixeducation"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Instagram"
               className="w-5 h-5 flex items-center justify-center"
             >
@@ -152,7 +167,9 @@ export default function ExplorePopoverContent({
               />
             </a>
             <a
-              href="#"
+              href="https://www.linkedin.com/company/clarixeducation"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
               className="w-5 h-5 flex items-center justify-center"
             >
@@ -164,7 +181,9 @@ export default function ExplorePopoverContent({
               />
             </a>
             <a
-              href="#"
+              href="https://www.youtube.com/@ClarixEducation"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="YouTube"
               className="w-5 h-5 flex items-center justify-center"
             >
@@ -176,7 +195,9 @@ export default function ExplorePopoverContent({
               />
             </a>
             <a
-              href="#"
+              href="https://twitter.com/clarixeducation"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Twitter"
               className="w-5 h-5 flex items-center justify-center"
             >
@@ -205,6 +226,7 @@ export default function ExplorePopoverContent({
                   columnIndex === 2 &&
                   column.title === "By Rankings"
                 ) {
+                  const ownershipColumn = contentSections[activeContentIndex].columns[3];
                   return (
                     <div
                       key={columnIndex}
@@ -215,43 +237,14 @@ export default function ExplorePopoverContent({
                           {column.title}
                         </h3>
                         <div className="flex flex-col gap-1">
-                          {column.items.map((item, itemIndex) => (
-                            <div
-                              key={itemIndex}
-                              onClick={() => handleItemClick(column.values ? column.values[itemIndex] : item, columnIndex)}
-                              className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out cursor-pointer hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392]"
-                            >
-                              <span>{item}</span>
-                              <ChevronRightIcon
-                                width={14}
-                                height={14}
-                                fill="#513392"
-                                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                      {contentSections[activeContentIndex].columns[3] && (
-                        <div
-                          className={`flex flex-col gap-2 ${contentSections[activeContentIndex].columns[3]
-                              .width || "w-[217px]"
-                            }`}
-                        >
-                          <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
-                            {
-                              contentSections[activeContentIndex].columns[3]
-                                .title
-                            }
-                          </h3>
-                          <div className="flex flex-col gap-1">
-                            {contentSections[
-                              activeContentIndex
-                            ].columns[3].items.map((item, itemIndex) => (
-                              <div
+                          {column.items.map((item, itemIndex) => {
+                            const value = column.values ? column.values[itemIndex] : item;
+                            const href = getItemHref(activeContentIndex, columnIndex, value);
+                            return (
+                              <Link
                                 key={itemIndex}
-                                onClick={() => handleItemClick(contentSections[activeContentIndex].columns[3].values ? contentSections[activeContentIndex].columns[3].values[itemIndex] : item, 3)}
-                                className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out cursor-pointer hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392]"
+                                href={href}
+                                className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
                               >
                                 <span>{item}</span>
                                 <ChevronRightIcon
@@ -260,8 +253,38 @@ export default function ExplorePopoverContent({
                                   fill="#513392"
                                   className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
                                 />
-                              </div>
-                            ))}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+                      {ownershipColumn && (
+                        <div
+                          className={`flex flex-col gap-2 ${ownershipColumn.width || "w-[217px]"}`}
+                        >
+                          <h3 className="text-[#162447] text-base font-medium leading-5 uppercase font-helvetica">
+                            {ownershipColumn.title}
+                          </h3>
+                          <div className="flex flex-col gap-1">
+                            {ownershipColumn.items.map((item, itemIndex) => {
+                              const value = ownershipColumn.values ? ownershipColumn.values[itemIndex] : item;
+                              const href = getItemHref(activeContentIndex, 3, value);
+                              return (
+                                <Link
+                                  key={itemIndex}
+                                  href={href}
+                                  className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
+                                >
+                                  <span>{item}</span>
+                                  <ChevronRightIcon
+                                    width={14}
+                                    height={14}
+                                    fill="#513392"
+                                    className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out"
+                                  />
+                                </Link>
+                              );
+                            })}
                           </div>
                         </div>
                       )}
@@ -288,21 +311,25 @@ export default function ExplorePopoverContent({
                       {column.title}
                     </h3>
                     <div className="flex flex-col gap-1">
-                      {column.items.map((item, itemIndex) => (
-                        <div
-                          key={itemIndex}
-                          onClick={() => handleItemClick(column.values ? column.values[itemIndex] : item, columnIndex)}
-                          className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out cursor-pointer hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392]"
-                        >
-                          <span>{item}</span>
-                          <ChevronRightIcon
-                            width={14}
-                            height={14}
-                            fill="#513392"
-                            className="opacity-0 group-hover:opacity-100 transition-opacity"
-                          />
-                        </div>
-                      ))}
+                      {column.items.map((item, itemIndex) => {
+                        const value = column.values ? column.values[itemIndex] : item;
+                        const href = getItemHref(activeContentIndex, columnIndex, value);
+                        return (
+                          <Link
+                            key={itemIndex}
+                            href={href}
+                            className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
+                          >
+                            <span>{item}</span>
+                            <ChevronRightIcon
+                              width={14}
+                              height={14}
+                              fill="#513392"
+                              className="opacity-0 group-hover:opacity-100 transition-opacity"
+                            />
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 );

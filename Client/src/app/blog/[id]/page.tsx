@@ -11,6 +11,7 @@ import Contact from "@/app/components/common/Contact/Contact";
 import { useBlog } from "@/hooks/blog/useBlog";
 import { useBlogs } from "@/hooks/blog/useBlogs";
 import Loader from "@/components/common/Loader";
+import Breadcrumb from "@/components/common/Breadcrumb";
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -44,6 +45,16 @@ export default function BlogDetailPage() {
 
   return (
     <div className="bg-[#fdfdfd] min-h-screen">
+      {/* Breadcrumb */}
+      <ContentWrapper className="!mt-0 pt-3 pb-3">
+        <Breadcrumb
+          items={[
+            { label: "Blog", href: "/blog" },
+            { label: blog.title },
+          ]}
+        />
+      </ContentWrapper>
+
       {/* Hero Section */}
       <BlogDetailHero
         category={blog.category || "General"}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { PenLine, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Star } from "lucide-react";
 import { useReviews } from "@/hooks/review/useReviews";
 import Link from "next/link";
@@ -49,9 +50,9 @@ function ReviewCard({
       {/* Header: Avatar + Info + Rating */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="h-10 w-10 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-[#F0EAFF]">
+          <div className="h-10 w-10 md:h-12 md:w-12 shrink-0 overflow-hidden rounded-full bg-[#F0EAFF] relative">
             {avatarUrl ? (
-              <img src={avatarUrl} alt={name} className="h-full w-full object-cover" />
+              <Image src={avatarUrl} alt={name} fill sizes="48px" className="object-cover" />
             ) : (
               <div className="h-full w-full flex items-center justify-center text-[#513392] font-helvetica font-bold text-sm md:text-base">
                 {name.charAt(0).toUpperCase()}
@@ -172,18 +173,18 @@ export default function StudentStories() {
       <ContentWrapper>
         {/* Header */}
         <div className="mb-8 md:mb-12">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-3">
-            <SectionHeading title="What Students Say" />
-            <Link href="/review" className="shrink-0">
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] items-start gap-4 sm:gap-8">
+            <div>
+              <SectionHeading title="What Students Say" />
+              <p className="mt-3 font-helvetica text-[14px] md:text-[16px] text-[#5D6677] leading-relaxed">Honest reviews from real students across India — helping you make confident college choices.</p>
+            </div>
+            <Link href="/review" className="shrink-0 self-start">
               <button className="flex items-center gap-2 rounded-full bg-[#513392] px-5 py-2.5 md:px-6 md:py-3 font-helvetica text-[14px] md:text-[15px] font-medium text-white transition-all hover:bg-[#412876] hover:shadow-lg shadow-[0px_4px_12px_rgba(81,51,146,0.3)]">
                 Write a Review
                 <PenLine className="h-4 w-4" />
               </button>
             </Link>
           </div>
-          <p className="font-helvetica text-[14px] md:text-[16px] text-[#5D6677] max-w-2xl">
-            Honest reviews from real students across India — helping you make confident college choices.
-          </p>
         </div>
 
         {/* Content */}

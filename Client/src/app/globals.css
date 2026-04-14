@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+::selection {
+  background-color: #e8e0f5;
+  color: #162447;
+}
+
 :root {
   /* Base Colors */
   --background: #f6f7ff;
@@ -66,7 +71,7 @@
   /* Typography */
   --font-family-sans: var(--font-helvetica-neue), "Helvetica Neue", Arial,
     sans-serif;
-  --font-family-poppins: "Poppins", sans-serif;
+  --font-family-poppins: var(--font-poppins), "Poppins", sans-serif;
   --font-family-helvetica: var(--font-helvetica-neue), "Helvetica Neue", Arial,
     sans-serif;
 
@@ -197,7 +202,7 @@
 
   /* Typography */
   --font-sans: var(--font-family-sans);
-  --font-poppins: "Poppins", sans-serif;
+  --font-poppins: var(--font-poppins), "Poppins", sans-serif;
   --font-helvetica: var(--font-helvetica-neue), "Helvetica Neue", Arial,
     sans-serif;
 
