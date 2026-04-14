@@ -37,7 +37,7 @@ export default function AdmissionSection({ college }: any) {
             </div>
 
             <div className="justify-self-center md:justify-self-end">
-              <AdmissionsDeadlineCard deadLine={college?.applicationClosingDate} />
+              <AdmissionsDeadlineCard deadLine={college?.applicationClosingDate} collegeName={college?.name} />
             </div>
           </GridWrapper>
         </ContentWrapper>

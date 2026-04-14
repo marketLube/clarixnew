@@ -28,7 +28,7 @@ export default function PlacementSection({ college }: any) {
   }, [college]);
   return (
     <ContentWrapper>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-2 sm:gap-4">
         <SectionHeading title="Placements" />
         <SectionDescription className="max-w-[24rem]">
           Get a transparent view of salaries, recruiters, placement rates, and
@@ -38,12 +38,12 @@ export default function PlacementSection({ college }: any) {
       </div>
 
       <GridWrapper colsDesktop={2} className="gap-2">
-        <div className="mt-8">
+        <div className="mt-4 sm:mt-8">
           <PlacementTrendsCard stats={college?.placementTrends} />
         </div>
 
-        <div className="mt-8 flex flex-col gap-4">
-          <div className="flex gap-2">
+        <div className="mt-4 sm:mt-8 flex flex-col gap-3 sm:gap-4">
+          <div className="grid grid-cols-3 gap-2">
             <PlacementStatCard
               label="Average Package"
               value={formatSalaryLPA(college?.averageSalary, "0 LPA")}
@@ -61,7 +61,7 @@ export default function PlacementSection({ college }: any) {
             />
           </div>
 
-          <div className="mt-2 flex flex-col gap-4 flex-1 justify-end">
+          <div className="mt-1 sm:mt-2 flex flex-col gap-3 sm:gap-4 flex-1 justify-end">
             <PlacementRightBottomCard
               title="Internship Statistics"
               stats={internshipStats as InternshipStat[]}

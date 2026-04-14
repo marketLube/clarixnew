@@ -65,7 +65,7 @@ export default function NavigationTabs({ college }: any) {
 
   return (
     <nav
-      className="w-full sticky top-0 z-[40] mt-[8rem] p-3 lg:p-4 bg-white shadow-[0_1px_4px_0_rgba(0,0,0,0.05)] border-b border-gray-100"
+      className="w-full sticky top-0 z-[40] mt-4 sm:mt-[8rem] p-2 sm:p-3 lg:p-4 bg-white shadow-[0_1px_4px_0_rgba(0,0,0,0.05)] border-b border-gray-100"
       aria-label="College detail sections"
     >
       <div className="flex items-center lg:justify-center gap-2 lg:gap-3 overflow-x-auto scrollbar-hide">

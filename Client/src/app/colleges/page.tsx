@@ -210,175 +210,176 @@ function CollegesPageContent() {
       )}
 
       {/* Filter Section */}
-      <div className="relative z-10 mt-8 flex flex-col gap-4">
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 text-[#162447] font-poppins font-medium">
-            <Filter className="w-5 h-5" />
-            <span>Filters</span>
-          </div>
-
-          {/* City Dropdown */}
-          <div className="relative" ref={dropdownRef}>
-            <button
-              type="button"
-              onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
-              aria-expanded={isCityDropdownOpen}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins hover:border-[#513392] transition-colors shadow-sm"
-            >
-              <span>{city ? `City: ${city}` : "City"}</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${isCityDropdownOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {isCityDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-[calc(100vw-32px)] sm:w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
-                <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
-                  Select a City
-                </div>
-                {isLocationLoading ? (
-                  <div className="px-4 py-3 text-sm text-[#767e92]">Loading cities...</div>
-                ) : cmsCities.length === 0 ? (
-                  <div className="px-4 py-3 text-sm text-[#767e92]">No cities found</div>
-                ) : (
-                  cmsCities.map((c) => (
-                    <button
-                      key={c}
-                      onClick={() => {
-                        handleFilterUpdate("city", c);
-                        setIsCityDropdownOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
-                    >
-                      <span className={city === c ? "text-[#513392] font-medium" : "text-[#162447]"}>
-                        {c}
-                      </span>
-                      {city === c && <Check className="w-4 h-4 text-[#513392]" />}
-                    </button>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Stream Dropdown */}
-          <div className="relative" ref={streamDropdownRef}>
-            <button
-              type="button"
-              onClick={() => setIsStreamDropdownOpen(!isStreamDropdownOpen)}
-              aria-expanded={isStreamDropdownOpen}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins hover:border-[#513392] transition-colors shadow-sm"
-            >
-              <span>{stream ? `Stream: ${cmsStreams.find((s: any) => s._id === stream)?.name || stream}` : "Stream"}</span>
-              <ChevronDown className={`w-4 h-4 transition-transform ${isStreamDropdownOpen ? "rotate-180" : ""}`} />
-            </button>
-
-            {isStreamDropdownOpen && (
-              <div className="absolute top-full left-0 mt-2 w-[calc(100vw-32px)] sm:w-64 max-h-[300px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-2xl shadow-[0_12px_40px_rgba(0,0,0,0.12)] z-50 py-2 custom-scrollbar">
-                <div className="px-4 py-2 text-xs font-semibold text-[#767e92] uppercase tracking-wider">
-                  Select a Stream
-                </div>
-                {isStreamsLoading ? (
-                  <div className="px-4 py-3 text-sm text-[#767e92]">Loading streams...</div>
-                ) : cmsStreams.length === 0 ? (
-                  <div className="px-4 py-3 text-sm text-[#767e92]">No streams found</div>
-                ) : (
-                  cmsStreams.map((s: any) => (
-                    <button
-                      key={s._id}
-                      onClick={() => {
-                        handleFilterUpdate("stream", s._id);
-                        setIsStreamDropdownOpen(false);
-                      }}
-                      className="w-full text-left px-4 py-2.5 text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
-                    >
-                      <span className={stream === s._id ? "text-[#513392] font-medium" : "text-[#162447]"}>
-                        {s.name}
-                      </span>
-                      {stream === s._id && <Check className="w-4 h-4 text-[#513392]" />}
-                    </button>
-                  ))
-                )}
-              </div>
-            )}
-          </div>
+      <div className="relative z-10 mt-4 sm:mt-6 flex flex-wrap items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 text-[#162447] font-poppins font-medium text-sm">
+          <Filter className="w-4 h-4" />
+          <span>Filters</span>
         </div>
 
-        {/* Active Filters */}
+        {/* City Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          <button
+            type="button"
+            onClick={() => setIsCityDropdownOpen(!isCityDropdownOpen)}
+            aria-expanded={isCityDropdownOpen}
+            className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border text-[13px] sm:text-sm font-poppins transition-colors ${city ? "border-[#513392] bg-[#f5eefe] text-[#513392] font-medium" : "border-[#e0e4f0] bg-white text-[#162447] hover:border-[#513392]"}`}
+          >
+            <span>{city ? `City: ${city}` : "City"}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isCityDropdownOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {isCityDropdownOpen && (
+            <div className="absolute top-full left-0 mt-1.5 w-[calc(100vw-32px)] sm:w-56 max-h-[280px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.1)] z-50 py-1.5 custom-scrollbar">
+              <div className="px-3 py-1.5 text-[10px] font-semibold text-[#767e92] uppercase tracking-wider">
+                Select a City
+              </div>
+              {isLocationLoading ? (
+                <div className="px-3 py-2 text-sm text-[#767e92]">Loading...</div>
+              ) : cmsCities.length === 0 ? (
+                <div className="px-3 py-2 text-sm text-[#767e92]">No cities found</div>
+              ) : (
+                cmsCities.map((c) => (
+                  <button
+                    key={c}
+                    onClick={() => {
+                      handleFilterUpdate("city", c);
+                      setIsCityDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3 py-2 text-[13px] sm:text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
+                  >
+                    <span className={city === c ? "text-[#513392] font-medium" : "text-[#162447]"}>
+                      {c}
+                    </span>
+                    {city === c && <Check className="w-3.5 h-3.5 text-[#513392]" />}
+                  </button>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Stream Dropdown */}
+        <div className="relative" ref={streamDropdownRef}>
+          <button
+            type="button"
+            onClick={() => setIsStreamDropdownOpen(!isStreamDropdownOpen)}
+            aria-expanded={isStreamDropdownOpen}
+            className={`flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border text-[13px] sm:text-sm font-poppins transition-colors ${stream ? "border-[#513392] bg-[#f5eefe] text-[#513392] font-medium" : "border-[#e0e4f0] bg-white text-[#162447] hover:border-[#513392]"}`}
+          >
+            <span>{stream ? `Stream: ${cmsStreams.find((s: any) => s._id === stream)?.name || stream}` : "Stream"}</span>
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${isStreamDropdownOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          {isStreamDropdownOpen && (
+            <div className="absolute top-full left-0 mt-1.5 w-[calc(100vw-32px)] sm:w-56 max-h-[280px] overflow-y-auto bg-white border border-[#e0e4f0] rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.1)] z-50 py-1.5 custom-scrollbar">
+              <div className="px-3 py-1.5 text-[10px] font-semibold text-[#767e92] uppercase tracking-wider">
+                Select a Stream
+              </div>
+              {isStreamsLoading ? (
+                <div className="px-3 py-2 text-sm text-[#767e92]">Loading...</div>
+              ) : cmsStreams.length === 0 ? (
+                <div className="px-3 py-2 text-sm text-[#767e92]">No streams found</div>
+              ) : (
+                cmsStreams.map((s: any) => (
+                  <button
+                    key={s._id}
+                    onClick={() => {
+                      handleFilterUpdate("stream", s._id);
+                      setIsStreamDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3 py-2 text-[13px] sm:text-sm font-poppins flex items-center justify-between hover:bg-[#f7f8ff] transition-colors"
+                  >
+                    <span className={stream === s._id ? "text-[#513392] font-medium" : "text-[#162447]"}>
+                      {s.name}
+                    </span>
+                    {stream === s._id && <Check className="w-3.5 h-3.5 text-[#513392]" />}
+                  </button>
+                ))
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Active Filters — inline with filter buttons */}
         {(searchQuery || city || stream || ownership || ranking) && (
-          <div className="flex flex-wrap items-center gap-2 mt-2">
-            <span className="text-sm font-poppins text-[#767e92] mr-2">Active:</span>
+          <>
+            <div className="hidden sm:block w-px h-5 bg-[#e0e4f0] mx-1" />
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full sm:w-auto mt-1.5 sm:mt-0">
+              <span className="text-[12px] sm:text-[13px] font-poppins text-[#767e92]">Active:</span>
 
-            {searchQuery && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                Search: {searchQuery}
-                <button
-                  onClick={() => handleFilterUpdate("search", searchQuery)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove search filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
-            )}
+              {searchQuery && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f5eefe] text-[#513392] text-[12px] sm:text-[13px] font-poppins font-medium border border-[#e5d5ff]">
+                  Search: {searchQuery}
+                  <button
+                    onClick={() => handleFilterUpdate("search", searchQuery)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors"
+                    aria-label="Remove search filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
 
-            {city && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                City: {city}
-                <button
-                  onClick={() => handleFilterUpdate("city", city)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove city filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
-            )}
+              {city && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f5eefe] text-[#513392] text-[12px] sm:text-[13px] font-poppins font-medium border border-[#e5d5ff]">
+                  City: {city}
+                  <button
+                    onClick={() => handleFilterUpdate("city", city)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors"
+                    aria-label="Remove city filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
 
-            {stream && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                Stream: {cmsStreams.find((s: any) => s._id === stream)?.name || stream}
-                <button
-                  onClick={() => handleFilterUpdate("stream", stream)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove stream filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
-            )}
+              {stream && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f5eefe] text-[#513392] text-[12px] sm:text-[13px] font-poppins font-medium border border-[#e5d5ff]">
+                  Stream: {cmsStreams.find((s: any) => s._id === stream)?.name || stream}
+                  <button
+                    onClick={() => handleFilterUpdate("stream", stream)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors"
+                    aria-label="Remove stream filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
 
-            {ownership && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                Type: {ownership}
-                <button
-                  onClick={() => handleFilterUpdate("ownership", ownership)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove ownership filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
-            )}
+              {ownership && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f5eefe] text-[#513392] text-[12px] sm:text-[13px] font-poppins font-medium border border-[#e5d5ff]">
+                  Type: {ownership}
+                  <button
+                    onClick={() => handleFilterUpdate("ownership", ownership)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors"
+                    aria-label="Remove ownership filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
 
-            {ranking && (
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                Ranking: {ranking}
-                <button
-                  onClick={() => handleFilterUpdate("ranking", ranking)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove ranking filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
-            )}
+              {ranking && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#f5eefe] text-[#513392] text-[12px] sm:text-[13px] font-poppins font-medium border border-[#e5d5ff]">
+                  Ranking: {ranking}
+                  <button
+                    onClick={() => handleFilterUpdate("ranking", ranking)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors"
+                    aria-label="Remove ranking filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              )}
 
-            <button
-              onClick={handleClearFilters}
-              className="text-sm font-poppins text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"
-            >
-              Clear All
-            </button>
-          </div>
+              <button
+                onClick={handleClearFilters}
+                className="text-[12px] sm:text-[13px] font-poppins text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-1 transition-colors"
+              >
+                Clear All
+              </button>
+            </div>
+          </>
         )}
       </div>
 
