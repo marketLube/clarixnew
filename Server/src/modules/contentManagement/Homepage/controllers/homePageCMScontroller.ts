@@ -144,7 +144,8 @@ const getHomePage = asyncHandler(async (req: Request, res: Response) => {
             contentBlocks: { enabled: true, blocks: [] },
             careerHub: { enabled: true, images: [], logo: [] },
             faq: { enabled: true, items: [] },
-            location: { enabled: true, title: '', items: [] }
+            location: { enabled: true, title: '', items: [] },
+            abroadLocations: { enabled: true, title: '', items: [] }
         });
         // Convert to plain object to match type if we were using lean() above, 
         // but create returns a document.

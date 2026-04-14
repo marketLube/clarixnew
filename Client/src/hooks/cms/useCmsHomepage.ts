@@ -69,6 +69,16 @@ export interface CmsHomepageData {
       isActive?: boolean;
     }>;
   };
+  abroadLocations?: {
+    enabled?: boolean;
+    title?: string;
+    items?: Array<{
+      name?: string;
+      slug?: string;
+      image?: string;
+      isActive?: boolean;
+    }>;
+  };
   faq?: CmsHomepageFaqSection;
 }
 
@@ -99,6 +109,7 @@ export function useCmsHomepage() {
     heroImages,
     careerHub: query.data?.careerHub ?? null,
     location: query.data?.location ?? null,
+    abroadLocations: query.data?.abroadLocations ?? null,
     faq: query.data?.faq ?? null,
     isLoading: query.isLoading,
     isFetching: query.isFetching,

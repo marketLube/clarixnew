@@ -75,7 +75,7 @@ interface IHomePage {
     careerHub: CareerHubSection;
     faq: FaqSection;
     location: LocationSection;
-
+    abroadLocations: LocationSection;
 }
 
 const homePageSchema = new Schema<IHomePage>(
@@ -130,6 +130,19 @@ const homePageSchema = new Schema<IHomePage>(
         },
 
         location: {
+            enabled: { type: Boolean, default: true },
+            title: String,
+            items: [
+                {
+                    name: String,
+                    slug: String,
+                    image: String,
+                    isActive: { type: Boolean, default: true },
+                },
+            ],
+        },
+
+        abroadLocations: {
             enabled: { type: Boolean, default: true },
             title: String,
             items: [
