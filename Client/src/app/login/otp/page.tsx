@@ -12,8 +12,7 @@ import Loader from "@/components/common/Loader";
 import { useDispatch } from "react-redux";
 import { login } from "@/global/redux/slices/authSlice";
 
-const dividerVector =
-  "http://localhost:3845/assets/787832ce6135077236dc4304d3144a1256212bfc.svg";
+// dividerVector replaced with CSS border
 
 function OTPForm() {
   const router = useRouter();
@@ -268,27 +267,11 @@ function OTPForm() {
 
               {/* Divider */}
               <div className="flex items-center gap-[10px]">
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
                 <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                   or
                 </p>
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
               </div>
 
               {/* Clarix Sign In Section */}

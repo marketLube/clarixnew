@@ -2,23 +2,25 @@
 
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { AuthRightPanel } from "@/components/common/AuthRightPanel";
 import { useOtpSignIn } from "@/hooks/auth/useOtpSignIn";
 
-// Figma image assets
-const nameIcon =
-  "http://localhost:3845/assets/fba78208e440397ab07ea1bed24754e15e266ab7.svg";
-const emailIcon =
-  "http://localhost:3845/assets/51a6cda4c03d683cf147106a4a16222b69e329c1.svg";
-const phoneFrame =
-  "http://localhost:3845/assets/329f38a28c495128eb9923b7c1bea4564ffb4790.svg";
-const dividerVector =
-  "http://localhost:3845/assets/787832ce6135077236dc4304d3144a1256212bfc.svg";
-const googleIcon =
-  "http://localhost:3845/assets/c726daed94ca0c5bc3b7aba73ec253421fe87bca.svg";
-const appleIcon =
-  "http://localhost:3845/assets/450805c3a1633aa70989c2e2fe28324ddf8266f1.svg";
+/* Inline SVG icons replacing broken localhost:3845 Figma assets */
+const NameIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#767e92" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+);
+const EmailIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#767e92" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+);
+const PhoneIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#767e92" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+);
+const GoogleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+);
+const AppleIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+);
 
 export default function SignInPage() {
   const {
@@ -76,13 +78,7 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <Image
-                    src={nameIcon}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
+                  <NameIcon />
                 </div>
                 <input
                   type="text"
@@ -108,13 +104,7 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <Image
-                    src={emailIcon}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
+                  <EmailIcon />
                 </div>
                 <input
                   type="email"
@@ -161,13 +151,7 @@ export default function SignInPage() {
               </label>
               <div className="relative">
                 <div className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center z-10">
-                  <Image
-                    src={phoneFrame}
-                    alt=""
-                    width={20}
-                    height={20}
-                    className="object-contain"
-                  />
+                  <PhoneIcon />
                 </div>
                 <input
                   type="tel"
@@ -281,27 +265,11 @@ export default function SignInPage() {
 
               {/* Divider */}
               <div className="flex items-center gap-[10px]">
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
                 <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                   or
                 </p>
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
               </div>
 
               {/* Social Login Buttons */}
@@ -316,15 +284,7 @@ export default function SignInPage() {
                   }}
                 >
                   <span>Continue with Google</span>
-                  <div className="w-5 h-5 flex items-center justify-center">
-                    <Image
-                      src={googleIcon}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                    />
-                  </div>
+                  <GoogleIcon />
                   <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_-1px_0px_1px_rgba(0,0,0,0.03)] rounded-[12px]" />
                 </button>
 
@@ -338,42 +298,18 @@ export default function SignInPage() {
                   }}
                 >
                   <span>Continue with Apple</span>
-                  <div className="w-5 h-5 flex items-center justify-center">
-                    <Image
-                      src={appleIcon}
-                      alt=""
-                      width={20}
-                      height={20}
-                      className="object-contain"
-                    />
-                  </div>
+                  <AppleIcon />
                   <div className="absolute inset-0 pointer-events-none shadow-[inset_0px_-1px_0px_1px_rgba(0,0,0,0.03)] rounded-[12px]" />
                 </button>
               </div>
 
               {/* Divider */}
               <div className="flex items-center gap-[10px]">
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
                 <p className="font-poppins text-[14px] leading-[18px] text-[#767e92] whitespace-nowrap">
                   or
                 </p>
-                <div className="flex-1 h-px relative min-h-px min-w-px">
-                  <Image
-                    src={dividerVector}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    sizes="50vw"
-                  />
-                </div>
+                <div className="flex-1 h-px bg-[#e6e8e7]" />
               </div>
 
               {/* Clarix Login Section */}

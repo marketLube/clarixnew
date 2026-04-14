@@ -802,7 +802,7 @@ export const coursesContent = {
   columns: [
     {
       title: "By Degree",
-      items: ["Diploma", "Postgraduate", "Certificate", "Doctorate (PhD)"],
+      items: ["Undergraduate", "Diploma", "Postgraduate", "Certificate", "Doctorate (PhD)"],
     },
     {
       title: "By Stream",
