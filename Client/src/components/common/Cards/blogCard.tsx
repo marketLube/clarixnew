@@ -33,12 +33,12 @@ export default function BlogCard({
     >
       {/* Thumbnail */}
       <div className="relative h-[258px] w-full rounded-[10px] overflow-hidden mb-4">
-        <Image
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
           src={imageUrl}
           alt={title}
-          fill
-          sizes="(max-width: 768px) 100vw, 320px"
-          className="object-cover rounded-[10px]"
+          className="absolute inset-0 w-full h-full object-cover rounded-[10px]"
+          loading="lazy"
         />
       </div>
 
