@@ -54,10 +54,10 @@ export default function HeroSection({ college }: any) {
   return (
     <div
       style={{ backgroundImage: `url('${bannerImage}')` }}
-      className="w-full min-h-[12rem] pt-[40px] pb-2 sm:pt-0 sm:pb-0 sm:min-h-0 sm:h-[28rem] lg:h-[35rem] bg-cover bg-center relative flex items-end sm:items-center justify-center"
+      className="w-full min-h-[14rem] bg-cover bg-center relative flex items-center justify-center sm:h-[28rem] lg:h-[35rem]"
     >
       {/* Overlay card */}
-      <div className="bg-white/92 backdrop-blur-sm shadow-[0_10px_40px_rgba(0,0,0,0.12)] relative sm:absolute mt-auto sm:mt-0 sm:bottom-[-88px] sm:left-1/2 sm:-translate-x-1/2 rounded-2xl px-3 py-3 sm:px-5 sm:py-4 w-[94%] max-w-[960px] z-10">
+      <div className="bg-white/92 backdrop-blur-sm shadow-[0_10px_40px_rgba(0,0,0,0.12)] rounded-2xl px-3 py-3 sm:px-5 sm:py-4 w-[94%] max-w-[960px] z-10">
 
         {/* ========== MOBILE LAYOUT ========== */}
         <div className="flex flex-col gap-2.5 sm:hidden">

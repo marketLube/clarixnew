@@ -50,7 +50,7 @@ export default function NotificationsDrawer({
       placement="right"
       onClose={onClose}
       open={open}
-      width={420}
+      size="default"
       closable={false}
       rootClassName="notifications-drawer-wrapper"
       className="notifications-drawer"
