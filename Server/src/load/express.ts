@@ -75,8 +75,8 @@ export const createExpressApp = (): Application => {
   app.use(express.urlencoded({ extended: true }));
 
 
-  // Trust Vercel's proxy to get correct IP addresses
-  app.set('trust proxy', true);
+  // Trust 1 proxy hop (nginx reverse proxy on the same server)
+  app.set('trust proxy', 1);
 
   app.use(
     rateLimit({
@@ -84,11 +84,10 @@ export const createExpressApp = (): Application => {
       max: 200,
       standardHeaders: true,
       legacyHeaders: false,
-      // If we can't get the IP, we shouldn't block the request in production
-      skip: (req) => !req.ip,
       validate: {
+        trustProxy: false,
         xForwardedForHeader: false,
-        default: true
+        default: true,
       },
     })
   );
