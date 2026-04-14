@@ -98,9 +98,9 @@ export default function ComparisonTable({
       <div className="w-full">
         <div className="flex items-start overflow-x-auto w-full">
           {/* Comparison Criteria Column */}
-          <div className="bg-white border-r border-[#e4e3e3] h-[140px] sm:h-[170px] w-[140px] sm:w-[325px] shrink-0 flex items-start justify-center sticky left-0 z-20 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none">
-            <p className="font-helvetica font-medium text-[11px] sm:text-[18px] lg:text-[20px] leading-[14px] sm:leading-[24px] text-[#767e92] text-center uppercase tracking-[-0.48px] px-2 pt-6">
-              Comparison Criteria
+          <div className="bg-white border-r border-[#e4e3e3] h-[140px] sm:h-[170px] w-[120px] sm:w-[160px] shrink-0 flex items-start justify-center sticky left-0 z-20 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none">
+            <p className="font-helvetica font-medium text-[10px] sm:text-[14px] leading-[14px] sm:leading-[20px] text-[#767e92] text-center uppercase tracking-[-0.3px] px-2 pt-6">
+              Compare
             </p>
           </div>
 
@@ -110,7 +110,7 @@ export default function ComparisonTable({
             return (
               <div
                 key={college?.id || `empty-${index}`}
-                className="bg-white border-r border-[#e4e3e3] h-[140px] sm:h-[170px] w-[200px] sm:w-[325px] shrink-0 relative flex flex-col items-center justify-center"
+                className="bg-white border-r border-[#e4e3e3] h-[140px] sm:h-[170px] w-[180px] sm:w-[240px] shrink-0 relative flex flex-col items-center justify-center"
               >
                 {college ? (
                   <>

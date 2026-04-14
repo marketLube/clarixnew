@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import CompareHeroSection from "./sections/CompareHeroSection";
 import ComparisonTable from "./sections/ComparisonTable";
 import ComparisonSections from "./sections/ComparisonSections";
@@ -71,6 +71,14 @@ export default function CompareView({
 }: CompareViewProps) {
   const [activeTab, setActiveTab] = useState("overview");
 
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId);
+    const el = document.getElementById(`section-${tabId}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F5F7FA] overflow-x-hidden">
       {/* Hero Section */}
@@ -79,13 +87,13 @@ export default function CompareView({
         onRemove={onRemoveCollege}
         onAdd={onAddCollege}
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={handleTabChange}
       />
       {/* Comparison Table */}
       <ComparisonTable
         colleges={colleges}
         activeTab={activeTab}
-        onTabChange={setActiveTab}
+        onTabChange={handleTabChange}
         onRemoveCollege={onRemoveCollege}
         onAddCollege={onAddCollege}
         onClearAll={onClearAll}

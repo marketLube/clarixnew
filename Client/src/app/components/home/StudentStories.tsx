@@ -172,10 +172,10 @@ export default function StudentStories() {
       <ContentWrapper>
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-8 md:mb-12 gap-4">
-          <div>
+          <div className="max-w-2xl">
             <SectionHeading title="What Students Say" />
-            <p className="mt-2 font-helvetica text-[14px] md:text-[16px] text-[#5D6677] max-w-xl">
-              Honest reviews from real students across India helping you make confident college choices.
+            <p className="mt-2 font-helvetica text-[14px] md:text-[16px] text-[#5D6677]">
+              Honest reviews from real students across India — helping you make confident college choices.
             </p>
           </div>
           <Link href="/review">

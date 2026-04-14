@@ -37,6 +37,13 @@ export default function ComparisonSections({
     new Set(["overview"])
   );
 
+  // Auto-expand the section when a tab is clicked
+  React.useEffect(() => {
+    if (activeTab && !expandedSections.has(activeTab)) {
+      setExpandedSections((prev) => new Set([...prev, activeTab]));
+    }
+  }, [activeTab]);
+
   const toggleSection = (sectionId: string) => {
     setExpandedSections((prev) => {
       const newSet = new Set(prev);
@@ -555,8 +562,9 @@ export default function ComparisonSections({
 
     return (
       <div
+        id={`section-${section.id}`}
         key={section.id}
-        className="flex flex-col items-start relative w-full mb-[20px] sm:mb-[40px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] rounded-[15px] sm:rounded-[20px] overflow-hidden"
+        className="flex flex-col items-start relative w-full mb-[20px] sm:mb-[40px] shadow-[1px_6px_41px_0px_rgba(0,0,0,0.04)] rounded-[15px] sm:rounded-[20px] overflow-hidden scroll-mt-[100px]"
       >
         {/* Section Header - Accordion Toggle */}
         <button
@@ -584,14 +592,14 @@ export default function ComparisonSections({
               <div
                 className="grid gap-px min-w-max w-full"
                 style={{
-                  gridTemplateColumns: `minmax(140px, 1fr) repeat(${totalCols}, minmax(200px, 1fr))`,
+                  gridTemplateColumns: `minmax(120px, 160px) repeat(${totalCols}, minmax(160px, 1fr))`,
                 }}
               >
                 {/* Criteria Column - Row Labels */}
                 {section.rows.map((row, rowIdx) => (
                   <div
                     key={`label-${rowIdx}`}
-                    className={`bg-[#f6f7ff] border-b border-[#e6e7e8] flex items-center min-h-[48px] sm:min-h-[60px] py-[12px] sm:py-[20px] px-[12px] sm:px-[20px] sticky left-0 z-10 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none ${rowIdx === section.rows.length - 1
+                    className={`bg-[#f6f7ff] border-b border-[#e6e7e8] flex items-center min-h-[40px] sm:min-h-[48px] py-[8px] sm:py-[12px] px-[10px] sm:px-[16px] sticky left-0 z-10 shadow-[2px_0_5px_rgba(0,0,0,0.05)] sm:shadow-none ${rowIdx === section.rows.length - 1
                       ? "rounded-bl-[20px]"
                       : ""
                       }`}
@@ -600,7 +608,7 @@ export default function ComparisonSections({
                       gridRow: rowIdx + 1,
                     }}
                   >
-                    <p className="font-poppins text-[14px] sm:text-[16px] leading-[18px] sm:leading-[20px] text-[#162447]">
+                    <p className="font-poppins text-[12px] sm:text-[14px] leading-[16px] sm:leading-[18px] text-[#162447]">
                       {row.label}
                     </p>
                   </div>
@@ -612,7 +620,7 @@ export default function ComparisonSections({
                   return section.rows.map((row, rowIdx) => (
                     <div
                       key={`col-${colIdx}-row-${rowIdx}`}
-                      className={`bg-white border-b border-[#e6e7e8] flex items-center min-h-[48px] sm:min-h-[60px] py-[12px] sm:py-[20px] px-[12px] sm:px-[20px] ${colIdx === totalCols - 1 &&
+                      className={`bg-white border-b border-[#e6e7e8] flex items-center min-h-[40px] sm:min-h-[48px] py-[8px] sm:py-[12px] px-[10px] sm:px-[16px] ${colIdx === totalCols - 1 &&
                         rowIdx === section.rows.length - 1
                         ? "rounded-br-[20px]"
                         : ""
