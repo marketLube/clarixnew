@@ -239,7 +239,7 @@ export default function ApplyNowModal({
       styles={{
         mask: { backgroundColor: "rgba(0, 0, 0, 0.5)" },
       }}
-      wrapClassName="apply-now-modal-wrapper"
+      classNames={{ wrapper: "apply-now-modal-wrapper" }}
       className="apply-now-modal"
     >
       <div className="bg-white rounded-[20px] relative">
