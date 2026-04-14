@@ -80,9 +80,9 @@ export default function Nav() {
   return (
     <header
       className={`${isHomePage
-        ? "absolute top-0 left-0 right-0 z-50 bg-linear-to-b from-[#0b0f2f2d]/90 via-[#0b0f2f32]/60 to-transparent"
+        ? "absolute top-0 left-0 right-0 bg-linear-to-b from-[#0b0f2f2d]/90 via-[#0b0f2f32]/60 to-transparent"
         : "border-b border-white/10 bg-linear-to-r from-[#0e1a55] via-[#11307c] to-[#0e1a55] backdrop-blur-xl"
-        } text-white transition-all duration-300`}
+        } ${isSearchOpen ? "z-[9999]" : "z-50"} text-white transition-all duration-300`}
     >
       <ContentWrapper className="flex items-center justify-between gap-4 px-4 sm:px-4 md:px-0 !lg:px-0 !xl:px-0 !mt-0 py-4  ">
         {/* Mobile navigation (Figma-style) */}

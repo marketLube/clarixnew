@@ -101,13 +101,13 @@ export default function ExplorePopoverContent({
 
   return (
     <div
-      className="flex w-[996px] h-[513px] bg-white rounded-[20px] shadow-[0px_0px_27.7px_1px_rgba(0,0,0,0.15)] overflow-hidden"
+      className="flex w-[1100px] h-[513px] bg-white rounded-[20px] shadow-[0px_0px_27.7px_1px_rgba(0,0,0,0.15)] overflow-hidden"
       onMouseLeave={() => setHoveredIndex(null)}
     >
       {/* Left Sidebar */}
-      <div className="w-[253px] h-full bg-[#513392] flex flex-col items-start px-[22px] pt-10 relative">
+      <div className="w-[370px] h-full bg-[#513392] flex flex-col items-start px-[30px] pt-10 relative">
         {/* Navigation Items */}
-        <div className="flex flex-col gap-0 w-[209px]">
+        <div className="flex flex-col gap-1 w-[310px]">
           {navItems.map((item, index) => {
             const isActive = getIsActive(index);
             const IconComponent = item.icon;
@@ -129,10 +129,10 @@ export default function ExplorePopoverContent({
                 onMouseLeave={() => {
                   // Don't reset hover here - let it persist when moving to right side
                 }}
-                className="h-[46px] w-full flex items-center justify-start gap-[6px] transition-all duration-200 cursor-pointer no-underline rounded-[6px]"
+                className="h-[52px] w-full flex items-center justify-start gap-[8px] transition-all duration-200 cursor-pointer no-underline rounded-[12px]"
                 style={{
                   backgroundColor: isActive ? "white" : "transparent",
-                  paddingLeft: "14px",
+                  paddingLeft: "16px",
                   paddingRight: isActive ? "16px" : undefined,
                   boxShadow: isActive ? "0 1px 3px rgba(0,0,0,0.08)" : undefined,
                 }}
@@ -143,7 +143,7 @@ export default function ExplorePopoverContent({
                   fill={isActive ? "#162447" : "white"}
                 />
                 <span
-                  className="text-[14px] font-medium leading-5 font-poppins transition-colors duration-200"
+                  className="text-[16px] font-medium leading-5 font-poppins transition-colors duration-200"
                   style={{
                     color: isActive ? "#162447" : "white",
                     flex: isActive ? 1 : undefined,
@@ -160,23 +160,23 @@ export default function ExplorePopoverContent({
         </div>
 
         {/* Social Media Links */}
-        <div className="absolute bottom-[38px] left-1/2 -translate-x-1/2 flex flex-col gap-3 items-center w-[188px]">
-          <p className="text-white text-[14px] font-medium leading-5 font-poppins w-full">
+        <div className="absolute bottom-[38px] left-1/2 -translate-x-1/2 flex flex-col gap-3 items-center w-[280px]">
+          <p className="text-white text-[16px] font-medium leading-5 font-poppins w-full">
             Follow More
           </p>
-          <div className="flex gap-[22px] items-center w-full">
+          <div className="flex gap-[24px] items-center w-full">
             <a
               href="https://www.facebook.com/profile.php?id=61582068009039"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="w-5 h-5 flex items-center justify-center"
+              className="w-7 h-7 flex items-center justify-center"
             >
               <Image
                 src="/icon/facebook.svg"
                 alt="Facebook"
-                width={20}
-                height={20}
+                width={28}
+                height={28}
               />
             </a>
             <a
@@ -184,13 +184,13 @@ export default function ExplorePopoverContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="w-5 h-5 flex items-center justify-center"
+              className="w-7 h-7 flex items-center justify-center"
             >
               <Image
                 src="/icon/instagram.svg"
                 alt="Instagram"
-                width={20}
-                height={20}
+                width={28}
+                height={28}
               />
             </a>
             <a
@@ -198,13 +198,13 @@ export default function ExplorePopoverContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="w-5 h-5 flex items-center justify-center"
+              className="w-7 h-7 flex items-center justify-center"
             >
               <Image
                 src="/icon/linked.svg"
                 alt="LinkedIn"
-                width={20}
-                height={20}
+                width={28}
+                height={28}
               />
             </a>
             <a
@@ -212,13 +212,13 @@ export default function ExplorePopoverContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"
-              className="w-5 h-5 flex items-center justify-center"
+              className="w-7 h-7 flex items-center justify-center"
             >
               <Image
                 src="/icon/youtube.svg"
                 alt="YouTube"
-                width={20}
-                height={20}
+                width={28}
+                height={28}
               />
             </a>
             <a
@@ -226,13 +226,13 @@ export default function ExplorePopoverContent({
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Twitter"
-              className="w-5 h-5 flex items-center justify-center"
+              className="w-7 h-7 flex items-center justify-center"
             >
               <Image
                 src="/icon/twitter.svg"
                 alt="Twitter"
-                width={20}
-                height={20}
+                width={28}
+                height={28}
               />
             </a>
           </div>
