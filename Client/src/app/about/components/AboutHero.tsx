@@ -9,8 +9,8 @@ export default function AboutHero() {
   const { hero } = useCmsAboutPage();
 
   return (
-    <section className="relative min-h-[300px] md:min-h-[560px] w-full overflow-hidden bg-gradient-to-br from-[#513392] via-[#6041ad] to-[#6846b6]">
-      <ContentWrapper className="relative h-full py-8 md:py-16">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#513392] via-[#6041ad] to-[#6846b6]">
+      <ContentWrapper className="relative h-full py-8 md:py-12">
         {/* Breadcrumb */}
         <div className="mb-8 flex items-center gap-[2px]">
           <p className="font-poppins text-[16px] leading-[20px] text-[rgba(255,255,255,0.87)]">

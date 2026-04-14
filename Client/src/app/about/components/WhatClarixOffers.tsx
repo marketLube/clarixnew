@@ -58,8 +58,8 @@ export default function WhatClarixOffers() {
   }
 
   return (
-    <section className="w-full py-8 md:py-16 bg-[#f6f7ff]">
-      <ContentWrapper className="flex flex-col gap-8 md:gap-16">
+    <section className="w-full py-8 md:py-12 bg-[#f6f7ff]">
+      <ContentWrapper className="flex flex-col gap-6 md:gap-10">
         {/* Header */}
         <div className="flex flex-col gap-2 md:gap-6 items-center text-center">
           <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[40px] tracking-[-0.96px]">

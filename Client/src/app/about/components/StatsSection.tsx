@@ -37,11 +37,11 @@ export default function StatsSection() {
   }
 
   return (
-    <section className="w-full py-0 md:py-16">
+    <section className="w-full py-6 md:py-12">
       <ContentWrapper>
         {/* <div className=""> */}
         <div className="bg-[#f6f7ff] rounded-[14px] px-4 md:px-[212px] py-6 md:py-[30px] my-8 md:my-0">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-[190px] items-center justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 items-center justify-center">
             {stats.map((stat) => (
               <div
                 key={stat.id}
