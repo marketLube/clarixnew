@@ -8,7 +8,7 @@ import { useCmsAboutPage } from "@/hooks/cms/useCmsAboutpage";
 export default function OurStory() {
   const { fourthSection } = useCmsAboutPage();
 
-  if (fourthSection && fourthSection.enabled === false) {
+  if (fourthSection?.enabled === false) {
     return null;
   }
 
@@ -18,10 +18,10 @@ export default function OurStory() {
         {/* Left: Content */}
         <div className="flex flex-col gap-6 md:gap-[30px] flex-1 max-w-[543px]">
           <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] sm:text-[48px] tracking-[-0.96px]">
-            {fourthSection?.headline}
+            {fourthSection?.headline ?? "Our Story"}
           </h2>
           <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
-            {fourthSection?.paragraph}
+            {fourthSection?.paragraph ?? "Clarix Education was born out of a simple observation: choosing the right college or course in India is unnecessarily complicated. With thousands of institutions, conflicting rankings, and scattered information, students and parents often feel overwhelmed. We set out to change that by building a platform that brings everything together in one place, accurate data, real reviews, expert guidance, and smart tools to help every student find their perfect fit."}
           </p>
         </div>
 

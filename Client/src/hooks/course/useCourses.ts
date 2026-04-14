@@ -14,6 +14,7 @@ export interface Course {
     min: string | number;
     max: string | number;
   }; 
+  collegeCount?: number;
   // Add other fields as they appear in the API
   stream?: string;
   createdAt: string;
@@ -60,6 +61,7 @@ export function useCourses(opts: UseCoursesOptions = {}) {
   const query = useQuery<CoursesApiResponse, Error>({
     queryKey: ["courses-list", opts],
     queryFn: () => fetchCourses(opts),
+    staleTime: 5 * 60 * 1000,
   });
 
   return {

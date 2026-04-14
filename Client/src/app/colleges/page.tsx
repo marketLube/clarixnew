@@ -3,7 +3,7 @@
 import { Suspense, useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { X, GitCompareArrows, Filter, ChevronDown, Check, Search } from "lucide-react";
+import { X, GitCompareArrows, Filter, ChevronDown, Check } from "lucide-react";
 import CollegeCard from "@/components/common/Cards/collageCard";
 import EmptyState from "@/components/common/EmptyState";
 import SectionDescription from "@/components/common/Section/SectionDescription";
@@ -61,19 +61,12 @@ function CollegesPageContent() {
   const stream = searchParams.get("stream") || undefined;
   const city = searchParams.get("city") || undefined;
   const ownership = searchParams.get("ownership") || undefined;
+  const ranking = searchParams.get("ranking") || undefined;
   const country = searchParams.get("country") || undefined;
   const searchQuery = searchParams.get("search") || undefined;
 
-  // Local state for the search input (synced with URL param)
-  const [searchInput, setSearchInput] = useState(searchQuery || "");
-
-  // Keep input in sync when URL changes (e.g. browser back/forward)
-  useEffect(() => {
-    setSearchInput(searchQuery || "");
-  }, [searchQuery]);
-
   // When filters are active, add noindex to avoid duplicate content indexing
-  const hasActiveFilters = Boolean(searchQuery || stream || city || ownership || country);
+  const hasActiveFilters = Boolean(searchQuery || stream || city || ownership || ranking || country);
 
   const {
     colleges,
@@ -89,6 +82,7 @@ function CollegesPageContent() {
     location: city,
     country,
     type: ownership,
+    ranking,
   });
 
   const cols = useGridColumns();
@@ -162,18 +156,6 @@ function CollegesPageContent() {
     router.push(`/colleges?${params.toString()}`);
   };
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    const params = new URLSearchParams(searchParams.toString());
-    const trimmed = searchInput.trim();
-    if (trimmed) {
-      params.set("search", trimmed);
-    } else {
-      params.delete("search");
-    }
-    router.push(`/colleges?${params.toString()}`);
-  };
-
   const handleClearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("search");
@@ -181,7 +163,6 @@ function CollegesPageContent() {
     params.delete("stream");
     params.delete("ownership");
     params.delete("ranking");
-    setSearchInput("");
     router.push(`/colleges?${params.toString()}`);
   };
 
@@ -228,28 +209,8 @@ function CollegesPageContent() {
         </section>
       )}
 
-      {/* Search Bar */}
-      <form onSubmit={handleSearch} className="mt-8 w-full max-w-2xl">
-        <div className="relative flex items-center">
-          <Search className="absolute left-4 w-5 h-5 text-[#767e92] pointer-events-none" />
-          <input
-            type="text"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search colleges by name..."
-            className="w-full pl-12 pr-28 py-3 rounded-full border border-[#e0e4f0] bg-white text-[#162447] text-sm font-poppins placeholder:text-[#a4acc4] focus:outline-none focus:border-[#513392] focus:ring-1 focus:ring-[#513392] shadow-sm transition-colors"
-          />
-          <button
-            type="submit"
-            className="absolute right-1.5 px-6 py-2 rounded-full bg-[#513392] text-white text-sm font-poppins font-medium hover:bg-[#3d2770] transition-colors shadow-sm"
-          >
-            Search
-          </button>
-        </div>
-      </form>
-
       {/* Filter Section */}
-      <div className="relative z-10 mt-6 flex flex-col gap-4">
+      <div className="relative z-10 mt-8 flex flex-col gap-4">
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2 text-[#162447] font-poppins font-medium">
             <Filter className="w-5 h-5" />
@@ -342,7 +303,7 @@ function CollegesPageContent() {
         </div>
 
         {/* Active Filters */}
-        {(searchQuery || city || stream || ownership) && (
+        {(searchQuery || city || stream || ownership || ranking) && (
           <div className="flex flex-wrap items-center gap-2 mt-2">
             <span className="text-sm font-poppins text-[#767e92] mr-2">Active:</span>
 
@@ -350,10 +311,7 @@ function CollegesPageContent() {
               <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
                 Search: {searchQuery}
                 <button
-                  onClick={() => {
-                    setSearchInput("");
-                    handleFilterUpdate("search", searchQuery);
-                  }}
+                  onClick={() => handleFilterUpdate("search", searchQuery)}
                   className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
                   aria-label="Remove search filter"
                 >
@@ -395,6 +353,19 @@ function CollegesPageContent() {
                   onClick={() => handleFilterUpdate("ownership", ownership)}
                   className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
                   aria-label="Remove ownership filter"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </span>
+            )}
+
+            {ranking && (
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
+                Ranking: {ranking}
+                <button
+                  onClick={() => handleFilterUpdate("ranking", ranking)}
+                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
+                  aria-label="Remove ranking filter"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>

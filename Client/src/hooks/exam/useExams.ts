@@ -1,8 +1,6 @@
 
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
+import api from '@/lib/api';
 
 export interface Exam {
     _id: string;
@@ -35,7 +33,7 @@ interface ExamsResponse {
 
 const fetchExams = async (params: { page?: number; limit?: number; stream?: string; search?: string } = {}) => {
     const { page = 1, limit = 8, ...rest } = params;
-    const response = await axios.get<ExamsResponse>(`${API_URL}/exam`, {
+    const response = await api.get<ExamsResponse>("/exam", {
         params: { page, limit, ...rest },
     });
     return response.data;
@@ -45,5 +43,6 @@ export const useExams = (page: number = 1, limit: number = 8, stream?: string, s
     return useQuery({
         queryKey: ['exams', page, limit, stream, search],
         queryFn: () => fetchExams({ page, limit, stream, search }),
+        staleTime: 5 * 60 * 1000,
     });
 };

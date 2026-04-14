@@ -13,6 +13,14 @@ export interface JobDetail {
   location: string;
   postedTime: string;
   benefits?: string[];
+  companyWebsite?: string;
+  employeeSize?: string;
+  industry?: string;
+  shortDescription?: string;
+  aboutJob?: string;
+  aboutYou?: string[];
+  aboutRole?: string[];
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
 interface JobDetailHeroProps {

@@ -8,6 +8,7 @@ import CompareView, { College } from "./components/CompareView";
 import AddCollegeModal from "./components/AddCollegeModal";
 import api from "@/lib/api";
 import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
+import { formatFeeRange } from "@/lib/helperFunctions/formatCurrency";
 
 // Transform API college data to CompareView College format
 const transformCollegeData = (apiCollege: any): College => {
@@ -51,7 +52,7 @@ const transformCollegeData = (apiCollege: any): College => {
     hostelFee: formatFees(apiCollege.hostelFee),
     registrationFee: "₹5,000",
     examFee: "₹2,000/sem",
-    estimatedTotalCost: apiCollege.annualFeesRange || "Check college website",
+    estimatedTotalCost: formatFeeRange(apiCollege.annualFeesRange, "Check college website"),
     scholarships:
       (apiCollege.scholarships || [])
         .map((sch: any) => {

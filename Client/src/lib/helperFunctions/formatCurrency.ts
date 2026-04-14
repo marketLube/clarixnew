@@ -69,31 +69,124 @@ export function formatFeeINR(value: string | number | undefined | null, fallback
 }
 
 /**
- * Formats a fee range string. Handles cases like "100000-500000" or already-formatted strings.
+ * Converts a raw fee number into compact Indian format.
+ *   1500000  => "15L"
+ *   250000   => "2.5L"
+ *   30000    => "30K"
+ *   800      => "800"
  */
-export function formatFeeRange(value: string | undefined | null, fallback = "N/A"): string {
-  if (!value) return fallback;
+function formatFeeCompact(num: number): string {
+  if (num >= 100000) {
+    const lakhs = num / 100000;
+    return `${lakhs % 1 === 0 ? lakhs.toString() : lakhs.toFixed(1).replace(/\.0$/, "")}L`;
+  }
+  if (num >= 1000) {
+    const thousands = num / 1000;
+    return `${thousands % 1 === 0 ? thousands.toString() : thousands.toFixed(1).replace(/\.0$/, "")}K`;
+  }
+  return num.toString();
+}
 
-  // If already formatted
-  if (value.includes("₹") || value.includes("Lakh") || value.includes("K")) {
-    return value;
+/**
+ * Parses a single fee token into a raw number.
+ * Handles:
+ *   "2.1L" | "2.1 Lakh" | "15L"  => 210000 | 1500000
+ *   "30K"                         => 30000
+ *   "1500005"                     => 1500005
+ *   "₹2,10,000"                   => 210000
+ */
+function parseFeeToken(token: string): number {
+  const cleaned = token.trim();
+
+  // Match numbers followed by L/Lakh/Lac
+  const lakhMatch = cleaned.match(/([\d,.]+)\s*(?:lakh|lac|l)\b/i);
+  if (lakhMatch) {
+    return parseFloat(lakhMatch[1].replace(/,/g, "")) * 100000;
   }
 
-  // Try to parse a range like "100000 - 500000" or "100000-500000"
-  const parts = value.split(/[-–]/);
-  if (parts.length === 2) {
-    const min = parseFloat(parts[0].trim().replace(/[^0-9.]/g, ""));
-    const max = parseFloat(parts[1].trim().replace(/[^0-9.]/g, ""));
-    if (!isNaN(min) && !isNaN(max)) {
-      return `₹${min.toLocaleString("en-IN")} - ₹${max.toLocaleString("en-IN")}`;
+  // Match numbers followed by Crore/Cr
+  const croreMatch = cleaned.match(/([\d,.]+)\s*(?:crore|cr)\b/i);
+  if (croreMatch) {
+    return parseFloat(croreMatch[1].replace(/,/g, "")) * 10000000;
+  }
+
+  // Match numbers followed by K
+  const kMatch = cleaned.match(/([\d,.]+)\s*k\b/i);
+  if (kMatch) {
+    return parseFloat(kMatch[1].replace(/,/g, "")) * 1000;
+  }
+
+  // Plain number (possibly with ₹, commas, spaces)
+  const numMatch = cleaned.match(/([\d,]+(?:\.\d+)?)/);
+  if (numMatch) {
+    return parseFloat(numMatch[1].replace(/,/g, ""));
+  }
+
+  return NaN;
+}
+
+/**
+ * Formats a fee range for display on college cards.
+ *
+ * Accepts many formats from the API:
+ *   - Already formatted: "₹2.1L - ₹15L" (re-validated and cleaned)
+ *   - Raw range string: "210000 - 1500000"
+ *   - Single value: "210000" or "2.1L"
+ *   - Number type: 210000
+ *   - Object: { min: 210000, max: 1500000 }
+ *
+ * Always outputs clean compact format like "₹2.1L - ₹15L" or "₹30K".
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function formatFeeRange(value: any, fallback = "N/A"): string {
+  if (value === undefined || value === null || value === "") return fallback;
+
+  // Handle object with min/max
+  if (typeof value === "object" && value !== null) {
+    const min = parseFeeToken(String(value.min ?? ""));
+    const max = parseFeeToken(String(value.max ?? ""));
+    if (!isNaN(min) && !isNaN(max) && min !== max) {
+      return `₹${formatFeeCompact(min)} - ₹${formatFeeCompact(max)}`;
     }
+    if (!isNaN(min)) return `₹${formatFeeCompact(min)}`;
+    if (!isNaN(max)) return `₹${formatFeeCompact(max)}`;
+    return fallback;
   }
 
-  // Try single value
-  const parsed = parseFloat(value.replace(/[^0-9.]/g, ""));
-  if (!isNaN(parsed) && parsed > 0) {
-    return `₹${parsed.toLocaleString("en-IN")}`;
+  // Handle raw number
+  if (typeof value === "number") {
+    if (value <= 0 || isNaN(value)) return fallback;
+    return `₹${formatFeeCompact(value)}`;
   }
 
-  return value;
+  // Handle string
+  if (typeof value === "string") {
+    const str = value.trim();
+    if (!str) return fallback;
+
+    // Split on range separator (dash/en-dash), but not dashes inside numbers
+    // Look for " - " or "–" with optional ₹ after
+    const rangeParts = str.split(/\s*[-–]\s*(?=₹|Rs|INR|\d)/i);
+
+    if (rangeParts.length >= 2) {
+      const min = parseFeeToken(rangeParts[0]);
+      const max = parseFeeToken(rangeParts[rangeParts.length - 1]);
+      if (!isNaN(min) && !isNaN(max)) {
+        return min === max
+          ? `₹${formatFeeCompact(min)}`
+          : `₹${formatFeeCompact(min)} - ₹${formatFeeCompact(max)}`;
+      }
+    }
+
+    // Try as a single value
+    const single = parseFeeToken(str);
+    if (!isNaN(single) && single > 0) {
+      return `₹${formatFeeCompact(single)}`;
+    }
+
+    // Return the original string if we can't parse it at all
+    return str;
+  }
+
+  return fallback;
 }

@@ -7,7 +7,7 @@ import JobsList from "./components/JobsList";
 import BlogsSection from "./components/BlogsSection";
 import FAQ from "@/app/components/common/FAQ";
 import { jobsInternshipsFaqsData } from "@/app/utilities/DummyData";
-import { useJobs } from "@/hooks/job/useJobs";
+import { useJobs, type UseJobsOptions } from "@/hooks/job/useJobs";
 import { useBlogs } from "@/hooks/blog/useBlogs";
 import { useSavedItems } from "@/hooks/useSavedItems";
 import Breadcrumb from "@/components/common/Breadcrumb";
@@ -42,7 +42,16 @@ function JobsInternshipsPageContent() {
   const searchParams = useSearchParams();
 
   const initialPage = Number(searchParams.get("page")) || 1;
+  const search = searchParams.get("search") || undefined;
+  const jobType = (searchParams.get("jobType") as UseJobsOptions["jobType"]) || undefined;
+
   const [page, setPage] = useState(initialPage);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [search, jobType]);
+
   const limit = 8;
   const { jobs, pagination, isLoading, isError, isFetching } = useJobs({
     page,
@@ -50,6 +59,8 @@ function JobsInternshipsPageContent() {
     status: "active",
     sortBy: "createdAt",
     order: "desc",
+    search,
+    jobType,
   });
 
   const { savedItems, toggleSavedItem } = useSavedItems();
@@ -97,8 +108,6 @@ function JobsInternshipsPageContent() {
   const { data: blogData } = useBlogs();
   const blogs = blogData?.blogs?.slice(0, 4) || [];
 
-  const search = searchParams.get("search") || "";
-  const jobType = searchParams.get("jobType") || "";
   const hasActiveFilters = Boolean(search || jobType);
 
   // Build rel prev/next links for SEO

@@ -58,6 +58,8 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
         limit = 10,
         search,
         type,
+        courseLevel,
+        stream,
         sortBy = 'createdAt',
         order = 'desc'
     } = req.query;
@@ -80,6 +82,22 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
         filter.type = type;
     }
 
+    if (courseLevel) {
+        filter.courseLevel = { $regex: courseLevel, $options: 'i' };
+    }
+
+    if (stream) {
+        // stream can be an ObjectId or a name
+        if (isValidObjectId(stream)) {
+            filter.stream = stream;
+        } else {
+            const streamDoc = await Stream.findOne({ name: { $regex: `^${stream}$`, $options: 'i' } }).lean();
+            if (streamDoc) {
+                filter.stream = streamDoc._id;
+            }
+        }
+    }
+
     // Build sort object
     const sortField = sortBy as string;
     const sortOrder = order === 'desc' ? -1 : 1;
@@ -95,11 +113,26 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
         Course.countDocuments(filter),
     ]);
 
+    // Add college count for each course
+    const courseIds = courses.map((c: any) => c._id);
+    const collegeCounts = await College.aggregate([
+        { $match: { courses: { $in: courseIds } } },
+        { $unwind: '$courses' },
+        { $match: { courses: { $in: courseIds } } },
+        { $group: { _id: '$courses', count: { $sum: 1 } } },
+    ]);
+
+    const countMap = new Map(collegeCounts.map((c: any) => [c._id.toString(), c.count]));
+    const coursesWithCount = courses.map((course: any) => ({
+        ...course,
+        collegeCount: countMap.get(course._id.toString()) || 0,
+    }));
+
     return ApiResponse.success(
         res,
         200,
         {
-            courses,
+            courses: coursesWithCount,
             pagination: {
                 total,
                 page: pageNum,

@@ -264,8 +264,8 @@ export default function ExplorePopover({
         trigger="hover"
         placement="bottomLeft"
         overlayClassName="explore-popover-wrapper"
-        mouseEnterDelay={0.15}
-        mouseLeaveDelay={0.15}
+        mouseEnterDelay={0.05}
+        mouseLeaveDelay={0.2}
         overlayStyle={{ padding: 0, margin: 0 }}
         rootClassName="explore-popover-root"
         open={isOpen}

@@ -11,6 +11,8 @@ export interface UseCollegesOptions {
   city?: string;
   location?: string;
   country?: string;
+  type?: string;
+  ranking?: string;
   sortBy?: string;
   order?: "asc" | "desc";
 }
@@ -33,11 +35,13 @@ async function fetchColleges(opts: UseCollegesOptions): Promise<CollegesApiRespo
 
   if (opts.search) params.search = opts.search;
   if (opts.stream) params.stream = opts.stream;
-  if (opts.city) params.city = opts.city;
+  if (opts.city) params.location = opts.city;
   if (opts.location) params.location = opts.location;
   if (opts.country) params.country = opts.country;
+  if (opts.type) params.type = opts.type;
+  if (opts.ranking) params.ranking = opts.ranking;
   if (opts.sortBy) params.sortBy = opts.sortBy;
-  if (opts.order) params.order = opts.order;     // Add to params
+  if (opts.order) params.order = opts.order;
 
   const { data } = await api.get("/college", { params });
   return data?.data as CollegesApiResponse;
@@ -47,6 +51,7 @@ export function useColleges(opts: UseCollegesOptions = {}) {
   const query = useQuery<CollegesApiResponse, Error>({
     queryKey: ["colleges", opts],
     queryFn: () => fetchColleges(opts),
+    staleTime: 5 * 60 * 1000,
   });
 
   return {

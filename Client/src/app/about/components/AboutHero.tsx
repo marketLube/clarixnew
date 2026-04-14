@@ -25,10 +25,10 @@ export default function AboutHero() {
         {/* Content */}
         <div className="flex flex-col gap-4 md:gap-[30px] max-w-[757px]">
           <h1 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-white text-[22px] md:text-[40px] tracking-[-0.96px]">
-            {hero?.headline}
+            {hero?.headline ?? "About Clarix Education"}
           </h1>
           <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[rgba(255,255,255,0.7)]">
-            {hero?.subHeadline}
+            {hero?.subHeadline ?? "Empowering students to make confident education decisions with trusted data, expert guidance, and the right tools."}
           </p>
         </div>
       </ContentWrapper>

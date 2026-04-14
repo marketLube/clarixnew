@@ -20,8 +20,9 @@ export default function ExamsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
   const stream = searchParams.get("stream") || undefined;
+  const search = searchParams.get("search") || undefined;
 
-  const { data: examsData, isLoading: isExamsLoading } = useExams(currentPage, cardsPerPage, stream);
+  const { data: examsData, isLoading: isExamsLoading } = useExams(currentPage, cardsPerPage, stream, search);
   const { data: streamsData, isLoading: isStreamsLoading } = useStreams();
 
   const exams = examsData?.data?.exams || [];
@@ -42,7 +43,7 @@ export default function ExamsPage() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const hasActiveFilters = Boolean(stream);
+  const hasActiveFilters = Boolean(stream || search);
 
   const { savedItems, toggleSavedItem } = useSavedItems();
 
@@ -64,6 +65,7 @@ export default function ExamsPage() {
   const handleClearFilters = () => {
     const params = new URLSearchParams(searchParams.toString());
     params.delete("stream");
+    params.delete("search");
     params.set("page", "1");
     router.push(`/exams?${params.toString()}`);
   };
@@ -173,19 +175,33 @@ export default function ExamsPage() {
           </div>
 
           {/* Active Filters */}
-          {stream && (
+          {(stream || search) && (
             <div className="flex flex-wrap items-center gap-2 mt-2">
               <span className="text-sm font-poppins text-[#767e92] mr-2">Active:</span>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
-                Stream: {cmsStreams.find((s) => s._id === stream)?.name || stream}
-                <button
-                  onClick={() => handleFilterUpdate("stream", null)}
-                  className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
-                  aria-label="Remove stream filter"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </span>
+              {search && (
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
+                  Search: {search}
+                  <button
+                    onClick={() => handleFilterUpdate("search", null)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
+                    aria-label="Remove search filter"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </span>
+              )}
+              {stream && (
+                <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f5eefe] text-[#513392] text-sm font-poppins font-medium border border-[#e5d5ff] transition-all">
+                  Stream: {cmsStreams.find((s) => s._id === stream)?.name || stream}
+                  <button
+                    onClick={() => handleFilterUpdate("stream", null)}
+                    className="hover:bg-[#d9c4fb] rounded-full p-0.5 transition-colors flex items-center justify-center"
+                    aria-label="Remove stream filter"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </span>
+              )}
               <button
                 onClick={handleClearFilters}
                 className="text-sm font-poppins text-[#ff4b4b] hover:text-[#e73b3b] hover:underline ml-2 transition-colors"

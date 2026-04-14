@@ -13,8 +13,17 @@ interface Stat {
 export default function StatsSection() {
   const { keyStatistics } = useCmsAboutPage();
 
+  const fallbackStats: Stat[] = [
+    { id: 1, value: "40,000+", label: "Colleges Listed" },
+    { id: 2, value: "500+", label: "Courses Covered" },
+    { id: 3, value: "200+", label: "Entrance Exams Tracked" },
+    { id: 4, value: "50,000+", label: "Student Reviews" },
+  ];
+
   const stats: Stat[] = useMemo(() => {
     const items = keyStatistics?.stats ?? [];
+
+    if (items.length === 0) return fallbackStats;
 
     return items.map((item, index) => ({
       id: index + 1,

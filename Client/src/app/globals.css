@@ -503,3 +503,17 @@ body {
   padding: 0 !important;
   border-radius: 20px !important;
 }
+
+/* Explore sidebar nav item hover - white bg with dark text */
+.explore-nav-item:not(.active):hover {
+  background-color: white !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.explore-nav-item:not(.active):hover .explore-nav-label {
+  color: #162447 !important;
+}
+
+.explore-nav-item:not(.active):hover svg {
+  fill: #162447 !important;
+}

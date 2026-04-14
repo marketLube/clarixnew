@@ -61,6 +61,14 @@ function JobDetailPageContent() {
       salaryRange: formatSalary(apiJob.salary),
       location: apiJob.location,
       postedTime: timeAgo(apiJob.createdAt),
+      companyWebsite: apiJob.companyWebsite,
+      employeeSize: apiJob.employeeSize,
+      industry: apiJob.industry,
+      shortDescription: apiJob.shortDescription,
+      aboutJob: apiJob.aboutJob,
+      aboutYou: apiJob.aboutYou,
+      aboutRole: apiJob.aboutRole,
+      faqs: apiJob.faqs,
     }
     : null;
 

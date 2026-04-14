@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { ChevronRightIcon } from "./Icons";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,8 +63,19 @@ function getItemHref(
       if (columnIndex === 0) return `/scholarships?type=${encoded}`;
       if (columnIndex === 1) return `/scholarships?search=${encoded}`;
       return "/scholarships";
-    case 4: // Jobs & Internships
-      return "/jobs-internships";
+    case 4: { // Jobs & Internships
+      // Map specific items to jobType filter; everything else uses search
+      const jobTypeMap: Record<string, string> = {
+        Internships: "Internship",
+        "Full Time": "Full Time",
+        "Part Time": "Part Time",
+        Contract: "Contract",
+        Freelance: "Freelance",
+      };
+      const mappedJobType = jobTypeMap[value];
+      if (mappedJobType) return `/jobs-internships?jobType=${encodeURIComponent(mappedJobType)}`;
+      return `/jobs-internships?search=${encoded}`;
+    }
     default:
       return "/";
   }
@@ -78,6 +91,13 @@ export default function ExplorePopoverContent({
   getIsActive,
   activeContentIndex,
 }: ExplorePopoverContentProps) {
+  const router = useRouter();
+
+  // Eagerly prefetch main routes so navigation is instant
+  useEffect(() => {
+    const routes = ["/colleges", "/courses", "/exams", "/scholarships", "/jobs-internships", "/colleges/compare"];
+    routes.forEach((route) => router.prefetch(route));
+  }, [router]);
 
   return (
     <div
@@ -96,6 +116,7 @@ export default function ExplorePopoverContent({
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={true}
                 onClick={(e) => {
                   // Prevent navigation on hover-select; only navigate on deliberate click
                   if (selectedIndex !== index) {
@@ -108,10 +129,13 @@ export default function ExplorePopoverContent({
                 onMouseLeave={() => {
                   // Don't reset hover here - let it persist when moving to right side
                 }}
-                className={`h-[46px] w-full flex items-center justify-start gap-[6px] transition-colors cursor-pointer no-underline ${isActive
-                    ? "bg-white rounded-[6px] pl-[14px] pr-[16px] shadow-sm"
-                    : "pl-[14px] rounded-[6px] hover:bg-white/15"
-                  }`}
+                className="h-[46px] w-full flex items-center justify-start gap-[6px] transition-all duration-200 cursor-pointer no-underline rounded-[6px]"
+                style={{
+                  backgroundColor: isActive ? "white" : "transparent",
+                  paddingLeft: "14px",
+                  paddingRight: isActive ? "16px" : undefined,
+                  boxShadow: isActive ? "0 1px 3px rgba(0,0,0,0.08)" : undefined,
+                }}
               >
                 <IconComponent
                   width={item.iconWidth}
@@ -119,8 +143,11 @@ export default function ExplorePopoverContent({
                   fill={isActive ? "#162447" : "white"}
                 />
                 <span
-                  className={`text-[14px] font-medium leading-5 font-poppins ${isActive ? "text-[#162447] flex-1" : "text-white"
-                    }`}
+                  className="text-[14px] font-medium leading-5 font-poppins transition-colors duration-200"
+                  style={{
+                    color: isActive ? "#162447" : "white",
+                    flex: isActive ? 1 : undefined,
+                  }}
                 >
                   {item.label}
                 </span>
@@ -244,6 +271,7 @@ export default function ExplorePopoverContent({
                               <Link
                                 key={itemIndex}
                                 href={href}
+                                prefetch={true}
                                 className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
                               >
                                 <span>{item}</span>
@@ -273,6 +301,7 @@ export default function ExplorePopoverContent({
                                 <Link
                                   key={itemIndex}
                                   href={href}
+                                  prefetch={true}
                                   className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
                                 >
                                   <span>{item}</span>
@@ -318,6 +347,7 @@ export default function ExplorePopoverContent({
                           <Link
                             key={itemIndex}
                             href={href}
+                            prefetch={true}
                             className="group flex items-center justify-between px-2 py-[5px] rounded-[6px] transition-all duration-300 ease-in-out hover:translate-x-1 text-[#767e92] text-[15px] leading-5 hover:bg-[#f6f7ff] hover:text-[#513392] no-underline"
                           >
                             <span>{item}</span>

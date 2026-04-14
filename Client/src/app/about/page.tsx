@@ -27,7 +27,7 @@ export default function AboutPage() {
       <StatsSection />
 
       {/* Contact/CTA Section */}
-      {/* <AboutCTA /> */}
+      <AboutCTA />
     </div>
   );
 }

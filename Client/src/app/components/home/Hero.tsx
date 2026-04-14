@@ -95,17 +95,17 @@ export default function Hero() {
   const handleSearch = (e?: React.FormEvent) => {
     e?.preventDefault();
     if (searchQuery.trim()) {
-      router.push(`/search?q=${encodeURIComponent(searchQuery)}`);
+      router.push(`/colleges?search=${encodeURIComponent(searchQuery)}`);
     }
   };
 
   const tabs = [
-    { name: "Colleges", icon: GraduationCapIcon, onclick: () => router.push("/colleges") },
-    { name: "Course", icon: OpenBookIcon, onclick: () => router.push("/courses") },
-    { name: "Exams", icon: DocIcon, onclick: () => router.push("/exams") },
-    { name: "Scholarships", icon: TrophyIcon, onclick: () => router.push("/scholarships") },
-    { name: "Compare", icon: BranchIcon, onclick: () => router.push("/colleges/compare") },
-    { name: "Reviews", icon: Edit2, onclick: () => router.push("/review") },
+    { name: "Colleges", icon: GraduationCapIcon, href: "/colleges" },
+    { name: "Courses", icon: OpenBookIcon, href: "/courses" },
+    { name: "Exams", icon: DocIcon, href: "/exams" },
+    { name: "Scholarships", icon: TrophyIcon, href: "/scholarships" },
+    { name: "Compare", icon: BranchIcon, href: "/colleges/compare" },
+    { name: "Reviews", icon: Edit2, href: "/review" },
   ];
 
   return (
@@ -566,9 +566,10 @@ export default function Hero() {
               <div className="bg-white border-[6px] border-white/24 rounded-[16px] mb-6 flex items-center justify-center w-full max-w-[800px] shadow-[0_4px_12px_rgba(0,0,0,0.05)] py-1 px-1">
                 <div className="bg-[#F6F7FF] rounded-[16px] md:rounded-[30px] p-1.5 md:p-2 grid grid-cols-3 md:flex items-center gap-2 md:gap-1 w-full md:w-auto md:overflow-x-auto md:no-scrollbar md:max-w-full">
                   {tabs.map((tab) => (
-                    <button
+                    <Link
                       key={tab.name}
-                      onClick={tab.onclick}
+                      href={tab.href}
+                      prefetch={true}
                       className="flex items-center justify-center md:justify-start w-full md:w-auto gap-1 md:gap-1.5 px-1 py-1.5 md:px-4 md:py-2 rounded-[40px] transition-all whitespace-nowrap cursor-pointer text-[#162447] hover:bg-[#513392] hover:text-white hover:shadow-[0px_1px_4px_rgba(0,0,0,0.05)]"
                     >
                       <tab.icon
@@ -578,21 +579,22 @@ export default function Hero() {
                         className="shrink-0"
                       />
                       <span className="font-poppins text-[11px] md:text-[14px] font-regular">{tab.name}</span>
-                    </button>
+                    </Link>
                   ))}
                 </div>
               </div>
 
               {/* Primary CTA Button */}
-              <button
-                onClick={() => router.push(primaryCtaLink)}
+              <Link
+                href={primaryCtaLink || "/colleges"}
+                prefetch={true}
                 className="group flex items-center gap-2 md:gap-4 bg-[#513392] hover:bg-[#412876] text-white rounded-[40px] px-2 py-2 md:px-6 md:py-3 transition-all shadow-[0_8px_24px_rgba(81,51,146,0.3)] hover:shadow-[0_12px_32px_rgba(81,51,146,0.4)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
-                <span className="text-[14px] md:text-[16px] font-normal font-poppins">{primaryCtaText}</span>
+                <span className="text-[14px] md:text-[16px] font-normal font-poppins">{primaryCtaText || "Explore Colleges"}</span>
                 <div className="bg-white p-1 rounded-full flex items-center justify-center transition-transform group-hover:translate-x-1">
                   <ChevronRightIcon width={16} height={16} className="md:w-[20px] md:h-[20px]" fill="#513392" />
                 </div>
-              </button>
+              </Link>
             </>
           )}
         </div>

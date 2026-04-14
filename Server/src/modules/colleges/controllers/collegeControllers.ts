@@ -134,6 +134,7 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
         stream,
         category,
         country,
+        ranking,
         sortBy = 'createdAt',
         order = 'desc',
     } = req.query;
@@ -177,6 +178,24 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
 
     if (country) {
         matchFilter.country = { $regex: `^${country}$`, $options: 'i' };
+    }
+
+    // --- Handle ranking filter: filter by minimum rating ---
+    if (ranking) {
+        const rankingStr = (ranking as string).toLowerCase();
+        if (rankingStr === 'top-10') {
+            matchFilter.rating = { $gte: 4.5 };
+        } else if (rankingStr === 'top-50') {
+            matchFilter.rating = { $gte: 4.0 };
+        } else if (rankingStr === 'top-100') {
+            matchFilter.rating = { $gte: 3.5 };
+        } else {
+            // If a numeric rating threshold is passed, use it directly
+            const ratingVal = parseFloat(ranking as string);
+            if (!isNaN(ratingVal)) {
+                matchFilter.rating = { $gte: ratingVal };
+            }
+        }
     }
 
     // --- Handle stream filter: find matching course IDs first ---

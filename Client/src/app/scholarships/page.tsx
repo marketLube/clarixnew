@@ -26,6 +26,8 @@ function ScholarshipsPageContent() {
   const { scholarships: rawScholarships, pagination, isLoading, isError, error } = useScholarships({
     page: currentPage,
     limit: cardsPerPage,
+    search,
+    type,
   });
 
   const { savedItems, toggleSavedItem } = useSavedItems();

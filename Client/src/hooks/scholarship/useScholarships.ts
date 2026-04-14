@@ -70,6 +70,7 @@ export function useScholarships(opts: UseScholarshipsOptions = {}) {
   const query = useQuery<ScholarshipsApiResponse, Error>({
     queryKey: ["scholarships-list", { ...opts, status: "active" }],
     queryFn: () => fetchScholarships({ ...opts, status: "active" }),
+    staleTime: 5 * 60 * 1000,
   });
 
   return {

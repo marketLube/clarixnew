@@ -22,17 +22,28 @@ interface Feature {
 export default function WhatClarixOffers() {
   const { thirdSection } = useCmsAboutPage();
 
+  const iconMap: Record<string, React.ReactNode> = useMemo(() => ({
+    search: <Search size={32} strokeWidth={1.5} color="#513392" />,
+    compare: <LineChart size={32} strokeWidth={1.5} color="#513392" />,
+    reviews: <MessageSquareText size={32} strokeWidth={1.5} color="#513392" />,
+    exams: <Calendar size={32} strokeWidth={1.5} color="#513392" />,
+    jobs: <Briefcase size={32} strokeWidth={1.5} color="#513392" />,
+    ai: <Sparkles size={32} strokeWidth={1.5} color="#513392" />,
+  }), []);
+
+  const fallbackFeatures: Feature[] = useMemo(() => [
+    { id: 1, title: "College Comparison", description: "Compare colleges side by side on fees, placements, rankings, and facilities.", icon: iconMap.compare },
+    { id: 2, title: "Course Discovery", description: "Explore undergraduate, postgraduate, diploma, and PhD programs across every stream.", icon: iconMap.search },
+    { id: 3, title: "Exam Tracker", description: "Stay updated on exam dates, registration deadlines, syllabi, and results.", icon: iconMap.exams },
+    { id: 4, title: "Scholarship Finder", description: "Discover merit-based, need-based, and category-specific scholarships.", icon: iconMap.ai },
+    { id: 5, title: "Career Guidance", description: "Get personalized career path recommendations based on your interests.", icon: iconMap.jobs },
+    { id: 6, title: "Expert Counseling", description: "Connect with education counselors for one-on-one guidance.", icon: iconMap.reviews },
+  ], [iconMap]);
+
   const features: Feature[] = useMemo(() => {
     const cards = thirdSection?.cards ?? [];
 
-    const iconMap: Record<string, React.ReactNode> = {
-      search: <Search size={32} strokeWidth={1.5} color="#513392" />,
-      compare: <LineChart size={32} strokeWidth={1.5} color="#513392" />,
-      reviews: <MessageSquareText size={32} strokeWidth={1.5} color="#513392" />,
-      exams: <Calendar size={32} strokeWidth={1.5} color="#513392" />,
-      jobs: <Briefcase size={32} strokeWidth={1.5} color="#513392" />,
-      ai: <Sparkles size={32} strokeWidth={1.5} color="#513392" />,
-    };
+    if (cards.length === 0) return fallbackFeatures;
 
     return cards.map((card, index) => ({
       id: index + 1,
@@ -40,9 +51,9 @@ export default function WhatClarixOffers() {
       description: card.description ?? "",
       icon: (card.icon && iconMap[card.icon]) ?? iconMap.search,
     }));
-  }, [thirdSection]);
+  }, [thirdSection, iconMap, fallbackFeatures]);
 
-  if (!thirdSection || thirdSection.enabled === false) {
+  if (thirdSection?.enabled === false) {
     return null;
   }
 
@@ -52,10 +63,10 @@ export default function WhatClarixOffers() {
         {/* Header */}
         <div className="flex flex-col gap-2 md:gap-6 items-center text-center">
           <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[40px] tracking-[-0.96px]">
-            {thirdSection.headline}
+            {thirdSection?.headline ?? "What Clarix Offers"}
           </h2>
           <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#767e92] max-w-[416px]">
-            {thirdSection.paragraph}
+            {thirdSection?.paragraph ?? "Everything you need to make the right education decision, all in one platform."}
           </p>
         </div>
 

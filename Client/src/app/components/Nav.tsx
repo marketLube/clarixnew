@@ -1,22 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
+import { AnimatePresence, motion } from "framer-motion";
+import { X } from "lucide-react";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
   SearchIcon,
   BellIcon,
   UserIcon,
+  GraduationCapIcon,
+  OpenBookIcon,
+  DocIcon,
+  TrophyIcon,
 } from "../../components/common/Icons";
 import ContentWrapper from "../../components/Ui/ContentWrapper";
 import NotificationsDrawer from "@/components/common/NotificationsDrawer";
 import AboutPopover from "@/components/common/AboutPopover";
 import { useAppSelector } from "@/global/redux/hooks";
 import ExplorePopover from "@/components/common/ExplorePopover";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useGlobalSearch } from "@/hooks/search/useGlobalSearch";
+import Loader from "@/components/common/Loader";
 
 const ProfilePopover = dynamic(
   () => import("@/components/common/ProfilePopover"),
@@ -29,9 +38,44 @@ const navLinks = [
 
 export default function Nav() {
   const pathname = usePathname();
+  const router = useRouter();
   const isHomePage = pathname === "/";
   const [drawerOpen, setDrawerOpen] = useState(false);
   const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
+  const { results: searchResults, isLoading: isSearchLoading } = useGlobalSearch(debouncedSearchQuery);
+  const searchRef = useRef<HTMLFormElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Close search dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSearch = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (searchQuery.trim()) {
+      setIsSearchOpen(false);
+      router.push(`/colleges?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  // Prefetch key routes on mount for instant navigation
+  useEffect(() => {
+    ["/colleges", "/courses", "/exams", "/scholarships", "/jobs-internships", "/blog", "/about"].forEach(
+      (route) => router.prefetch(route)
+    );
+  }, [router]);
 
   return (
     <header
@@ -124,25 +168,245 @@ export default function Nav() {
             </ExplorePopover>
           </div>
 
-          {/* Center section: search input (desktop only, matches hero search input) */}
+          {/* Center section: search input with dropdown */}
           <form
-            className="hidden lg:flex min-w-[420px] max-w-[650px] flex-1 items-center gap-3 rounded-full border border-white/60 bg-white/10 px-5 py-2 text-sm text-white/80 backdrop-blur-lg shadow-[0_6px_24px_rgba(0,0,0,0.25)]"
+            ref={searchRef}
+            onSubmit={handleSearch}
             role="search"
-            onSubmit={(e) => e.preventDefault()}
+            className="hidden lg:flex flex-col min-w-[420px] max-w-[650px] flex-1 relative z-50"
           >
-            <SearchIcon
-              width={24}
-              height={24}
-              fill="white"
-              aria-hidden="true"
-            />
-            <input
-              type="search"
-              name="q"
-              className="w-full bg-transparent text-sm leading-5 text-white placeholder:text-white/70 focus:outline-none"
-              placeholder="Search colleges, courses, exams, or scholarships…"
-              aria-label="Search colleges, courses, exams, or scholarships"
-            />
+            <div
+              className={`flex items-center gap-3 px-5 py-2 w-full rounded-full border transition-colors ${
+                isSearchOpen
+                  ? "bg-white border-white shadow-[0px_8px_32px_rgba(0,0,0,0.12)]"
+                  : "bg-white/10 border-white/60 shadow-[0px_6px_24px_rgba(0,0,0,0.25)]"
+              }`}
+              style={{ backdropFilter: "blur(16px)" }}
+            >
+              <SearchIcon
+                width={24}
+                height={24}
+                fill={isSearchOpen ? "#6B7280" : "white"}
+                aria-hidden="true"
+              />
+              <input
+                ref={searchInputRef}
+                type="text"
+                name="q"
+                value={searchQuery}
+                onFocus={() => setIsSearchOpen(true)}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={`w-full bg-transparent text-sm leading-5 focus:outline-none ${
+                  isSearchOpen
+                    ? "text-gray-900 placeholder:text-gray-400"
+                    : "text-white placeholder:text-white/70"
+                }`}
+                placeholder="Search colleges, courses, exams, or scholarships…"
+                aria-label="Search colleges, courses, exams, or scholarships"
+              />
+              {isSearchOpen && searchQuery && (
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSearchQuery("");
+                    searchInputRef.current?.focus();
+                  }}
+                  className="p-1 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X size={18} />
+                </button>
+              )}
+            </div>
+
+            <AnimatePresence>
+              {isSearchOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.12)] border border-gray-100 max-h-[60vh] overflow-y-auto z-[9999]"
+                >
+                  <div className="px-5 pt-4 pb-5 flex flex-col gap-4">
+                    {debouncedSearchQuery ? (
+                      isSearchLoading ? (
+                        <Loader containerClassName="py-6" size={28} />
+                      ) : (
+                        <div className="flex flex-col gap-4">
+                          {searchResults.colleges?.length > 0 && (
+                            <div>
+                              <h3 className="text-[#737C91] text-[12px] font-medium font-poppins mb-2 uppercase tracking-wider">
+                                Colleges
+                              </h3>
+                              <div className="flex flex-col gap-1">
+                                {searchResults.colleges.map((college: any) => (
+                                  <Link
+                                    key={college._id}
+                                    href={`/colleges/${college._id}`}
+                                    onClick={() => setIsSearchOpen(false)}
+                                    className="flex items-center gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                                  >
+                                    <div className="w-7 h-7 relative rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                                      {college.logo ? (
+                                        <Image
+                                          src={college.logo}
+                                          alt={college.name}
+                                          fill
+                                          className="object-cover"
+                                        />
+                                      ) : (
+                                        <GraduationCapIcon
+                                          width={14}
+                                          height={14}
+                                          className="text-gray-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                        />
+                                      )}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-[#162447] text-[13px] font-medium group-hover:text-[#513392] transition-colors line-clamp-1">
+                                        {college.name}
+                                      </p>
+                                      <p className="text-gray-500 text-[11px] line-clamp-1">
+                                        {college.city}, {college.state}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {searchResults.courses?.length > 0 && (
+                            <div>
+                              <h3 className="text-[#737C91] text-[12px] font-medium font-poppins mb-2 uppercase tracking-wider">
+                                Courses
+                              </h3>
+                              <div className="flex flex-col gap-1">
+                                {searchResults.courses.map((course: any) => (
+                                  <Link
+                                    key={course._id}
+                                    href={`/courses/${course._id}`}
+                                    onClick={() => setIsSearchOpen(false)}
+                                    className="flex items-center gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                                  >
+                                    <div className="w-7 h-7 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0">
+                                      <OpenBookIcon width={14} height={14} className="text-blue-600" />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-[#162447] text-[13px] font-medium group-hover:text-[#513392] transition-colors line-clamp-1">
+                                        {course.name}
+                                      </p>
+                                      <p className="text-gray-500 text-[11px] line-clamp-1">
+                                        {course.duration} • {course.type}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {searchResults.exams?.length > 0 && (
+                            <div>
+                              <h3 className="text-[#737C91] text-[12px] font-medium font-poppins mb-2 uppercase tracking-wider">
+                                Exams
+                              </h3>
+                              <div className="flex flex-col gap-1">
+                                {searchResults.exams.map((exam: any) => (
+                                  <Link
+                                    key={exam._id}
+                                    href={`/exams/${exam._id}`}
+                                    onClick={() => setIsSearchOpen(false)}
+                                    className="flex items-center gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                                  >
+                                    <div className="w-7 h-7 relative rounded-full overflow-hidden bg-gray-100 flex-shrink-0">
+                                      {exam.logo ? (
+                                        <Image
+                                          src={exam.logo}
+                                          alt={exam.shortName}
+                                          fill
+                                          className="object-cover"
+                                        />
+                                      ) : (
+                                        <DocIcon
+                                          width={14}
+                                          height={14}
+                                          className="text-gray-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                                        />
+                                      )}
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-[#162447] text-[13px] font-medium group-hover:text-[#513392] transition-colors line-clamp-1">
+                                        {exam.fullName} ({exam.shortName})
+                                      </p>
+                                      <p className="text-gray-500 text-[11px] line-clamp-1">
+                                        {new Date(exam.examDate).toLocaleDateString()}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {searchResults.jobs?.length > 0 && (
+                            <div>
+                              <h3 className="text-[#737C91] text-[12px] font-medium font-poppins mb-2 uppercase tracking-wider">
+                                Jobs
+                              </h3>
+                              <div className="flex flex-col gap-1">
+                                {searchResults.jobs.map((job: any) => (
+                                  <Link
+                                    key={job._id}
+                                    href={`/jobs-internships/${job._id}`}
+                                    onClick={() => setIsSearchOpen(false)}
+                                    className="flex items-center gap-3 group hover:bg-gray-50 p-2 rounded-lg transition-colors"
+                                  >
+                                    <div className="w-7 h-7 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0">
+                                      <TrophyIcon width={14} height={14} className="text-purple-600" />
+                                    </div>
+                                    <div className="min-w-0">
+                                      <p className="text-[#162447] text-[13px] font-medium group-hover:text-[#513392] transition-colors line-clamp-1">
+                                        {job.jobTitle}
+                                      </p>
+                                      <p className="text-gray-500 text-[11px] line-clamp-1">
+                                        {job.companyName} • {job.location}
+                                      </p>
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {!searchResults.colleges?.length &&
+                            !searchResults.courses?.length &&
+                            !searchResults.exams?.length &&
+                            !searchResults.jobs?.length && (
+                              <div className="text-center py-6 text-gray-500 text-sm">
+                                No results found for &ldquo;{searchQuery}&rdquo;
+                              </div>
+                            )}
+
+                          {/* View all results link */}
+                          <button
+                            type="submit"
+                            className="text-center text-[#513392] text-[13px] font-medium font-poppins py-2 hover:underline cursor-pointer"
+                          >
+                            View all results for &ldquo;{searchQuery}&rdquo;
+                          </button>
+                        </div>
+                      )
+                    ) : (
+                      <p className="text-gray-400 text-[13px] font-poppins py-4 text-center">
+                        Start typing to search colleges, courses, exams, or scholarships…
+                      </p>
+                    )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </form>
 
           {/* Right section: links + profile + cta */}

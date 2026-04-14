@@ -11,6 +11,7 @@ export interface UseInfiniteCollegesOptions {
   location?: string;
   country?: string;
   type?: string;
+  ranking?: string;
   sortBy?: string;
   order?: "asc" | "desc";
 }
@@ -36,10 +37,11 @@ async function fetchColleges(
 
   if (opts.search) params.search = opts.search;
   if (opts.stream) params.stream = opts.stream;
-  if (opts.city) params.city = opts.city;
+  if (opts.city) params.location = opts.city;
   if (opts.location) params.location = opts.location;
   if (opts.country) params.country = opts.country;
   if (opts.type) params.type = opts.type;
+  if (opts.ranking) params.ranking = opts.ranking;
   if (opts.sortBy) params.sortBy = opts.sortBy;
   if (opts.order) params.order = opts.order;
 
@@ -52,13 +54,23 @@ export function useInfiniteColleges(opts: UseInfiniteCollegesOptions = {}) {
     queryKey: ["colleges-infinite", opts],
     queryFn: ({ pageParam }) => fetchColleges(opts, pageParam as number),
     initialPageParam: 1,
+    staleTime: 5 * 60 * 1000,
     getNextPageParam: (lastPage) => {
       const { page, totalPages } = lastPage.pagination;
       return page < totalPages ? page + 1 : undefined;
     },
   });
 
-  const allColleges = query.data?.pages.flatMap((page) => page.colleges) ?? [];
+  // Deduplicate colleges across pages (prevents React key warnings)
+  const allColleges = (() => {
+    const raw = query.data?.pages.flatMap((page) => page.colleges) ?? [];
+    const seen = new Set<string>();
+    return raw.filter((c) => {
+      if (seen.has(c._id)) return false;
+      seen.add(c._id);
+      return true;
+    });
+  })();
   const totalCount = query.data?.pages[0]?.pagination.total ?? 0;
 
   return {

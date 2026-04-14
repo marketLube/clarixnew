@@ -56,16 +56,16 @@ const COLLEGE_NAMES = [
 ] as const;
 
 const RECRUITER_COMPANIES = [
-  "Northwind Labs",
-  "Contoso Analytics",
-  "Fabrikam Digital",
-  "Tailspin BioTech",
-  "Wide World Education",
-  "Litware Systems",
-  "AdventureWorks AI",
-  "Blue Yonder Retail",
-  "Coho Vineyard Labs",
-  "Fourth Coffee Products",
+  "Tata Consultancy Services",
+  "Infosys",
+  "Wipro",
+  "Google India",
+  "Microsoft India",
+  "Amazon India",
+  "Flipkart",
+  "Deloitte India",
+  "Accenture India",
+  "Reliance Industries",
 ] as const;
 
 const REVIEW_AUTHORS = [
@@ -115,14 +115,14 @@ const SCHOLARSHIP_NAMES = [
 ] as const;
 
 const JOB_COMPANIES = [
-  "Northwind Labs",
-  "Contoso Analytics",
-  "Fabrikam Digital",
-  "Tailspin BioTech",
-  "Wide World Education",
-  "Litware Systems",
-  "AdventureWorks AI",
-  "Blue Yonder Retail",
+  "Tata Consultancy Services",
+  "Infosys",
+  "Wipro",
+  "Google India",
+  "Microsoft India",
+  "Amazon India",
+  "Flipkart",
+  "Deloitte India",
 ] as const;
 
 const COURSE_NAMES = [
@@ -182,10 +182,12 @@ async function clearDemoData() {
   await Exam.deleteMany({ $or: [{ shortName: { $in: [...EXAM_CODES] } }, { shortName: { $in: ["DEMOCET", "DEMOMGMT"] } }] });
   await Stream.deleteMany({ $or: [{ name: { $in: STREAM_DEFS.map((s) => s.name) } }, { name: legacyDemo }] });
   await Scholarship.deleteMany({ $or: [{ scholarshipName: { $in: [...SCHOLARSHIP_NAMES] } }, { scholarshipName: legacyDemo }] });
-  await Recruiter.deleteMany({ $or: [{ companyName: { $in: [...RECRUITER_COMPANIES] } }, { companyName: legacyDemo }] });
+  const LEGACY_RECRUITER_COMPANIES = ["Northwind Labs", "Contoso Analytics", "Fabrikam Digital", "Tailspin BioTech", "Wide World Education", "Litware Systems", "AdventureWorks AI", "Blue Yonder Retail", "Coho Vineyard Labs", "Fourth Coffee Products"];
+  await Recruiter.deleteMany({ $or: [{ companyName: { $in: [...RECRUITER_COMPANIES, ...LEGACY_RECRUITER_COMPANIES] } }, { companyName: legacyDemo }] });
   await University.deleteMany({ $or: [{ name: { $in: [...UNIVERSITY_NAMES] } }, { name: legacyDemo }] });
   await BlogModel.deleteMany({ $or: [{ slug: new RegExp(`^${BLOG_SLUG_PREFIX}`) }, { slug: /^demo-/ }] });
-  await Job.deleteMany({ $or: [{ companyName: { $in: [...JOB_COMPANIES] } }, { companyName: legacyDemo }] });
+  const LEGACY_JOB_COMPANIES = ["Northwind Labs", "Contoso Analytics", "Fabrikam Digital", "Tailspin BioTech", "Wide World Education", "Litware Systems", "AdventureWorks AI", "Blue Yonder Retail"];
+  await Job.deleteMany({ $or: [{ companyName: { $in: [...JOB_COMPANIES, ...LEGACY_JOB_COMPANIES] } }, { companyName: legacyDemo }] });
 }
 
 function buildCoursePayload(
@@ -724,14 +726,134 @@ async function seed() {
   ]);
 
   await Job.insertMany([
-    { jobTitle: "Graduate Software Engineer", companyName: JOB_COMPANIES[0], jobType: "Full Time" as const, location: "Bengaluru (Hybrid)", salary: { min: 14, max: 20, unit: "LPA" as const }, companyWebsite: "https://example.org/nw", employeeSize: "500-1000", industry: "Technology", shortDescription: "Ship APIs on the learner data platform.", aboutJob: "Node, TypeScript, Postgres. Pair programming and on-call rotation.", aboutYou: ["CS degree or equivalent", "0–2 YOE"], aboutRole: ["Design REST APIs", "Improve SLOs", "Ship experiments"], faqs: [{ question: "Relocation?", answer: "Yes for domestic moves." }], isActive: true },
-    { jobTitle: "Strategy Summer Intern", companyName: JOB_COMPANIES[1], jobType: "Internship" as const, location: "Mumbai", salary: { min: 50000, max: 70000, unit: "Monthly" as const }, shortDescription: "10-week pod with client exposure.", aboutJob: "Research, modelling, and workshop support.", aboutYou: ["MBA Y1 or strong UG"], aboutRole: ["Market scans", "Slide QA"], faqs: [], isActive: true },
-    { jobTitle: "UX Research Associate", companyName: JOB_COMPANIES[2], jobType: "Full Time" as const, location: "Remote — India", salary: { min: 9, max: 14, unit: "LPA" as const }, shortDescription: "Studies for education products.", aboutJob: "Moderated sessions, journey maps, insight decks.", aboutYou: ["HCI / psychology / design"], aboutRole: ["Recruit workflows", "Synthesize findings"], faqs: [], isActive: true },
-    { jobTitle: "Campus Talent Partner", companyName: JOB_COMPANIES[3], jobType: "Full Time" as const, location: "Hyderabad", salary: { min: 11, max: 16, unit: "LPA" as const }, shortDescription: "Own relationships with tier-1 schools.", aboutJob: "Drive offer numbers and candidate experience.", aboutYou: ["HR / MBA background"], aboutRole: ["Forecast hiring", "Coach interviewers"], faqs: [], isActive: true },
-    { jobTitle: "Curriculum Producer", companyName: JOB_COMPANIES[4], jobType: "Contract" as const, location: "Delhi NCR", salary: { min: 60000, max: 85000, unit: "Monthly" as const }, shortDescription: "Video + assessment modules for STEM courses.", aboutJob: "Work with faculty SMEs and editors.", aboutYou: ["Instructional design exp."], aboutRole: ["Storyboards", "QC launches"], faqs: [], isActive: true },
-    { jobTitle: "DevOps Engineer", companyName: JOB_COMPANIES[5], jobType: "Full Time" as const, location: "Pune", salary: { min: 12, max: 18, unit: "LPA" as const }, shortDescription: "Kubernetes + observability for edtech traffic.", aboutJob: "On-call, pipelines, cost tuning.", aboutYou: ["Linux, K8s, Terraform"], aboutRole: ["CI/CD", "Incident response"], faqs: [], isActive: true },
-    { jobTitle: "Data Analyst — Admissions", companyName: JOB_COMPANIES[6], jobType: "Full Time" as const, location: "Chennai", salary: { min: 8, max: 12, unit: "LPA" as const }, shortDescription: "Funnel analytics for enrolment team.", aboutJob: "dbt, BigQuery, Looker.", aboutYou: ["SQL + stats"], aboutRole: ["Dashboards", "Forecast yield"], faqs: [], isActive: true },
-    { jobTitle: "Brand Designer", companyName: JOB_COMPANIES[7], jobType: "Freelance" as const, location: "Remote", salary: { min: 55000, max: 90000, unit: "Monthly" as const }, shortDescription: "Campaigns for student acquisition.", aboutJob: "Figma systems, motion optional.", aboutYou: ["Portfolio with edu clients"], aboutRole: ["Concept", "Hand-off"], faqs: [], isActive: true },
+    {
+      jobTitle: "Software Development Engineer",
+      companyName: JOB_COMPANIES[0],
+      jobType: "Full Time" as const,
+      location: "Mumbai, Chennai, Bengaluru",
+      salary: { min: 7, max: 12, unit: "LPA" as const },
+      companyWebsite: "https://www.tcs.com",
+      employeeSize: "600,000+",
+      industry: "IT Services",
+      shortDescription: "Join TCS as an SDE working on enterprise applications using Java, Python, and cloud technologies.",
+      aboutJob: "As an SDE at TCS, you will work on large-scale enterprise solutions for global clients. Technologies include Java, Spring Boot, Python, AWS/Azure, microservices, and DevOps practices. TCS offers global mobility and continuous learning opportunities.",
+      aboutYou: ["B.Tech/BE in CS/IT or related field", "Strong problem-solving skills", "Knowledge of data structures and algorithms", "Good communication and teamwork abilities"],
+      aboutRole: ["Design and develop enterprise applications", "Collaborate with global teams", "Follow Agile/Scrum methodologies", "Write clean, maintainable code"],
+      faqs: [{ question: "Is there a bond?", answer: "TCS has a service agreement of 2 years for campus hires." }, { question: "What is the work model?", answer: "TCS follows a hybrid work model with 3 days in office per week." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "Summer Internship (Engineering)",
+      companyName: JOB_COMPANIES[1],
+      jobType: "Internship" as const,
+      location: "Bengaluru, Mysuru, Pune",
+      salary: { min: 25000, max: 40000, unit: "Monthly" as const },
+      companyWebsite: "https://www.infosys.com",
+      employeeSize: "340,000+",
+      industry: "IT Services",
+      shortDescription: "8-week summer internship at Infosys for pre-final year engineering students.",
+      aboutJob: "Infosys InStep internship program offers hands-on project experience with real client engagements. Interns work on cutting-edge technologies including AI/ML, cloud computing, and full-stack development. Top performers receive pre-placement offers.",
+      aboutYou: ["Pre-final year B.Tech/BE student", "CGPA 7.0+ or equivalent", "Passion for technology and innovation"],
+      aboutRole: ["Work on live client projects", "Learn enterprise development practices", "Present project outcomes to leadership"],
+      faqs: [{ question: "Is there a PPO?", answer: "Yes, top-performing interns receive Pre-Placement Offers with Infosys." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "Project Engineer",
+      companyName: JOB_COMPANIES[2],
+      jobType: "Full Time" as const,
+      location: "Bengaluru, Hyderabad, Chennai",
+      salary: { min: 6, max: 10, unit: "LPA" as const },
+      companyWebsite: "https://www.wipro.com",
+      employeeSize: "250,000+",
+      industry: "IT Services",
+      shortDescription: "Join Wipro as a Project Engineer in application development and maintenance.",
+      aboutJob: "Wipro Project Engineers work on diverse technology projects for Fortune 500 clients across BFSI, healthcare, and retail domains. Strong training ecosystem with Wipro's TalentNext platform for continuous skill development.",
+      aboutYou: ["B.Tech/BE/MCA from recognized university", "Strong fundamentals in programming", "Willingness to learn and adapt to new technologies"],
+      aboutRole: ["Application development and testing", "Client requirement analysis", "Technical documentation and code reviews"],
+      faqs: [{ question: "What is the training period?", answer: "3-4 months of intensive training at Wipro campuses covering technical and soft skills." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "Software Development Engineer (SDE-1)",
+      companyName: JOB_COMPANIES[3],
+      jobType: "Full Time" as const,
+      location: "Bengaluru, Hyderabad",
+      salary: { min: 25, max: 45, unit: "LPA" as const },
+      companyWebsite: "https://careers.google.com",
+      employeeSize: "180,000+",
+      industry: "Technology",
+      shortDescription: "Build products used by billions. Work on Google Search, Cloud, Android, YouTube, or Ads.",
+      aboutJob: "Google SDEs work on large-scale distributed systems, machine learning pipelines, and user-facing products. The engineering culture emphasizes code quality, testing, and innovation. 20% time for personal projects is encouraged.",
+      aboutYou: ["B.Tech/MS in CS or equivalent", "Strong coding skills in C++, Java, or Python", "Solid understanding of algorithms and system design", "Excellent problem-solving abilities"],
+      aboutRole: ["Design and implement scalable systems", "Write clean, well-tested code", "Collaborate with world-class engineers", "Participate in design reviews and code reviews"],
+      faqs: [{ question: "What is the interview process?", answer: "Phone screen + 4-5 onsite rounds covering coding, algorithms, and system design. Googleyness (culture fit) is also assessed." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "Software Engineer",
+      companyName: JOB_COMPANIES[4],
+      jobType: "Full Time" as const,
+      location: "Bengaluru, Hyderabad, Noida",
+      salary: { min: 22, max: 40, unit: "LPA" as const },
+      companyWebsite: "https://careers.microsoft.com",
+      employeeSize: "220,000+",
+      industry: "Technology",
+      shortDescription: "Work on Azure, Office 365, Teams, Windows, or LinkedIn engineering teams.",
+      aboutJob: "Microsoft engineers build products used by billions worldwide. Strong emphasis on work-life balance, inclusive culture, and career growth. Technologies: C#, .NET, TypeScript, Azure, distributed systems.",
+      aboutYou: ["B.Tech/MS in CS", "Strong fundamentals in DSA and system design", "Experience with any programming language", "Growth mindset and collaborative attitude"],
+      aboutRole: ["Design, develop, and ship features", "Code reviews and mentoring junior engineers", "Collaborate with PMs and designers", "Contribute to team OKRs and engineering excellence"],
+      faqs: [{ question: "What is the work culture?", answer: "Microsoft emphasizes work-life balance with flexible hours, generous PTO, and a growth mindset culture." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "SDE-1",
+      companyName: JOB_COMPANIES[5],
+      jobType: "Full Time" as const,
+      location: "Bengaluru, Hyderabad",
+      salary: { min: 20, max: 35, unit: "LPA" as const },
+      companyWebsite: "https://www.amazon.jobs",
+      employeeSize: "1,500,000+",
+      industry: "E-Commerce & Technology",
+      shortDescription: "Build systems that power Amazon's e-commerce, AWS, Alexa, or Prime Video.",
+      aboutJob: "Amazon's engineering is built on the Leadership Principles. SDEs work on highly scalable, distributed systems. The two-pizza team structure ensures ownership and autonomy. AWS, retail, Alexa, and operations all have engineering teams in India.",
+      aboutYou: ["B.Tech/MS in CS", "Strong problem-solving and coding skills", "Understanding of OOP and system design", "Bias for action and customer obsession"],
+      aboutRole: ["Own end-to-end features from design to deployment", "Operate services at Amazon scale", "On-call responsibilities for production services", "Mentor and grow other engineers"],
+      faqs: [{ question: "What are Leadership Principles?", answer: "Amazon's 16 Leadership Principles (Customer Obsession, Ownership, etc.) guide all decisions and are heavily tested during interviews." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "SDE-1",
+      companyName: JOB_COMPANIES[6],
+      jobType: "Full Time" as const,
+      location: "Bengaluru",
+      salary: { min: 18, max: 30, unit: "LPA" as const },
+      companyWebsite: "https://www.flipkartcareers.com",
+      employeeSize: "50,000+",
+      industry: "E-Commerce",
+      shortDescription: "Build India's largest e-commerce platform powering millions of transactions daily.",
+      aboutJob: "Flipkart engineers work on India-scale problems — from supply chain optimization to ML-powered recommendations. The tech stack includes Java, Go, React, Kubernetes, and in-house platforms. Big Billion Day events push systems to extreme scale.",
+      aboutYou: ["B.Tech/MS in CS", "Strong in DSA and competitive programming", "Experience with backend systems preferred", "Passion for building at scale"],
+      aboutRole: ["Build scalable microservices", "Handle Big Billion Day scale challenges", "Innovate for Indian market needs", "Collaborate with product and data teams"],
+      faqs: [{ question: "What is the growth path?", answer: "SDE-1 → SDE-2 → SDE-3 → Principal Engineer. Promotions are based on impact and skill growth, typically every 2-3 years." }],
+      isActive: true,
+    },
+    {
+      jobTitle: "Analyst",
+      companyName: JOB_COMPANIES[7],
+      jobType: "Full Time" as const,
+      location: "Mumbai, Bengaluru, Hyderabad",
+      salary: { min: 12, max: 20, unit: "LPA" as const },
+      companyWebsite: "https://www2.deloitte.com/in/en/careers.html",
+      employeeSize: "415,000+",
+      industry: "Consulting",
+      shortDescription: "Join Deloitte India in consulting, audit, tax, or advisory practice.",
+      aboutJob: "Deloitte analysts work across strategy, operations, technology, and risk advisory. Projects span industries from BFSI to healthcare. Steep learning curve with exposure to CXO-level stakeholders and global engagement opportunities.",
+      aboutYou: ["MBA / B.Tech / CA / B.Com from premier institutions", "Strong analytical and communication skills", "Ability to work in fast-paced environments"],
+      aboutRole: ["Client engagement and problem-solving", "Data analysis and presentation", "Process improvement recommendations", "Cross-functional collaboration"],
+      faqs: [{ question: "What is the career path?", answer: "Analyst → Senior Analyst → Manager → Senior Manager → Director → Partner. Typical promotion cycles are 2-3 years." }],
+      isActive: true,
+    },
   ]);
 
   console.log("Clarix demo seed complete.");

@@ -41,24 +41,42 @@ const ShareIcon = ({ width = 16, height = 16, fill = "#767E92" }) => (
 );
 
 export default function JobDetailSidebar({ job }: JobDetailSidebarProps) {
+  const websiteDisplay = job.companyWebsite
+    ? job.companyWebsite.replace(/^https?:\/\//, "").replace(/\/$/, "")
+    : null;
+
   return (
     <div className="flex flex-col gap-[30px] items-start">
       {/* Apply Button */}
       <div className="flex flex-col gap-2 items-end w-full">
-        <Button
-          variant="primary"
-          className="bg-[#513392] rounded-[30px] px-[51px] py-[10px] w-full flex items-center justify-center gap-6 text-white hover:bg-[#3d2670] transition-colors"
-        >
-          <span className="font-poppins text-[16px] leading-[20px] text-white">
-            Apply for this job
-          </span>
-          <ArrowRightIcon width={24} height={24} fill="#f6f7ff" />
-        </Button>
+        {job.companyWebsite ? (
+          <a href={job.companyWebsite} target="_blank" rel="noopener noreferrer" className="w-full">
+            <Button
+              variant="primary"
+              className="bg-[#513392] rounded-[30px] px-[51px] py-[10px] w-full flex items-center justify-center gap-6 text-white hover:bg-[#3d2670] transition-colors"
+            >
+              <span className="font-poppins text-[16px] leading-[20px] text-white">
+                Apply for this job
+              </span>
+              <ArrowRightIcon width={24} height={24} fill="#f6f7ff" />
+            </Button>
+          </a>
+        ) : (
+          <Button
+            variant="primary"
+            className="bg-[#513392] rounded-[30px] px-[51px] py-[10px] w-full flex items-center justify-center gap-6 text-white hover:bg-[#3d2670] transition-colors"
+          >
+            <span className="font-poppins text-[16px] leading-[20px] text-white">
+              Apply for this job
+            </span>
+            <ArrowRightIcon width={24} height={24} fill="#f6f7ff" />
+          </Button>
+        )}
 
         {/* Info Box */}
         <div className="bg-[#f6f7ff] rounded-[12px] p-4 w-full min-h-[128px] flex items-center justify-center">
           <p className="font-poppins text-[14px] leading-[20px] text-[#767e92] text-center">
-            When applying, please mention you found this role on WeLoveProduct - it helps {job.company} track where great candidates come from 🙌
+            {job.shortDescription || `Explore opportunities at ${job.company} and take the next step in your career.`}
           </p>
         </div>
       </div>
@@ -69,24 +87,39 @@ export default function JobDetailSidebar({ job }: JobDetailSidebarProps) {
           <h3 className="font-poppins font-medium leading-[28px] text-[#162447] text-[20px] tracking-[-0.4px]">
             About {job.company}
           </h3>
-          <p className="font-poppins text-[14px] leading-[20px] text-[#767e92]">
-            {job.company} is a modern data platform for data science and analytics. Collaborative notebooks, beautiful data apps and enterprise-grade security.
-          </p>
+          {job.shortDescription && (
+            <p className="font-poppins text-[14px] leading-[20px] text-[#767e92]">
+              {job.shortDescription}
+            </p>
+          )}
         </div>
 
         <div className="flex flex-col gap-[18px] items-start mt-4">
-          <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
-            <p className="text-[#767e92]">Website</p>
-            <p className="text-[#162447]">hex.tech</p>
-          </div>
-          <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
-            <p className="text-[#767e92]">Industry</p>
-            <p className="text-[#162447]">Analytics, Big Data</p>
-          </div>
-          <div className="flex font-poppins items-center justify-between text-[16px] leading-[20px] text-nowrap w-full">
-            <p className="text-[#767e92]">Size</p>
-            <p className="text-[#162447]">11-50 employees</p>
-          </div>
+          {websiteDisplay && (
+            <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
+              <p className="text-[#767e92]">Website</p>
+              <a
+                href={job.companyWebsite}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#513392] hover:underline"
+              >
+                {websiteDisplay}
+              </a>
+            </div>
+          )}
+          {job.industry && (
+            <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
+              <p className="text-[#767e92]">Industry</p>
+              <p className="text-[#162447]">{job.industry}</p>
+            </div>
+          )}
+          {job.employeeSize && (
+            <div className="flex font-poppins items-center justify-between text-[16px] leading-[20px] text-nowrap w-full">
+              <p className="text-[#767e92]">Size</p>
+              <p className="text-[#162447]">{job.employeeSize} employees</p>
+            </div>
+          )}
         </div>
       </div>
 
