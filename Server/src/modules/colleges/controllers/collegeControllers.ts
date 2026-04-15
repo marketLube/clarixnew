@@ -5,6 +5,10 @@ import { College } from '../models/collegeModel.js';
 import { Course } from '../../courses/models/courseModel.js';
 import { Stream } from '../../streams/model/streamModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 /**
  * Parse a single fee value from a string.
  * Handles formats like:
@@ -148,8 +152,8 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
 
     if (search) {
         matchFilter.$or = [
-            { name: { $regex: search, $options: 'i' } },
-            { description: { $regex: search, $options: 'i' } },
+            { name: { $regex: escapeRegex(search as string), $options: 'i' } },
+            { description: { $regex: escapeRegex(search as string), $options: 'i' } },
         ];
     }
 
@@ -160,8 +164,8 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
     if (location) {
         const locationFilter = {
             $or: [
-                { city: { $regex: location, $options: 'i' } },
-                { state: { $regex: location, $options: 'i' } },
+                { city: { $regex: escapeRegex(location as string), $options: 'i' } },
+                { state: { $regex: escapeRegex(location as string), $options: 'i' } },
             ],
         };
         if (matchFilter.$or) {
@@ -177,7 +181,7 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
     }
 
     if (country) {
-        matchFilter.country = { $regex: `^${country}$`, $options: 'i' };
+        matchFilter.country = { $regex: `^${escapeRegex(country as string)}$`, $options: 'i' };
     }
 
     // --- Handle ranking filter: filter by minimum rating ---
@@ -230,12 +234,19 @@ const listColleges = asyncHandler(async (req: Request, res: Response) => {
             .lean(),
     ]);
 
-    // Resolve category name from streams if it's an ObjectId
-    for (const college of paginatedColleges as any[]) {
-        if (isValidObjectId(college.category)) {
-            const streamDoc = await Stream.findById(college.category).lean();
-            if (streamDoc) {
-                college.category = (streamDoc as any).name;
+    // Batch resolve category names
+    const categoryIds = (paginatedColleges as any[])
+        .map((c: any) => c.category)
+        .filter((id: any) => isValidObjectId(id));
+
+    if (categoryIds.length > 0) {
+        const streams = await Stream.find({ _id: { $in: categoryIds } }).select('name').lean();
+        const streamMap = new Map(streams.map((s: any) => [s._id.toString(), (s as any).name]));
+
+        for (const college of paginatedColleges as any[]) {
+            if (isValidObjectId(college.category)) {
+                const name = streamMap.get(college.category?.toString());
+                if (name) college.category = name;
             }
         }
     }

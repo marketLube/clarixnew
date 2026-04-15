@@ -7,7 +7,7 @@ export function useExploreTopColleges() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("reviews");
 
   const { colleges: data, isLoading, error } = useColleges({
-    limit: 100, // Fetch more to sort client-side effectively
+    limit: 8,
     search: undefined,
   });
 

@@ -63,7 +63,6 @@ export default function AddUniversityDrawer({ isOpen, onClose }: AddUniversityDr
 
     const handleSubmit = () => {
         if (formData.type === '') {
-            console.error("Please select a university type");
             return;
         }
 

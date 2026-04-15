@@ -45,6 +45,7 @@ export function useCmsBlogPage() {
   const query = useQuery<CmsBlogPageData | null, Error>({
     queryKey: ["cms-blogpage"],
     queryFn: fetchCmsBlogPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

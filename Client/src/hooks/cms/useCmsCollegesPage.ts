@@ -26,6 +26,7 @@ export function useCmsCollegesPage() {
   const query = useQuery<CmsCollegesPageData | null, Error>({
     queryKey: ["cms-collegespage"],
     queryFn: fetchCmsCollegesPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

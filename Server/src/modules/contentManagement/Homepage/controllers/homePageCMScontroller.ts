@@ -258,8 +258,6 @@ const updateHomePage = asyncHandler(async (req: Request, res: Response) => {
         }
     }
 
-    console.log(updateData, "update Data");
-
     // Load current homepage to detect which location images should be deleted
     let homePage = await HomePage.findOne();
     const imagesToDelete: string[] = [];
@@ -301,8 +299,8 @@ const updateHomePage = asyncHandler(async (req: Request, res: Response) => {
 
     // Best-effort delete of replaced location images from S3
     if (imagesToDelete.length) {
-        deleteMultipleFilesFromS3(imagesToDelete).catch((err) => {
-            console.error('Failed to delete old location images from S3:', err);
+        deleteMultipleFilesFromS3(imagesToDelete).catch(() => {
+            // S3 cleanup failure is non-critical
         });
     }
 

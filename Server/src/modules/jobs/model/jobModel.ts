@@ -118,4 +118,7 @@ const jobSchema = new Schema<IJob>(
     { timestamps: true }
 );
 
+jobSchema.index({ createdAt: -1 });
+jobSchema.index({ jobTitle: 'text', companyName: 'text' });
+
 export const Job = model<IJob>('Job', jobSchema);

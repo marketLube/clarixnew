@@ -395,7 +395,7 @@ export default function Nav() {
                                   >
                                     <div className="w-7 h-7 relative rounded overflow-hidden bg-gray-100 flex-shrink-0">
                                       {blog.thumbnail ? (
-                                        <img src={blog.thumbnail} alt="" className="w-full h-full object-cover" />
+                                        <img src={blog.thumbnail} alt={blog.title || "Blog thumbnail"} className="w-full h-full object-cover" />
                                       ) : (
                                         <div className="w-full h-full bg-[#f0ecfc] flex items-center justify-center text-[10px] text-[#513392] font-bold">B</div>
                                       )}

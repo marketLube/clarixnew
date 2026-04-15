@@ -49,8 +49,7 @@ export default function ExamPage() {
         };
 
         updateCMSExamPage(payload, {
-            onSuccess: (responseData: any) => {
-                console.log("Exam page updated successfully:", responseData);
+            onSuccess: () => {
             },
         });
     };

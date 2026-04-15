@@ -70,6 +70,7 @@ export function useJobs(opts: UseJobsOptions = {}) {
   const query = useQuery<JobsApiResponse, Error>({
     queryKey: ["jobs", opts],
     queryFn: () => fetchJobs(opts),
+    staleTime: 5 * 60 * 1000,
   });
 
   return {

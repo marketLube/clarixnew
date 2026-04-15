@@ -222,15 +222,11 @@ export default function AddCollegePage() {
         formDataToSend.append(field, JSON.stringify(existingUrls));
       });
 
-      console.log("Form Data to Send:", formDataToSend);
-
       addCollege(formDataToSend, {
-        onSuccess: (data: any) => {
-          console.log("College created successfully:", data);
+        onSuccess: () => {
           router.push('/colleges');
         },
         onError: (error: any) => {
-          console.error("Error creating college:", error);
           alert(error?.response?.data?.message || "Failed to create college. Please try again.");
         },
       });

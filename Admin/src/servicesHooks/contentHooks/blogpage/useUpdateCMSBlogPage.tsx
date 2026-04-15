@@ -14,8 +14,8 @@ export const useUpdateCMSBlogPage = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["cms/blogpage"] });
         },
-        onError: (error: any) => {
-            console.error("Error updating cms blogpage:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

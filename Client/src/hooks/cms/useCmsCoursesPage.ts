@@ -26,6 +26,7 @@ export function useCmsCoursesPage() {
   const query = useQuery<CmsCoursesPageData | null, Error>({
     queryKey: ["cms-coursespage"],
     queryFn: fetchCmsCoursesPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

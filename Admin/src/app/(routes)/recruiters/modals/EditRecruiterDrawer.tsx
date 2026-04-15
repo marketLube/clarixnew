@@ -113,8 +113,8 @@ export default function EditRecruiterDrawer({
         onSuccess: () => {
           onClose();
         },
-        onError: (err: any) => {
-          console.error("Failed to update recruiter:", err);
+        onError: () => {
+          // Error handled silently
         },
       }
     );

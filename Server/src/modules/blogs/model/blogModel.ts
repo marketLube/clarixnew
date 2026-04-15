@@ -39,4 +39,8 @@ const blogSchema = new Schema<Blog>(
     }
 );
 
+blogSchema.index({ slug: 1 }, { unique: true });
+blogSchema.index({ createdAt: -1 });
+blogSchema.index({ title: 'text', tags: 'text' });
+
 export const BlogModel = model<Blog>('Blog', blogSchema);

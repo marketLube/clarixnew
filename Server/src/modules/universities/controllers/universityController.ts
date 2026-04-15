@@ -2,6 +2,10 @@ import type { Request, Response } from 'express';
 import { asyncHandler, ApiResponse, ApiError } from '../../../utils/index.js';
 import { University } from '../models/universityModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const listUniversities = asyncHandler(async (req: Request, res: Response) => {
     const {
         page = 1,
@@ -12,17 +16,17 @@ const listUniversities = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc'
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50);
     const skip = (pageNum - 1) * limitNum;
 
     const filter: any = {};
 
     if (search) {
         filter.$or = [
-            { name: { $regex: search, $options: 'i' } },
-            { city: { $regex: search, $options: 'i' } },
-            { state: { $regex: search, $options: 'i' } },
+            { name: { $regex: escapeRegex(search as string), $options: 'i' } },
+            { city: { $regex: escapeRegex(search as string), $options: 'i' } },
+            { state: { $regex: escapeRegex(search as string), $options: 'i' } },
         ];
     }
 

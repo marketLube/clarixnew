@@ -109,11 +109,10 @@ export default function ContentBlocksPage() {
         }
 
         updateCMSFooter(payload, {
-            onSuccess: (responseData: any) => {
-                console.log("Footer content updated successfully:", responseData);
+            onSuccess: () => {
             },
-            onError: (error: any) => {
-                console.error("Error updating footer:", error);
+            onError: () => {
+                // Error handled silently
             },
         });
     };

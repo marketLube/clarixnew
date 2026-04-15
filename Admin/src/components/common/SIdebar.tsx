@@ -47,7 +47,6 @@ export function Sidebar() {
 
   const handleLogout = () => {
     router.push("/login");
-    console.log("Logout");
   };
 
   return (

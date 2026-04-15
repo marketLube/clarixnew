@@ -18,6 +18,7 @@ export function useCourseById(id: string) {
   const query = useQuery({
     queryKey: ["courses", id],
     queryFn: () => fetchCourseById(id),
+    staleTime: 30 * 60 * 1000,
   });
 
   return {

@@ -41,7 +41,7 @@ const fetchExams = async (params: { page?: number; limit?: number; stream?: stri
 
 export const useExams = (page: number = 1, limit: number = 8, stream?: string, search?: string) => {
     return useQuery({
-        queryKey: ['exams', page, limit, stream, search],
+        queryKey: ['exams', { page, limit, stream, search }],
         queryFn: () => fetchExams({ page, limit, stream, search }),
         staleTime: 5 * 60 * 1000,
     });

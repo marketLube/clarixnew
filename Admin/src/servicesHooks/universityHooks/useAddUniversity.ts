@@ -15,8 +15,8 @@ export const useAddUniversity = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["universities"] });
         },
-        onError: (error: any) => {
-            console.error("Error adding university:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

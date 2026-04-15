@@ -231,8 +231,8 @@ export default function HomePage() {
             });
 
             updateCMSHomePage(formData);
-        } catch (error) {
-            console.error("Error publishing homepage:", error);
+        } catch {
+            // Error handled silently
         }
     };
 

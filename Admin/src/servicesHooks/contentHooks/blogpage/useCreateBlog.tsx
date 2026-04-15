@@ -14,8 +14,8 @@ export const useCreateBlog = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["blogs"] });
         },
-        onError: (error: any) => {
-            console.error("Error creating blog:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

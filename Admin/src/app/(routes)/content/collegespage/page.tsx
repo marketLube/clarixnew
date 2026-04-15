@@ -49,8 +49,7 @@ export default function CollegesPage() {
         };
 
         updateCMSCollegesPage(payload, {
-            onSuccess: (responseData: any) => {
-                console.log("Colleges page updated successfully:", responseData);
+            onSuccess: () => {
             },
         });
     };

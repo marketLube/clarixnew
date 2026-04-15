@@ -18,8 +18,8 @@ export const useAddStream = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["streams"] });
         },
-        onError: (error: any) => {
-            console.error("Error adding stream:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

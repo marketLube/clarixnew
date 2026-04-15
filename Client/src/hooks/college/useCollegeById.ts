@@ -18,6 +18,7 @@ export function useCollegeById(id: string) {
   const query = useQuery({
     queryKey: ["colleges", id],
     queryFn: () => fetchCollegeById(id),
+    staleTime: 30 * 60 * 1000,
   });
 
   return {

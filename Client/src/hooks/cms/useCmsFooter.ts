@@ -40,6 +40,7 @@ export function useCmsFooter() {
   const query = useQuery<CmsFooterData | null, Error>({
     queryKey: ["cms-footer"],
     queryFn: fetchCmsFooter,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

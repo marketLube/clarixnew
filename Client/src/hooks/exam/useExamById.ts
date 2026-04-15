@@ -30,6 +30,7 @@ export function useExamById(id: string) {
     queryKey: ["exams", id],
     queryFn: () => fetchExamById(id),
     enabled: !!id,
+    staleTime: 30 * 60 * 1000,
   });
 
   return {

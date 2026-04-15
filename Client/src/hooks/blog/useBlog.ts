@@ -12,5 +12,6 @@ export const useBlog = (id: string) => {
         queryKey: ["blog", id],
         queryFn: () => fetchBlogById(id),
         enabled: !!id,
+        staleTime: 30 * 60 * 1000,
     });
 };

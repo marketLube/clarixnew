@@ -49,7 +49,6 @@ export function CoursesList() {
     };
 
     const handleEdit = (id: string) => {
-        console.log("handle edit ", id);
         setEditCourseId(id);
     };
 

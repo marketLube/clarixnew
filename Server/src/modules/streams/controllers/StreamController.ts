@@ -5,6 +5,10 @@ import { Exam } from '../../exams/model/examModel.js';
 import { Course } from '../../courses/models/courseModel.js';
 import { College } from '../../colleges/models/collegeModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const listStreams = asyncHandler(async (req: Request, res: Response) => {
     const {
         page = 1,
@@ -15,8 +19,8 @@ const listStreams = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc'
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50);
     const skip = (pageNum - 1) * limitNum;
 
     // Build query filter
@@ -24,7 +28,7 @@ const listStreams = asyncHandler(async (req: Request, res: Response) => {
 
     if (search) {
         filter.$or = [
-            { name: { $regex: search, $options: 'i' } },
+            { name: { $regex: escapeRegex(search as string), $options: 'i' } },
         ];
     }
 

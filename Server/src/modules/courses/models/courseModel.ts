@@ -136,4 +136,8 @@ const courseSchema = new Schema<Course>(
     },
 );
 
+courseSchema.index({ createdAt: -1 });
+courseSchema.index({ name: 'text' });
+courseSchema.index({ stream: 1 });
+
 export const Course = model<Course>('Course', courseSchema);

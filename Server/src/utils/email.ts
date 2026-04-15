@@ -4,8 +4,7 @@ import { logger } from './logger.js';
 export const sendOTP = async (to: string, otp: string) => {
     try {
         if (!process.env.SMTP_USER || !process.env.SMTP_PASS || process.env.SMTP_USER.includes('your-email')) {
-            logger.warn('SMTP_USER or SMTP_PASS not valid in environment variables. OTP email not sent. Check console for OTP: ' + otp);
-            console.log(`[TESTING] OTP for ${to} is ${otp}`);
+            logger.warn('SMTP not configured. OTP email not sent.');
             return;
         }
 
@@ -47,6 +46,5 @@ export const sendOTP = async (to: string, otp: string) => {
         logger.info(`OTP email sent to ${to}: ${info.messageId}`);
     } catch (error) {
         logger.error(`Error sending OTP email: ${error}`);
-        console.error('Email sending error:', error);
     }
 };

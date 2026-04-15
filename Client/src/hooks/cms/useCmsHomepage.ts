@@ -97,6 +97,7 @@ export function useCmsHomepage() {
   const query = useQuery<CmsHomepageData | null, Error>({
     queryKey: ["cms-homepage"],
     queryFn: fetchCmsHomepage,
+    staleTime: 10 * 60 * 1000,
   });
 
   const heroImages = (query.data?.hero?.images ?? []).filter(Boolean);

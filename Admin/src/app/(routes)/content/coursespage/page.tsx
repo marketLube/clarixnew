@@ -49,8 +49,7 @@ export default function CoursesPage() {
         };
 
         updateCMSCoursesPage(payload, {
-            onSuccess: (responseData: any) => {
-                console.log("Courses page updated successfully:", responseData);
+            onSuccess: () => {
             },
         });
     };

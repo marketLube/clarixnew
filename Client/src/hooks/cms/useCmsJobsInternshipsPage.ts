@@ -26,6 +26,7 @@ export function useCmsJobsInternshipsPage() {
   const query = useQuery<CmsJobsInternshipsPageData | null, Error>({
     queryKey: ["cms-jobsinternshipspage"],
     queryFn: fetchCmsJobsInternshipsPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

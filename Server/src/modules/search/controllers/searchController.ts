@@ -7,6 +7,10 @@ import { Exam } from '../../exams/model/examModel.js';
 import { Job } from '../../jobs/model/jobModel.js';
 import { BlogModel } from '../../blogs/model/blogModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const globalSearch = asyncHandler(async (req: Request, res: Response) => {
     const { query } = req.query;
 
@@ -20,7 +24,7 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
         }, 'No query provided');
     }
 
-    const searchRegex = new RegExp(query, 'i');
+    const searchRegex = new RegExp(escapeRegex(query), 'i');
 
     const [colleges, courses, exams, jobs, blogs] = await Promise.all([
         College.find({

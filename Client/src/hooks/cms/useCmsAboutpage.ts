@@ -67,6 +67,7 @@ export function useCmsAboutPage() {
   const query = useQuery<CmsAboutPageData | null, Error>({
     queryKey: ["cms-aboutpage"],
     queryFn: fetchCmsAboutPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

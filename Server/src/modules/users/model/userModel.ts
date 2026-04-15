@@ -70,4 +70,6 @@ const userSchema = new Schema<IUser>(
     },
 );
 
+userSchema.index({ role: 1, createdAt: -1 });
+
 export const User = model<IUser>('User', userSchema);

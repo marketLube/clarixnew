@@ -1,8 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
+import api from "@/lib/api";
 
 export interface Review {
   _id: string;
@@ -39,7 +36,7 @@ interface ReviewsResponse {
 }
 
 const fetchReviews = async (page: number = 1, limit: number = 3) => {
-  const response = await axios.get<ReviewsResponse>(`${API_URL}/reviews`, {
+  const response = await api.get<ReviewsResponse>("/reviews", {
     params: { page, limit },
   });
 
@@ -48,7 +45,7 @@ const fetchReviews = async (page: number = 1, limit: number = 3) => {
 
 export const useReviews = (page: number = 1, limit: number = 3) => {
   return useQuery({
-    queryKey: ["reviews", page, limit],
+    queryKey: ["reviews", { page, limit }],
     queryFn: () => fetchReviews(page, limit),
   });
 };

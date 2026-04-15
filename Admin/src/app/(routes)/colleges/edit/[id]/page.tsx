@@ -275,15 +275,11 @@ export default function EditCollegePage() {
         formDataToSend.append(field, JSON.stringify(existingUrls));
       });
 
-      console.log("Form Data to Send:", formDataToSend);
-
       updateCollege({ id: collegeId, formData: formDataToSend }, {
-        onSuccess: (data: any) => {
-          console.log("College updated successfully:", data);
+        onSuccess: () => {
           router.push('/colleges');
         },
         onError: (error: any) => {
-          console.error("Error updating college:", error);
           alert(error?.response?.data?.message || "Failed to update college. Please try again.");
         },
       });

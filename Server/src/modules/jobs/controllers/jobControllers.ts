@@ -2,6 +2,10 @@ import type { Request, Response } from 'express';
 import { asyncHandler, ApiResponse, ApiError } from '../../../utils/index.js';
 import { Job } from '../model/jobModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const listJobs = asyncHandler(async (req: Request, res: Response) => {
     const {
         page = 1,
@@ -14,8 +18,8 @@ const listJobs = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc',
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50);
     const skip = (pageNum - 1) * limitNum;
 
     const pipeline: any[] = [];
@@ -25,9 +29,9 @@ const listJobs = asyncHandler(async (req: Request, res: Response) => {
     if (search) {
         matchCriteria.push({
             $or: [
-                { jobTitle: { $regex: search, $options: 'i' } },
-                { companyName: { $regex: search, $options: 'i' } },
-                { shortDescription: { $regex: search, $options: 'i' } },
+                { jobTitle: { $regex: escapeRegex(search as string), $options: 'i' } },
+                { companyName: { $regex: escapeRegex(search as string), $options: 'i' } },
+                { shortDescription: { $regex: escapeRegex(search as string), $options: 'i' } },
             ],
         });
     }
@@ -37,7 +41,7 @@ const listJobs = asyncHandler(async (req: Request, res: Response) => {
     }
 
     if (location) {
-        matchCriteria.push({ location: { $regex: location, $options: 'i' } });
+        matchCriteria.push({ location: { $regex: escapeRegex(location as string), $options: 'i' } });
     }
 
     if (status) {

@@ -49,8 +49,7 @@ export default function JobsInternshipsPage() {
         };
 
         updateCMSJobsInternshipsPage(payload, {
-            onSuccess: (responseData: any) => {
-                console.log("Jobs & Internships page updated successfully:", responseData);
+            onSuccess: () => {
             },
         });
     };

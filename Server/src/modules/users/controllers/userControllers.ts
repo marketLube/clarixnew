@@ -100,7 +100,7 @@ const adminForgotPasswordRequest = asyncHandler(async (req: Request, res: Respon
         throw new ApiError(404, 'Admin not found for this email');
     }
 
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = crypto.randomInt(1000, 9999).toString();
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + OTP_EXPIRY_MINUTES);
 
@@ -207,7 +207,7 @@ const signupRequestOtp = asyncHandler(async (req: Request, res: Response) => {
         throw new ApiError(409, 'User with this email or mobile number already exists');
     }
 
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = crypto.randomInt(1000, 9999).toString();
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + OTP_EXPIRY_MINUTES);
 
@@ -306,7 +306,7 @@ const requestOtp = asyncHandler(async (req: Request, res: Response) => {
         throw new ApiError(400, 'Admins must login using password');
     }
 
-    const otp = Math.floor(1000 + Math.random() * 9000).toString();
+    const otp = crypto.randomInt(1000, 9999).toString();
     const expiresAt = new Date();
     expiresAt.setMinutes(expiresAt.getMinutes() + OTP_EXPIRY_MINUTES);
 

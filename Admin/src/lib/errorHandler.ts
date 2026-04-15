@@ -63,7 +63,5 @@ export const handleError = (error: any, options: {
     toast.error(message);
   }
   
-  console.error('[Handled Error]', error);
-  
   return message;
 };

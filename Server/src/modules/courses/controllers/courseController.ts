@@ -5,6 +5,10 @@ import { Course } from '../models/courseModel.js';
 import { College } from '../../colleges/models/collegeModel.js';
 import { Stream } from '../../streams/model/streamModel.js';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const capitalize = (str: string) => {
     if (!str) return str;
     // For now, let's just return as is or trim it, 
@@ -64,8 +68,8 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc'
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50);
     const skip = (pageNum - 1) * limitNum;
 
     // Build query filter
@@ -73,8 +77,8 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
 
     if (search) {
         filter.$or = [
-            { name: { $regex: search, $options: 'i' } },
-            { 'description.content': { $regex: search, $options: 'i' } },
+            { name: { $regex: escapeRegex(search as string), $options: 'i' } },
+            { 'description.content': { $regex: escapeRegex(search as string), $options: 'i' } },
         ];
     }
 
@@ -83,7 +87,7 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
     }
 
     if (courseLevel) {
-        filter.courseLevel = { $regex: courseLevel, $options: 'i' };
+        filter.courseLevel = { $regex: escapeRegex(courseLevel as string), $options: 'i' };
     }
 
     if (stream) {
@@ -91,7 +95,7 @@ const listCourses = asyncHandler(async (req: Request, res: Response) => {
         if (isValidObjectId(stream)) {
             filter.stream = stream;
         } else {
-            const streamDoc = await Stream.findOne({ name: { $regex: `^${stream}$`, $options: 'i' } }).lean();
+            const streamDoc = await Stream.findOne({ name: { $regex: `^${escapeRegex(stream as string)}$`, $options: 'i' } }).lean();
             if (streamDoc) {
                 filter.stream = streamDoc._id;
             }
@@ -316,10 +320,12 @@ const getCourseById = asyncHandler(async (req: Request, res: Response) => {
     }
 
     // Find colleges that offer this course
-    const collegesData = await College.find({ courses: id } as any).populate('university')
-        .populate('recruiters')
-        .populate('scholarships').
-        limit(4)
+    const collegesData = await College.find({ courses: id } as any)
+        .select('name logo city state campusImages accreditation averageSalary highestSalary placementPercentage courses university')
+        .populate('university', 'name logo')
+        .populate('recruiters', 'name logo')
+        .populate('scholarships', 'scholarshipName')
+        .limit(4)
         .lean();
 
     const colleges = collegesData.map((college: any) => ({

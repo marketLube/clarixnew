@@ -18,8 +18,8 @@ export const useAddRecruiter = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["recruiters"] });
         },
-        onError: (error: any) => {
-            console.error("Error adding recruiter:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

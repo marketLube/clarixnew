@@ -222,8 +222,7 @@ export const extractS3KeyFromUrl = (url: string): string | null => {
         const urlObj = new URL(url);
         const key = urlObj.pathname.substring(1);
         return key || null;
-    } catch (error) {
-        console.error('Error extracting S3 key from URL:', error);
+    } catch {
         return null;
     }
 };
@@ -231,7 +230,6 @@ export const extractS3KeyFromUrl = (url: string): string | null => {
 
 export const deleteFileFromS3 = async (fileUrl: string): Promise<boolean> => {
     if (!fileUrl || typeof fileUrl !== 'string') {
-        console.warn('Invalid file URL provided for deletion');
         return false;
     }
 
@@ -240,7 +238,6 @@ export const deleteFileFromS3 = async (fileUrl: string): Promise<boolean> => {
         if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
             const extractedKey = extractS3KeyFromUrl(fileUrl);
             if (!extractedKey) {
-                console.error('Could not extract S3 key from URL:', fileUrl);
                 return false;
             }
             key = extractedKey;
@@ -254,10 +251,8 @@ export const deleteFileFromS3 = async (fileUrl: string): Promise<boolean> => {
         });
 
         await s3Client.send(deleteCommand);
-        console.log(`Successfully deleted file from S3: ${key}`);
         return true;
-    } catch (error) {
-        console.error('Error deleting file from S3:', error);
+    } catch {
         return false;
     }
 };

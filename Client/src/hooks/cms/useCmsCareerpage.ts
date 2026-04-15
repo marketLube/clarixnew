@@ -66,6 +66,7 @@ export function useCmsCareerPage() {
   const query = useQuery<CmsCareerPageData | null, Error>({
     queryKey: ["cms-careerpage"],
     queryFn: fetchCmsCareerPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

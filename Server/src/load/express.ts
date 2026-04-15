@@ -50,6 +50,10 @@ export const createExpressApp = (): Application => {
           frameSrc: ["'self'"],
         },
       },
+      hsts: {
+        maxAge: 31536000,
+        includeSubDomains: true,
+      },
       crossOriginEmbedderPolicy: false,
       crossOriginResourcePolicy: { policy: "cross-origin" },
     })
@@ -57,7 +61,16 @@ export const createExpressApp = (): Application => {
 
   app.use(
     cors({
-      origin: "*",
+      origin: [
+            "https://clarixeducation.com",
+            "https://www.clarixeducation.com",
+            "https://clarix.in",
+            "https://www.clarix.in",
+            "https://admin.clarixeducation.com",
+            "http://localhost:3000",
+            "http://localhost:3001",
+            "http://localhost:3002",
+        ],
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     })
   );
@@ -71,8 +84,8 @@ export const createExpressApp = (): Application => {
 
   app.use(compression());
 
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  app.use(express.json({ limit: '10mb' }));
+  app.use(express.urlencoded({ limit: '10mb', extended: true }));
 
 
   // Trust 1 proxy hop (nginx reverse proxy on the same server)

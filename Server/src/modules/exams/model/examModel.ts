@@ -82,4 +82,7 @@ const examSchema = new Schema<IExam>(
     { timestamps: true }
 );
 
+examSchema.index({ createdAt: -1 });
+examSchema.index({ title: 'text' });
+
 export const Exam = model<IExam>('Exam', examSchema);

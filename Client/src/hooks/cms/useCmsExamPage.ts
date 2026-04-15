@@ -26,6 +26,7 @@ export function useCmsExamPage() {
   const query = useQuery<CmsExamPageData | null, Error>({
     queryKey: ["cms-exampage"],
     queryFn: fetchCmsExamPage,
+    staleTime: 10 * 60 * 1000,
   });
 
   return {

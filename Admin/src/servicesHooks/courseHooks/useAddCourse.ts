@@ -18,8 +18,8 @@ export const useAddCourse = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["courses"] });
         },
-        onError: (error: any) => {
-            console.error("Error adding course:", error?.response?.data || error.message);
+        onError: () => {
+            // Error handled silently
         },
     });
 

@@ -13,6 +13,7 @@ export function useJobById(id?: string) {
     queryKey: ["job", id],
     queryFn: () => fetchJobById(id as string),
     enabled: Boolean(id),
+    staleTime: 30 * 60 * 1000,
   });
 
   return {

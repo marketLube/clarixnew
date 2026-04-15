@@ -5,11 +5,9 @@ import Image from "next/image";
 import ContentWrapper from "@/components/Ui/ContentWrapper";
 import PhoneIcon from "@/components/common/Icons/PhoneIcon";
 
-// Image assets from Figma
-const imgFrame2147225322 =
-  "http://localhost:3845/assets/38eacacfed9c4d234b8fe4482b3ee512c761680c.svg";
-const imgFrame2147225339 =
-  "http://localhost:3845/assets/6a501d976d0f907fe459c081d0367613d0204f92.svg";
+// Decorative line pattern (inline SVG data URIs instead of broken Figma asset URLs)
+const imgFrame2147225322 = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='595' fill='none'%3E%3Cpath d='M50 0v595' stroke='rgba(255,255,255,0.15)' stroke-width='0.5'/%3E%3C/svg%3E";
+const imgFrame2147225339 = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='595' fill='none'%3E%3Cpath d='M50 0v595' stroke='rgba(255,255,255,0.25)' stroke-width='0.5'/%3E%3C/svg%3E";
 
 export default function NeedHelpDeciding() {
   const handleGetCounselling = () => {

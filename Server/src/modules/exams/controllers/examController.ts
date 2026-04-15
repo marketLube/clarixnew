@@ -4,6 +4,10 @@ import { Exam } from '../model/examModel.js';
 import { Stream } from '../../streams/model/streamModel.js';
 import mongoose, { isValidObjectId } from 'mongoose';
 
+function escapeRegex(str: string): string {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 const capitalize = (str: string) => {
     if (!str) return str;
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
@@ -20,8 +24,8 @@ const listExams = asyncHandler(async (req: Request, res: Response) => {
         order = 'desc',
     } = req.query;
 
-    const pageNum = Number(page);
-    const limitNum = Number(limit);
+    const pageNum = Math.max(1, Number(page) || 1);
+    const limitNum = Math.min(Math.max(1, Number(limit) || 10), 50);
     const skip = (pageNum - 1) * limitNum;
 
     // 1. Initial Match Stage (Must be first to correctly filter by stream ObjectId and be performant)
@@ -29,8 +33,8 @@ const listExams = asyncHandler(async (req: Request, res: Response) => {
 
     if (search) {
         matchCriteria.$or = [
-            { fullName: { $regex: search, $options: 'i' } },
-            { shortName: { $regex: search, $options: 'i' } },
+            { fullName: { $regex: escapeRegex(search as string), $options: 'i' } },
+            { shortName: { $regex: escapeRegex(search as string), $options: 'i' } },
         ];
     }
 

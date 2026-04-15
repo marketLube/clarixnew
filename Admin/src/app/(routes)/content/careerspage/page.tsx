@@ -120,14 +120,11 @@ export default function CareersPage() {
             });
         });
 
-        console.log("Publishing careers page content as FormData");
-
         updateCMSCareersPage(formData, {
-            onSuccess: (responseData: any) => {
-                console.log("Careers page updated successfully:", responseData);
+            onSuccess: () => {
             },
-            onError: (error: any) => {
-                console.error("Error updating careers page:", error);
+            onError: () => {
+                // Error handled silently
             }
         });
     };

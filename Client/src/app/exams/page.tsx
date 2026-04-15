@@ -22,7 +22,7 @@ export default function ExamsPage() {
   const stream = searchParams.get("stream") || undefined;
   const search = searchParams.get("search") || undefined;
 
-  const { data: examsData, isLoading: isExamsLoading } = useExams(currentPage, cardsPerPage, stream, search);
+  const { data: examsData, isLoading: isExamsLoading, isError: isExamsError } = useExams(currentPage, cardsPerPage, stream, search);
   const { data: streamsData, isLoading: isStreamsLoading } = useStreams();
 
   const exams = examsData?.data?.exams || [];
@@ -214,6 +214,16 @@ export default function ExamsPage() {
 
         {isExamsLoading ? (
           <Loader fullPage label="Loading exams..." />
+        ) : isExamsError ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <p className="font-poppins text-[#ff4b4b] text-lg font-medium">Failed to load exams</p>
+            <p className="font-poppins text-[#767e92] text-sm mt-2">Please try again later.</p>
+          </div>
+        ) : exams.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-20 text-center">
+            <p className="font-poppins text-[#162447] text-lg font-medium">No exams found</p>
+            <p className="font-poppins text-[#767e92] text-sm mt-2">Try adjusting your filters or search terms.</p>
+          </div>
         ) : (
           <ExamsList
             exams={mappedExams}

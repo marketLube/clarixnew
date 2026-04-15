@@ -196,7 +196,9 @@ function CollegesPageContent() {
 
   return (
     <>
-      {/* SEO noindex handled via layout metadata */}
+      {hasActiveFilters && (
+        <meta name="robots" content="noindex, follow" />
+      )}
     <ContentWrapper>
       <Breadcrumb items={[{ label: "Colleges" }]} />
 
