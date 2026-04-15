@@ -83,6 +83,6 @@ const examSchema = new Schema<IExam>(
 );
 
 examSchema.index({ createdAt: -1 });
-examSchema.index({ title: 'text' });
+examSchema.index({ fullName: 'text', shortName: 'text' });
 
 export const Exam = model<IExam>('Exam', examSchema);
