@@ -47,5 +47,6 @@ export const useReviews = (page: number = 1, limit: number = 3) => {
   return useQuery({
     queryKey: ["reviews", { page, limit }],
     queryFn: () => fetchReviews(page, limit),
+    staleTime: 5 * 60 * 1000,
   });
 };
