@@ -13,6 +13,31 @@ function escapeRegex(str: string): string {
     return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+/**
+ * Build a regex that tolerates common typographic variations users
+ * enter for abbreviated names: dots, hyphens, underscores and spaces
+ * between each alphanumeric character.
+ *
+ * Example: "btech" / "b.tech" / "b tech" / "b-tech" all match the
+ * DB value "B.Tech Computer Science" because the generated pattern
+ * allows an optional [. \s _ -] between every pair of characters.
+ *
+ * Falls back to a plain escaped regex when the input has fewer than
+ * two alphanumerics (flexible matching on a single character would
+ * be way too permissive).
+ */
+function buildFlexibleRegex(query: string): RegExp {
+    const alnum = query.replace(/[^a-z0-9]/gi, '');
+    if (alnum.length < 2) {
+        return new RegExp(escapeRegex(query), 'i');
+    }
+    const pattern = alnum
+        .split('')
+        .map((ch) => escapeRegex(ch))
+        .join('[.\\s_\\-]?');
+    return new RegExp(pattern, 'i');
+}
+
 const globalSearch = asyncHandler(async (req: Request, res: Response) => {
     const { query } = req.query;
 
@@ -34,7 +59,15 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
         return ApiResponse.success(res, 200, emptyPayload, 'No query provided');
     }
 
+    // Plain regex for fields where users type things literally
+    // (city, state, blog tags etc).
     const searchRegex = new RegExp(escapeRegex(trimmedQuery), 'i');
+
+    // Flexible regex — tolerates dots, hyphens, underscores and spaces
+    // between letters. Used for fields where DB values are often
+    // abbreviated with punctuation (course names like "B.Tech", exam
+    // shortNames like "NEET-UG").
+    const flexibleRegex = buildFlexibleRegex(trimmedQuery);
 
     // Resolve streams up-front so Course search can also match by stream name.
     // e.g. searching "engineering" should return courses under the Engineering
@@ -59,7 +92,7 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
 
         Course.find({
             $or: [
-                { name: searchRegex },
+                { name: flexibleRegex },
                 { shortDescription: searchRegex },
                 { type: searchRegex },
                 ...(matchingStreamIds.length
@@ -75,7 +108,7 @@ const globalSearch = asyncHandler(async (req: Request, res: Response) => {
         Exam.find({
             $or: [
                 { fullName: searchRegex },
-                { shortName: searchRegex },
+                { shortName: flexibleRegex },
             ],
         })
             .select('fullName shortName examDate logo')
