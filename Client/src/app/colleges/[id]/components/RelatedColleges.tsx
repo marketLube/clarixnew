@@ -18,17 +18,29 @@ export default function RelatedColleges({
   city,
   state,
 }: RelatedCollegesProps) {
-  // Fetch colleges from the same city/state
-  const { colleges, isLoading } = useColleges({
-    city: city || state || undefined,
-    limit: 5,
+  // Try city first, then top-up with state-level matches so we always
+  // surface enough similar colleges even if the city has few entries.
+  const { colleges: cityColleges, isLoading: cityLoading } = useColleges({
+    city: city || undefined,
+    limit: 8,
+  });
+  const { colleges: stateColleges, isLoading: stateLoading } = useColleges({
+    city: state || undefined,
+    limit: 8,
   });
 
-  // Filter out the current college
-  const relatedColleges = colleges.filter(
+  const cityFiltered = cityColleges.filter(
     (c: any) => c._id !== currentCollegeId
-  ).slice(0, 4);
+  );
+  const stateFiltered = stateColleges.filter(
+    (c: any) =>
+      c._id !== currentCollegeId &&
+      !cityFiltered.some((cc: any) => cc._id === c._id)
+  );
 
+  const relatedColleges = [...cityFiltered, ...stateFiltered].slice(0, 8);
+
+  const isLoading = cityLoading && stateLoading;
   if (isLoading || relatedColleges.length === 0) return null;
 
   return (
