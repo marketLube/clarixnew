@@ -45,7 +45,7 @@ export default function ContactLeftBody() {
         {description}
       </SectionDescription>
 
-      <div className="grid grid-cols-3 gap-2 md:flex md:flex-col md:gap-y-5">
+      <div className="flex flex-col gap-3 md:gap-y-5">
         {/* Office Locations */}
         <div className="flex items-start gap-2 md:gap-3">
           <div className="h-8 w-8 md:h-9 md:w-9 rounded-full bg-[var(--color-primary)] flex items-center justify-center text-white shrink-0">
