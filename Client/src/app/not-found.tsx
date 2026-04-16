@@ -14,7 +14,7 @@ export default function NotFound() {
       <h2 className="mt-3 sm:mt-4 text-[18px] sm:text-[20px] md:text-[24px] font-semibold text-text-headline font-poppins">
         Page Not Found
       </h2>
-      <p className="mt-2 sm:mt-3 max-w-md text-[13px] md:text-[14px] text-text-sub leading-relaxed">
+      <p className="mt-2 sm:mt-3 w-full max-w-md text-[13px] md:text-[14px] text-text-sub leading-relaxed">
         Sorry, the page you are looking for does not exist or has been moved.
       </p>
       <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">

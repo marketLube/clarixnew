@@ -560,13 +560,12 @@ export default function Nav() {
 
       {/* Mobile Navigation Drawer */}
       <Drawer
-        placement="left"
         open={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
-        width={300}
-        closable={false}
-        styles={{ body: { padding: 0 } }}
-        className="xl:hidden"
+        placement="left"
+        closeIcon={null}
+        styles={{ body: { padding: 0 }, wrapper: { width: 300 } }}
+        rootClassName="nav-mobile-drawer"
       >
         <div className="flex flex-col h-full bg-white">
           {/* Drawer header */}

@@ -121,7 +121,7 @@ function CoursesPageContent() {
             <h3 className="font-poppins font-bold text-xl text-[#162447] mb-2">
               No Courses Available
             </h3>
-            <p className="font-poppins text-[#767e92] text-sm text-center max-w-md">
+            <p className="font-poppins text-[#767e92] text-sm text-center w-full max-w-md">
               We&apos;re adding new courses regularly. Please check back soon or
               try a different filter.
             </p>
