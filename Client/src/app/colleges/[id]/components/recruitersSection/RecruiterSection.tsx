@@ -16,8 +16,8 @@ export default function RecruiterSection({ college }: any) {
             Meet the brands that turn classroom learning into real careers.
           </SectionDescription>
         </div>
-        <div className="md:px-[6rem] px-4">
-          <GridWrapper colsDesktop={4}>
+        <div className="md:px-[6rem] px-4 w-full">
+          <GridWrapper colsDesktop={4} colsMobile={2} colsTablet={3} className="gap-3 md:gap-4">
             {college?.recruiters?.length > 0 ? (
               college.recruiters.map((recruiter: any, index: number) => (
                 <RecruitersCard
