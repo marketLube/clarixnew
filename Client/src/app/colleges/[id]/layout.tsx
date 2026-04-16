@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
+import BreadcrumbJsonLd from "@/components/common/BreadcrumbJsonLd";
+import FaqJsonLd from "@/components/common/FaqJsonLd";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://clarix.in";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.clarixeducation.com";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -116,6 +119,21 @@ export default async function CollegeLayout({ params, children }: Props) {
       }
     : null;
 
+  const collegeName = college?.name || college?.collegeName;
+
+  const faqItems: { question: string; answer: string }[] = Array.isArray(
+    college?.faqs?.items
+  )
+    ? college.faqs.items
+        .filter(
+          (f: { question?: string; answer?: string }) => f?.question && f?.answer
+        )
+        .map((f: { question: string; answer: string }) => ({
+          question: f.question,
+          answer: f.answer,
+        }))
+    : [];
+
   return (
     <>
       {jsonLd && (
@@ -124,6 +142,16 @@ export default async function CollegeLayout({ params, children }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       )}
+      {collegeName && (
+        <BreadcrumbJsonLd
+          items={[
+            { name: "Home", url: "/" },
+            { name: "Colleges", url: "/colleges" },
+            { name: collegeName, url: `/colleges/${id}` },
+          ]}
+        />
+      )}
+      <FaqJsonLd items={faqItems} />
       {children}
     </>
   );

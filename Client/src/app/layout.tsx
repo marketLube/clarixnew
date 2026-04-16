@@ -196,6 +196,28 @@ export default function RootLayout({
             }),
           }}
         />
+        {/* WebSite + SearchAction — lets Google show the sitelinks
+            searchbox in SERPs for the brand query. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Clarix Education",
+              url: "https://www.clarixeducation.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate:
+                    "https://www.clarixeducation.com/colleges?search={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
         <ReduxProvider>
           <ReactQueryProvider>
             <AntdRegistry>

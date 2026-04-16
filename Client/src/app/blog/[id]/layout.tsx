@@ -3,7 +3,8 @@ import { stripMarkdown } from "@/lib/helperFunctions/stripMarkdown";
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://clarix.in";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.clarixeducation.com";
 
 type Props = {
   params: Promise<{ id: string }>;
