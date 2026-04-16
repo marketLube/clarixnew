@@ -98,7 +98,9 @@ const siteDescription =
   "Discover top colleges, courses, entrance exams, scholarships, and career opportunities across India. Clarix Education helps students make informed decisions about their academic and professional future.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://clarix.in"),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.clarixeducation.com"
+  ),
   title: {
     default: siteTitle,
     template: "%s | Clarix Education",
@@ -182,9 +184,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Clarix Education",
-              url: "https://clarix.in",
+              url: "https://www.clarixeducation.com",
               description: siteDescription,
-              logo: "https://clarix.in/favicon.ico",
+              logo: "https://www.clarixeducation.com/favicon.ico",
               sameAs: [],
               contactPoint: {
                 "@type": "ContactPoint",

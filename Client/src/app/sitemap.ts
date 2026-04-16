@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
 import axios from "axios";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://clarix.in";
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.clarixeducation.com";
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api/v1";
 
