@@ -96,7 +96,7 @@ export default function JobDetailSidebar({ job }: JobDetailSidebarProps) {
 
         <div className="flex flex-col gap-[18px] items-start mt-4">
           {websiteDisplay && (
-            <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
+            <div className="flex font-poppins gap-4 md:gap-6 lg:gap-10 items-center text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-nowrap">
               <p className="text-[#767e92]">Website</p>
               <a
                 href={job.companyWebsite}
@@ -109,7 +109,7 @@ export default function JobDetailSidebar({ job }: JobDetailSidebarProps) {
             </div>
           )}
           {job.industry && (
-            <div className="flex font-poppins gap-10 items-center text-[16px] leading-[20px] text-nowrap">
+            <div className="flex font-poppins gap-4 md:gap-6 lg:gap-10 items-center text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-nowrap">
               <p className="text-[#767e92]">Industry</p>
               <p className="text-[#162447]">{job.industry}</p>
             </div>

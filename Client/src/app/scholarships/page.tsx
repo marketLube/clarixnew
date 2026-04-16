@@ -74,12 +74,12 @@ function ScholarshipsPageContent() {
   }, [currentPage, totalPages]);
 
   return (
-    <section className="py-10 min-h-screen">
+    <section className="py-4 md:py-8 lg:py-10">
       {/* SEO noindex handled via layout metadata */}
       <ContentWrapper>
         <Breadcrumb items={[{ label: "Scholarships" }]} />
       </ContentWrapper>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-4 md:gap-6 lg:gap-10">
         {isLoading ? (
           <Loader fullPage label="Loading scholarships..." />
         ) : isError ? (

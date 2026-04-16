@@ -134,10 +134,10 @@ function JobsInternshipsPageContent() {
   }, [page, totalPages]);
 
   return (
-    <section className="py-10 min-h-screen">
+    <section className="py-4 md:py-8 lg:py-10">
       {/* SEO noindex handled via layout metadata */}
 
-      <ContentWrapper className="flex flex-col gap-16">
+      <ContentWrapper className="flex flex-col gap-4 md:gap-8 lg:gap-12 xl:gap-16">
         <Breadcrumb items={[{ label: "Jobs & Internships" }]} />
 
         {/* Jobs List Section */}

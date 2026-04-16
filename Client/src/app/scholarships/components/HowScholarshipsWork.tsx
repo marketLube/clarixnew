@@ -133,14 +133,14 @@ const StepIcon = ({ stepNumber }: { stepNumber: number }) => {
 
 export default function HowScholarshipsWork() {
   return (
-    <section className="w-full py-16">
-      <ContentWrapper className="flex flex-col gap-16">
+    <section className="w-full py-6 sm:py-10 md:py-12 lg:py-16">
+      <ContentWrapper className="flex flex-col gap-6 md:gap-10 lg:gap-14">
         {/* Header */}
-        <div className="flex flex-col items-center gap-6 text-center">
-          <h2 className="font-poppins font-medium leading-[48px] text-[#162447] text-[40px] sm:text-[48px] tracking-[-0.96px] max-w-[613px]">
+        <div className="flex flex-col items-center gap-3 md:gap-4 lg:gap-6 text-center">
+          <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[48px] text-[#162447] text-[22px] sm:text-[28px] md:text-[36px] lg:text-[44px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.96px] max-w-[613px]">
             Understand How Scholarships Work
           </h2>
-          <p className="font-poppins text-[16px] leading-[20px] text-[#767e92] max-w-[501px]">
+          <p className="font-poppins text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-[#767e92] max-w-[501px]">
             Clarix makes the process simple with verified data, step-by-step
             instructions, and timely reminders.
           </p>

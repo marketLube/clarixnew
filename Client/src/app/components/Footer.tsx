@@ -5,7 +5,7 @@ import FooterMain from "./FooterMain";
 
 export default function Footer() {
   return (
-    <footer className="md:mt-24 mt-2 text-[#162447] bg-[#f6f7ff]">
+    <footer className="mt-6 sm:mt-10 md:mt-16 lg:mt-24 text-[#162447] bg-[#f6f7ff]">
       <ContentWrapper>
         <Contact />
         <FooterCTA />

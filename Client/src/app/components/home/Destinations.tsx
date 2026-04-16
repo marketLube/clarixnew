@@ -160,7 +160,7 @@ export default function Destinations() {
     }, [handleUserScroll]);
 
     return (
-        <section className="w-full bg-white py-4 sm:py-20">
+        <section className="w-full bg-white py-6 sm:py-10 md:py-14 lg:py-20">
             <ContentWrapper>
                 {/* Header Section */}
                 <div className="flex items-end justify-between mb-4 sm:mb-8">

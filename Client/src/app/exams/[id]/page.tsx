@@ -37,8 +37,8 @@ export default function ExamDetailPage() {
 
   if (isError || !exam) {
     return (
-      <section className="py-10 min-h-screen">
-        <ContentWrapper className="flex flex-col items-center justify-center gap-4 py-20">
+      <section className="py-4 md:py-8 lg:py-10">
+        <ContentWrapper className="flex flex-col items-center justify-center gap-4 py-6 sm:py-10 md:py-14 lg:py-20">
           <p className="font-poppins text-[#767e92] text-lg">
             Exam not found or an error occurred.
           </p>

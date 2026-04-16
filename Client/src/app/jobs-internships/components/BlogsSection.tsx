@@ -21,11 +21,11 @@ export default function BlogsSection({
   onBlogClick,
 }: BlogsSectionProps) {
   return (
-    <section className="flex flex-col gap-10 items-center w-full">
+    <section className="flex flex-col gap-4 md:gap-6 lg:gap-10 items-center w-full">
       {/* Header */}
-      <div className="flex flex-col gap-6 items-center text-center max-w-[567px]">
-        <div className="bg-[#f6f7ff] px-5 py-[10px] rounded-[40px]">
-          <p className="text-[16px] leading-[20px] text-[#513392]">
+      <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 items-center text-center max-w-[567px]">
+        <div className="bg-[#f6f7ff] px-3 py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-[10px] rounded-full">
+          <p className="text-[12px] md:text-[14px] lg:text-[16px] leading-[16px] md:leading-[20px] text-[#513392]">
             Blogs
           </p>
         </div>

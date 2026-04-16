@@ -169,7 +169,7 @@ export default function StudentStories() {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden py-10 sm:py-20 bg-[#F6F7FF]">
+    <section className="relative w-full overflow-hidden py-6 sm:py-10 md:py-14 lg:py-20 bg-[#F6F7FF]">
       <ContentWrapper>
         {/* Header */}
         <div className="mb-8 md:mb-12">

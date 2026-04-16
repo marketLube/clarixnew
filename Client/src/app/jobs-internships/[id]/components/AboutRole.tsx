@@ -13,16 +13,16 @@ export default function AboutRole({ job }: AboutRoleProps) {
   if (responsibilities.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-10 items-start mb-[60px]">
-      <h2 className="font-poppins font-medium leading-[28px] text-[#162447] text-[24px] tracking-[-0.48px]">
+    <div className="flex flex-col gap-4 md:gap-6 lg:gap-10 items-start mb-8 md:mb-10 lg:mb-[60px]">
+      <h2 className="font-poppins font-medium leading-[22px] md:leading-[26px] lg:leading-[28px] text-[#162447] text-[18px] md:text-[22px] lg:text-[24px] tracking-[-0.4px]">
         About the role
       </h2>
 
-      <div className="flex flex-col gap-7 items-start">
+      <div className="flex flex-col gap-3 md:gap-5 lg:gap-7 items-start">
         {responsibilities.map((item, index) => (
-          <div key={index} className="flex gap-[15px] items-start">
-            <div className="w-[6px] h-[6px] rounded-full bg-[#767e92] mt-[7px] flex-shrink-0"></div>
-            <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
+          <div key={index} className="flex gap-2 md:gap-[15px] items-start">
+            <div className="w-[5px] h-[5px] md:w-[6px] md:h-[6px] rounded-full bg-[#767e92] mt-[6px] md:mt-[7px] flex-shrink-0"></div>
+            <p className="font-poppins text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-[#767e92]">
               {item}
             </p>
           </div>
