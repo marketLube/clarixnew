@@ -44,13 +44,24 @@ export default function FeeSection({ college }: any) {
     });
   });
 
-  college?.courses?.forEach((course: any) => {
-    feeitems.push({
-      label: course?.name,
-      value: formatFeeINR(course?.fees),
-      duration: course?.duration,
+  // Prefer college-specific courseOfferings if available (richer per-college data)
+  if (college?.courseOfferings?.length > 0) {
+    college.courseOfferings.forEach((offering: any) => {
+      feeitems.push({
+        label: offering?.courseName,
+        value: formatFeeINR(offering?.fees),
+        duration: offering?.duration,
+      });
     });
-  });
+  } else {
+    college?.courses?.forEach((course: any) => {
+      feeitems.push({
+        label: course?.name,
+        value: formatFeeINR(course?.fees),
+        duration: course?.duration,
+      });
+    });
+  }
 
 
 

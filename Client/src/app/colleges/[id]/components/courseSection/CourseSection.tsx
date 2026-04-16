@@ -43,10 +43,33 @@ export default function CourseSection({ college }: any) {
     }
   }, [streams, selectedStream]);
 
-  const filteredCourses = useMemo(() => {
+  // Build college-specific course data by merging offerings with course refs
+  const enrichedCourses = useMemo(() => {
     if (!college?.courses) return [];
+    const offeringsMap = new Map<string, any>();
+    (college?.courseOfferings || []).forEach((o: any) => {
+      const id = o?.courseId?.toString?.() || o?.courseId;
+      if (id) offeringsMap.set(id, o);
+    });
+    return college.courses.map((course: any) => {
+      const id = course?._id?.toString?.() || course?._id;
+      const offering = offeringsMap.get(id);
+      if (offering) {
+        // Override generic course fees/intake with college-specific data
+        return {
+          ...course,
+          fees: offering.fees || course.fees,
+          intakeCapacity: offering.intake || course.intakeCapacity,
+          collegeCutoff: offering.cutoff,
+          collegeModules: offering.modules,
+        };
+      }
+      return course;
+    });
+  }, [college?.courses, college?.courseOfferings]);
 
-    return college.courses.filter((course: any) => {
+  const filteredCourses = useMemo(() => {
+    return enrichedCourses.filter((course: any) => {
       let courseStream = "";
       if (typeof course?.stream === "string") {
         courseStream = course.stream;
@@ -55,12 +78,10 @@ export default function CourseSection({ college }: any) {
       } else if (course?.stream?.title) {
         courseStream = course.stream.title;
       }
-      
       const streamMatch = selectedStream ? courseStream === selectedStream : true;
-
       return streamMatch;
     });
-  }, [college?.courses, selectedStream]);
+  }, [enrichedCourses, selectedStream]);
 
   if (!college?.courses || college.courses.length === 0) return null;
 
