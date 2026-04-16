@@ -70,7 +70,7 @@ export default function SavedPage() {
     switch (activeTab) {
       case "colleges":
         return savedItems.colleges?.length > 0 ? (
-          <GridWrapper colsMobile={1} colsTablet={2} colsDesktop={4}>
+          <GridWrapper colsMobile={1} colsFold={2} colsTablet={2} colsDesktop={4}>
             {savedItems.colleges.map((college: any, index: number) => (
               <CollegeCard
                 key={college._id || index}

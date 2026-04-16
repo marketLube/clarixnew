@@ -19,9 +19,10 @@ import { useSavedItems } from "@/hooks/useSavedItems";
 import Loader from "@/components/common/Loader";
 import Breadcrumb from "@/components/common/Breadcrumb";
 
-/** Number of columns at each breakpoint — must match GridWrapper defaults. */
+/** Number of columns at each breakpoint — must match GridWrapper usage. */
 const COLS_DESKTOP = 4;
 const COLS_TABLET = 2;
+const COLS_FOLD = 2;
 const COLS_MOBILE = 1;
 
 /**
@@ -36,6 +37,7 @@ function useGridColumns() {
       const w = window.innerWidth;
       if (w >= 1024) setCols(COLS_DESKTOP);
       else if (w >= 768) setCols(COLS_TABLET);
+      else if (w >= 640) setCols(COLS_FOLD);
       else setCols(COLS_MOBILE);
     }
     update();
@@ -395,7 +397,7 @@ function CollegesPageContent() {
         <EmptyState onClearFilters={handleClearFilters} />
       ) : (
         <>
-          <GridWrapper colsDesktop={COLS_DESKTOP} className="mt-8">
+          <GridWrapper colsMobile={COLS_MOBILE} colsFold={COLS_FOLD} colsTablet={COLS_TABLET} colsDesktop={COLS_DESKTOP} className="mt-8">
             {visibleColleges.map((college) => (
               <CollegeCard
                 key={college._id}
