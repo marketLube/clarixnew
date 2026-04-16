@@ -37,7 +37,7 @@ export default function CourseCard({
           </h3>
         </div>
 
-        <div className="mt-2 md:mt-3 grid grid-cols-2 gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-3 text-[11px] md:text-[12px] text-[var(--text-sub)]">
+        <div className="mt-2 md:mt-3 grid grid-cols-2 gap-x-2 gap-y-2 md:grid-cols-1 md:gap-y-2 text-[11px] md:text-[13px] text-[var(--text-sub)]">
           <InfoPill label={course?.duration} Icon={ClockIcon} />
           <InfoPill label={course?.fees} Icon={GraphUpIcon} />
           <InfoPill label={course?.intakeCapacity ? `${course.intakeCapacity} seats` : "N/A"} Icon={GraduationCapIcon} />
@@ -88,11 +88,11 @@ type InfoPillProps = {
 
 function InfoPill({ label, Icon }: InfoPillProps) {
   return (
-    <div className="flex flex-row md:flex-col items-center gap-1.5 md:gap-1 min-w-0">
+    <div className="flex flex-row items-center gap-1.5 md:gap-2 min-w-0">
       <div className="bg-[var(--background)] rounded-full p-1.5 flex items-center justify-center shrink-0">
         <Icon width={14} height={14} fill="var(--primary-color)" />
       </div>
-      <p className="truncate md:whitespace-normal md:text-center">{label}</p>
+      <p className="truncate">{label}</p>
     </div>
   );
 }
