@@ -113,7 +113,7 @@ export default function ExamsPage() {
         {/* Header Section */}
         {heroSection?.enabled !== false && (
           <div className="flex flex-col gap-4 md:gap-[30px] items-start">
-            <h1 className="font-poppins font-medium leading-[30px] md:leading-[40px] lg:leading-[48px] text-[#162447] text-[20px] md:text-[32px] lg:text-[48px] tracking-[-0.96px] max-w-[638px]">
+            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[638px]">
               {title}
             </h1>
             <div className="font-poppins leading-5 text-[#767e92] text-[13px] md:text-[16px] lg:text-[16px] max-w-[567px]">

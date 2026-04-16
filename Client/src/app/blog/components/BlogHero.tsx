@@ -49,7 +49,7 @@ export default function BlogHero({ onSearch }: BlogHeroProps) {
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-[301px] items-start">
           {/* Left: Title and Description */}
           <div className="flex flex-col gap-[30px] max-w-[595px]">
-            <h1 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-white text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
+            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-white text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px]">
               {hero?.headline}
             </h1>
             <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] text-[rgba(255,255,255,0.7)] max-w-[548px]">

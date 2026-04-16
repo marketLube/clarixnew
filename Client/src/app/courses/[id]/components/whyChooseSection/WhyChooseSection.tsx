@@ -41,14 +41,14 @@ const features = [
 
 export default function WhyChooseSection({ course }: any) {
   return (
-    <section className="w-full bg-[#f6f7ff] py-8 md:py-16">
-      <ContentWrapper className="flex flex-col gap-8 md:gap-10">
+    <section className="w-full bg-[#f6f7ff] py-6 sm:py-10 md:py-12 lg:py-16">
+      <ContentWrapper className="flex flex-col gap-5 md:gap-8 lg:gap-10">
         {/* Header */}
-        <div className="flex flex-col gap-4 md:gap-6 items-center text-center">
-          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[40px] lg:text-[48px] tracking-[-0.96px]">
+        <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 items-center text-center">
+          <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px]">
             {course?.whyChoose?.title}
           </h2>
-          <p className="font-poppins text-[16px] leading-[20px] text-[#767e92]">
+          <p className="font-poppins text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-[#767e92]">
             {course?.whyChoose?.description}
           </p>
         </div>

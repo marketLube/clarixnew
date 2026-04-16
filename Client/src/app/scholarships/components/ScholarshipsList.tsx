@@ -37,11 +37,11 @@ export default function ScholarshipsList({
   return (
     <ContentWrapper className="px-0">
       {/* Header Section */}
-      <div className="flex flex-col gap-4 md:gap-[30px] items-start mb-8 md:mb-10">
-        <h1 className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-[#162447] text-[22px] sm:text-[48px] tracking-[-0.96px] max-w-[627px]">
+      <div className="flex flex-col gap-3 md:gap-5 lg:gap-[30px] items-start mb-5 md:mb-8 lg:mb-10">
+        <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[627px]">
           Find Scholarships That Match Your Dream Education
         </h1>
-        <div className="font-poppins leading-6 text-[#767e92] text-[14px] sm:text-[16px] max-w-[625px]">
+        <div className="font-poppins leading-[18px] md:leading-[22px] lg:leading-6 text-[#767e92] text-[13px] md:text-[15px] lg:text-[16px] max-w-[625px]">
           <p className="mb-0">
             Explore verified government, private, merit-based, and need-based scholarships designed to support every student across India.
           </p>

@@ -83,7 +83,7 @@ export default function BlogDetailHero({
                 {date}
               </p>
             </div>
-            <h1 className="font-poppins font-medium leading-[1.2] text-white text-[22px] sm:text-[36px] md:text-[48px] tracking-[-0.96px] break-words">
+            <h1 className="font-poppins font-medium leading-[1.2] text-white text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] break-words">
               {title}
             </h1>
           </div>

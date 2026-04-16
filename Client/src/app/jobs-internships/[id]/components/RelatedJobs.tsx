@@ -45,9 +45,9 @@ export default function RelatedJobs({ currentJobId }: RelatedJobsProps) {
   if (isLoading || filteredJobs.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-[60px] items-start mt-[60px]">
+    <div className="flex flex-col gap-6 md:gap-10 lg:gap-[60px] items-start mt-6 md:mt-10 lg:mt-[60px]">
       <div className="flex items-center justify-between w-full">
-        <h2 className="font-poppins font-medium leading-[28px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[629px]">
+        <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[629px]">
           More Jobs You Might Like
         </h2>
         <Link

@@ -13,13 +13,13 @@ export default function OurPeopleSection() {
   if (secondSection?.enabled === false) return null;
 
   return (
-    <section className="bg-white py-8 md:py-20">
-      <ContentWrapper className="flex flex-col gap-6 md:gap-[60px]">
-        <div className="flex flex-col gap-4 md:gap-[30px] max-w-[742px]">
-          <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.96px] max-w-[375px]">
+    <section className="bg-white py-6 sm:py-10 md:py-14 lg:py-20">
+      <ContentWrapper className="flex flex-col gap-5 md:gap-10 lg:gap-[60px]">
+        <div className="flex flex-col gap-3 md:gap-5 lg:gap-[30px] max-w-[742px]">
+          <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[420px]">
             {secondSection?.primaryHeadline}
           </h2>
-          <div className="font-poppins leading-[20px] text-[#767e92] text-[14px] md:text-[16px] space-y-4">
+          <div className="font-poppins leading-[18px] md:leading-[20px] text-[#767e92] text-[13px] md:text-[15px] lg:text-[16px] space-y-3 md:space-y-4">
             {secondSection?.paragraph?.split('\n').map((line, i) => (
               <p key={i}>{line}</p>
             ))}

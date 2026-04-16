@@ -66,7 +66,7 @@ export default function CareerHub() {
           <div className="">
             <SectionHeading
               title={title}
-              className="text-[22px] leading-[28px] md:text-[40px] md:leading-[44px] lg:text-[48px] lg:leading-[48px] text-[#faf9f6]"
+              className="text-[22px] leading-[28px] sm:text-[26px] sm:leading-[32px] md:text-[32px] md:leading-[38px] lg:text-[40px] lg:leading-[44px] xl:text-[48px] xl:leading-[52px] text-[#faf9f6]"
               style={{
                 color: "#faf9f6",
               }}

@@ -53,10 +53,10 @@ export default function CoursesList({
       <div className="flex flex-col gap-[12px] md:gap-[30px] items-start">
         {heroSection?.enabled !== false && (
           <>
-            <h1 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.48px] md:tracking-[-0.96px] max-w-[501px]">
+            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[501px]">
               {heroSection?.primaryHeadline}
             </h1>
-            <div className="font-poppins leading-5 text-[#767e92] text-[12px] md:text-[16px] max-w-[763px]">
+            <div className="font-poppins leading-[18px] md:leading-5 text-[#767e92] text-[12px] md:text-[14px] lg:text-[16px] max-w-[763px]">
               <p className="mb-0">
                 {heroSection?.subHeadline}
               </p>

@@ -91,14 +91,14 @@ const reviews: Review[] = [
 
 export default function StudentReviews() {
   return (
-    <section className="w-full py-16 bg-[#f6f7ff] ">
+    <section className="w-full py-6 sm:py-10 md:py-12 lg:py-16 bg-[#f6f7ff] ">
       <div className="container max-width-[1536px] mx-auto">
         {/* Header */}
-        <div className="flex flex-col gap-6 items-center text-center">
-          <h2 className="font-poppins font-medium leading-[48px] text-[#162447] text-[40px] sm:text-[48px] tracking-[-0.96px]">
+        <div className="flex flex-col gap-3 md:gap-4 lg:gap-6 items-center text-center">
+          <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px]">
             Student Reviews
           </h2>
-          <p className="font-poppins text-[16px] leading-[20px] text-[#767e92] max-w-[638px]">
+          <p className="font-poppins text-[13px] md:text-[15px] lg:text-[16px] leading-[18px] md:leading-[20px] text-[#767e92] max-w-[638px]">
             Read authentic reviews from real students sharing their experiences
             with academics, faculty, campus life, and placements. Every review
             is verified to help you make confident decisions.

@@ -63,7 +63,7 @@ export default function StayUpdated() {
           <div className="flex-1 lg:w-[600px]">
             <SectionHeading
               title={title}
-              className="text-[22px] leading-[40px] md:text-[40px] md:leading-[44px] lg:text-[48px] lg:leading-[48px]"
+              className="text-[22px] leading-[28px] sm:text-[26px] sm:leading-[32px] md:text-[32px] md:leading-[38px] lg:text-[40px] lg:leading-[44px] xl:text-[48px] xl:leading-[52px]"
             />
           </div>
 

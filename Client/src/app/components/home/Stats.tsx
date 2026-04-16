@@ -25,7 +25,7 @@ export default function Stats() {
                 key={index}
                 className="flex flex-col items-center text-center text-[#767e92] py-2"
               >
-                <p className="font-poppins font-medium text-[20px] leading-[24px] tracking-[-0.28px] md:text-[28px] lg:text-[48px] lg:leading-[48px] lg:tracking-[-0.96px]">
+                <p className="font-poppins font-medium text-[20px] leading-[24px] tracking-[-0.28px] sm:text-[22px] sm:leading-[26px] md:text-[28px] md:leading-[34px] lg:text-[36px] lg:leading-[40px] xl:text-[40px] xl:leading-[44px] xl:tracking-[-0.6px]">
                   {stat.value}
                 </p>
                 <p className="font-poppins text-[11px] leading-[16px] md:text-[13px] lg:text-[16px] lg:leading-[20px] mt-1">

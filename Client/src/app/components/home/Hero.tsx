@@ -556,7 +556,7 @@ export default function Hero() {
                   </div>
 
                   {/* Headline */}
-                  <h1 className="text-white font-poppins text-[28px] sm:text-[36px] md:text-[48px] font-medium leading-tight tracking-[-1.2px] text-center mb-10 transition-all max-w-[90vw] sm:max-w-[600px] mx-auto">
+                  <h1 className="text-white font-poppins text-[24px] sm:text-[28px] md:text-[32px] lg:text-[40px] xl:text-[44px] font-medium leading-tight tracking-[-0.4px] sm:tracking-[-0.6px] md:tracking-[-0.8px] text-center mb-6 sm:mb-8 md:mb-10 transition-all max-w-[92vw] sm:max-w-[560px] mx-auto">
                     {heroHeading}
                   </h1>
                 </>

@@ -36,7 +36,7 @@ export default function FooterCTA() {
     <div className="">
       <div className="relative overflow-hidden rounded-[20px] md:rounded-[30px] bg-[url('/images/footer-bg.png')] bg-cover bg-bottom px-4 py-10 md:px-10 md:py-16 lg:py-20 text-center text-white">
         <div className="relative flex flex-col items-center gap-4 md:gap-6 max-w-[800px] mx-auto">
-          <h2 className="text-[22px] font-medium leading-tight tracking-[-0.04em] sm:text-4xl md:text-5xl lg:text-7xl">
+          <h2 className="text-[22px] font-medium leading-tight tracking-[-0.04em] sm:text-[28px] md:text-[36px] lg:text-[44px] xl:text-[52px]">
             <HeadingContent />
           </h2>
           <p className="mt-1 text-sm leading-relaxed text-white/85 sm:text-base md:text-lg">

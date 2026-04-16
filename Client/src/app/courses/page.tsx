@@ -82,17 +82,17 @@ function CoursesPageContent() {
   }));
 
   return (
-    <section className="py-6 md:py-10 min-h-screen">
+    <section className="py-4 md:py-8 lg:py-10">
       <ContentWrapper className="flex flex-col">
         <Breadcrumb items={[{ label: "Courses" }]} />
 
         {/* Header Section */}
         {heroSection?.enabled !== false && (
-          <div className="flex flex-col gap-3 md:gap-6 items-start mb-4 md:mb-8">
-            <h1 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[#162447] text-[22px] md:text-[48px] tracking-[-0.48px] md:tracking-[-0.96px] max-w-[501px]">
+          <div className="flex flex-col gap-2 md:gap-4 lg:gap-6 items-start mb-4 md:mb-6 lg:mb-8">
+            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[501px]">
               {heroSection?.primaryHeadline}
             </h1>
-            <p className="font-poppins leading-5 text-[#767e92] text-[12px] md:text-[16px] max-w-[763px]">
+            <p className="font-poppins leading-[18px] md:leading-5 text-[#767e92] text-[12px] md:text-[14px] lg:text-[16px] max-w-[763px]">
               {heroSection?.subHeadline}
             </p>
           </div>

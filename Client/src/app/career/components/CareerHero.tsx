@@ -38,7 +38,7 @@ export default function CareerHero() {
         {/* Content */}
         <div className="flex flex-col gap-8 md:gap-[40px] items-start max-w-[721px]">
           <div className="flex flex-col gap-4 md:gap-[30px]">
-            <h1 className="font-poppins font-medium leading-[32px] sm:leading-[48px] text-white text-[22px] sm:text-[48px] tracking-[-0.96px]">
+            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-white text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px]">
               {heroSection?.primaryHeadline ||
                 "Work With Us to Make Education Transparent for Everyone"}
             </h1>

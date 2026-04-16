@@ -47,7 +47,7 @@ export default function StatsSection() {
                 key={stat.id}
                 className="flex flex-col items-center text-center py-2"
               >
-                <p className="font-poppins font-medium text-[20px] leading-[24px] md:text-[28px] md:leading-[32px] lg:text-[48px] lg:leading-[48px] text-[#767e92] tracking-[-0.5px] md:tracking-[-0.96px]">
+                <p className="font-poppins font-medium text-[20px] leading-[24px] sm:text-[22px] sm:leading-[26px] md:text-[28px] md:leading-[34px] lg:text-[36px] lg:leading-[40px] xl:text-[40px] xl:leading-[44px] text-[#767e92] tracking-[-0.4px] md:tracking-[-0.6px]">
                   {stat.value}
                 </p>
                 <p className="font-poppins text-[11px] md:text-[13px] lg:text-[16px] leading-[16px] md:leading-[20px] text-[#767e92] mt-1">

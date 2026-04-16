@@ -49,8 +49,8 @@ export default function SimilarArticles({
   }, []);
 
   return (
-    <div className="flex flex-col gap-6 md:gap-[48px]">
-      <h2 className="font-poppins font-medium leading-[32px] md:leading-[48px] text-[22px] md:text-[48px] tracking-[-0.96px] text-black">
+    <div className="flex flex-col gap-4 md:gap-8 lg:gap-[48px]">
+      <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] text-black">
         Similar Articles
       </h2>
 

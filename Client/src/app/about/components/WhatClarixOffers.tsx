@@ -62,7 +62,7 @@ export default function WhatClarixOffers() {
       <ContentWrapper className="flex flex-col gap-6 md:gap-10">
         {/* Header */}
         <div className="flex flex-col gap-2 md:gap-6 items-center text-center">
-          <h2 className="font-poppins font-medium leading-[36px] md:leading-[48px] text-[#162447] text-[28px] md:text-[40px] tracking-[-0.96px]">
+          <h2 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px]">
             {thirdSection?.headline ?? "What Clarix Offers"}
           </h2>
           <p className="font-poppins text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] text-[#767e92] max-w-[416px]">
