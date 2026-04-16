@@ -38,13 +38,13 @@ export default function InfoTable({
 }: InfoTableProps) {
   return (
     <div
-      className={`bg-[var(--white-color)] rounded-[20px] shadow-[1px_3px_30px_0px_rgba(0,0,0,0.04)] w-full relative overflow-hidden  ${className}`}
+      className={`bg-[var(--white-color)] rounded-[16px] md:rounded-[20px] shadow-[1px_3px_30px_0px_rgba(0,0,0,0.04)] w-full relative overflow-hidden  ${className}`}
     >
-      <div className="absolute bg-[var(--primary-light)] h-[59px] left-0 rounded-tl-[20px] rounded-tr-[20px] top-0 w-full" />
-      <p className="absolute font-poppins leading-[28px] left-[24px]  text-[18px] md:text-[24px] whitespace-nowrap top-[18px] tracking-[-0.48px] font-medium">
+      <div className="absolute bg-[var(--primary-light)] h-[48px] md:h-[59px] left-0 rounded-tl-[16px] md:rounded-tl-[20px] rounded-tr-[16px] md:rounded-tr-[20px] top-0 w-full" />
+      <p className="absolute font-poppins leading-[20px] md:leading-[28px] left-4 md:left-[24px]  text-[16px] md:text-[24px] whitespace-nowrap top-[14px] md:top-[18px] tracking-[-0.48px] font-medium">
         {title}
       </p>
-      <div className="flex flex-col gap-[4px] items-start pt-[59px] px-4 md:px-[24px]   pb-[24px]">
+      <div className="flex flex-col gap-[4px] items-start pt-[48px] md:pt-[59px] px-4 md:px-[24px] pb-4 md:pb-[24px]">
         {showThreeColumns && columnHeaders && (
           <div className="w-full hidden md:block">
             <div className="grid grid-cols-3 items-start md:items-center leading-[28px] py-[16px] text-[var(--text-sub)] text-[13px] md:text-[18px] tracking-[-0.36px] font-medium">
@@ -121,7 +121,7 @@ export default function InfoTable({
         {footer && (
           <div className="w-full mt-2">
             <div className="h-px w-full bg-[var(--border)]" />
-            <div className="flex justify-between items-center leading-[28px] pt-[12px] text-[18px] tracking-[-0.4px] font-semibold">
+            <div className="flex justify-between items-center leading-[20px] md:leading-[28px] pt-[12px] text-[14px] md:text-[18px] tracking-[-0.4px] font-semibold">
               <p className="font-poppins">{footer.label}</p>
               <p className="font-poppins">{footer.value}</p>
             </div>

@@ -41,7 +41,7 @@ export default function OverviewSection({ college }: any) {
   ]
   return (
     <ContentWrapper>
-      <GridWrapper colsDesktop={2} className="gap-10 items-start ">
+      <GridWrapper colsDesktop={2} className="gap-4 md:gap-10 items-start ">
         <div className="justify-self-start flex flex-col gap-2 md:gap-6 h-full justify-center">
           <SectionHeading title="Overview" />
           <SectionDescription className="max-w-[26rem]">
@@ -49,7 +49,7 @@ export default function OverviewSection({ college }: any) {
           </SectionDescription>
 
           <div className="flex flex-col gap-[10px] md:gap-[22px]">
-            <h3 className="text-[24px] leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-poppins">
+            <h3 className="text-[18px] leading-[22px] md:text-[24px] md:leading-[28px] tracking-[-0.48px] font-medium text-[var(--text-headline)] font-poppins">
               Key Highlights
             </h3>
 
