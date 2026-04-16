@@ -43,12 +43,22 @@ export default function Nav() {
   const isHomePage = pathname === "/";
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
   const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
 
   // Close mobile menu whenever the route changes
   useEffect(() => {
     setIsMobileMenuOpen(false);
+    setIsMobileSearchOpen(false);
   }, [pathname]);
+
+  // Auto-focus mobile search input when it opens
+  useEffect(() => {
+    if (isMobileSearchOpen) {
+      setTimeout(() => mobileSearchInputRef.current?.focus(), 100);
+    }
+  }, [isMobileSearchOpen]);
 
   // Search state
   const [searchQuery, setSearchQuery] = useState("");
@@ -122,8 +132,10 @@ export default function Nav() {
           <div className="flex items-center gap-4">
             <button
               type="button"
+              onClick={() => setIsMobileSearchOpen((v) => !v)}
               aria-label="Search"
-              className="flex items-center justify-center"
+              aria-expanded={isMobileSearchOpen}
+              className="flex items-center justify-center p-1 -m-1 rounded-md active:bg-white/10 transition-colors"
             >
               <SearchIcon
                 width={24}
@@ -148,6 +160,137 @@ export default function Nav() {
             </button>
           </div>
         </div>
+
+        {/* Mobile search expansion */}
+        <AnimatePresence>
+          {isMobileSearchOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="xl:hidden w-full overflow-hidden"
+            >
+              <div className="pt-3 pb-2">
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-white/20">
+                  <SearchIcon width={18} height={18} fill="#767e92" aria-hidden="true" />
+                  <input
+                    ref={mobileSearchInputRef}
+                    type="search"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && searchQuery.trim()) {
+                        router.push(`/colleges?search=${encodeURIComponent(searchQuery.trim())}`);
+                        setIsMobileSearchOpen(false);
+                      }
+                      if (e.key === "Escape") {
+                        setIsMobileSearchOpen(false);
+                      }
+                    }}
+                    placeholder="Search colleges, courses, exams, blogs..."
+                    className="flex-1 bg-transparent border-0 outline-0 text-[14px] text-[#162447] placeholder:text-[#767e92]"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery("")}
+                      aria-label="Clear search"
+                      className="text-[#767e92] hover:text-[#162447] p-1"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Mobile search results dropdown */}
+                {debouncedSearchQuery && (
+                  <div className="mt-2 bg-white rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.12)] border border-gray-100 max-h-[60vh] max-h-[60dvh] overflow-y-auto">
+                    <div className="px-4 py-3 flex flex-col gap-3">
+                      {isSearchLoading ? (
+                        <Loader containerClassName="py-6" size={28} />
+                      ) : (() => {
+                        const anyResults =
+                          (searchResults.colleges?.length || 0) +
+                          (searchResults.courses?.length || 0) +
+                          (searchResults.exams?.length || 0) +
+                          (searchResults.jobs?.length || 0) +
+                          (searchResults.blogs?.length || 0) > 0;
+                        if (!anyResults) {
+                          return (
+                            <p className="text-center text-[13px] text-[#767e92] py-4">
+                              No results for &quot;{debouncedSearchQuery}&quot;
+                            </p>
+                          );
+                        }
+                        return (
+                          <>
+                            {searchResults.colleges?.slice(0, 3).map((c: any) => (
+                              <Link
+                                key={c._id}
+                                href={`/colleges/${c._id}`}
+                                onClick={() => setIsMobileSearchOpen(false)}
+                                className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-gray-50"
+                              >
+                                <GraduationCapIcon width={16} height={16} fill="#513392" className="shrink-0" />
+                                <div className="min-w-0">
+                                  <p className="text-[13px] text-[#162447] font-medium line-clamp-1">{c.name}</p>
+                                  <p className="text-[11px] text-[#767e92] line-clamp-1">College</p>
+                                </div>
+                              </Link>
+                            ))}
+                            {searchResults.courses?.slice(0, 3).map((c: any) => (
+                              <Link
+                                key={c._id}
+                                href={`/courses/${c._id}`}
+                                onClick={() => setIsMobileSearchOpen(false)}
+                                className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-gray-50"
+                              >
+                                <OpenBookIcon width={16} height={16} className="shrink-0 text-blue-600" />
+                                <div className="min-w-0">
+                                  <p className="text-[13px] text-[#162447] font-medium line-clamp-1">{c.name}</p>
+                                  <p className="text-[11px] text-[#767e92] line-clamp-1">Course</p>
+                                </div>
+                              </Link>
+                            ))}
+                            {searchResults.exams?.slice(0, 3).map((e: any) => (
+                              <Link
+                                key={e._id}
+                                href={`/exams/${e._id}`}
+                                onClick={() => setIsMobileSearchOpen(false)}
+                                className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-gray-50"
+                              >
+                                <DocIcon width={16} height={16} className="shrink-0 text-orange-600" />
+                                <div className="min-w-0">
+                                  <p className="text-[13px] text-[#162447] font-medium line-clamp-1">{e.shortName || e.fullName}</p>
+                                  <p className="text-[11px] text-[#767e92] line-clamp-1">Exam</p>
+                                </div>
+                              </Link>
+                            ))}
+                            {searchResults.blogs?.slice(0, 3).map((b: any) => (
+                              <Link
+                                key={b._id}
+                                href={`/blog/${b._id}`}
+                                onClick={() => setIsMobileSearchOpen(false)}
+                                className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-gray-50"
+                              >
+                                <TrophyIcon width={16} height={16} className="shrink-0 text-purple-600" />
+                                <div className="min-w-0">
+                                  <p className="text-[13px] text-[#162447] font-medium line-clamp-1">{b.title}</p>
+                                  <p className="text-[11px] text-[#767e92] line-clamp-1">Blog</p>
+                                </div>
+                              </Link>
+                            ))}
+                          </>
+                        );
+                      })()}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Desktop / tablet navigation */}
         <div className="hidden w-full items-center justify-between gap-4 xl:flex ">

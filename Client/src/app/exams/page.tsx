@@ -104,28 +104,36 @@ export default function ExamsPage() {
     return links;
   }, [currentPage, totalPages]);
 
+  const hasHeroContent = Boolean(
+    heroSection?.enabled !== false && (title || description)
+  );
+
   return (
-    <section className="py-6 md:py-10 min-h-screen">
+    <section className="py-3 md:py-6 lg:py-10">
       {/* SEO meta handled via layout metadata */}
-      <ContentWrapper className="flex flex-col gap-6 md:gap-10">
+      <ContentWrapper className="flex flex-col gap-3 md:gap-6 lg:gap-10">
         <Breadcrumb items={[{ label: "Exams" }]} />
 
-        {/* Header Section */}
-        {heroSection?.enabled !== false && (
-          <div className="flex flex-col gap-4 md:gap-[30px] items-start">
-            <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[638px]">
-              {title}
-            </h1>
-            <div className="font-poppins leading-5 text-[#767e92] text-[13px] md:text-[16px] lg:text-[16px] max-w-[567px]">
-              <p className="mb-0">
-                {description}
-              </p>
-            </div>
+        {/* Header Section — only when CMS has content */}
+        {hasHeroContent && (
+          <div className="flex flex-col gap-3 md:gap-5 lg:gap-[30px] items-start">
+            {title && (
+              <h1 className="font-poppins font-medium leading-[28px] sm:leading-[32px] md:leading-[40px] lg:leading-[46px] xl:leading-[52px] text-[#162447] text-[22px] sm:text-[26px] md:text-[32px] lg:text-[40px] xl:text-[48px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] max-w-[638px]">
+                {title}
+              </h1>
+            )}
+            {description && (
+              <div className="font-poppins leading-[18px] md:leading-5 text-[#767e92] text-[13px] md:text-[15px] lg:text-[16px] max-w-[567px]">
+                <p className="mb-0">
+                  {description}
+                </p>
+              </div>
+            )}
           </div>
         )}
 
         {/* Filter Section */}
-        <div className="mt-8 flex flex-col gap-4">
+        <div className="flex flex-col gap-3 md:gap-4">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center gap-2 text-[#162447] font-poppins font-medium">
               <Filter className="w-5 h-5" />
