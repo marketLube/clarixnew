@@ -110,7 +110,7 @@ export default function ContactRightBody() {
       onSubmit={handleSubmit}
       className="w-full mx-auto space-y-2.5 md:space-y-4 bg-white p-3 md:p-4 rounded-lg"
     >
-      <GridWrapper colsDesktop={2} colsMobile={1} colsTablet={2} className="gap-2.5 md:gap-4">
+      <GridWrapper colsDesktop={2} colsMobile={2} colsTablet={2} className="gap-2.5 md:gap-4">
         <FormField
           label="Student Name"
           required

@@ -23,7 +23,7 @@ export default function FormField({
   return (
     <div className={`w-full ${className}`}>
       {label && (
-        <div className="mb-2">
+        <div className="mb-1 md:mb-2">
           {typeof label === "string" ? (
             <Label
               htmlFor={labelHtmlFor}

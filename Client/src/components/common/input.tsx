@@ -42,12 +42,17 @@ export default function Input({
     bg-[var(--background)]
     border
     ${error ? "border-[var(--error)]" : "border-[var(--input-border)]"}
-    rounded-[12px]
-    px-4
-    py-3
+    rounded-[10px]
+    md:rounded-[12px]
+    px-3
+    py-2
+    md:px-4
+    md:py-3
     font-poppins
-    text-[14px]
-    leading-[20px]
+    text-[12px]
+    leading-[16px]
+    md:text-[14px]
+    md:leading-[20px]
     text-[var(--text-headline)]
     placeholder:text-[var(--text-sub)]
     focus:outline-none
