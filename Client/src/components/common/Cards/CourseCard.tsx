@@ -19,8 +19,8 @@ export default function CourseCard({
   return (
     <Link href={`/courses/${course?._id}`} className="block h-full">
     <article className="bg-white rounded-[16px] md:rounded-[20px] overflow-hidden shadow-[0_1px_4px_rgba(0,0,0,0.05)] max-w-[21rem] h-full flex flex-col">
-      <div className="w-full flex justify-center pt-2 px-2 md:pt-4 shrink-0">
-        <div className="relative h-[130px] md:h-[192px] w-full max-w-[310px]">
+      <div className="w-full flex justify-center pt-2 px-2 md:pt-3 shrink-0">
+        <div className="relative h-[130px] md:h-[160px] w-full max-w-[310px]">
           <Image
             src={course?.cardImage || "/DummycourseImage.png"}
             alt={course?.name || "course"}
@@ -30,25 +30,25 @@ export default function CourseCard({
         </div>
       </div>
 
-      <div className="p-3 md:p-[22px] flex flex-col flex-1">
-        <div className="min-h-[32px] md:min-h-[42px]">
-          <h3 className="font-poppins text-[14px] leading-[17px] md:text-[20px] md:leading-[21px] tracking-[-0.4px] text-[#141219] line-clamp-2">
+      <div className="p-3 md:p-4 flex flex-col flex-1">
+        <div className="min-h-[32px] md:min-h-[40px]">
+          <h3 className="font-poppins text-[14px] leading-[17px] md:text-[17px] md:leading-[20px] tracking-[-0.4px] text-[#141219] line-clamp-2">
             {course?.name}
           </h3>
         </div>
 
-        <div className="mt-2 md:mt-5 grid grid-cols-2 gap-x-2 gap-y-2 md:flex md:flex-wrap md:gap-4 text-[11px] md:text-[13px] text-[var(--text-sub)]">
+        <div className="mt-2 md:mt-3 grid grid-cols-2 gap-x-2 gap-y-2 md:gap-x-3 md:gap-y-3 text-[11px] md:text-[12px] text-[var(--text-sub)]">
           <InfoPill label={course?.duration} Icon={ClockIcon} />
           <InfoPill label={course?.fees} Icon={GraphUpIcon} />
           <InfoPill label={course?.intakeCapacity ? `${course.intakeCapacity} seats` : "N/A"} Icon={GraduationCapIcon} />
           <InfoPill label={course?.type} Icon={VerifyIcon} />
         </div>
 
-        <div className="mt-3 md:mt-5 h-px w-full bg-[#e2e4e8] shrink-0" />
+        <div className="mt-3 h-px w-full bg-[#e2e4e8] shrink-0" />
 
-        <div className="mt-2 md:mt-3 flex-1 flex flex-col gap-1 md:gap-2 text-[12px] leading-[15px] md:text-[16px] md:leading-5 min-h-[52px] md:min-h-[80px]">
+        <div className="mt-2 md:mt-3 flex-1 flex flex-col gap-1 md:gap-1.5 text-[12px] leading-[15px] md:text-[13px] md:leading-[18px] min-h-[52px] md:min-h-[60px]">
           <p className="text-[var(--text-sub)] shrink-0">Eligibility:</p>
-          <div className="flex flex-col gap-0.5 md:gap-1 overflow-hidden">
+          <div className="flex flex-col gap-0.5 overflow-hidden">
             {course?.eligibility?.map((item: any, index: number) => (
               <p
                 key={index}
@@ -61,18 +61,18 @@ export default function CourseCard({
           </div>
         </div>
 
-        <div className="mt-auto pt-3 md:pt-4">
+        <div className="mt-auto pt-3">
           <Button
             variant="primary"
             size="md"
-            className="rounded-[30px] px-3 md:px-4 py-[4px] md:py-[5px] text-[12px] md:text-base flex items-center gap-2 md:gap-3 w-fit"
+            className="rounded-[30px] px-3 md:px-4 py-[4px] md:py-[5px] text-[12px] md:text-[13px] flex items-center gap-2 w-fit"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
               router.push(`/courses/${course?._id}`);
             }}
           >
-            Course Details <span className="text-base md:text-lg">→</span>
+            Course Details <span className="text-base">→</span>
           </Button>
         </div>
       </div>
