@@ -69,7 +69,7 @@ export default function CourseSection({ college }: any) {
       <ContentWrapper>
         <div className="flex flex-col gap-2 md:gap-4">
           <SectionHeading title="Courses Offered" />
-          <SectionDescription className="max-w-[24rem]">
+          <SectionDescription className="max-w-[24rem] md:max-w-none">
             Discover programs built to shape your future — compare outcomes,
             fees, and opportunities.
           </SectionDescription>
