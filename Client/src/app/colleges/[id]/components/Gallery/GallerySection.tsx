@@ -28,14 +28,14 @@ export default function GallerySection({ college }: GallerySectionProps) {
 
   return (
     <ContentWrapper>
-      <div className="flex flex-col gap-4 py-16">
+      <div className="flex flex-col gap-3 md:gap-4 py-6 md:py-16">
         <SectionHeading title="Gallery" />
         <SectionDescription className="max-w-[24rem]">
           Browse authentic images of the campus, facilities, events, and daily
           student life to get a true sense of the college atmosphere.
         </SectionDescription>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {categories.map((cat) => (
             <Button
               key={cat}
@@ -47,10 +47,10 @@ export default function GallerySection({ college }: GallerySectionProps) {
           ))}
         </div>
 
-        <div className="flex flex-col gap-4 mt-8 min-h-[400px]">
+        <div className="flex flex-col gap-3 md:gap-4 mt-3 md:mt-8 min-h-0 md:min-h-[400px]">
           {galleryImages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-20 border-2 border-dashed border-gray-100 rounded-3xl bg-gray-50/50">
-              <p className="text-gray-400 font-medium">No images available for {activeCategory} yet.</p>
+            <div className="flex flex-col items-center justify-center py-8 md:py-20 border-2 border-dashed border-gray-100 rounded-2xl md:rounded-3xl bg-gray-50/50">
+              <p className="text-gray-400 font-medium text-[13px] md:text-base">No images available for {activeCategory} yet.</p>
             </div>
           ) : (
             (() => {

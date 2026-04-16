@@ -64,7 +64,7 @@ export default function BlogCardHorizontal({
             onClick={onReadMore}
             className="font-poppins text-[13px] md:text-[14px] leading-[20px] text-[#513392] hover:underline font-medium cursor-pointer"
           >
-            Read more →
+            Read More →
           </button>
           <button
             onClick={onBookmark}

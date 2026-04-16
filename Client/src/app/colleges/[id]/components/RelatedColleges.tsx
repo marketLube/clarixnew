@@ -48,7 +48,22 @@ export default function RelatedColleges({
             </Link>
           </div>
 
-          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {/* Mobile: horizontal scroll with peek of next card */}
+          <div className="md:hidden -mx-4">
+            <div className="flex gap-3 overflow-x-auto px-4 pb-2 snap-x snap-mandatory scrollbar-hide">
+              {relatedColleges.map((college: any) => (
+                <div
+                  key={college._id}
+                  className="snap-start shrink-0 w-[72%]"
+                >
+                  <CollegeCard college={college} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Tablet / Desktop: grid */}
+          <div className="hidden md:grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {relatedColleges.map((college: any) => (
               <CollegeCard key={college._id} college={college} />
             ))}

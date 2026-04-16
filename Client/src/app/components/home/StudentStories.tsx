@@ -86,7 +86,7 @@ function ReviewCard({
             onClick={() => setExpanded(!expanded)}
             className="mt-1 font-poppins text-[10px] md:text-[13px] font-medium text-[#513392] hover:underline"
           >
-            {expanded ? "Show less" : "Read more"}
+            {expanded ? "Show Less" : "Read More"}
           </button>
         )}
       </div>

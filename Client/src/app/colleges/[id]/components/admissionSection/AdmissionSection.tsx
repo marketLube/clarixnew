@@ -69,7 +69,7 @@ export default function AdmissionSection({ college }: any) {
                     variant="outline"
                     className="flex items-center justify-center gap-2 md:gap-4 text-[13px] md:text-[16px] text-black leading-5 w-full py-3 border-[var(--primary-color)]"
                   >
-                    check eligibility{" "}
+                    Check Eligibility{" "}
                     <ArrowRightIcon width={20} height={20} fill="black" />
                   </Button>
                   <Button

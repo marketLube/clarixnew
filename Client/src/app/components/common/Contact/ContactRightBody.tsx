@@ -254,7 +254,7 @@ export default function ContactRightBody() {
         label={
           <>
             I agree the{" "}
-            <span className="text-[var(--color-primary)]">privacy policy</span>.
+            <span className="text-[var(--color-primary)]">Privacy Policy</span>.
           </>
         }
       />

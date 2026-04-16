@@ -102,7 +102,7 @@ export default function StoryCard({
             onClick={() => setExpanded(!expanded)}
             className="mt-1.5 font-poppins text-[12px] md:text-[13px] font-medium text-primary hover:underline"
           >
-            {expanded ? "Show less" : "Show more"}
+            {expanded ? "Show Less" : "Show More"}
           </button>
         )}
       </div>
