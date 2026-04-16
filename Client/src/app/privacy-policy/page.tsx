@@ -5,6 +5,18 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Privacy Policy - Clarix Education",
   description: "Learn how Clarix Education collects, uses, and protects your personal information.",
+  alternates: { canonical: "/privacy-policy" },
+  openGraph: {
+    type: "website",
+    title: "Privacy Policy - Clarix Education",
+    description: "Learn how Clarix Education collects, uses, and protects your personal information.",
+    url: "/privacy-policy",
+  },
+  twitter: {
+    card: "summary",
+    title: "Privacy Policy - Clarix Education",
+    description: "Learn how Clarix Education collects, uses, and protects your personal information.",
+  },
 };
 
 export default function PrivacyPolicyPage() {

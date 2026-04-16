@@ -5,6 +5,18 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Terms & Conditions - Clarix Education",
   description: "Terms and conditions for using the Clarix Education platform.",
+  alternates: { canonical: "/terms" },
+  openGraph: {
+    type: "website",
+    title: "Terms & Conditions - Clarix Education",
+    description: "Terms and conditions for using the Clarix Education platform.",
+    url: "/terms",
+  },
+  twitter: {
+    card: "summary",
+    title: "Terms & Conditions - Clarix Education",
+    description: "Terms and conditions for using the Clarix Education platform.",
+  },
 };
 
 export default function TermsPage() {

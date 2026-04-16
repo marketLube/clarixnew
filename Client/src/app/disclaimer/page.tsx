@@ -5,6 +5,18 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Disclaimer - Clarix Education",
   description: "Important disclaimers about the information provided on Clarix Education.",
+  alternates: { canonical: "/disclaimer" },
+  openGraph: {
+    type: "website",
+    title: "Disclaimer - Clarix Education",
+    description: "Important disclaimers about the information provided on Clarix Education.",
+    url: "/disclaimer",
+  },
+  twitter: {
+    card: "summary",
+    title: "Disclaimer - Clarix Education",
+    description: "Important disclaimers about the information provided on Clarix Education.",
+  },
 };
 
 export default function DisclaimerPage() {
