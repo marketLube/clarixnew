@@ -15,7 +15,7 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <Tag
-      className={`text-[20px] md:text-[36px] lg:text-[48px] leading-[26px] md:leading-[40px] lg:leading-[48px] tracking-[-0.5px] md:tracking-[-0.96px] font-medium font-poppins text-text-headline ${className}`}
+      className={`text-[20px] sm:text-[22px] md:text-[26px] lg:text-[32px] xl:text-[36px] leading-[26px] sm:leading-[28px] md:leading-[32px] lg:leading-[38px] xl:leading-[42px] tracking-[-0.4px] md:tracking-[-0.6px] lg:tracking-[-0.8px] font-medium font-poppins text-text-headline ${className}`}
       style={style}
     >
       {title}
