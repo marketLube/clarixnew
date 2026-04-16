@@ -38,7 +38,7 @@ export default function CollegeDetailsPage() {
 
   return (
     <div className="bg-[#FDFDFD] w-full">
-      <ContentWrapper className="pt-6">
+      <ContentWrapper className="!mt-0 py-3 md:py-5">
         <Breadcrumb
           items={[
             { label: "Colleges", href: "/colleges" },
