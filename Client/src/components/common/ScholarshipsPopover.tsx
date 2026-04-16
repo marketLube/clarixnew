@@ -14,7 +14,7 @@ export default function ScholarshipsPopover({ children }: ScholarshipsPopoverPro
     const { scholarships, isLoading } = useScholarships({ limit: 5 });
 
     const scholarshipsPopoverContent = (
-        <div className="flex flex-col gap-1 p-0 w-[400px] bg-white">
+        <div className="flex flex-col gap-1 p-0 w-[min(92vw,360px)] bg-white">
             <div className="px-4 py-3 border-b border-gray-50">
                 <h3 className="text-[#162447] text-base font-bold uppercase tracking-wider mb-1">
                     Popular Scholarships

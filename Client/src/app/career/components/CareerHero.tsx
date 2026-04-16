@@ -18,8 +18,8 @@ export default function CareerHero() {
   };
 
   return (
-    <section className="relative min-h-[300px] md:min-h-[560px] w-full overflow-hidden bg-gradient-to-br from-[#513392] via-[#6041ad] to-[#6846b6]">
-      <ContentWrapper className="relative h-full py-8 md:py-16">
+    <section className="relative min-h-[220px] sm:min-h-[320px] md:min-h-[420px] lg:min-h-[520px] w-full overflow-hidden bg-gradient-to-br from-[#513392] via-[#6041ad] to-[#6846b6]">
+      <ContentWrapper className="relative h-full py-6 sm:py-10 md:py-14 lg:py-16">
         {/* Breadcrumb */}
         <div className="mb-8 flex items-center gap-[2px]">
           <p className="font-poppins text-[16px] leading-[20px] text-[rgba(255,255,255,0.87)]">

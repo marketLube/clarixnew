@@ -116,7 +116,7 @@ export default function CareerHub() {
         <div className="relative flex-1">
           <div className="relative mx-auto grid max-w-[520px] gap-3 sm:gap-4 grid-cols-2 md:gap-6">
             {/* Left column: bottom career image + recruiters */}
-            <div className="flex min-h-[300px] sm:min-h-[540px] flex-col justify-end gap-3 sm:gap-4 md:gap-6">
+            <div className="flex min-h-[260px] sm:min-h-[380px] md:min-h-[460px] lg:min-h-[540px] flex-col justify-end gap-3 sm:gap-4 md:gap-6">
               <div className="h-[150px] sm:h-[220px] rounded-[12px] border border-white/20 bg-white/10 p-[6px] backdrop-blur-sm">
                 <div className="h-full w-full overflow-hidden rounded-[10px]">
                   {bottomImageSrc && (

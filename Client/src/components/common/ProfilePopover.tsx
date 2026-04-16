@@ -67,7 +67,7 @@ export default function ProfilePopover({ children }: ProfilePopoverProps) {
   };
 
   const profilePopoverContent = (
-    <div className="flex flex-col gap-[6px] p-0 w-[316px] bg-white">
+    <div className="flex flex-col gap-[6px] p-0 w-[min(92vw,316px)] bg-white">
       {/* User Info Section */}
       <div className="flex flex-col gap-[10px] items-start pb-0 px-[16px]">
         <div className="flex gap-[10px] items-center w-full">

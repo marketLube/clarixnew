@@ -101,7 +101,7 @@ export default function AddCollegeModal({
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
             {/* Modal Container */}
             <div
-                className="bg-white w-full max-w-[500px] h-[80vh] md:h-[600px] rounded-[30px] overflow-hidden flex flex-col relative shadow-2xl animate-in fade-in zoom-in duration-200"
+                className="bg-white w-full max-w-[calc(100vw-24px)] sm:max-w-[480px] max-h-[85dvh] h-auto md:h-[600px] md:max-h-none rounded-[20px] sm:rounded-[24px] md:rounded-[30px] overflow-hidden flex flex-col relative shadow-2xl animate-in fade-in zoom-in duration-200"
                 onClick={(e) => e.stopPropagation()}
             >
                 {/* Header */}
