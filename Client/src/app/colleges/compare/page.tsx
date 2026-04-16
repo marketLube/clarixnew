@@ -221,6 +221,7 @@ export default function CompareCollegesPage() {
           <HeroSection />
           <NoCollegesSelected
             onLoadSample={handleLoadSample}
+            onStartComparing={handleAddCollege}
             isLoading={isLoading}
             error={error}
           />
