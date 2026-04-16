@@ -61,7 +61,7 @@ export default function SignInPage() {
         <div className="w-full max-w-[399px]">
           {/* Welcome Section */}
           <div className="mb-5">
-            <h1 className="font-poppins font-medium text-[36px] leading-[40px] text-[#162447] tracking-[-0.72px] mb-2">
+            <h1 className="font-poppins font-medium text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] leading-[28px] sm:leading-[32px] md:leading-[36px] lg:leading-[40px] text-[#162447] tracking-[-0.48px] lg:tracking-[-0.72px] mb-2">
               Welcome to Clarix
             </h1>
             <p className="font-poppins text-[14px] leading-[18px] text-[#767e92]">
