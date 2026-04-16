@@ -567,34 +567,38 @@ export default function Nav() {
         styles={{ body: { padding: 0 }, wrapper: { width: 300 } }}
         rootClassName="nav-mobile-drawer"
       >
-        <div className="flex flex-col h-full bg-white">
-          {/* Drawer header */}
-          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+        <div className="flex flex-col h-full bg-white font-poppins">
+          {/* Drawer header — logo + close */}
+          <div className="flex items-center justify-between p-5 pb-2">
             <Link
               href="/"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center"
+              aria-label="Clarix Education — home"
             >
               <Image
-                src="/clarixlogo.svg"
+                src="/logo-footer.svg"
                 alt="Clarix Education"
-                width={110}
-                height={36}
-                className="h-auto w-[110px]"
+                width={100}
+                height={32}
+                className="h-8 w-auto"
               />
             </Link>
             <button
               type="button"
               onClick={() => setIsMobileMenuOpen(false)}
               aria-label="Close navigation menu"
-              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+              className="p-2 -mr-2 text-gray-400 hover:text-gray-900 transition-colors"
             >
-              <X className="w-5 h-5 text-[#162447]" />
+              <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Nav links */}
-          <nav className="flex-1 overflow-y-auto px-3 py-4">
+          <nav className="flex flex-col px-6 py-6 overflow-y-auto flex-1 no-scrollbar">
+            <div className="text-[#9CA3AF] text-sm font-medium mb-4 pl-1">
+              Explore
+            </div>
             <ul className="flex flex-col gap-1">
               {[
                 { href: "/colleges", label: "Colleges" },
@@ -611,7 +615,7 @@ export default function Nav() {
                     <Link
                       href={link.href}
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex items-center justify-between px-4 py-3 rounded-xl font-poppins text-[14px] transition-colors ${
+                      className={`flex items-center justify-between px-3 py-3 rounded-xl font-poppins text-[14px] transition-colors ${
                         active
                           ? "bg-[#513392]/10 text-[#513392] font-medium"
                           : "text-[#162447] hover:bg-gray-50"
