@@ -284,6 +284,34 @@ body {
   overflow-x: hidden;
 }
 
+/* Use dvh instead of vh where we want modal/drawer heights that don't
+   jump when iOS/Android browser chrome collapses on scroll. Fallback
+   to vh for older browsers. */
+.h-safe-screen {
+  height: 100vh;
+  height: 100dvh;
+}
+.min-h-safe-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+.max-h-safe-screen {
+  max-height: 100vh;
+  max-height: 100dvh;
+}
+
+/* Landscape mobile safety: on very short viewports (phone landscape,
+   foldable cover) shrink hero section min-heights so real content is
+   visible in the first scroll. Opt in via the .hero-compact-landscape
+   class on a hero section. */
+@media (max-height: 500px) {
+  .hero-compact-landscape {
+    min-height: min(80dvh, 100%) !important;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+}
+
 /* Custom font classes */
 .font-helvetica {
   font-family: var(--font-helvetica-neue), "Helvetica Neue", Arial, sans-serif !important;

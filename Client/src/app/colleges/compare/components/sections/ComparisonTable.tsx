@@ -45,7 +45,7 @@ export default function ComparisonTable({
     <div className="bg-white border-[4px] sm:border-[10px_10px_0px] border-[rgba(255,255,255,0.6)] border-solid overflow-hidden relative rounded-tl-[20px] sm:rounded-tl-[30px] rounded-tr-[20px] sm:rounded-tr-[30px] shadow-[1px_6px_19.2px_0px_rgba(0,0,0,0.04)] -mt-[10px] max-w-full">
       {/* Header with Tabs and Clear All */}
       <div className="bg-white h-[66px] sm:h-[86px] shadow-[0px_1px_4px_0px_rgba(0,0,0,0.05)] relative">
-        <div className="flex items-center justify-between h-full max-w-full mx-auto px-4 md:px-8 lg:px-[140px]">
+        <div className="flex items-center justify-between h-full max-w-full mx-auto px-4 md:px-8 lg:px-12 xl:px-16 2xl:px-24">
           {/* Tabs - Left aligned */}
           <div className="flex items-center gap-[6px] overflow-x-auto flex-1">
             {tabs.map((tab) => {

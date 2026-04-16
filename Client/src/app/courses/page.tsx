@@ -102,7 +102,7 @@ function CoursesPageContent() {
         {isLoading ? (
           <Loader fullPage label="Loading courses..." />
         ) : formattedCourses.length === 0 ? (
-          <div className="w-full flex flex-col items-center justify-center py-20 px-4 mt-8 rounded-2xl border border-[#edf0f9] bg-[#fafbff]">
+          <div className="w-full flex flex-col items-center justify-center py-10 sm:py-14 md:py-16 lg:py-20 px-4 mt-6 md:mt-8 rounded-2xl border border-[#edf0f9] bg-[#fafbff]">
             <div className="bg-[#f0ecfc] w-20 h-20 rounded-full flex items-center justify-center mb-6">
               <svg
                 className="w-10 h-10 text-[#513392]"

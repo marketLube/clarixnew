@@ -244,7 +244,7 @@ export default function ApplyNowModal({
         {/* Close Button */}
         <button
           onClick={handleClose}
-          className="absolute right-6 top-6 w-6 h-6 flex items-center justify-center hover:opacity-70 transition-opacity z-10"
+          className="absolute right-3 top-3 md:right-4 md:top-4 w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 hover:opacity-100 opacity-80 transition-all z-10"
           aria-label="Close modal"
         >
           <svg

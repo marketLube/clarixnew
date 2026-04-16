@@ -9,10 +9,10 @@ interface ErrorPageProps {
 
 export default function ErrorPage({ error, reset }: ErrorPageProps) {
   return (
-    <div className="flex items-center justify-center min-h-[70vh] px-4 py-16 font-poppins">
+    <div className="flex items-center justify-center min-h-[60vh] sm:min-h-[65vh] md:min-h-[70vh] px-4 py-10 sm:py-12 md:py-14 lg:py-16 font-poppins">
       <div className="w-full max-w-lg text-center">
         {/* Icon */}
-        <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-red-50 mb-5">
+        <div className="mx-auto flex items-center justify-center w-14 h-14 md:w-16 md:h-16 rounded-full bg-red-50 mb-4 md:mb-5">
           <svg
             className="w-8 h-8 text-red-500"
             fill="none"

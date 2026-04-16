@@ -109,7 +109,7 @@ export default function Hero() {
   ];
 
   return (
-    <section className="relative w-full min-h-[480px] sm:min-h-[560px] md:min-h-[600px] lg:h-[640px] overflow-hidden flex flex-col">
+    <section className="hero-compact-landscape relative w-full min-h-[480px] sm:min-h-[560px] md:min-h-[600px] lg:h-[640px] overflow-hidden flex flex-col">
       {/* Background Carousel with Overlay */}
       <div className="absolute inset-0 z-0">
         {backgroundImages.map((src, idx) => (
