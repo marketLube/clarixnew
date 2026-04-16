@@ -104,7 +104,7 @@ function BlogPageContent() {
       </ContentWrapper>
 
       {/* Hero Section */}
-      <BlogHero onSearch={handleSearch} />
+      <BlogHero onSearch={handleSearch} activeCategory={search} />
 
       {/* Main Content */}
       <ContentWrapper className="flex flex-col gap-8 md:gap-12 py-4 md:py-10">

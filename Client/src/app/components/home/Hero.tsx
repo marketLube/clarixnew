@@ -262,7 +262,7 @@ export default function Hero() {
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.2 }}
-                className="px-5 md:px-10 overflow-hidden max-h-[60vh] overflow-y-auto"
+                className="px-5 md:px-10 overflow-hidden max-h-[60vh] max-h-[60dvh] overflow-y-auto"
               >
                 <div className="pt-8 pb-10 flex flex-col gap-5">
                   {debouncedSearchQuery ? (
@@ -508,15 +508,8 @@ export default function Hero() {
                 <span className="absolute top-2 right-2 w-2 h-2 bg-[#E11D48] rounded-full border border-white/20" />
               </button>
 
-              {/* Login / Profile */}
-              {!isLoggedIn ? (
-                <Link
-                  href="/login"
-                  className="hidden sm:inline-block text-white/90 hover:text-white text-[16px] font-medium font-poppins transition-colors"
-                >
-                  Login
-                </Link>
-              ) : (
+              {/* Profile (login button hidden globally for now) */}
+              {isLoggedIn && (
                 <ProfilePopover>
                   <button className="flex items-center gap-2 bg-white/20 hover:bg-white/30 border border-white/50 rounded-full px-4 py-2 transition-colors cursor-pointer">
                     <UserIcon width={20} height={20} fill="white" />
@@ -525,16 +518,18 @@ export default function Hero() {
                 </ProfilePopover>
               )}
 
-              {/* CTA Button */}
-              <Link
-                href="/sign-in"
+              {/* CTA Button — WhatsApp */}
+              <a
+                href="https://wa.me/919072730020"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-3 bg-white hover:bg-gray-50 text-[#513392] rounded-[40px] px-1 py-1 pl-6 transition-all shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
               >
                 <span className="text-[14px] sm:text-[16px] font-bold font-poppins leading-none">Start Free</span>
                 <div className="bg-[#513392] p-1.5 rounded-full text-white transition-transform group-hover:translate-x-0.5">
                   <ChevronRightIcon width={20} height={20} fill="white" />
                 </div>
-              </Link>
+              </a>
 
             </div>
           </div>
@@ -687,28 +682,18 @@ export default function Hero() {
           {/* Footer Buttons */}
           <div className="p-5 border-t border-gray-100 mt-auto">
             {!isLoggedIn ? (
-              <div className="flex items-center gap-3">
-                <Link
-                  href="/login"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex-1 flex items-center justify-between px-4 py-3 text-[#513392] font-semibold border border-[#513392] rounded-full hover:bg-[#513392]/5 transition-colors group"
-                >
-                  <span>Login</span>
-                  <div className="bg-[#513392] rounded-full p-1 transition-transform group-hover:translate-x-1">
-                    <ChevronRightIcon width={10} height={10} fill="white" />
-                  </div>
-                </Link>
-                <Link
-                  href="/sign-in"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex-1 flex items-center justify-between px-4 py-3 text-white font-semibold bg-[#513392] rounded-full hover:bg-[#412876] transition-colors shadow-lg shadow-[#513392]/20 group"
-                >
-                  <span>Start Free</span>
-                  <div className="bg-white rounded-full p-1 transition-transform group-hover:translate-x-1">
-                    <ChevronRightIcon width={10} height={10} fill="#513392" />
-                  </div>
-                </Link>
-              </div>
+              <a
+                href="https://wa.me/919072730020"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="w-full flex items-center justify-between px-4 py-3 text-white font-semibold bg-[#513392] rounded-full hover:bg-[#412876] transition-colors shadow-lg shadow-[#513392]/20 group"
+              >
+                <span>Start Free</span>
+                <div className="bg-white rounded-full p-1 transition-transform group-hover:translate-x-1">
+                  <ChevronRightIcon width={10} height={10} fill="#513392" />
+                </div>
+              </a>
             ) : (
               <Link
                 href="/profile"

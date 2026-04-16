@@ -397,7 +397,17 @@ function CollegesPageContent() {
         <EmptyState onClearFilters={handleClearFilters} />
       ) : (
         <>
-          <GridWrapper colsMobile={COLS_MOBILE} colsFold={COLS_FOLD} colsTablet={COLS_TABLET} colsDesktop={COLS_DESKTOP} className="mt-8">
+          <GridWrapper
+            colsMobile={COLS_MOBILE}
+            colsFold={COLS_FOLD}
+            colsTablet={COLS_TABLET}
+            colsDesktop={COLS_DESKTOP}
+            className={`mt-8 ${
+              selectedColleges.length > 0
+                ? "pb-[220px] sm:pb-[160px] md:pb-[140px]"
+                : ""
+            }`}
+          >
             {visibleColleges.map((college) => (
               <CollegeCard
                 key={college._id}
@@ -420,7 +430,13 @@ function CollegesPageContent() {
           )}
 
           {!hasNextPage && colleges.length > 0 && (
-            <p className="text-center text-sm text-[#767e92] font-poppins py-8">
+            <p
+              className={`text-center text-sm text-[#767e92] font-poppins py-8 ${
+                selectedColleges.length > 0
+                  ? "pb-[220px] sm:pb-[160px] md:pb-[140px]"
+                  : ""
+              }`}
+            >
               You have seen all {colleges.length} colleges.
             </p>
           )}

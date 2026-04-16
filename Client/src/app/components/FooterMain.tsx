@@ -92,7 +92,6 @@ const footerSections: FooterSection[] = [
       { href: "/jobs-internships", text: "Jobs & Internships" },
       { href: "/blog", text: "Blogs" },
       { href: "/colleges", text: "All Colleges" },
-      { href: "/login", text: "Login" },
     ],
   },
 ];

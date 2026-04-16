@@ -26,14 +26,8 @@ export default function ProfilePopover({ children }: ProfilePopoverProps) {
 
 
   if (!user) {
-    return (
-      <Link
-        href="/login"
-        className="hidden text-sm font-medium text-white/90 transition-colors hover:text-white sm:inline"
-      >
-        Login
-      </Link>
-    );
+    // Login entry points are intentionally hidden across the app for now.
+    return null;
   }
 
   const getInitials = () => {

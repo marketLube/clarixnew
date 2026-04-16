@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
+import { Drawer } from "antd";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
@@ -41,7 +42,13 @@ export default function Nav() {
   const router = useRouter();
   const isHomePage = pathname === "/";
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isLoggedIn = useAppSelector((state: any) => state.auth.isLoggedIn);
+
+  // Close mobile menu whenever the route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   // Search state
   const [searchQuery, setSearchQuery] = useState("");
@@ -90,8 +97,10 @@ export default function Nav() {
           {/* Hamburger icon */}
           <button
             type="button"
+            onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Open navigation menu"
-            className="flex flex-col justify-center gap-[4px]"
+            aria-expanded={isMobileMenuOpen}
+            className="flex flex-col justify-center gap-[4px] p-1.5 -m-1.5 rounded-md active:bg-white/10 transition-colors"
           >
             <span className="block h-[2px] w-6 rounded-full bg-white" />
             <span className="block h-[2px] w-6 rounded-full bg-white" />
@@ -226,7 +235,7 @@ export default function Nav() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -8 }}
                   transition={{ duration: 0.15 }}
-                  className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.12)] border border-gray-100 max-h-[60vh] overflow-y-auto z-[9999]"
+                  className="absolute top-full left-0 right-0 mt-2 bg-white rounded-2xl shadow-[0px_8px_32px_rgba(0,0,0,0.12)] border border-gray-100 max-h-[60vh] max-h-[60dvh] overflow-y-auto z-[9999]"
                 >
                   <div className="px-5 pt-4 pb-5 flex flex-col gap-4">
                     {debouncedSearchQuery ? (
@@ -501,14 +510,7 @@ export default function Nav() {
               <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
             </button>
 
-            {!isLoggedIn ? (
-              <Link
-                href="/login"
-                className="hidden text-sm font-medium text-white/90 transition-colors hover:text-white sm:inline"
-              >
-                Login
-              </Link>
-            ) : (
+            {isLoggedIn && (
               <ProfilePopover>
                 <button
                   type="button"
@@ -533,8 +535,10 @@ export default function Nav() {
               </ProfilePopover>
             )}
 
-            <Link
-              href="/signup"
+            <a
+              href="https://wa.me/919072730020"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-[40px] border-2 border-[rgba(255,255,255,0.23)] bg-white px-[2px] py-[2px] pl-[10px] text-sm font-medium text-[#513392] shadow-[0_2px_1px_rgba(255,255,255,0.2)] transition hover:bg-gray-100"
             >
               <span className="font-['Poppins',system-ui,sans-serif] leading-5">
@@ -543,7 +547,7 @@ export default function Nav() {
               <span className="inline-flex items-center justify-center rounded-full bg-[#513392] p-1.5 border border-white">
                 <ChevronRightIcon width={18} height={18} fill="#ffffff" />
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </ContentWrapper>
@@ -553,6 +557,97 @@ export default function Nav() {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       />
+
+      {/* Mobile Navigation Drawer */}
+      <Drawer
+        placement="left"
+        open={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+        width={300}
+        closable={false}
+        styles={{ body: { padding: 0 } }}
+        className="xl:hidden"
+      >
+        <div className="flex flex-col h-full bg-white">
+          {/* Drawer header */}
+          <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+            <Link
+              href="/"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="flex items-center"
+            >
+              <Image
+                src="/clarixlogo.svg"
+                alt="Clarix Education"
+                width={110}
+                height={36}
+                className="h-auto w-[110px]"
+              />
+            </Link>
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Close navigation menu"
+              className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+            >
+              <X className="w-5 h-5 text-[#162447]" />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav className="flex-1 overflow-y-auto px-3 py-4">
+            <ul className="flex flex-col gap-1">
+              {[
+                { href: "/colleges", label: "Colleges" },
+                { href: "/courses", label: "Courses" },
+                { href: "/exams", label: "Exams" },
+                { href: "/scholarships", label: "Scholarships" },
+                { href: "/jobs-internships", label: "Jobs & Internships" },
+                { href: "/blog", label: "Blog" },
+                { href: "/about", label: "About" },
+              ].map((link) => {
+                const active = pathname === link.href || pathname?.startsWith(link.href + "/");
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center justify-between px-4 py-3 rounded-xl font-poppins text-[14px] transition-colors ${
+                        active
+                          ? "bg-[#513392]/10 text-[#513392] font-medium"
+                          : "text-[#162447] hover:bg-gray-50"
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      <ChevronRightIcon
+                        width={12}
+                        height={12}
+                        fill={active ? "#513392" : "#767e92"}
+                      />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+
+          {/* Drawer footer */}
+          <div className="p-4 border-t border-gray-100">
+            <a
+              href="https://wa.me/919072730020"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="w-full flex items-center justify-between px-4 py-3 text-white font-semibold bg-[#513392] rounded-full hover:bg-[#412876] transition-colors shadow-lg shadow-[#513392]/20 group"
+            >
+              <span className="text-[14px]">Start Free</span>
+              <div className="bg-white rounded-full p-1 transition-transform group-hover:translate-x-1">
+                <ChevronRightIcon width={10} height={10} fill="#513392" />
+              </div>
+            </a>
+          </div>
+        </div>
+      </Drawer>
     </header>
   );
 }
