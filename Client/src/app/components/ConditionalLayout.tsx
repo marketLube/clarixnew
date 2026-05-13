@@ -16,7 +16,9 @@ export default function ConditionalLayout({
     pathname === "/login" ||
     pathname === "/login/otp" ||
     pathname === "/sign-in";
-  const isStandaloneLanding = pathname === "/work-integrated-bca";
+  const isStandaloneLanding =
+    pathname === "/work-integrated-bca" ||
+    pathname === "/work-integrated-bca-malayalam";
   const shouldHideNav = isLoginPage || isHomePage || isStandaloneLanding;
   const shouldHideFooter = isLoginPage || isStandaloneLanding;
 
