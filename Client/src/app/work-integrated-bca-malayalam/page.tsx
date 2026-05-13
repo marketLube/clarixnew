@@ -7,13 +7,13 @@ const WHATSAPP_URL = "https://wa.me/917306897989";
 const WHATSAPP_DISPLAY = "+91 73068 97989";
 
 export const metadata: Metadata = {
-  title: "Work-Integrated BCA Program — Degree-യും 2 വർഷം Experience-ഉം",
+  title: "Work-Integrated BCA Program | Degree-യും 2 വർഷം Experience-ഉം",
   description:
     "ഇന്ത്യയിലെ ആദ്യത്തെ Work-Integrated BCA. Hybrid program. Year 2 മുതൽ top MNCs-ൽ ജോലി, salary, real experience.",
   alternates: { canonical: "/work-integrated-bca-malayalam" },
   robots: { index: true, follow: true },
   openGraph: {
-    title: "Degree + 2 വർഷം Work Experience — ഒരുമിച്ച്!",
+    title: "Degree + 2 വർഷം Work Experience ഒരുമിച്ച്!",
     description:
       "Hybrid BCA. Year 2 മുതൽ company-യിൽ ജോലിയും salary-യും. Real experience-ഉം.",
     type: "website",
@@ -24,7 +24,7 @@ const benefits = [
   {
     title: "ഇന്ത്യയിലെ ആദ്യം",
     description:
-      "Work + Campus ഒരുമിച്ച് — ഇത് ആദ്യം കൊണ്ടുവന്നത് ഞങ്ങളാണ്.",
+      "Work-ഉം Campus-ഉം ഒരുമിച്ച്. ഇത് ആദ്യം കൊണ്ടുവന്നത് ഞങ്ങളാണ്.",
   },
   {
     title: "Hybrid Mode",
@@ -48,7 +48,7 @@ const timeline = [
     year: "Year 1",
     label: "അടിസ്ഥാനം",
     description:
-      "Programming, problem-solving — basics strong ആക്കാം. Industry tools day 1 മുതൽ.",
+      "Programming, problem-solving. Basics strong ആക്കാം. Industry tools day 1 മുതൽ.",
   },
   {
     year: "Year 2",
@@ -143,12 +143,12 @@ export default function WorkIntegratedBcaMalayalamLanding() {
               <h1 className="font-poppins font-semibold tracking-[-0.01em] text-[24px] leading-[1.2] sm:text-[34px] md:text-[44px] lg:text-[52px] xl:text-[58px] text-[#162447] mx-auto lg:mx-0 max-w-[360px] sm:max-w-none">
                 Degree-യും{" "}
                 <span className="text-[#513392]">2 വർഷം Work Experience-ഉം</span>{" "}
-                — ഒരുമിച്ച്!
+                ഒരുമിച്ച്!
               </h1>
 
               <p className="hidden lg:block mt-5 md:mt-6 text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-[#4b5468] max-w-[640px]">
                 Hybrid program ആണ്. Year 2 മുതൽ top MNCs-ൽ work ചെയ്യാം.
-                Real products, real salary, real experience — ഇതാണ് നമ്മുടെ
+                Real products, real salary, real experience. ഇതാണ് നമ്മുടെ
                 വഴി.
               </p>
 
@@ -214,7 +214,7 @@ export default function WorkIntegratedBcaMalayalamLanding() {
                   Details അയക്കാം!
                 </h2>
                 <p className="mt-1 text-[12px] md:text-[14px] text-[#767e92] leading-snug md:leading-relaxed text-center lg:text-left">
-                  Number ഇടൂ — ബാക്കി WhatsApp-ൽ പറയാം!
+                  Number ഇടൂ, ബാക്കി WhatsApp-ൽ പറയാം!
                 </p>
                 <div className="mt-4 md:mt-5">
                   <LeadForm />
@@ -389,7 +389,7 @@ export default function WorkIntegratedBcaMalayalamLanding() {
               </h2>
               <p className="mt-4 text-[14px] md:text-[17px] text-white/85 leading-relaxed max-w-[560px] mx-auto lg:mx-0">
                 Seats കുറവാണ്. ആദ്യം apply ചെയ്യുന്നവർക്ക് മുൻഗണന. Details
-                ഇടൂ — admissions team WhatsApp-ൽ contact ചെയ്യും.
+                ഇടൂ, admissions team WhatsApp-ൽ contact ചെയ്യും.
               </p>
 
               <div className="mt-6 md:mt-8 flex justify-center lg:justify-start">
