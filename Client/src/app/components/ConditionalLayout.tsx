@@ -16,7 +16,9 @@ export default function ConditionalLayout({
     pathname === "/login" ||
     pathname === "/login/otp" ||
     pathname === "/sign-in";
-  const shouldHideNav = isLoginPage || isHomePage;
+  const isStandaloneLanding = pathname === "/work-integrated-bca";
+  const shouldHideNav = isLoginPage || isHomePage || isStandaloneLanding;
+  const shouldHideFooter = isLoginPage || isStandaloneLanding;
 
   // Scroll to top on every route change
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function ConditionalLayout({
       <main id="main-content" className={isLoginPage ? "w-full h-screen" : "flex-1 w-full"}>
         {children}
       </main>
-      {!isLoginPage && <Footer />}
+      {!shouldHideFooter && <Footer />}
     </>
   );
 }
