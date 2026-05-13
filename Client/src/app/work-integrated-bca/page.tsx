@@ -130,30 +130,30 @@ export default function WorkIntegratedBcaLanding() {
           }}
           aria-hidden="true"
         />
-        <div className="mx-auto max-w-[1280px] px-4 pt-10 pb-12 md:px-8 md:pt-16 md:pb-20 lg:pt-24 lg:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#513392]/20 bg-white/80 backdrop-blur px-3 py-1.5 mb-5 shadow-[0_2px_8px_rgba(81,51,146,0.08)]">
-                <span className="inline-block h-2 w-2 rounded-full bg-[#513392]" aria-hidden="true" />
-                <span className="text-[12px] md:text-[13px] font-medium tracking-[0.02em] text-[#513392]">
+        <div className="mx-auto max-w-[1280px] px-4 pt-5 pb-8 md:px-8 md:pt-16 md:pb-20 lg:pt-24 lg:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-12 items-center">
+            <div className="lg:col-span-7 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#513392]/20 bg-white/80 backdrop-blur px-3 py-1 md:py-1.5 mb-3 md:mb-5 shadow-[0_2px_8px_rgba(81,51,146,0.08)]">
+                <span className="inline-block h-1.5 w-1.5 md:h-2 md:w-2 rounded-full bg-[#513392]" aria-hidden="true" />
+                <span className="text-[11px] md:text-[13px] font-medium tracking-[0.02em] text-[#513392]">
                   India's first Work-Integrated BCA
                 </span>
               </div>
 
-              <h1 className="font-poppins font-semibold tracking-[-0.02em] text-[32px] leading-[1.1] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[60px] text-[#162447]">
+              <h1 className="font-poppins font-semibold tracking-[-0.02em] text-[24px] leading-[1.15] sm:text-[34px] md:text-[44px] lg:text-[52px] xl:text-[60px] text-[#162447] mx-auto lg:mx-0 max-w-[340px] sm:max-w-none">
                 Graduate with a degree{" "}
                 <span className="text-[#513392]">and 2 years</span>{" "}
                 of real industry experience.
               </h1>
 
-              <p className="mt-5 md:mt-6 text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-[#4b5468] max-w-[640px]">
+              <p className="hidden lg:block mt-5 md:mt-6 text-[15px] md:text-[17px] lg:text-[18px] leading-relaxed text-[#4b5468] max-w-[640px]">
                 A hybrid, work-integrated BCA designed with global hiring
                 partners. From Year 2, you're already inside top MNCs —
                 building real products, drawing a stipend, and proving yourself
                 where it matters.
               </p>
 
-              <div className="mt-7 md:mt-8 flex flex-wrap items-center gap-3">
+              <div className="hidden lg:flex mt-7 md:mt-8 flex-wrap items-center gap-3">
                 <a
                   href="#apply"
                   className="group inline-flex items-center gap-3 rounded-full bg-[#513392] hover:bg-[#3f2672] text-white font-medium text-[15px] md:text-[16px] px-6 py-3.5 md:px-7 md:py-4 transition-all shadow-[0_10px_28px_rgba(81,51,146,0.32)] hover:shadow-[0_14px_36px_rgba(81,51,146,0.42)] hover:-translate-y-0.5"
@@ -184,7 +184,7 @@ export default function WorkIntegratedBcaLanding() {
                 </a>
               </div>
 
-              <div className="mt-8 flex flex-wrap gap-2 md:gap-3">
+              <div className="hidden lg:flex mt-8 flex-wrap gap-2 md:gap-3">
                 {trustPills.map((pill) => (
                   <span
                     key={pill}
@@ -205,23 +205,61 @@ export default function WorkIntegratedBcaLanding() {
               </div>
             </div>
 
-            {/* Inline form card (visible on desktop) */}
+            {/* Form card — first view on mobile, side panel on desktop */}
             <div className="lg:col-span-5">
               <div
                 id="apply"
-                className="scroll-mt-24 rounded-[20px] md:rounded-[24px] bg-white border border-[#e1e3ff] shadow-[0_20px_60px_-20px_rgba(81,51,146,0.25)] p-5 md:p-7"
+                className="scroll-mt-20 lg:scroll-mt-24 rounded-[18px] md:rounded-[24px] bg-white border border-[#e1e3ff] shadow-[0_20px_60px_-20px_rgba(81,51,146,0.25)] p-4 md:p-7"
               >
-                <h2 className="text-[20px] md:text-[22px] font-semibold text-[#162447] tracking-[-0.01em]">
+                <h2 className="text-[17px] md:text-[22px] font-semibold text-[#162447] tracking-[-0.01em] text-center lg:text-left">
                   Talk to our admissions team
                 </h2>
-                <p className="mt-1 text-[13px] md:text-[14px] text-[#767e92] leading-relaxed">
-                  Drop your details — we'll continue the chat on WhatsApp with
-                  fees, eligibility & next steps.
+                <p className="mt-1 text-[12px] md:text-[14px] text-[#767e92] leading-snug md:leading-relaxed text-center lg:text-left">
+                  Drop your details — we'll continue the chat on WhatsApp.
                 </p>
-                <div className="mt-5">
+                <div className="mt-4 md:mt-5">
                   <LeadForm />
                 </div>
               </div>
+            </div>
+
+            {/* Mobile-only: pills + WhatsApp link below the form */}
+            <div className="lg:hidden flex flex-col items-center gap-4 text-center">
+              <div className="flex flex-wrap justify-center gap-2">
+                {trustPills.map((pill) => (
+                  <span
+                    key={pill}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-white border border-[#e1e3ff] text-[#162447] text-[12px] font-medium px-3 py-1.5 shadow-[0_1px_3px_rgba(22,36,71,0.04)]"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                      <path
+                        d="M16.667 5.833 8.333 14.167 4.167 10"
+                        stroke="#513392"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {pill}
+                  </span>
+                ))}
+              </div>
+              <p className="text-[14px] text-[#4b5468] leading-relaxed max-w-[460px] px-2">
+                A hybrid, work-integrated BCA. From Year 2 you're already
+                inside top MNCs — building real products and drawing a
+                stipend.
+              </p>
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-[#513392]/25 bg-white text-[#513392] font-medium text-[14px] px-5 py-2.5 hover:bg-[#f3eefe] transition-colors"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.42 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413" />
+                </svg>
+                <span>Talk on WhatsApp</span>
+              </a>
             </div>
           </div>
         </div>
@@ -462,29 +500,6 @@ export default function WorkIntegratedBcaLanding() {
         </div>
       </footer>
 
-      {/* Sticky Mobile CTA */}
-      <a
-        href="#apply"
-        className="lg:hidden fixed bottom-4 left-4 right-4 z-50 inline-flex items-center justify-between gap-3 rounded-full bg-[#513392] hover:bg-[#3f2672] text-white font-medium text-[15px] px-5 py-3.5 shadow-[0_12px_30px_rgba(81,51,146,0.45)]"
-      >
-        <span className="flex items-center gap-2">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.71.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.42 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.83 9.83 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.82 11.82 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.88 11.88 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 0 0-3.48-8.413" />
-          </svg>
-          Get program details
-        </span>
-        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-[#513392]">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path
-              d="M4 10h12m0 0l-5-5m5 5l-5 5"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </span>
-      </a>
     </div>
   );
 }

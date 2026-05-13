@@ -97,14 +97,17 @@ export default function LeadForm() {
   };
 
   const inputBase =
-    "w-full bg-white border rounded-[12px] px-4 py-3 md:py-3.5 font-poppins text-[14px] md:text-[15px] text-[#162447] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#e8e0f5] transition-all";
+    "w-full bg-white border rounded-[10px] md:rounded-[12px] px-3.5 md:px-4 py-2.5 md:py-3.5 font-poppins text-[14px] md:text-[15px] text-[#162447] placeholder:text-[#9ca3af] focus:outline-none focus:ring-2 focus:ring-[#e8e0f5] transition-all";
+
+  const labelBase =
+    "block mb-1 md:mb-1.5 font-poppins text-[12px] md:text-[14px] font-medium text-[#162447]";
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3 md:gap-4">
       <div>
         <label
           htmlFor="lf-name"
-          className="block mb-1.5 font-poppins text-[13px] md:text-[14px] font-medium text-[#162447]"
+          className={labelBase}
         >
           Full Name <span className="text-[#ef4444]">*</span>
         </label>
@@ -132,7 +135,7 @@ export default function LeadForm() {
       <div>
         <label
           htmlFor="lf-phone"
-          className="block mb-1.5 font-poppins text-[13px] md:text-[14px] font-medium text-[#162447]"
+          className={labelBase}
         >
           Phone Number <span className="text-[#ef4444]">*</span>
         </label>
@@ -157,11 +160,11 @@ export default function LeadForm() {
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 md:gap-4">
+      <div className="grid grid-cols-2 gap-2.5 md:gap-4">
         <div>
           <label
             htmlFor="lf-marks"
-            className="block mb-1.5 font-poppins text-[13px] md:text-[14px] font-medium text-[#162447]"
+            className={labelBase}
           >
             +2 Marks (%) <span className="text-[#ef4444]">*</span>
           </label>
@@ -191,7 +194,7 @@ export default function LeadForm() {
         <div>
           <label
             htmlFor="lf-year"
-            className="block mb-1.5 font-poppins text-[13px] md:text-[14px] font-medium text-[#162447]"
+            className={labelBase}
           >
             Passout Year <span className="text-[#ef4444]">*</span>
           </label>
@@ -221,7 +224,7 @@ export default function LeadForm() {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#513392] hover:bg-[#3f2672] active:bg-[#3d2569] text-white font-poppins font-medium text-[15px] md:text-[16px] px-6 py-3.5 md:py-4 transition-all shadow-[0_8px_24px_rgba(81,51,146,0.28)] hover:shadow-[0_12px_32px_rgba(81,51,146,0.38)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-wait"
+        className="mt-1 md:mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-[#513392] hover:bg-[#3f2672] active:bg-[#3d2569] text-white font-poppins font-medium text-[14px] md:text-[16px] px-6 py-3 md:py-4 transition-all shadow-[0_8px_24px_rgba(81,51,146,0.28)] hover:shadow-[0_12px_32px_rgba(81,51,146,0.38)] hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-70 disabled:cursor-wait"
       >
         {submitting ? (
           <span>Opening WhatsApp…</span>
@@ -241,7 +244,7 @@ export default function LeadForm() {
         )}
       </button>
 
-      <p className="text-center text-[12px] text-[#767e92] font-poppins mt-1">
+      <p className="hidden md:block text-center text-[12px] text-[#767e92] font-poppins mt-1">
         Tap submit and continue the conversation on WhatsApp. We'll never spam
         you.
       </p>
