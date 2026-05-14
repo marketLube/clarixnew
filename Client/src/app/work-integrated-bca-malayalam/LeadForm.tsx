@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-const WHATSAPP_NUMBER = "917306897989";
+const WHATSAPP_NUMBER = "918590179090";
 
 type FormState = {
   name: string;

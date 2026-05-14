@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import LeadForm from "./LeadForm";
 
-const WHATSAPP_URL = "https://wa.me/917306897989";
-const WHATSAPP_DISPLAY = "+91 73068 97989";
+const WHATSAPP_URL = "https://wa.me/918590179090";
+const WHATSAPP_DISPLAY = "+91 85901 79090";
 
 export const metadata: Metadata = {
   title: "Work-Integrated BCA Program | Degree-യും 2 വർഷം Experience-ഉം",
